@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<style>
+  .mypage-wrapper {
+    max-width: 700px;
+    margin: 3rem auto;
+    background-color: white;
+    border-radius: 16px;
+    padding: 2.5rem;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.05);
+    font-family: 'Noto Sans KR', sans-serif;
+    text-align: center;
+  }
+
+  .profile-img {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-image: url("{% static 'accounts/profile_default.jpg' %}");
+    margin: 0 auto 1rem;
+  }
+
+  .nickname {
+    font-size: 1.3rem;
+    font-weight: bold;
+    color: #3E3025;
+    margin-bottom: 1rem;
+  }
+
+  .logout-form button {
+    background-color: #8D6E63;
+    color: white;
+    padding: 0.6rem 1.2rem;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 1rem;
+  }
+
+  .logout-form button:hover {
+    background-color: #6D4C41;
+  }
+</style>
+
+<div class="mypage-wrapper">
+  <div class="profile-img"></div>
+  <div class="nickname">{{ request.user.username }} 님</div>
+
+  <form method="POST" action="{% url 'accounts:logout' %}" class="logout-form">
+    {% csrf_token %}
+    <button type="submit">로그아웃</button>
+  </form>
+</div>
+{% endblock %}
