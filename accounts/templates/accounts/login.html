@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+{% block content %}
+<style>
+  body {
+    background-color: #F4ECE4;
+    font-family: 'Noto Sans KR', sans-serif;
+  }
+
+  .form-wrapper {
+    max-width: 400px;
+    margin: 4rem auto;
+    background-color: white;
+    padding: 2.5rem;
+    border-radius: 16px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+  }
+
+  .form-wrapper h2 {
+    text-align: center;
+    margin-bottom: 1.5rem;
+    font-family: 'Noto Serif KR', serif;
+    color: #3E3025;
+  }
+
+  label {
+    display: block;
+    margin-top: 1rem;
+    font-weight: bold;
+    color: #5D4037;
+  }
+
+  input {
+    width: 100%;
+    padding: 0.6rem;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    margin-top: 0.3rem;
+  }
+
+  .form-wrapper button {
+    width: 100%;
+    padding: 0.75rem;
+    background-color: #8D6E63;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    margin-top: 1.5rem;
+    cursor: pointer;
+  }
+
+  .form-wrapper button:hover {
+    background-color: #6D4C41;
+  }
+
+  .helptext, .errorlist {
+    display: none;
+  }
+</style>
+
+<div class="form-wrapper">
+  <h2>로그인</h2>
+  <form method="POST">
+    {% csrf_token %}
+
+    <label for="{{ form.username.id_for_label }}">아이디</label>
+    {{ form.username }}
+
+    <label for="{{ form.password.id_for_label }}">비밀번호</label>
+    {{ form.password }}
+
+    <button type="submit">로그인</button>
+  </form>
+</div>
+{% endblock %}
