@@ -48,12 +48,30 @@
 </style>
 
 <div class="mypage-wrapper">
-  <div class="profile-img"></div>
+  <!-- templates/accounts/mypage.html -->
+  <div class="profile-img" style="
+  background-image: url('{% if request.user.profile_image %}{{ request.user.profile_image.url }}{% else %}{% static 'accounts/profile_default.jpg' %}{% endif %}');
+  "></div>
+
   <div class="nickname">{{ request.user.username }} 님</div>
+
+  <a href="{% url 'accounts:update' %}" style="
+    display: inline-block;
+    margin-top: 1.5rem;
+    padding: 0.6rem 1.2rem;
+    background-color: #BCAAA4;
+    color: white;
+    border-radius: 8px;
+    font-weight: bold;
+    text-decoration: none;
+  ">
+    회원정보 수정
+  </a>
 
   <form method="POST" action="{% url 'accounts:logout' %}" class="logout-form">
     {% csrf_token %}
     <button type="submit">로그아웃</button>
   </form>
+
 </div>
 {% endblock %}

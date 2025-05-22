@@ -85,3 +85,22 @@ class CustomUserCreationForm(UserCreationForm):
             "The two password fields didn’t match.": "비밀번호가 일치하지 않습니다.",
         }
         return translations.get(msg, msg)
+
+class NoLabelClearableFileInput(forms.ClearableFileInput):
+    template_name = 'widgets/only_input_file_widget.html'  # 별도 템플릿 사용
+
+class CustomUserChangeForm(forms.ModelForm):
+    profile_image = forms.ImageField(
+        required=False,
+        widget=NoLabelClearableFileInput(attrs={
+            'class': 'form-input'
+        })
+    )
+
+    class Meta:
+        model = User
+        fields = ('nickname', 'profile_image', 'email')
+        widgets = {
+            'nickname': forms.TextInput(attrs={'placeholder': '닉네임'}),
+            'email': forms.EmailInput(attrs={'placeholder': '이메일'}),
+        }
