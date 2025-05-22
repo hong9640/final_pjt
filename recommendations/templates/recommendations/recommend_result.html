@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div style="padding:2rem; text-align:center;">
+  <h2>'{{ keyword }}'에 어울리는 책 추천 결과</h2>
+
+  {% if books %}
+    <div style="display:flex; justify-content:center; gap:2rem; flex-wrap:wrap; margin-top:2rem;">
+      {% for book in books %}
+        <a href="#">
+          <strong>{{ book.title }}</strong>
+        </a>
+        <p>{{ book.description }}</p>
+      {% endfor %}
+    </div>
+  {% else %}
+    <p>추천 결과를 불러오지 못했습니다. 다시 시도해주세요.</p>
+  {% endif %}
+</div>
+{% endblock %}
