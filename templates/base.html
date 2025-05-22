@@ -1,0 +1,74 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>도서 추천 서비스</title>
+  <style>
+    body {
+      font-family: 'Noto Serif KR', serif;
+      background-color:rgb(248, 248, 248);
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      background-color: #D2B9AD;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    nav a {
+      margin-left: 1rem;
+      color: #2C1B13;
+      text-decoration: none;
+    }
+    nav a:hover {
+      color: #A67C52;
+    }
+    .container {
+      padding: 2rem;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div>로고</div>
+    <nav>
+      {% if user.is_authenticated %}
+        <a href="#">홈</a>
+        <a href="#">회원가입</a>
+        <a href="#">로그아웃</a>
+        <a href="#">나를 위한 추천</a>
+        <a href="#">마이페이지</a>
+      {% else %}
+      <a href="#">홈</a>
+      <a href="#">회원가입</a>
+        <a href="#">로그인</a>
+        <a href="#">나를 위한 추천</a>
+        <a href="#">마이페이지</a>
+      {% endif %}
+    </nav>
+  </header>
+
+  <div class="container">
+    {% block content %}
+    {% endblock %}
+  </div>
+
+  <script>
+    function openSurveyPopup() {
+      const width = 720
+      const height = 800
+      const left = (screen.width - width) / 2
+      const top = (screen.height - height) / 2
+
+      {% comment %} window.open(
+        "{% url 'survey_start' %}",
+        "surveyPopup",
+        `width=${width},height=${height},top=${top},left=${left},toolbar=no,location=no,status=no,menubar=no,scrollbars=no,resizable=no`
+      ); {% endcomment %}
+    }
+  </script>
+</body>
+</html>
