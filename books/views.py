@@ -18,7 +18,7 @@ def home(request):
             if len(second_levels) >= 6:
                 break
 
-    bestseller_books = Book.objects.filter(is_bestseller=True).select_related('category')[:1]
+    bestseller_books = Book.objects.filter(is_bestseller=True).select_related('category')[:6]
     new_books = Book.objects.order_by('-pub_date')[:6]
 
     context = {

@@ -108,7 +108,7 @@
       "author": 5,
       "category": 5,
       "created_at": "2025-05-22T05:27:16.288105+00:00",
-      "is_bestseller": false
+      "is_bestseller": true
     }
   },
   {
@@ -124,7 +124,7 @@
       "author": 6,
       "category": 6,
       "created_at": "2025-05-22T05:27:16.304105+00:00",
-      "is_bestseller": false
+      "is_bestseller": true
     }
   },
   {
@@ -188,7 +188,7 @@
       "author": 10,
       "category": 9,
       "created_at": "2025-05-22T05:38:26.299659+00:00",
-      "is_bestseller": true
+      "is_bestseller": false
     }
   },
   {
@@ -684,7 +684,7 @@
       "author": 39,
       "category": 28,
       "created_at": "2025-05-22T05:38:27.069021+00:00",
-      "is_bestseller": true
+      "is_bestseller": false
     }
   },
   {
