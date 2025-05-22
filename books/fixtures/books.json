@@ -1,0 +1,770 @@
+[
+  {
+    "model": "books.book",
+    "pk": 1,
+    "fields": {
+      "title": "2025 시대에듀 우정 9급 계리직 공무원 9개년 기출문제집 한권으로 끝내기 - 우정사업본부.우체국.지방우정청 우정 9급 계리직 공무원 시험 대비(2025년도 학습자료 반영)",
+      "isbn13": "9791138389624",
+      "description": "우정사업본부에서 제공하는 2025년 학습자료 및 출제 경향에 맞춰 개정하였다. 출제 경향에 맞는 상세한 해설을 통해 학습자료 없이 학습할 수 있다. 2024~2012년간 시행된 시험의 기출문제를 수록하였고, 총 9회분 기출문제를 원 없이 풀어볼 수 있다.",
+      "cover_image_url": "https://image.aladin.co.kr/product/36042/35/cover200/k402037848_1.jpg",
+      "pub_date": "2025-05-20",
+      "link": "https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=360423560&amp;partner=openAPI&amp;start=api",
+      "author": 1,
+      "category": 1,
+      "created_at": "2025-05-22T05:27:16.144206+00:00",
+      "is_bestseller": true
+    }
+  },
+  {
+    "model": "books.book",
+    "pk": 2,
+    "fields": {
+      "title": "2025 시대에듀 우정 9급 계리직 공무원 한권으로 합격 (우편일반·예금일반·보험일반·컴퓨터일반) - 우정사업본부.우체국.지방우정청 우정 9급 계리직 공무원 시험 대비(2025년도 학습자료 반영)",
+      "isbn13": "9791138389617",
+      "description": "우정사업본부에서 제공하는 2025년 학습자료 및 출제 경향에 맞춰 이론을 개정하였다. 출제 경향에 맞는 ‘핵심이론’으로 개념을 다지고, ‘더 알아보기’를 통해 심화 내용을 학습할 수 있다. 또한 빈출 문제인 법령의 원문도 함께 수록하였다.",
+      "cover_image_url": "https://image.aladin.co.kr/product/36035/58/cover200/k922037635_1.jpg",
+      "pub_date": "2025-05-20",
+      "link": "https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=360355803&amp;partner=openAPI&amp;start=api",
+      "author": 1,
+      "category": 1,
+      "created_at": "2025-05-22T05:27:16.157992+00:00",
+      "is_bestseller": false
+    }
+  },
+  {
+    "model": "books.book",
+    "pk": 3,
+    "fields": {
+      "title": "2025 시대에듀 우정 9급 계리직 공무원 전과목(우편일반·예금일반·보험일반·컴퓨터일반) 최종모의고사 한권으로 끝내기 - 우정사업본부·우체국·지방우정청 우정 9급 계리직 공무원 시험 대비(2025년도 학습자료 반영)",
+      "isbn13": "9791138389631",
+      "description": "우정사업본부에서 제공하는 2025년 학습자료에 맞춘 최종 모의고사 5회분을 수록하였다. 시험에 대비할 수 있도록 ‘우편일반’, ‘예금일반’, ‘보험일반’, ‘컴퓨터일반’ 총 4과목으로 나눠 구성하였으며, ‘기초영어’는 ‘컴퓨터일반’ 과목에 총 7문제가 포함되어 있다.",
+      "cover_image_url": "https://image.aladin.co.kr/product/36093/50/cover200/k762038862_1.jpg",
+      "pub_date": "2025-05-20",
+      "link": "https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=360935048&amp;partner=openAPI&amp;start=api",
+      "author": 1,
+      "category": 1,
+      "created_at": "2025-05-22T05:27:16.170937+00:00",
+      "is_bestseller": false
+    }
+  },
+  {
+    "model": "books.book",
+    "pk": 4,
+    "fields": {
+      "title": "우정 챌린지",
+      "isbn13": "9791193207895",
+      "description": "어린이 독자들의 마음을 사로잡은 ‘소원어린이책’ 27번째 이야기. 『우정 챌린지』는 채연과 친구들이 ‘우정 챌린지’에 도전하면서 겪는 우정의 위기를 다룬 국내창작동화이다. 나와 다르다는 이유로 관계를 끊는 게 아니라, 서로를 이해하고 사이좋게 지내려는 노력이 진짜 ‘우정 챌린지’라는 메시지를 담았다.",
+      "cover_image_url": "https://image.aladin.co.kr/product/36338/98/cover200/k722039863_1.jpg",
+      "pub_date": "2025-05-10",
+      "link": "https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=363389827&amp;partner=openAPI&amp;start=api",
+      "author": 2,
+      "category": 2,
+      "created_at": "2025-05-22T05:27:16.188094+00:00",
+      "is_bestseller": true
+    }
+  },
+  {
+    "model": "books.book",
+    "pk": 5,
+    "fields": {
+      "title": "우정 도둑 - 삶의 궤도를 넓혀준 글, 고독, 연결의 기록",
+      "isbn13": "9791130699691",
+      "description": "『쉬운 천국』, 『미워하는 미워하는 미워하는 마음 없이』로 유일무이한 이십대 작가의 탄생을 알렸던 유지혜 작가가 단단하게 균형 잡힌 삼십대의 이야기로 돌아왔다. 결핍을 간절히 채우고 싶었던 끝에 그 답을 우정에서 찾은 과정을 기록한 에세이 『우정 도둑』이 놀에서 출간되었다.",
+      "cover_image_url": "https://image.aladin.co.kr/product/31679/23/cover200/k832833783_1.jpg",
+      "pub_date": "2023-05-17",
+      "link": "https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=316792382&amp;partner=openAPI&amp;start=api",
+      "author": 3,
+      "category": 3,
+      "created_at": "2025-05-22T05:27:16.221789+00:00",
+      "is_bestseller": true
+    }
+  },
+  {
+    "model": "books.book",
+    "pk": 6,
+    "fields": {
+      "title": "노년에 관하여 우정에 관하여",
+      "isbn13": "9788991290051",
+      "description": "고대 로마의 웅변가이자 정치가, 철학자, 문인으로 잘 알려진 키케로가 그의 평생지기 앗티쿠스에게 헌정한 두 편의 글, '노년에 관하여'와 '우정에 관하여'를 엮은 책이다. 대화의 방식으로 현대를 사는 우리에게 '노년'과 '우정'에 관해 들려주며, 곁들여진 흑백사진으로 생각의 깊이를 더하게 한다.",
+      "cover_image_url": "https://image.aladin.co.kr/product/57/8/cover200/s252934569_1.jpg",
+      "pub_date": "2005-06-30",
+      "link": "https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=570820&amp;partner=openAPI&amp;start=api",
+      "author": 4,
+      "category": 4,
+      "created_at": "2025-05-22T05:27:16.256777+00:00",
+      "is_bestseller": true
+    }
+  },
+  {
+    "model": "books.book",
+    "pk": 7,
+    "fields": {
+      "title": "사랑과 차별과 우정과 LGBTQ+ - 경계와 편견을 넘어 무지를 메워 온 말들의 기록",
+      "isbn13": "9791173570940",
+      "description": "퀴어에 대해 침묵하던 일본 사회에 30여 년간 LGBTQ+ 소식을 전해 온 성소수자 언론인 기타마루 유지의 『사랑과 차별과 우정과 LGBTQ+』가 ‘필로스 페미니즘’ 시리즈 열두 번째 도서로 출간되었다.",
+      "cover_image_url": "https://image.aladin.co.kr/product/35910/25/cover200/k962037592_1.jpg",
+      "pub_date": "2025-02-24",
+      "link": "https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=359102538&amp;partner=openAPI&amp;start=api",
+      "author": 5,
+      "category": 5,
+      "created_at": "2025-05-22T05:27:16.288105+00:00",
+      "is_bestseller": false
+    }
+  },
+  {
+    "model": "books.book",
+    "pk": 8,
+    "fields": {
+      "title": "버디버디 우정문답",
+      "isbn13": "8809625043469",
+      "description": "일상적이고 가벼운 주제부터 진심을 고백할 수 있는 주제까지 50가지의 다양한 주제로 커플끼리 서로 편지를 주고 받을 수 있는 편지집. 뜯는 선이 있어 인테리어용 엽서로 사용 가능하다.",
+      "cover_image_url": "https://image.aladin.co.kr/product/25240/48/cover200/k722633006_1.jpg",
+      "pub_date": "2020-09-22",
+      "link": "https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=252404864&amp;partner=openAPI&amp;start=api",
+      "author": 6,
+      "category": 6,
+      "created_at": "2025-05-22T05:27:16.304105+00:00",
+      "is_bestseller": false
+    }
+  },
+  {
+    "model": "books.book",
+    "pk": 9,
+    "fields": {
+      "title": "우정 그림책",
+      "isbn13": "9791160947151",
+      "description": "0세부터 100세까지. 흘러가는 인생의 순간들을 100장면으로 담아냈던 &lt;100 인생 그림책&gt;. 간결하고 담백한 글과 형형색색 감각적인 그림으로 모두의 마음을 사로잡은 &lt;100 인생 그림책&gt;의 두 작가, 하이케 팔러와 발레리오 비달리의 신작이 나왔다. 이번에는 우정이다.",
+      "cover_image_url": "https://image.aladin.co.kr/product/26700/17/cover200/k462730984_1.jpg",
+      "pub_date": "2021-03-26",
+      "link": "https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=267001768&amp;partner=openAPI&amp;start=api",
+      "author": 7,
+      "category": 7,
+      "created_at": "2025-05-22T05:27:16.335906+00:00",
+      "is_bestseller": false
+    }
+  },
+  {
+    "model": "books.book",
+    "pk": 10,
+    "fields": {
+      "title": "우정 계약서",
+      "isbn13": "9791195630950",
+      "description": "그래 책이야 시리즈 5권. ‘편견 없는 친구 사귀기’와 다른 친구의 좋은 점부터 보는 ‘긍정적인 마음’을 심어 주는 이야기다. 조금 어른스럽고 여우같은 여자 아이와 철없고 어리바리한 남자 아이가 펼치는 좌충우돌 재미있는 이야기가 펼쳐진다.",
+      "cover_image_url": "https://image.aladin.co.kr/product/8955/99/cover200/k462535691_1.jpg",
+      "pub_date": "2016-08-15",
+      "link": "https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=89559916&amp;partner=openAPI&amp;start=api",
+      "author": 8,
+      "category": 2,
+      "created_at": "2025-05-22T05:27:16.351862+00:00",
+      "is_bestseller": false
+    }
+  },
+  {
+    "model": "books.book",
+    "pk": 11,
+    "fields": {
+      "title": "우리들의 사춘기 2 : 우정×관계×사랑 - 나의 몸과 마음을 이해하고 더 멋진 내가 되는",
+      "isbn13": "9791130677729",
+      "description": "초등학생 고학년부터 중학생까지의 사춘기에 접어드는 아이들이 쉽고 재미있게 성 지식을 익히며, 건강한 자존감을 형성할 수 있는 성교육 학습만화이다. 이 책의 만화에는 “사춘기가 왔다.”라는 말처럼 진짜 ‘사춘기 요정’들이 아이들을 찾아온다.",
+      "cover_image_url": "https://image.aladin.co.kr/product/34689/49/cover200/k312933918_1.jpg",
+      "pub_date": "2024-09-12",
+      "link": "https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=346894947&amp;partner=openAPI&amp;start=api",
+      "author": 9,
+      "category": 8,
+      "created_at": "2025-05-22T05:38:26.266948+00:00",
+      "is_bestseller": false
+    }
+  },
+  {
+    "model": "books.book",
+    "pk": 12,
+    "fields": {
+      "title": "영원한 우정으로 1",
+      "isbn13": "9791158791919",
+      "description": "전 세계에 독일 미스터리를 각인시킨 작가 넬레 노이하우스의 대표작이자 유럽 최고 인기 시리즈인 ‘타우누스 시리즈’의 신작. ‘영원한 우정’으로 맺어진 남자 둘, 여자 셋. 그들 안에서 발생한 살인사건이 이번 신작의 중심에 있다.",
+      "cover_image_url": "https://image.aladin.co.kr/product/29798/1/cover200/k302838010_1.jpg",
+      "pub_date": "2022-07-29",
+      "link": "https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=297980140&amp;partner=openAPI&amp;start=api",
+      "author": 10,
+      "category": 9,
+      "created_at": "2025-05-22T05:38:26.299659+00:00",
+      "is_bestseller": true
+    }
+  },
+  {
+    "model": "books.book",
+    "pk": 13,
+    "fields": {
+      "title": "영원한 우정으로 2",
+      "isbn13": "9791158791926",
+      "description": "전 세계에 독일 미스터리를 각인시킨 작가 넬레 노이하우스의 대표작이자 유럽 최고 인기 시리즈인 ‘타우누스 시리즈’의 신작. ‘영원한 우정’으로 맺어진 남자 둘, 여자 셋. 그들 안에서 발생한 살인사건이 이번 신작의 중심에 있다.",
+      "cover_image_url": "https://image.aladin.co.kr/product/29798/2/cover200/k342838010_1.jpg",
+      "pub_date": "2022-07-29",
+      "link": "https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=297980261&amp;partner=openAPI&amp;start=api",
+      "author": 10,
+      "category": 9,
+      "created_at": "2025-05-22T05:38:26.299659+00:00",
+      "is_bestseller": false
+    }
+  },
+  {
+    "model": "books.book",
+    "pk": 14,
+    "fields": {
+      "title": "남성 과잉 사회 - 성비 불균형이 불러온 폭력과 분노의 사회",
+      "isbn13": "9788932324289",
+      "description": "전 세계적으로 성비 불균형이 심각해진 원인과 결과를 추적한다. 미국의 저명한 과학 및 사회 문제 저널리스트인 마라 비슨달은 성비 불균형 문제가 극심한 한국, 중국, 인도, 아제르바이잔, 베트남 등에서 현장 취재와 인물 인터뷰, 통계 자료 분석 등을 다각도로 활용해 탄탄한 논리로 책을 완성했다.",
+      "cover_image_url": "https://image.aladin.co.kr/product/36301/33/cover200/893232428x_2.jpg",
+      "pub_date": "2025-05-30",
+      "link": "https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=363013390&amp;partner=openAPI&amp;start=api",
+      "author": 11,
+      "category": 10,
+      "created_at": "2025-05-22T05:38:26.331190+00:00",
+      "is_bestseller": false
+    }
+  },
+  {
+    "model": "books.book",
+    "pk": 15,
+    "fields": {
+      "title": "꾸뻬 씨의 우정 여행 - 파리의 정신과 의사",
+      "isbn13": "9788970636757",
+      "description": "&lt;꾸뻬 씨의 행복 여행&gt;의 작가 프랑수아 를로르의 장편소설. 그동안 정신과 의사 출신으로 본인이 임상에서 겪은 환자들과 직간접적으로 겪은 일들을 바탕으로, 행복과 사랑 등 인간 삶의 본질적 문제들에 천착해온 작가 를로르는 이번 작품에서 여행의 과정을 통해 우정에 관한 심도 깊은 성찰을 준다.",
+      "cover_image_url": "https://image.aladin.co.kr/product/866/42/cover200/8970636757_1.jpg",
+      "pub_date": "2011-01-14",
+      "link": "https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=8664254&amp;partner=openAPI&amp;start=api",
+      "author": 12,
+      "category": 11,
+      "created_at": "2025-05-22T05:38:26.362132+00:00",
+      "is_bestseller": false
+    }
+  },
+  {
+    "model": "books.book",
+    "pk": 16,
+    "fields": {
+      "title": "Highlights 인기 주제별 숨은그림찾기 : 우정 (Friendship)",
+      "isbn13": "9791192489209",
+      "description": "75년 전통을 이어온 어린이· 아동서 출판의 선두주자 하이라이츠(Highlights)가 가장 인기 있는 것들을 특별히 선별하여 펴낸 어린이 책이다. 흥미진진한 장면들을 재치 있게 숨겨 놓은 물건들을 찾으며 아이들은 자신감을 갖게 되고, 집중력과 관찰력을 기르게 된다.",
+      "cover_image_url": "https://image.aladin.co.kr/product/35718/94/cover200/k192036237_1.jpg",
+      "pub_date": "2025-03-10",
+      "link": "https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=357189450&amp;partner=openAPI&amp;start=api",
+      "author": 13,
+      "category": 12,
+      "created_at": "2025-05-22T05:38:26.393851+00:00",
+      "is_bestseller": false
+    }
+  },
+  {
+    "model": "books.book",
+    "pk": 17,
+    "fields": {
+      "title": "우정",
+      "isbn13": "9788976826886",
+      "description": "『문학의 공간』(1955), 『도래할 책』(1959) 등 그간 블랑쇼가 해온 문학 비평의 연장선으로서, 라스코 동굴 벽화의 수수께끼에서부터 원자 폭탄의 시대에 이르기까지 그의 관심사를 폭넓게 기록하고 있다.",
+      "cover_image_url": "https://image.aladin.co.kr/product/30070/37/cover200/8976826884_1.jpg",
+      "pub_date": "2022-09-02",
+      "link": "https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=300703711&amp;partner=openAPI&amp;start=api",
+      "author": 14,
+      "category": 13,
+      "created_at": "2025-05-22T05:38:26.409652+00:00",
+      "is_bestseller": false
+    }
+  },
+  {
+    "model": "books.book",
+    "pk": 18,
+    "fields": {
+      "title": "우정 지속의 법칙",
+      "isbn13": "9788936452117",
+      "description": "창비청소년문고 시리즈 11권. &lt;멋지기 때문에 놀러 왔지&gt;로 제1회 창비청소년도서상 대상을 수상했던 작가 설흔이 처음 친구를 사귀는 법부터 우정을 키워 나가는 법, 그리고 이별을 맞는 법까지 안내해 주는 신개념 우정 지침서이다.",
+      "cover_image_url": "https://image.aladin.co.kr/product/3532/99/cover200/8936452118_1.jpg",
+      "pub_date": "2014-01-10",
+      "link": "https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=35329981&amp;partner=openAPI&amp;start=api",
+      "author": 15,
+      "category": 14,
+      "created_at": "2025-05-22T05:38:26.446485+00:00",
+      "is_bestseller": false
+    }
+  },
+  {
+    "model": "books.book",
+    "pk": 19,
+    "fields": {
+      "title": "무례한 친구가 생겼어요 - 건강한 우정을 위한 경계를 설정하는 법",
+      "isbn13": "9791193506332",
+      "description": "‘무례함’의 의미와 친구 사이에 꼭 필요한 ‘경계’의 개념에 대해서 가르쳐 준다. 경계의 개념을 배우면 아이는 괴롭힘을 예방하고 대처하는 방법을 알게 된다. 건강한 우정을 바탕으로 단단하게 성장할 수 있다. 또한 자신만의 경계를 설정해 보는 것은 자기조절력, 자존감, 자기주도성 등을 키우는 데에도 커다란 도움이 된다.",
+      "cover_image_url": "https://image.aladin.co.kr/product/33397/42/cover200/k292938510_1.jpg",
+      "pub_date": "2024-02-21",
+      "link": "https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=333974298&amp;partner=openAPI&amp;start=api",
+      "author": 16,
+      "category": 15,
+      "created_at": "2025-05-22T05:38:26.472836+00:00",
+      "is_bestseller": false
+    }
+  },
+  {
+    "model": "books.book",
+    "pk": 20,
+    "fields": {
+      "title": "한편 12호 : 우정",
+      "isbn13": "9788937491634",
+      "description": "《한편》 12호 ‘우정’은 지금 나에게 우정이 무엇인지를 골똘히 고민하는 열 편을 실었다. 에세이와 비평, 국문학에서 동물행동학, 사회인류학, 문화연구, 철학까지 삶을 위한 관계의 통로를 찾는다.",
+      "cover_image_url": "https://image.aladin.co.kr/product/32531/60/cover200/893749163x_1.jpg",
+      "pub_date": "2023-09-15",
+      "link": "https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=325316022&amp;partner=openAPI&amp;start=api",
+      "author": 17,
+      "category": 16,
+      "created_at": "2025-05-22T05:38:26.520192+00:00",
+      "is_bestseller": false
+    }
+  },
+  {
+    "model": "books.book",
+    "pk": 21,
+    "fields": {
+      "title": "미움, 우정, 구애, 사랑, 결혼",
+      "isbn13": "9788901242194",
+      "description": "단편 작가로서는 최초로 〈노벨 문학상〉을 수상한 세계적인 작가, 앨리스 먼로 문학 세계의 정수를 담은 3종 컬렉션이 출간되었다. 앨리스 먼로의 첫 소설집인 『행복한 그림자의 춤』, 앨리스 먼로의 대표작이자 영화로도 제작된 바 있는 『미움, 우정, 구애, 사랑, 결혼』, 《뉴욕타임스》 선정 올해의 책에 빛나는 『런어웨이』가 새로운 장정으로 선보이게 된 것이다.",
+      "cover_image_url": "https://image.aladin.co.kr/product/24027/87/cover200/8901242192_2.jpg",
+      "pub_date": "2020-05-11",
+      "link": "https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=240278787&amp;partner=openAPI&amp;start=api",
+      "author": 18,
+      "category": 17,
+      "created_at": "2025-05-22T05:38:26.551736+00:00",
+      "is_bestseller": false
+    }
+  },
+  {
+    "model": "books.book",
+    "pk": 22,
+    "fields": {
+      "title": "진정한 우정",
+      "isbn13": "9788932918402",
+      "description": "프랑스를 대표하는 삽화가 장 자끄 상뻬와 언론인 마르크 르카르팡티에와의 대화 기록으로, 일시적인 우정, 익살스러운 우정, 세상을 떠난 예술가에게 느끼는 우정 등 우정의 다양한 양상이 실제 일화와 엮여 흥미를 더한다.",
+      "cover_image_url": "https://image.aladin.co.kr/product/11233/36/cover200/8932918406_1.jpg",
+      "pub_date": "2017-06-30",
+      "link": "https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=112333608&amp;partner=openAPI&amp;start=api",
+      "author": 19,
+      "category": 7,
+      "created_at": "2025-05-22T05:38:26.567538+00:00",
+      "is_bestseller": false
+    }
+  },
+  {
+    "model": "books.book",
+    "pk": 23,
+    "fields": {
+      "title": "우정, 나의 종교 - 세기말, 츠바이크가 사랑한 벗들의 기록",
+      "isbn13": "9791185152479",
+      "description": "세기말 비엔나에서 문인으로 활약하면서 로맹 롤랑, 지그문트 프로이트, 니체 등 유럽 문화 예술계의 쟁쟁한 인물들과 친분을 나누었던 슈테판 츠바이크는 자신과 우정을 나누었던 이 벗들의 삶을 자신만의 방식으로 회고하고 추억한다.",
+      "cover_image_url": "https://image.aladin.co.kr/product/7492/5/cover200/k542434250_1.jpg",
+      "pub_date": "2016-05-01",
+      "link": "https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=74920527&amp;partner=openAPI&amp;start=api",
+      "author": 20,
+      "category": 18,
+      "created_at": "2025-05-22T05:38:26.601494+00:00",
+      "is_bestseller": false
+    }
+  },
+  {
+    "model": "books.book",
+    "pk": 24,
+    "fields": {
+      "title": "진심으로 통하는 마음 우정",
+      "isbn13": "9788956895048",
+      "description": "'어린이를 위한 인성동화' 시리즈의 2권. 좋은 친구를 골라 사귀는 것보다 내가 먼저 좋은 친구가 되는 것을 일깨우는 단편동화들을 한데 엮었다. 좋은 친구란, 친구를 항상 믿어 주고, 친한 사이일수록 함부로 하지 않고, 친구의 잘못을 조용히 타일러 고치게 하고, 친구와 좋은 것을 나누어 가질 수 있는 친구라고 이 책은 말한다.",
+      "cover_image_url": "https://image.aladin.co.kr/product/271/78/cover200/895689504x_1.jpg",
+      "pub_date": "2008-10-15",
+      "link": "https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=2717849&amp;partner=openAPI&amp;start=api",
+      "author": 21,
+      "category": 2,
+      "created_at": "2025-05-22T05:38:26.619192+00:00",
+      "is_bestseller": false
+    }
+  },
+  {
+    "model": "books.book",
+    "pk": 25,
+    "fields": {
+      "title": "쿠키 한 입의 우정 수업",
+      "isbn13": "9791185564012",
+      "description": "작은 곰자리 시리즈 23권. 2008년에 처음 출간되어 7년이 지난 지금까지 꾸준히 독자들의 사랑을 받아 왔고, 2013년 개정된 초등 통합 교과서에도 수록되어 더욱 널리 읽히고 있는 그림책 '쿠키 한 입의 수업' 시리즈 네 번째 책이다.",
+      "cover_image_url": "https://image.aladin.co.kr/product/3756/34/cover200/1185564012_2.jpg",
+      "pub_date": "2014-02-21",
+      "link": "https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=37563476&amp;partner=openAPI&amp;start=api",
+      "author": 22,
+      "category": 19,
+      "created_at": "2025-05-22T05:38:26.646975+00:00",
+      "is_bestseller": false
+    }
+  },
+  {
+    "model": "books.book",
+    "pk": 26,
+    "fields": {
+      "title": "오성과 한음 : 재치와 우정으로 나라를 지킨 충신",
+      "isbn13": "9788928103034",
+      "description": "열정과 노력으로 시련을 극복하고 위대한 업적을 이룬 위인들의 일생을 재미있게 담아내는 데 초점을 맞춘 '교과서 저학년 위인전' 시리즈. 기존 위인전처럼 연대기 순으로 내용을 요약하는 데 그치는 것이 아니라 보다 쉽게 이해하고 공감할 수 있도록 동화로 각색하였다.",
+      "cover_image_url": "https://image.aladin.co.kr/product/3383/58/cover200/8928103037_1.jpg",
+      "pub_date": "2013-10-25",
+      "link": "https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=33835847&amp;partner=openAPI&amp;start=api",
+      "author": 23,
+      "category": 20,
+      "created_at": "2025-05-22T05:38:26.668525+00:00",
+      "is_bestseller": false
+    }
+  },
+  {
+    "model": "books.book",
+    "pk": 27,
+    "fields": {
+      "title": "우리는 친구",
+      "isbn13": "9788901074405",
+      "description": "세계적인 동화작가 앤서니 브라운의 2008년 신작이 출간됐다. &lt;우리는 친구&gt;는 고릴라와 고양이의 우정을 다룬 동화책이다. 앤서니 브라운은 몸집부터 대조적이고 정말 어울릴 것 같지 않은 친구, 고릴라와 고양이를 통해 우정에 대해 간단명료하게 이야기한다.",
+      "cover_image_url": "https://image.aladin.co.kr/product/206/64/cover200/8901074400_2.jpg",
+      "pub_date": "2008-04-01",
+      "link": "https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=2066486&amp;partner=openAPI&amp;start=api",
+      "author": 24,
+      "category": 21,
+      "created_at": "2025-05-22T05:38:26.701845+00:00",
+      "is_bestseller": false
+    }
+  },
+  {
+    "model": "books.book",
+    "pk": 28,
+    "fields": {
+      "title": "도망을 잘 치는 도련님 17",
+      "isbn13": "9791142314070",
+      "description": "",
+      "cover_image_url": "https://image.aladin.co.kr/product/36297/73/cover200/k002038243_1.jpg",
+      "pub_date": "2025-04-25",
+      "link": "https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=362977336&amp;partner=openAPI&amp;start=api",
+      "author": 25,
+      "category": 22,
+      "created_at": "2025-05-22T05:38:26.734064+00:00",
+      "is_bestseller": false
+    }
+  },
+  {
+    "model": "books.book",
+    "pk": 29,
+    "fields": {
+      "title": "반창고 우정",
+      "isbn13": "9788997798148",
+      "description": "별숲 동화 마을 시리즈 6권. 동성 친구를 좋아하는 소녀의 순수한 우정을 담아낸 이야기다. 작품 속 등장인물들 이화정, 오솔길, 김진수를 통해 요즘 아이들에 대한 공감을 끌어내는 힘이 있고, 작품을 끝까지 읽게 하는 매력이 있다.",
+      "cover_image_url": "https://image.aladin.co.kr/product/3166/22/cover200/8997798146_1.jpg",
+      "pub_date": "2013-09-27",
+      "link": "https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=31662220&amp;partner=openAPI&amp;start=api",
+      "author": 26,
+      "category": 2,
+      "created_at": "2025-05-22T05:38:26.754516+00:00",
+      "is_bestseller": false
+    }
+  },
+  {
+    "model": "books.book",
+    "pk": 30,
+    "fields": {
+      "title": "사랑.우정.성격 맞아! 맞아! 혈액형",
+      "isbn13": "9791170182061",
+      "description": "텐텐북스 시리즈 65권. 혈액형으로 친구들의 성격, 사랑, 우정을 알 수 있다. 또 혈액형마다 어울리는 직업, 행운의 패션 스타일, 공부법, 다이어트 방법도 다르다. 혈액형도 생김새도 모두 다른 소녀들의 상큼발랄하고 유쾌하고 감동이 있는 이야기가 펼쳐진다.",
+      "cover_image_url": "https://image.aladin.co.kr/product/2265/56/cover200/k072434112_2.jpg",
+      "pub_date": "2015-12-30",
+      "link": "https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=22655639&amp;partner=openAPI&amp;start=api",
+      "author": 27,
+      "category": 23,
+      "created_at": "2025-05-22T05:38:26.777281+00:00",
+      "is_bestseller": false
+    }
+  },
+  {
+    "model": "books.book",
+    "pk": 31,
+    "fields": {
+      "title": "숙명의 우정 - 박갑성과 김종영",
+      "isbn13": "9791192275284",
+      "description": "한국 미술계의 지음(知音), 미학자 박갑성과 조각가 김종영의 탄생 110주년을 맞아 두 사람의 아름다운 우정과 박갑성이 바라본 김종영 이야기를 기록한 책이다. 김형국 서울대 명예교수가 박갑성의 글을 비롯해 두 사람의 가족, 친지, 제자들의 글을 모아 엮었다.",
+      "cover_image_url": "https://image.aladin.co.kr/product/36248/80/cover200/k242038427_1.jpg",
+      "pub_date": "2025-04-20",
+      "link": "https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=362488093&amp;partner=openAPI&amp;start=api",
+      "author": 28,
+      "category": 18,
+      "created_at": "2025-05-22T05:38:26.802455+00:00",
+      "is_bestseller": false
+    }
+  },
+  {
+    "model": "books.book",
+    "pk": 32,
+    "fields": {
+      "title": "우정에 대하여 / 노년에 대하여 / 변론에 대하여",
+      "isbn13": "9788949716053",
+      "description": "동서문화사 세계사상전집 90. 키케로는 가장 구체적, 현실적으로 정치를 철학하고 정치를 철학과 결합하려고 노력한 철학자이다. 인간적 교양의 풍부함에서 키케로는 정치가로서도 철학자로서도 플라톤에 필적하는 그릇이었다.",
+      "cover_image_url": "https://image.aladin.co.kr/product/10782/85/cover200/8949716054_1.jpg",
+      "pub_date": "2017-03-20",
+      "link": "https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=107828575&amp;partner=openAPI&amp;start=api",
+      "author": 29,
+      "category": 4,
+      "created_at": "2025-05-22T05:38:26.819230+00:00",
+      "is_bestseller": false
+    }
+  },
+  {
+    "model": "books.book",
+    "pk": 33,
+    "fields": {
+      "title": "도망을 잘 치는 도련님 16 - 버그 1338",
+      "isbn13": "9791142308093",
+      "description": "",
+      "cover_image_url": "https://image.aladin.co.kr/product/35897/15/cover200/k002037986_1.jpg",
+      "pub_date": "2025-02-26",
+      "link": "https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=358971561&amp;partner=openAPI&amp;start=api",
+      "author": 25,
+      "category": 22,
+      "created_at": "2025-05-22T05:38:26.834878+00:00",
+      "is_bestseller": false
+    }
+  },
+  {
+    "model": "books.book",
+    "pk": 34,
+    "fields": {
+      "title": "서양 선비, 우정을 논하다 - 마테오 리치의 《교우론》과 마르티노 마르티니의 《구우편》",
+      "isbn13": "9788934957836",
+      "description": "조선 지성사를 깊이 탐구해온 고전학자 정민 교수가 16~17세기 동서양 문물 교류의 선구였던 마테오 리치의 《교우론》과 마르티노 마르티니의 《구우편》을 새롭게 번역하고 풀어낸 신작. 키케로, 세네카, 아우구스티누스 등 그리스·로마 시대의 격언과 일화부터 《성경》과 《이솝우화》까지. 옛 성현들의 우정에 대한 금언집에 상세한 해제와 영인본, 화보 등 풍성한 자료를 더했다.",
+      "cover_image_url": "https://image.aladin.co.kr/product/32915/91/cover200/8934957832_1.jpg",
+      "pub_date": "2023-11-20",
+      "link": "https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=329159197&amp;partner=openAPI&amp;start=api",
+      "author": 30,
+      "category": 18,
+      "created_at": "2025-05-22T05:38:26.852272+00:00",
+      "is_bestseller": false
+    }
+  },
+  {
+    "model": "books.book",
+    "pk": 35,
+    "fields": {
+      "title": "우정 시뮬레이션을 시작하시겠습니까?",
+      "isbn13": "9788961773294",
+      "description": "빅데이터를 바탕으로 인간관계를 코칭해 주는 인공지능 앱이 있다면 어떨까? 나와 잘 맞는 친구를 추천해 주고, 친해지는 방법과 갈등을 해결하는 방법을 설계해 주며, 필요에 따라 미래의 모습까지 예측해 주는 인공지능 커뮤니티 앱 ‘메이트’. 관계 과목에 있어선 용기도 요령도 없는 지안은 채린에게 벼락 같은 절교를 당한 후, 메이트의 도움을 받아 은서에게 다가간다.",
+      "cover_image_url": "https://image.aladin.co.kr/product/33740/53/cover200/8961773291_1.jpg",
+      "pub_date": "2024-04-08",
+      "link": "https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=337405305&amp;partner=openAPI&amp;start=api",
+      "author": 31,
+      "category": 24,
+      "created_at": "2025-05-22T05:38:26.885789+00:00",
+      "is_bestseller": false
+    }
+  },
+  {
+    "model": "books.book",
+    "pk": 36,
+    "fields": {
+      "title": "우정 자판기",
+      "isbn13": "9791158682460",
+      "description": "‘우정을 쌓는 방법’에 대해 이야기한다. 친구 사이에 다툼이 시작되는 원인은 생각보다 사소하다. 나의 행동과 말투에서 시작해 점차 눈덩이처럼 커진다. 자판기를 통해 서로 아끼는 마음을 깨달아 가는 삼총사와 함께 진정한 우정 쌓는 방법을 배워 보자.",
+      "cover_image_url": "https://image.aladin.co.kr/product/30188/77/cover200/k312839997_1.jpg",
+      "pub_date": "2022-09-23",
+      "link": "https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=301887797&amp;partner=openAPI&amp;start=api",
+      "author": 32,
+      "category": 2,
+      "created_at": "2025-05-22T05:38:26.902111+00:00",
+      "is_bestseller": false
+    }
+  },
+  {
+    "model": "books.book",
+    "pk": 37,
+    "fields": {
+      "title": "라일리우스 우정론",
+      "isbn13": "9788957337882",
+      "description": "로마 귀족들의 상식을 기반으로 우정을 칭송하고 우정과 행복한 삶의 관계를 보여주는 대화편이다. 작중 화자인 현자 라일리우스는 스키피오를 회상하며 두 사위 판니우스와 스카이볼라에게 우정의 본질과 계율을 일러준다.",
+      "cover_image_url": "https://image.aladin.co.kr/product/29327/62/cover200/8957337881_1.jpg",
+      "pub_date": "2022-04-29",
+      "link": "https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=293276238&amp;partner=openAPI&amp;start=api",
+      "author": 33,
+      "category": 4,
+      "created_at": "2025-05-22T05:38:26.918726+00:00",
+      "is_bestseller": false
+    }
+  },
+  {
+    "model": "books.book",
+    "pk": 38,
+    "fields": {
+      "title": "노빈손의 못 말리는 우정 수호 대작전 - 사기 2 : 관포지교",
+      "isbn13": "9788958074984",
+      "description": "신나는 노빈손 동양고전 시리즈. 학교에서 배운 과학 지식으로 무인도에서 혼자 꿋꿋이 살아가던 과학 청년 노빈손이 동양고전 속으로 들어간다. 이번에는 「사기」의 「관안열전」에 실려 있는 관중과 포숙아의 이야기, ‘관포지교’라는 한자성어를 탄생시킨 위대한 우정 이야기다.",
+      "cover_image_url": "https://image.aladin.co.kr/product/3576/31/cover200/8958074981_1.jpg",
+      "pub_date": "2014-01-28",
+      "link": "https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=35763158&amp;partner=openAPI&amp;start=api",
+      "author": 34,
+      "category": 25,
+      "created_at": "2025-05-22T05:38:26.952022+00:00",
+      "is_bestseller": false
+    }
+  },
+  {
+    "model": "books.book",
+    "pk": 39,
+    "fields": {
+      "title": "1%의 우정 - 전신마비 백만장자와 무일푼 백수가 만드는 감동실화!",
+      "isbn13": "9788964231364",
+      "description": "필립 포조 디 보르고가 성한 몸으로 살아온 40여 년, 사지 마비 환자로 살아온 20여 년에 대한 유쾌하고도 감동적인 기록을 책으로 담았다. 상식적으로는 서로 도저히 맞을 것 같지 않고 심지어 접촉 자체가 불가능할 것 같은(언터처블!) 필립 포조 디 보르고와 압델 사이에 있었던 오랜 세월 동안의 아름다운 우정과 유쾌하고도 가슴 따듯한 감동 실화를 담은 책이다.",
+      "cover_image_url": "https://image.aladin.co.kr/product/1553/51/cover200/8964231368_1.jpg",
+      "pub_date": "2012-03-07",
+      "link": "https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=15535126&amp;partner=openAPI&amp;start=api",
+      "author": 35,
+      "category": 26,
+      "created_at": "2025-05-22T05:38:26.983980+00:00",
+      "is_bestseller": false
+    }
+  },
+  {
+    "model": "books.book",
+    "pk": 40,
+    "fields": {
+      "title": "위풍당당 여우 꼬리 2 - 알쏭달쏭 우정 테스트",
+      "isbn13": "9788936448172",
+      "description": "2021년 출간 직후 ‘미운 나도, 이상한 나도 사랑하는 법을 일깨우는 이야기’라는 호평을 받으며 베스트셀러에 오른 ‘위풍당당 여우 꼬리’ 시리즈가 두 번째 이야기로 돌아왔다. 우정 때문에 괴로워하거나 고민하는 독자들에게 부드러우면서도 진실된 위로를 선사해 줄 이야기가 펼쳐진다.",
+      "cover_image_url": "https://image.aladin.co.kr/product/28910/83/cover200/893644817x_1.jpg",
+      "pub_date": "2022-02-25",
+      "link": "https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=289108312&amp;partner=openAPI&amp;start=api",
+      "author": 36,
+      "category": 2,
+      "created_at": "2025-05-22T05:38:27.002148+00:00",
+      "is_bestseller": false
+    }
+  },
+  {
+    "model": "books.book",
+    "pk": 41,
+    "fields": {
+      "title": "우정론",
+      "isbn13": "9788908060296",
+      "description": "",
+      "cover_image_url": "https://image.aladin.co.kr/product/11/5/cover200/8908060294_1.jpg",
+      "pub_date": "1990-11-01",
+      "link": "https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=110569&amp;partner=openAPI&amp;start=api",
+      "author": 37,
+      "category": 26,
+      "created_at": "2025-05-22T05:38:27.019232+00:00",
+      "is_bestseller": false
+    }
+  },
+  {
+    "model": "books.book",
+    "pk": 42,
+    "fields": {
+      "title": "옛사람들의 우정 이야기",
+      "isbn13": "9788927801108",
+      "description": "오십 빛깔 우리 것 우리 얘기 시리즈 18권. 친구와 우정에 얽힌 옛이야기 열 편을 소개하고 있다. 이야기의 각 장이 끝날 때마다 본문에서 제대로 파악하기 어려웠던 내용이나 더 알면 좋을 내용을 풍부하고 정확한 사진, 최신 정보들과 함께 넣어서 어린이들이 보다 쉽고 재미있게 정보 내용을 익힐 수 있도록 하였다.",
+      "cover_image_url": "https://image.aladin.co.kr/product/1109/58/cover200/8927801105_1.jpg",
+      "pub_date": "2011-03-11",
+      "link": "https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=11095859&amp;partner=openAPI&amp;start=api",
+      "author": 38,
+      "category": 27,
+      "created_at": "2025-05-22T05:38:27.052146+00:00",
+      "is_bestseller": false
+    }
+  },
+  {
+    "model": "books.book",
+    "pk": 43,
+    "fields": {
+      "title": "메이크 타임 - 구글벤처스의 혁신적 시간관리법",
+      "isbn13": "9788934995258",
+      "description": "스프린트를 일상생활에 적용해 조직이 아닌 개인에 초점을 맞춘다. 시간과 집중력, 에너지를 극대화하는 일과 삶의 시간관리법이다. ‘하이라이트, 초집중, 에너지 충전, 돌아보기’의 4단계 프로세스와 87가지 전술은 목표한 일이 무엇이든 실행할 시간을 만들어준다.",
+      "cover_image_url": "https://image.aladin.co.kr/product/18979/66/cover200/8934995254_1.jpg",
+      "pub_date": "2019-04-29",
+      "link": "https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=189796678&amp;partner=openAPI&amp;start=api",
+      "author": 39,
+      "category": 28,
+      "created_at": "2025-05-22T05:38:27.069021+00:00",
+      "is_bestseller": true
+    }
+  },
+  {
+    "model": "books.book",
+    "pk": 44,
+    "fields": {
+      "title": "뻔뻔한 우정",
+      "isbn13": "9791189034252",
+      "description": "우주 최강 왈가닥, 우리 반 최고 축구왕, 그리고 세상에서 감자튀김을 제일 좋아하는 오하얀. 언젠가부터 먼 데서 감자튀김 냄새만 나도 가슴이 두근두근, 얼굴까지 발갛게 달아오르는 나동지. 나동지와 오하얀의 우정에 무슨 일이 생긴 걸까?",
+      "cover_image_url": "https://image.aladin.co.kr/product/23335/22/cover200/k982637914_1.jpg",
+      "pub_date": "2020-02-24",
+      "link": "https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=233352283&amp;partner=openAPI&amp;start=api",
+      "author": 40,
+      "category": 2,
+      "created_at": "2025-05-22T05:38:27.085610+00:00",
+      "is_bestseller": false
+    }
+  },
+  {
+    "model": "books.book",
+    "pk": 45,
+    "fields": {
+      "title": "우정 책",
+      "isbn13": "9788901228891",
+      "description": "‘우정’과 친구 관계에 관한 다양한 상황에 대해 이야기하는 책이다. 새롭고 낯선 환경에 처해 친구가 없을 때의 감정, 그럴 땐 어떤 기분일까에 대한 이해, 우정은 영원할 수 있을까 하는 물음에 대한 신선한 답변 등 친구를 사귀며 한 번 정도는 생각해 봄 직한 이슈를 친절하게 다루었다.",
+      "cover_image_url": "https://image.aladin.co.kr/product/17976/65/cover200/8901228890_1.jpg",
+      "pub_date": "2019-01-18",
+      "link": "https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=179766541&amp;partner=openAPI&amp;start=api",
+      "author": 41,
+      "category": 29,
+      "created_at": "2025-05-22T05:38:27.119462+00:00",
+      "is_bestseller": false
+    }
+  },
+  {
+    "model": "books.book",
+    "pk": 46,
+    "fields": {
+      "title": "우정을 꽃피운 플랜더스의 개",
+      "isbn13": "9788989886259",
+      "description": "",
+      "cover_image_url": "https://image.aladin.co.kr/product/39/17/cover200/8989886252_1.gif",
+      "pub_date": "2003-01-10",
+      "link": "https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=391761&amp;partner=openAPI&amp;start=api",
+      "author": 42,
+      "category": 30,
+      "created_at": "2025-05-22T05:38:27.152352+00:00",
+      "is_bestseller": false
+    }
+  },
+  {
+    "model": "books.book",
+    "pk": 47,
+    "fields": {
+      "title": "우정 바이브레이션 - B愛+658",
+      "isbn13": "9791172456399",
+      "description": "친구가 없는 외톨이에 수수한 히시카와와 반의 인기인 센자키. 스마트 폰의 알림도 쉴 틈이 없는 센자키와가 다른 세계의 인간이라고 여기던 히시카와는 어느 날 이상야릇한 일로 인해 센자키와 갑자기 가까워 지는데?!",
+      "cover_image_url": "https://image.aladin.co.kr/product/34366/12/cover200/k722932001_1.jpg",
+      "pub_date": "2024-07-26",
+      "link": "https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=343661212&amp;partner=openAPI&amp;start=api",
+      "author": 43,
+      "category": 31,
+      "created_at": "2025-05-22T05:38:27.169040+00:00",
+      "is_bestseller": false
+    }
+  },
+  {
+    "model": "books.book",
+    "pk": 48,
+    "fields": {
+      "title": "질문을 주고받으며 나와 친구의 미덕을 찾아내는 우정 수업 - 4학년 우정",
+      "isbn13": "9791192665092",
+      "description": "초등 학년별 인성교육 시리즈. 4학년 아이들이 친구를 사귀고, 관계를 원만하게 유지하는 방법을 알려 준다. 책에 제시한 다양한 활동을 하면서 마음 맞는 친구와 질문을 주고받다 보면, 서로의 장점(미덕)도 찾게 되고, 어느새 우정을 돈독히 유지할 방법도 스스로 깨닫게 된다.",
+      "cover_image_url": "https://image.aladin.co.kr/product/30353/11/cover200/k022839647_1.jpg",
+      "pub_date": "2022-10-20",
+      "link": "https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=303531154&amp;partner=openAPI&amp;start=api",
+      "author": 44,
+      "category": 32,
+      "created_at": "2025-05-22T05:38:27.202216+00:00",
+      "is_bestseller": false
+    }
+  }
+]

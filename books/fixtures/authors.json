@@ -1,0 +1,398 @@
+[
+  {
+    "model": "books.author",
+    "pk": 1,
+    "fields": {
+      "name": "시대공무원시험연구소 (지은이)",
+      "profile_image": null,
+      "biography": ""
+    }
+  },
+  {
+    "model": "books.author",
+    "pk": 2,
+    "fields": {
+      "name": "박상기 (지은이), 불곰 (그림)",
+      "profile_image": null,
+      "biography": ""
+    }
+  },
+  {
+    "model": "books.author",
+    "pk": 3,
+    "fields": {
+      "name": "유지혜 (지은이)",
+      "profile_image": null,
+      "biography": ""
+    }
+  },
+  {
+    "model": "books.author",
+    "pk": 4,
+    "fields": {
+      "name": "마르쿠스 툴리우스 키케로 (지은이), 천병희 (옮긴이)",
+      "profile_image": null,
+      "biography": ""
+    }
+  },
+  {
+    "model": "books.author",
+    "pk": 5,
+    "fields": {
+      "name": "기타마루 유지 (지은이), 송해영 (옮긴이)",
+      "profile_image": null,
+      "biography": ""
+    }
+  },
+  {
+    "model": "books.author",
+    "pk": 6,
+    "fields": {
+      "name": "워터멜론 컴퍼니 (지은이)",
+      "profile_image": null,
+      "biography": ""
+    }
+  },
+  {
+    "model": "books.author",
+    "pk": 7,
+    "fields": {
+      "name": "하이케 팔러 (지은이), 발레리오 비달리 (그림), 김서정 (옮긴이)",
+      "profile_image": null,
+      "biography": ""
+    }
+  },
+  {
+    "model": "books.author",
+    "pk": 8,
+    "fields": {
+      "name": "원유순 (지은이), 주미 (그림)",
+      "profile_image": null,
+      "biography": ""
+    }
+  },
+  {
+    "model": "books.author",
+    "pk": 9,
+    "fields": {
+      "name": "배정원, 전판교 (지은이), 소윤 (그림)",
+      "profile_image": null,
+      "biography": ""
+    }
+  },
+  {
+    "model": "books.author",
+    "pk": 10,
+    "fields": {
+      "name": "넬레 노이하우스 (지은이), 전은경 (옮긴이)",
+      "profile_image": null,
+      "biography": ""
+    }
+  },
+  {
+    "model": "books.author",
+    "pk": 11,
+    "fields": {
+      "name": "마라 비슨달 (지은이), 박우정 (옮긴이)",
+      "profile_image": null,
+      "biography": ""
+    }
+  },
+  {
+    "model": "books.author",
+    "pk": 12,
+    "fields": {
+      "name": "프랑수아 를로르 (지은이), 발레리 해밀 (그림), 이은정 (옮긴이)",
+      "profile_image": null,
+      "biography": ""
+    }
+  },
+  {
+    "model": "books.author",
+    "pk": 13,
+    "fields": {
+      "name": "하이라이츠 어린이 (Highlights for Children) (지은이)",
+      "profile_image": null,
+      "biography": ""
+    }
+  },
+  {
+    "model": "books.author",
+    "pk": 14,
+    "fields": {
+      "name": "모리스 블랑쇼 (지은이), 류재화 (옮긴이)",
+      "profile_image": null,
+      "biography": ""
+    }
+  },
+  {
+    "model": "books.author",
+    "pk": 15,
+    "fields": {
+      "name": "설흔 (지은이)",
+      "profile_image": null,
+      "biography": ""
+    }
+  },
+  {
+    "model": "books.author",
+    "pk": 16,
+    "fields": {
+      "name": "크리스티나 퍼니발 (지은이), 케이티 드와이어 (그림), 이은경 (옮긴이)",
+      "profile_image": null,
+      "biography": ""
+    }
+  },
+  {
+    "model": "books.author",
+    "pk": 17,
+    "fields": {
+      "name": "민음사 편집부 (엮은이)",
+      "profile_image": null,
+      "biography": ""
+    }
+  },
+  {
+    "model": "books.author",
+    "pk": 18,
+    "fields": {
+      "name": "앨리스 먼로 (지은이), 서정은 (옮긴이)",
+      "profile_image": null,
+      "biography": ""
+    }
+  },
+  {
+    "model": "books.author",
+    "pk": 19,
+    "fields": {
+      "name": "장자크 상페 (지은이), 양영란 (옮긴이)",
+      "profile_image": null,
+      "biography": ""
+    }
+  },
+  {
+    "model": "books.author",
+    "pk": 20,
+    "fields": {
+      "name": "슈테판 츠바이크 (지은이), 오지원 (옮긴이)",
+      "profile_image": null,
+      "biography": ""
+    }
+  },
+  {
+    "model": "books.author",
+    "pk": 21,
+    "fields": {
+      "name": "김경희 (지은이), 장동일 (그림)",
+      "profile_image": null,
+      "biography": ""
+    }
+  },
+  {
+    "model": "books.author",
+    "pk": 22,
+    "fields": {
+      "name": "에이미 크루즈 로젠탈 (글), 제인 다이어, 브룩 다이어 (그림), 최현경 (옮긴이)",
+      "profile_image": null,
+      "biography": ""
+    }
+  },
+  {
+    "model": "books.author",
+    "pk": 23,
+    "fields": {
+      "name": "김희숙 (글), 심춘숙 (그림)",
+      "profile_image": null,
+      "biography": ""
+    }
+  },
+  {
+    "model": "books.author",
+    "pk": 24,
+    "fields": {
+      "name": "앤서니 브라운 (지은이), 장미란 (옮긴이)",
+      "profile_image": null,
+      "biography": ""
+    }
+  },
+  {
+    "model": "books.author",
+    "pk": 25,
+    "fields": {
+      "name": "마츠이 유세이 (지은이)",
+      "profile_image": null,
+      "biography": ""
+    }
+  },
+  {
+    "model": "books.author",
+    "pk": 26,
+    "fields": {
+      "name": "송아주 (지은이), 최정인 (그림)",
+      "profile_image": null,
+      "biography": ""
+    }
+  },
+  {
+    "model": "books.author",
+    "pk": 27,
+    "fields": {
+      "name": "김경아 (글), 오수진 (그림)",
+      "profile_image": null,
+      "biography": ""
+    }
+  },
+  {
+    "model": "books.author",
+    "pk": 28,
+    "fields": {
+      "name": "박갑성 (지은이), 김형국 (엮은이)",
+      "profile_image": null,
+      "biography": ""
+    }
+  },
+  {
+    "model": "books.author",
+    "pk": 29,
+    "fields": {
+      "name": "마르쿠스 툴리우스 키케로 (지은이), 김성숙 (옮긴이)",
+      "profile_image": null,
+      "biography": ""
+    }
+  },
+  {
+    "model": "books.author",
+    "pk": 30,
+    "fields": {
+      "name": "마테오 리치 (이마두), 마르티노 마르티니 (지은이), 정민 (옮긴이)",
+      "profile_image": null,
+      "biography": ""
+    }
+  },
+  {
+    "model": "books.author",
+    "pk": 31,
+    "fields": {
+      "name": "하유지 (지은이)",
+      "profile_image": null,
+      "biography": ""
+    }
+  },
+  {
+    "model": "books.author",
+    "pk": 32,
+    "fields": {
+      "name": "정선애 (지은이), 박우진 (그림)",
+      "profile_image": null,
+      "biography": ""
+    }
+  },
+  {
+    "model": "books.author",
+    "pk": 33,
+    "fields": {
+      "name": "마르쿠스 툴리우스 키케로 (지은이), 김남우 (옮긴이)",
+      "profile_image": null,
+      "biography": ""
+    }
+  },
+  {
+    "model": "books.author",
+    "pk": 34,
+    "fields": {
+      "name": "박은철 (지은이), 이우일 (그림)",
+      "profile_image": null,
+      "biography": ""
+    }
+  },
+  {
+    "model": "books.author",
+    "pk": 35,
+    "fields": {
+      "name": "필립 포조 디 보르고 (지은이), 최복현 (옮긴이)",
+      "profile_image": null,
+      "biography": ""
+    }
+  },
+  {
+    "model": "books.author",
+    "pk": 36,
+    "fields": {
+      "name": "손원평 (지은이), 만물상 (그림)",
+      "profile_image": null,
+      "biography": ""
+    }
+  },
+  {
+    "model": "books.author",
+    "pk": 37,
+    "fields": {
+      "name": "아벨 보나르 (지은이)",
+      "profile_image": null,
+      "biography": ""
+    }
+  },
+  {
+    "model": "books.author",
+    "pk": 38,
+    "fields": {
+      "name": "우리누리 (지은이), 김형연 (그림)",
+      "profile_image": null,
+      "biography": ""
+    }
+  },
+  {
+    "model": "books.author",
+    "pk": 39,
+    "fields": {
+      "name": "제이크 냅, 존 제라츠키 (지은이), 박우정 (옮긴이)",
+      "profile_image": null,
+      "biography": ""
+    }
+  },
+  {
+    "model": "books.author",
+    "pk": 40,
+    "fields": {
+      "name": "박현숙 (지은이), 정경아 (그림)",
+      "profile_image": null,
+      "biography": ""
+    }
+  },
+  {
+    "model": "books.author",
+    "pk": 41,
+    "fields": {
+      "name": "박은정 (지은이), 남주현 (그림)",
+      "profile_image": null,
+      "biography": ""
+    }
+  },
+  {
+    "model": "books.author",
+    "pk": 42,
+    "fields": {
+      "name": "지영 (지은이)",
+      "profile_image": null,
+      "biography": ""
+    }
+  },
+  {
+    "model": "books.author",
+    "pk": 43,
+    "fields": {
+      "name": "아카이 시라후 (지은이)",
+      "profile_image": null,
+      "biography": ""
+    }
+  },
+  {
+    "model": "books.author",
+    "pk": 44,
+    "fields": {
+      "name": "이보경 (지은이)",
+      "profile_image": null,
+      "biography": ""
+    }
+  }
+]

@@ -1,0 +1,258 @@
+[
+  {
+    "model": "books.category",
+    "pk": 1,
+    "fields": {
+      "name": "국내도서>수험서/자격증>공무원 수험서>기능직>계리직",
+      "created_at": "2025-05-22T05:27:16.138786+00:00"
+    }
+  },
+  {
+    "model": "books.category",
+    "pk": 2,
+    "fields": {
+      "name": "국내도서>어린이>동화/명작/고전>국내창작동화",
+      "created_at": "2025-05-22T05:27:16.188094+00:00"
+    }
+  },
+  {
+    "model": "books.category",
+    "pk": 3,
+    "fields": {
+      "name": "국내도서>에세이>한국에세이",
+      "created_at": "2025-05-22T05:27:16.204786+00:00"
+    }
+  },
+  {
+    "model": "books.category",
+    "pk": 4,
+    "fields": {
+      "name": "국내도서>인문학>서양철학>고대철학>고대철학 일반",
+      "created_at": "2025-05-22T05:27:16.238494+00:00"
+    }
+  },
+  {
+    "model": "books.category",
+    "pk": 5,
+    "fields": {
+      "name": "국내도서>사회과학>여성학/젠더>여성학이론",
+      "created_at": "2025-05-22T05:27:16.278108+00:00"
+    }
+  },
+  {
+    "model": "books.category",
+    "pk": 6,
+    "fields": {
+      "name": "국내도서>건강/취미>취미기타>기타",
+      "created_at": "2025-05-22T05:27:16.304105+00:00"
+    }
+  },
+  {
+    "model": "books.category",
+    "pk": 7,
+    "fields": {
+      "name": "국내도서>에세이>사진/그림 에세이",
+      "created_at": "2025-05-22T05:27:16.335906+00:00"
+    }
+  },
+  {
+    "model": "books.category",
+    "pk": 8,
+    "fields": {
+      "name": "국내도서>어린이>초등 전학년>성(性) 이야기",
+      "created_at": "2025-05-22T05:38:26.258951+00:00"
+    }
+  },
+  {
+    "model": "books.category",
+    "pk": 9,
+    "fields": {
+      "name": "국내도서>소설/시/희곡>추리/미스터리소설>기타국가 추리/미스터리소설",
+      "created_at": "2025-05-22T05:38:26.284465+00:00"
+    }
+  },
+  {
+    "model": "books.category",
+    "pk": 10,
+    "fields": {
+      "name": "국내도서>사회과학>사회문제>사회문제 일반",
+      "created_at": "2025-05-22T05:38:26.315393+00:00"
+    }
+  },
+  {
+    "model": "books.category",
+    "pk": 11,
+    "fields": {
+      "name": "국내도서>소설/시/희곡>프랑스소설",
+      "created_at": "2025-05-22T05:38:26.346345+00:00"
+    }
+  },
+  {
+    "model": "books.category",
+    "pk": 12,
+    "fields": {
+      "name": "국내도서>유아>놀이책>숨은그림찾기",
+      "created_at": "2025-05-22T05:38:26.377914+00:00"
+    }
+  },
+  {
+    "model": "books.category",
+    "pk": 13,
+    "fields": {
+      "name": "국내도서>인문학>철학 일반>교양 철학",
+      "created_at": "2025-05-22T05:38:26.409652+00:00"
+    }
+  },
+  {
+    "model": "books.category",
+    "pk": 14,
+    "fields": {
+      "name": "국내도서>청소년>청소년 자기계발",
+      "created_at": "2025-05-22T05:38:26.441356+00:00"
+    }
+  },
+  {
+    "model": "books.category",
+    "pk": 15,
+    "fields": {
+      "name": "국내도서>유아>그림책>나라별 그림책>외국 그림책",
+      "created_at": "2025-05-22T05:38:26.472836+00:00"
+    }
+  },
+  {
+    "model": "books.category",
+    "pk": 16,
+    "fields": {
+      "name": "국내도서>인문학>학회/무크/계간지",
+      "created_at": "2025-05-22T05:38:26.504426+00:00"
+    }
+  },
+  {
+    "model": "books.category",
+    "pk": 17,
+    "fields": {
+      "name": "국내도서>소설/시/희곡>세계의 소설>기타 국가 소설",
+      "created_at": "2025-05-22T05:38:26.535983+00:00"
+    }
+  },
+  {
+    "model": "books.category",
+    "pk": 18,
+    "fields": {
+      "name": "국내도서>인문학>교양 인문학",
+      "created_at": "2025-05-22T05:38:26.592490+00:00"
+    }
+  },
+  {
+    "model": "books.category",
+    "pk": 19,
+    "fields": {
+      "name": "국내도서>유아>그림책>나라별 그림책>미국",
+      "created_at": "2025-05-22T05:38:26.637105+00:00"
+    }
+  },
+  {
+    "model": "books.category",
+    "pk": 20,
+    "fields": {
+      "name": "국내도서>어린이>책읽기/글쓰기>논리/논술",
+      "created_at": "2025-05-22T05:38:26.668525+00:00"
+    }
+  },
+  {
+    "model": "books.category",
+    "pk": 21,
+    "fields": {
+      "name": "국내도서>유아>그림책>나라별 그림책>유럽",
+      "created_at": "2025-05-22T05:38:26.685245+00:00"
+    }
+  },
+  {
+    "model": "books.category",
+    "pk": 22,
+    "fields": {
+      "name": "국내도서>만화>본격장르만화>판타지>드라마틱 판타지",
+      "created_at": "2025-05-22T05:38:26.718698+00:00"
+    }
+  },
+  {
+    "model": "books.category",
+    "pk": 23,
+    "fields": {
+      "name": "국내도서>어린이>초등 전학년>학습만화",
+      "created_at": "2025-05-22T05:38:26.774482+00:00"
+    }
+  },
+  {
+    "model": "books.category",
+    "pk": 24,
+    "fields": {
+      "name": "국내도서>청소년>청소년 문학>청소년 소설",
+      "created_at": "2025-05-22T05:38:26.868944+00:00"
+    }
+  },
+  {
+    "model": "books.category",
+    "pk": 25,
+    "fields": {
+      "name": "국내도서>청소년>청소년 고전",
+      "created_at": "2025-05-22T05:38:26.935500+00:00"
+    }
+  },
+  {
+    "model": "books.category",
+    "pk": 26,
+    "fields": {
+      "name": "국내도서>에세이>외국에세이",
+      "created_at": "2025-05-22T05:38:26.968849+00:00"
+    }
+  },
+  {
+    "model": "books.category",
+    "pk": 27,
+    "fields": {
+      "name": "국내도서>어린이>문화/예술/인물>한국전통문화",
+      "created_at": "2025-05-22T05:38:27.035533+00:00"
+    }
+  },
+  {
+    "model": "books.category",
+    "pk": 28,
+    "fields": {
+      "name": "국내도서>자기계발>시간관리/정보관리>시간관리",
+      "created_at": "2025-05-22T05:38:27.069021+00:00"
+    }
+  },
+  {
+    "model": "books.category",
+    "pk": 29,
+    "fields": {
+      "name": "국내도서>유아>그림책>나라별 그림책>한국 그림책",
+      "created_at": "2025-05-22T05:38:27.117470+00:00"
+    }
+  },
+  {
+    "model": "books.category",
+    "pk": 30,
+    "fields": {
+      "name": "국내도서>어린이>동화/명작/고전>세계명작",
+      "created_at": "2025-05-22T05:38:27.135682+00:00"
+    }
+  },
+  {
+    "model": "books.category",
+    "pk": 31,
+    "fields": {
+      "name": "국내도서>만화>순정만화>그 남자들의 사랑",
+      "created_at": "2025-05-22T05:38:27.169040+00:00"
+    }
+  },
+  {
+    "model": "books.category",
+    "pk": 32,
+    "fields": {
+      "name": "국내도서>사회과학>교육학>교육 일반",
+      "created_at": "2025-05-22T05:38:27.186002+00:00"
+    }
+  }
+]
