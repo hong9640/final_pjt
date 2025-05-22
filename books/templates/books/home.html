@@ -148,9 +148,9 @@
       <div class="book-item">
         <img src="{{ book.cover_image_url }}" alt="{{ book.title }}">
         <p>{{ book.title }}</p>
+        <a href="{% url 'books:book_detail' book_id=book.id %}" class="detail-link">자세히</a>
       </div>
     {% endfor %}
-    
   </div>
   </div>
 
@@ -164,6 +164,7 @@
           <div class="book-card">
             <img src="{{ book.cover_image_url }}" alt="{{ book.title }}">
             <p>{{ book.title }}</p>
+            <a href="{% url 'books:book_detail' book_id=book.id %}" class="detail-link">자세히</a>
           </div>
         {% endfor %}
       </div>
