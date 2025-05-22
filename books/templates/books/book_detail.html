@@ -1,0 +1,463 @@
+{% extends "main.html" %}
+{% load static %}
+
+{% block content %}
+<style>
+  /* detail.html 특정 스타일 */
+  .book-detail-page-container {
+    max-width: 900px; /* 콘텐츠 최대 너비 */
+    margin: 2rem auto; /* 페이지 중앙 정렬 */
+    padding: 2rem;
+    background-color: #fff; /* 콘텐츠 영역 배경색 */
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05); /* 부드러운 그림자 효과 */
+    border-radius: 8px;
+  }
+
+  /* 책 기본 정보 섹션 */
+  .book-primary-info-section {
+    display: flex;
+    gap: 2rem; /* 이미지와 정보 사이 간격 */
+    margin-bottom: 2.5rem;
+  }
+  .book-cover-container {
+    flex: 0 0 220px; /* 책 표지 너비 고정, 축소 방지 */
+    height: 330px; /* 책 표지 높이 */
+    background-color: #f0f0f0; /* 이미지 없을 시 배경색 */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  .book-cover-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .book-meta-details {
+    flex: 1; /* 남은 공간 모두 차지 */
+  }
+  .book-main-title {
+    font-size: 2.2em;
+    font-weight: bold;
+    color: #333;
+    margin-top: 0;
+    margin-bottom: 0.75rem;
+  }
+  .book-info-block, .book-description-block {
+    background-color: #f7f7f7; /* 피그마의 회색 블록 느낌 */
+    padding: 1rem 1.5rem;
+    border-radius: 4px;
+    margin-bottom: 1rem;
+    min-height: 60px; /* 최소 높이 */
+    font-size: 0.95em;
+    color: #444;
+  }
+  .book-description-block {
+    min-height: 100px;
+  }
+
+  /* 작가 정보 섹션 */
+  .author-info-section {
+    margin-bottom: 2.5rem;
+    padding-top: 2rem;
+    border-top: 1px solid #e5e5e5;
+  }
+  .author-info-section h2 {
+    font-size: 1.5em;
+    margin-bottom: 1.5rem;
+    color: #333;
+  }
+  .author-layout {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+  }
+  .author-image-container {
+    width: 100px;
+    height: 100px;
+    background-color: #e0e0e0;
+    border-radius: 50%; /* 원형 이미지 */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    flex-shrink: 0;
+  }
+  .author-image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .author-profile-block {
+    background-color: #f7f7f7;
+    padding: 1rem 1.5rem;
+    border-radius: 4px;
+    min-height: 80px;
+    flex-grow: 1;
+    font-size: 0.95em;
+    color: #444;
+  }
+
+  /* 구매 링크 */
+  .book-purchase-link {
+    display: block;
+    text-align: center;
+    margin: 2rem 0 3rem 0;
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #A67C52; /* main.html의 nav a:hover 색상과 유사하게 */
+    text-decoration: none;
+    padding: 0.75rem;
+    border: 1px solid #D2B9AD;
+    border-radius: 4px;
+    background-color: transparent;
+    transition: background-color 0.3s, color 0.3s;
+  }
+  .book-purchase-link:hover {
+    background-color: #D2B9AD;
+    color: #fff;
+  }
+
+  /* 리뷰 섹션 */
+  .review-main-section {
+    padding-top: 2rem;
+    border-top: 1px solid #e5e5e5;
+  }
+  .review-main-section h2 {
+    font-size: 1.5em;
+    margin-bottom: 1.5rem;
+    color: #333;
+  }
+  .review-write-container, .review-list-container {
+    margin-bottom: 2rem;
+  }
+  .review-form-box {
+    background-color: #fdfdfd;
+    padding: 1.5rem;
+    border: 1px solid #e9e9e9;
+    border-radius: 8px;
+  }
+  .review-form-box textarea {
+    width: calc(100% - 2rem); /* padding 고려 */
+    min-height: 100px;
+    margin-bottom: 1rem;
+    padding: 0.8rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-family: inherit;
+    font-size: 0.95em;
+  }
+  .review-form-box .star-input-area span, .review-item-stars span {
+    font-size: 1.8em; /* 별 크기 키움 */
+    color: #ccc;
+    cursor: pointer;
+    margin-right: 2px;
+  }
+  .review-form-box .star-input-area span.filled, .review-item-stars span.filled {
+    color: #f5a623; /* 채워진 별 색상 */
+  }
+  .review-form-box .form-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      margin-top: 1rem;
+  }
+  .review-form-box input[type="text"] {
+    padding: 0.75rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    flex-grow: 1;
+    font-size: 0.9em;
+  }
+  .review-form-box .review-buttons button {
+    background-color: #D2B9AD;
+    color: #2C1B13;
+    border: none;
+    padding: 0.75rem 1.2rem;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    margin-left: 0.5rem;
+    transition: background-color 0.2s;
+  }
+  .review-form-box .review-buttons button:hover {
+    background-color: #A67C52;
+    color: #fff;
+  }
+  .review-form-box .review-buttons button.secondary {
+      background-color: #e0e0e0;
+      color: #333;
+  }
+ .review-form-box .review-buttons button.secondary:hover {
+      background-color: #c0c0c0;
+  }
+
+
+  .review-item-card {
+    background-color: #fdfdfd;
+    border: 1px solid #e9e9e9;
+    border-radius: 8px;
+    margin-bottom: 1.5rem;
+    padding: 1.5rem;
+    display: flex;
+    gap: 1.5rem; /* 아바타와 내용 간격 */
+  }
+  .review-user-avatar-placeholder {
+    width: 60px; /* 피그마 참고 */
+    height: 60px;
+    background-color: #e0e0e0;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.8em;
+    color: #777;
+    text-align: center;
+    flex-shrink: 0;
+  }
+  .review-details-content {
+    flex-grow: 1;
+  }
+  .review-text-block {
+    background-color: #f0f0f0; /* 피그마 참고 */
+    padding: 1rem;
+    min-height: 60px;
+    margin: 0.5rem 0 1rem 0;
+    border-radius: 4px;
+    font-size: 0.95em;
+  }
+  .review-meta-info {
+    font-size: 0.85em;
+    color: #666;
+    margin-bottom: 1rem;
+  }
+  .review-meta-info span {
+    margin-right: 1rem;
+  }
+  .review-interaction-buttons button {
+    background-color: #f0f0f0;
+    color: #555;
+    border: 1px solid #ddd;
+    padding: 0.5rem 0.8rem;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-right: 0.5rem;
+    font-size: 0.85em;
+  }
+  .review-interaction-buttons button:hover {
+    background-color: #e0e0e0;
+  }
+  .review-comments-placeholder-block {
+    background-color: #f0f0f0;
+    padding: 1rem;
+    min-height: 50px;
+    margin-top: 1rem;
+    border-radius: 4px;
+    color: #777;
+    font-size: 0.9em;
+  }
+  .no-reviews-message {
+    text-align: center;
+    color: #777;
+    padding: 2rem;
+  }
+</style>
+
+<div class="book-detail-page-container">
+  <section class="book-primary-info-section">
+    <div class="book-cover-container">
+      {% if book.cover_image_url %}
+        <img src="{{ book.cover_image_url }}" alt="{{ book.title }} 표지">
+      {% else %}
+        책 사진
+      {% endif %}
+    </div>
+    <div class="book-meta-details">
+      <h1 class="book-main-title">{% if book %}{{ book.title }}{% else %}샘플 책 제목{% endif %}</h1>
+      <div class="book-info-block">
+        {% if book %}
+          <p><strong>저자:</strong> {{ book.author_name|default:"정보 없음" }}</p>
+          <p><strong>출판사:</strong> {{ book.publisher|default:"정보 없음" }}</p>
+          <p><strong>출간일:</strong> {{ book.publication_date|date:"Y년 m월 d일"|default:"정보 없음" }}</p>
+        {% else %}
+          책 정보 (저자, 출판사, 출간일 등)
+        {% endif %}
+      </div>
+      <div class="book-description-block">
+        {% if book %}{{ book.description|linebreaksbr|default:"책 설명이 여기에 표시됩니다." }}{% else %}책 설명이 여기에 표시됩니다. 이 책은 매우 흥미로운 내용을 다루고 있으며...{% endif %}
+      </div>
+    </div>
+  </section>
+
+  <section class="author-info-section">
+    <h2>Section 1 (작가 프로필)</h2> {# 피그마의 "Section 1" 문구 유지 또는 "작가 정보" 등으로 변경 가능 #}
+    <div class="author-layout">
+      <div class="author-image-container">
+        {% if book.author_image_url %}
+          <img src="{{ book.author_image_url }}" alt="{{ book.author_name }}">
+        {% else %}
+          작가 사진
+        {% endif %}
+      </div>
+      <div class="author-profile-block">
+        {% if book %}{{ book.author_profile|linebreaksbr|default:"작가의 프로필 정보가 여기에 표시됩니다." }}{% else %}작가의 주요 약력 및 소개. 다양한 작품 활동과 수상 경력 등을 포함할 수 있습니다.{% endif %}
+      </div>
+    </div>
+  </section>
+
+  <a href="{% if book %}{{ book.purchase_link|default:'#' }}{% else %}#{% endif %}" class="book-purchase-link" target="_blank">
+    책 보러 가기 (알라딘 링크)
+  </a>
+
+  <section class="review-main-section">
+    <div class="review-write-container">
+      <h2>리뷰 쓰기</h2>
+      <div class="review-form-box">
+        <div class="star-input-area" id="writeStarRating">
+          <span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span>
+        </div>
+        <textarea id="reviewTextarea" placeholder="이 책에 대한 생각을 자유롭게 공유해주세요. (예: 인상 깊었던 구절, 추천 이유 등)"></textarea>
+        <div class="form-row">
+          <input type="text" id="reviewCategory" placeholder="카테고리 (선택 사항, 예: 소설, 자기계발)">
+          <div class="review-buttons">
+            <button type="button" class="secondary" onclick="alert('작성 기능은 준비 중입니다.');">작성</button> {# 피그마의 '작성' 버튼, 임시 저장 기능일 수도 있음 #}
+            <button type="button" onclick="submitReviewPlaceholder();">등록</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="review-list-container">
+      <h2>리뷰</h2> {# 또는 "나의 리뷰" / "모든 리뷰" 등 문맥에 맞게 #}
+      
+      {# 실제로는 여기서 book.reviews 와 같이 반복문을 사용합니다. #}
+      {% if reviews %} {# `reviews` 변수가 뷰에서 전달된다고 가정 #}
+        {% for review in reviews %}
+        <div class="review-item-card">
+          <div class="review-user-avatar-placeholder">
+            {% if review.user.avatar_url %}
+              <img src="{{ review.user.avatar_url }}" alt="{{ review.user.username }}">
+            {% else %}
+              {{ review.user.username|slice:":2" }}<br>리뷰
+            {% endif %}
+          </div>
+          <div class="review-details-content">
+            <div class="review-item-stars">
+              {% for i in "12345" %}
+                <span class="{% if i|add:0 <= review.rating %}filled{% endif %}">{% if i|add:0 <= review.rating %}★{% else %}☆{% endif %}</span>
+              {% endfor %}
+            </div>
+            <div class="review-text-block">
+              {{ review.content|linebreaksbr }}
+            </div>
+            <div class="review-meta-info">
+              <span>작성자: {{ review.user.username|default:"익명" }}</span>
+              <span>작성시간: {{ review.created_at|date:"Y.m.d H:i" }}</span>
+              <span>카테고리: {{ review.category|default:"미지정" }}</span>
+              <span>나의 독서타입: {{ review.user.reading_type|default:"-" }}</span>
+            </div>
+            <div class="review-interaction-buttons">
+              <button type="button" onclick="alert('댓글 기능은 준비 중입니다.');">댓글 달기</button>
+              <button type="button" onclick="alert('좋아요 기능은 준비 중입니다.');">좋아요</button>
+            </div>
+            <div class="review-comments-placeholder-block">
+              댓글 영역 (준비 중)
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      {% else %}
+        {# 샘플 리뷰 (뷰에서 실제 리뷰 데이터가 없을 경우를 위해) #}
+        <div class="review-item-card">
+          <div class="review-user-avatar-placeholder">
+            나의<br>리뷰
+          </div>
+          <div class="review-details-content">
+            <div class="review-item-stars">
+              <span class="filled">★</span><span class="filled">★</span><span class="filled">★</span><span class="filled">★</span><span>☆</span> </div>
+            <div class="review-text-block">
+              이곳은 샘플 리뷰 내용입니다. 책이 정말 인상 깊었고, 많은 것을 배울 수 있었습니다. 특히 주인공의 성장이 감동적이었어요. 다른 분들께도 강력 추천합니다!
+            </div>
+            <div class="review-meta-info">
+              <span>작성자: 김리뷰</span>
+              <span>작성시간: 2025.05.22 10:30</span>
+              <span>카테고리: 소설</span>
+              <span>나의 독서타입: 감성형</span>
+            </div>
+            <div class="review-interaction-buttons">
+              <button type="button" onclick="alert('댓글 기능은 준비 중입니다.');">댓글 달기</button>
+              <button type="button" onclick="alert('좋아요 기능은 준비 중입니다.');">좋아요</button>
+            </div>
+            <div class="review-comments-placeholder-block">
+              댓글 영역 (준비 중)
+            </div>
+          </div>
+        </div>
+        <p class="no-reviews-message">아직 등록된 리뷰가 없습니다. 첫 번째 리뷰를 작성해주세요!</p>
+      {% endif %}
+    </div>
+  </section>
+</div>
+
+<script>
+  // 간단한 별점 클릭 처리 (리뷰 작성란)
+  const starRatingContainer = document.getElementById('writeStarRating');
+  if (starRatingContainer) {
+    const stars = starRatingContainer.querySelectorAll('span');
+    let currentRating = 0;
+
+    stars.forEach((star, index) => {
+      star.addEventListener('click', () => {
+        currentRating = index + 1;
+        updateStars(stars, currentRating);
+        // 실제로는 이 값을 hidden input 등에 저장하여 폼으로 전송합니다.
+        console.log('선택된 별점:', currentRating);
+      });
+
+      star.addEventListener('mouseover', () => {
+        updateStarsVisual(stars, index + 1);
+      });
+
+      star.addEventListener('mouseout', () => {
+        updateStars(stars, currentRating); // 클릭된 상태로 복원
+      });
+    });
+
+    function updateStars(starElements, rating) {
+      starElements.forEach((s, i) => {
+        if (i < rating) {
+          s.innerHTML = '★';
+          s.classList.add('filled');
+        } else {
+          s.innerHTML = '☆';
+          s.classList.remove('filled');
+        }
+      });
+    }
+    function updateStarsVisual(starElements, rating) {
+        starElements.forEach((s, i) => {
+            s.innerHTML = i < rating ? '★' : '☆';
+            // hover 시에는 filled 클래스를 직접 건드리지 않고, 색상만 임시 변경 효과를 줄 수도 있습니다.
+            // 여기서는 간단히 innerHTML만 변경합니다. 실제 색상 변경은 CSS로 처리하는 것이 더 좋습니다.
+        });
+    }
+  }
+
+  function submitReviewPlaceholder() {
+    const reviewText = document.getElementById('reviewTextarea').value;
+    const reviewCategory = document.getElementById('reviewCategory').value;
+    // const rating = currentRating; // 위 스크립트에서 currentRating을 가져와야 함
+
+    if (!reviewText.trim()) {
+      alert('리뷰 내용을 입력해주세요.');
+      return;
+    }
+    // 별점 선택 여부도 확인할 수 있습니다.
+
+    alert(`리뷰 등록 기능 준비 중입니다.\n내용: ${reviewText}\n카테고리: ${reviewCategory}\n별점: (별점 값)`);
+    // 실제로는 여기서 폼 데이터를 서버로 전송합니다.
+  }
+</script>
+{% endblock %}
