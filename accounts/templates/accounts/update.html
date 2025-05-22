@@ -1,0 +1,85 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<style>
+    .update-wrapper {
+        max-width: 600px;
+        margin: 3rem auto;
+        background-color: white;
+        padding: 2.5rem;
+        border-radius: 16px;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        font-family: 'Noto Sans KR', sans-serif;
+    }
+
+    .update-wrapper h2 {
+        color: #3E3025;
+        text-align: center;
+        margin-bottom: 1.5rem;
+    }
+
+    .form-label {
+        font-weight: bold;
+        margin-top: 1rem;
+        display: block;
+    }
+
+    .form-input {
+        width: 100%;
+        padding: 0.6rem;
+        margin-top: 0.3rem;
+        border-radius: 8px;
+        border: 1px solid #ccc;
+    }
+
+    .update-wrapper button {
+        margin-top: 2rem;
+        padding: 0.8rem 1.5rem;
+        background-color: #8D6E63;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        font-weight: bold;
+        cursor: pointer;
+        width: 100%;
+    }
+
+    .update-wrapper button:hover {
+        background-color: #6D4C41;
+    }
+
+    .form-file {
+        margin-top: 0.5rem;
+    }
+</style>
+
+<div class="update-wrapper">
+    <h2>회원정보 수정</h2>
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        <!-- 닉네임 -->
+        <label class="form-label" for="{{ form.nickname.id_for_label }}">닉네임</label>
+        {{ form.nickname }}
+
+        <!-- 프로필 사진 -->
+        <label class="form-label">프로필 사진</label>
+
+        {% if form.instance.profile_image %}
+            <label class="checkbox-label">
+                <input type="checkbox" name="profile_image-clear" id="profile_image-clear">
+                기본 이미지로 변경
+            </label>
+        {% endif %}
+
+        <label class="form-label" for="{{ form.profile_image.id_for_label }}"></label>
+        {{ form.profile_image }}
+
+        <!-- 이메일 -->
+        <label class="form-label" for="{{ form.email.id_for_label }}">이메일</label>
+        {{ form.email }}
+
+        <button type="submit">수정 완료</button>
+    </form>
+</div>
+{% endblock %}
