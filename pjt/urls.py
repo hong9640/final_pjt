@@ -25,7 +25,7 @@ urlpatterns = [
     path('books/', include('books.urls')),
     # path('reviews/', include('reviews.urls')),
     # path('libraries/', include('libraries.urls')),
-    # path('recommendations/', include('recommendations.urls')),
+    path('recommendations/', include('recommendations.urls')),
 ]
 
 if settings.DEBUG:
