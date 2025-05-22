@@ -7,12 +7,10 @@
   {% if books %}
     <div style="display:flex; justify-content:center; gap:2rem; flex-wrap:wrap; margin-top:2rem;">
       {% for book in books %}
-        <div style="width:200px; padding:1rem; border:1px solid #ddd; border-radius:10px; background-color:white;">
-          <div style="height:120px; background-color:#eee; margin-bottom:1rem;"></div> <!-- 표지 대신 배경 -->
+        <a href="#">
           <strong>{{ book.title }}</strong>
-          <p style="font-size:0.9rem; color:#555;">{{ book.desc }}</p>
-          <button style="margin-top:1rem; padding:0.4rem 0.8rem;">내 서재에 추가</button>
-        </div>
+        </a>
+        <p>{{ book.description }}</p>
       {% endfor %}
     </div>
   {% else %}
