@@ -10,4 +10,5 @@ urlpatterns = [
     # path('category/<int:category_id>/', views.category_total, name='category_total'),
     # path('author/<int:author_id>/', views.author_detail, name='author_detail'),
     path("api/bestsellers/", views.bestseller_api, name="bestseller_api"),
+    path('category/<int:category_id>/', views.books_by_category_view, name='books_by_category'),
 ]

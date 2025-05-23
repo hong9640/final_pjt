@@ -46,6 +46,49 @@
   .review-interaction-buttons button:hover { background-color: #e0e0e0; }
   .review-comments-placeholder-block { background-color: #f0f0f0; padding: 1rem; min-height: 50px; margin-top: 1rem; border-radius: 4px; color: #777; font-size: 0.9em; }
   .no-reviews-message { text-align: center; color: #777; padding: 2rem; }
+  .add-to-library-button-container {
+    text-align: center;
+    margin: 1.5rem 0;
+  }
+  .add-to-library-button {
+    display: inline-block;
+    background-color: #A67C52;
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 4px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 1em; /* 글자 크기 */
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  .add-to-library-button:hover {
+    background-color: #8c6b4a;
+  }
+  .add-to-library-button-container { text-align: center; margin: 1.5rem 0; }
+  .add-to-library-button { display: inline-block; background-color: #A67C52; color: white; padding: 0.75rem 1.5rem; border: none; border-radius: 4px; text-align: center; text-decoration: none; font-size: 1em; font-weight: bold; cursor: pointer; transition: background-color 0.3s; }
+  .add-to-library-button:hover { background-color: #8c6b4a; }
+
+  /* "내 서재에서 제거" 버튼 스타일 추가 */
+  .remove-from-library-button {
+    display: inline-block;
+    background-color: #d9534f; /* 예시: 빨간색 계열 */
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 4px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 1em;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  .remove-from-library-button:hover {
+    background-color: #c9302c; /* 호버 시 약간 어둡게 */
+  }
 </style>
 
 <div class="book-detail-page-container">
@@ -76,7 +119,23 @@
       </div>
     </div>
   </section>
-
+  {% if user.is_authenticated %}
+  <div class="add-to-library-button-container">
+    {% if is_in_library %}
+      {# --- 책이 이미 서재에 있는 경우: "제거" 버튼 표시 --- #}
+      <form method="POST" action="{% url 'libraries:remove_from_library' book_id=book.id %}">
+        {% csrf_token %}
+        <button type="submit" class="remove-from-library-button">내 서재에서 제거</button>
+      </form>
+    {% else %}
+      {# --- 책이 서재에 없는 경우: "추가" 버튼 표시 --- #}
+      <form method="POST" action="{% url 'libraries:add_to_library' book_id=book.id %}">
+        {% csrf_token %}
+        <button type="submit" class="add-to-library-button">내 서재에 추가</button>
+      </form>
+    {% endif %}
+  </div>
+  {% endif %}
   <section class="author-info-section">
     <h2>{{ clean_author_name }}</h2>
     <div class="author-layout">
