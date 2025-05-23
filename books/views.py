@@ -5,6 +5,8 @@ from django.shortcuts import render, get_object_or_404
 import re
 from .models import Category, Book, Author # Category 모델이 필요합니다.
 from libraries.models import Library
+from reviews.forms import ReviewForm 
+from reviews.models import Review
 
 
 def home(request):
@@ -55,39 +57,34 @@ def extract_primary_author_name(raw_author_str):
 
 def book_detail(request, book_id):
     book = get_object_or_404(Book, id=book_id)
-    author = getattr(book, 'author', None)
+    author = book.author
 
-    # author name 정제
-    if author and author.name:
-        clean_author_name = extract_primary_author_name(author.name)
-    else:
-        clean_author_name = ''
+    clean_author_name = ""
+    if author and isinstance(author.name, str): # author.name이 실제 문자열인지 확인
+        clean_author_name = author.name.split("(")[0].strip()
+    elif author: # author 객체는 있지만 이름이 문자열이 아니거나 None인 경우
+        clean_author_name = str(author.name) if author.name else "정보 없음"
+    else: # author 객체 자체가 None인 경우
+        clean_author_name = "정보 없음"
 
-    # 로그인 사용자 도서 보유 여부
     is_in_library = False
     if request.user.is_authenticated:
         if Library.objects.filter(user=request.user, book=book).exists():
             is_in_library = True
 
-    # 샘플 리뷰 데이터
-    sample_reviews = [
-        {
-            'user': {'username': '김샘플', 'reading_type': '분석형'},
-            'rating': 4,
-            'content': '샘플 리뷰입니다. 책 내용이 아주 유익했어요.',
-            'created_at': '2025-05-20 10:00:00',
-            'category': 'IT',
-        },
-    ]
+    # 실제 리뷰 목록 가져오기 (Review 모델의 Meta ordering에 따라 정렬됨)
+    book_reviews = book.reviews.all() # Review.book의 related_name='reviews' 사용
 
-    # 고정 네비게이션 바용 카테고리
+    # 리뷰 작성 폼
+    review_form = ReviewForm()
+
     nav_categories_for_sticky_bar = get_navigation_categories()
 
     context = {
         'book': book,
-        'author': author,
         'clean_author_name': clean_author_name,
-        'reviews': sample_reviews,
+        'reviews': book_reviews,        # 실제 리뷰 목록
+        'review_form': review_form,     # 리뷰 작성 폼
         'is_in_library': is_in_library,
         'global_categories': nav_categories_for_sticky_bar,
     }

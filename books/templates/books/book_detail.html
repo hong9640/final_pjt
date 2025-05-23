@@ -89,6 +89,9 @@
   .remove-from-library-button:hover {
     background-color: #c9302c; /* 호버 시 약간 어둡게 */
   }
+  .star-rating-hidden-input { display: none; }
+  .review-user-avatar-placeholder img { width: 100%; height: 100%; object-fit: cover; border-radius: 4px; }
+  .form-field-errors { color: red; font-size: 0.8em; list-style-type: none; padding-left: 0; margin-top: 2px; }
 </style>
 
 <div class="book-detail-page-container">
@@ -161,41 +164,62 @@
     책 보러 가기 (알라딘 링크)
   </a>
 
-  {# --- 리뷰 섹션 (기존과 동일하게 유지) --- #}
+ {# --- 리뷰 섹션 수정 --- #}
   <section class="review-main-section">
     <div class="review-write-container">
       <h2>리뷰 쓰기</h2>
-      <div class="review-form-box">
-        <div class="star-input-area" id="writeStarRating">
-          <span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span>
-        </div>
-        <textarea id="reviewTextarea" placeholder="이 책에 대한 생각을 자유롭게 공유해주세요. (예: 인상 깊었던 구절, 추천 이유 등)"></textarea>
-        <div class="form-row">
-          <input type="text" id="reviewCategory" placeholder="카테고리 (선택 사항, 예: 소설, 자기계발)">
-          <div class="review-buttons">
-            <button type="button" class="secondary" onclick="alert('작성 기능은 준비 중입니다.');">작성</button>
-            <button type="button" onclick="submitReviewPlaceholder();">등록</button>
+      {% if user.is_authenticated %}
+        <form method="POST" action="{% url 'reviews:add_review' book_id=book.id %}" class="review-form-box">
+          {% csrf_token %}
+          <div class="star-input-area" id="writeStarRating">
+            <span data-value="1">☆</span><span data-value="2">☆</span><span data-value="3">☆</span><span data-value="4">☆</span><span data-value="5">☆</span>
           </div>
-        </div>
-      </div>
+          {{ review_form.rating }} {# Hidden input for rating #}
+          {% if review_form.rating.errors %}<ul class="form-field-errors">{% for error in review_form.rating.errors %}<li>{{ error }}</li>{% endfor %}</ul>{% endif %}
+          
+          <div style="margin-bottom: 1rem;">
+            {{ review_form.content.label_tag }}<br>
+            {{ review_form.content }}
+            {% if review_form.content.errors %}<ul class="form-field-errors">{% for error in review_form.content.errors %}<li>{{ error }}</li>{% endfor %}</ul>{% endif %}
+          </div>
+
+          {# "리뷰 카테고리" 입력 필드 제거 - 뷰에서 자동으로 책의 카테고리를 저장함 #}
+          {# {% if review_form.review_category_text %} ... {% endif %} 부분 삭제 #}
+          
+          <div class="form-row"> {# 이 div는 버튼을 오른쪽 정렬하기 위해 유지할 수 있음 #}
+            <div style="flex-grow: 1;"></div> {# 왼쪽 공간을 채우기 위한 빈 div #}
+            <div class="review-buttons">
+              <button type="submit">리뷰 등록</button>
+            </div>
+          </div>
+
+          {% if review_form.non_field_errors %}
+            <div class="form-errors" style="color: red; margin-top: 10px;">
+              {{ review_form.non_field_errors }}
+            </div>
+          {% endif %}
+        </form>
+      {% else %}
+        <p><a href="{% url 'accounts:login' %}?next={{ request.path }}">로그인</a> 후 리뷰를 작성할 수 있습니다.</p>
+      {% endif %}
     </div>
 
     <div class="review-list-container">
-      <h2>리뷰</h2>
+      <h2>리뷰 ({{ reviews.count }})</h2>
       {% if reviews %}
         {% for review in reviews %}
         <div class="review-item-card">
           <div class="review-user-avatar-placeholder">
-            {% if review.user.avatar_url %}
-              <img src="{{ review.user.avatar_url }}" alt="{{ review.user.username }}">
+            {% if review.user.profile_image and review.user.profile_image.url %}
+              <img src="{{ review.user.profile_image.url }}" alt="{{ review.user.username }}">
             {% else %}
-              {{ review.user.username|slice:":2" }}<br>리뷰
+              {{ review.user.username|slice:":1"|upper }}
             {% endif %}
           </div>
           <div class="review-details-content">
             <div class="review-item-stars">
-              {% for i in "12345" %}
-                <span class="{% if i|add:0 <= review.rating %}filled{% endif %}">{% if i|add:0 <= review.rating %}★{% else %}☆{% endif %}</span>
+              {% for i_star in "12345" %}
+                <span class="{% if i_star|add:0 <= review.rating %}filled{% endif %}">{% if i_star|add:0 <= review.rating %}★{% else %}☆{% endif %}</span>
               {% endfor %}
             </div>
             <div class="review-text-block">
@@ -204,30 +228,25 @@
             <div class="review-meta-info">
               <span>작성자: {{ review.user.username|default:"익명" }}</span>
               <span>작성시간: {{ review.created_at|date:"Y.m.d H:i" }}</span>
-              <span>카테고리: {{ review.category|default:"미지정" }}</span>
-              <span>나의 독서타입: {{ review.user.reading_type|default:"-" }}</span>
+              {# Review 모델에 book_category_at_review 필드가 있고 값이 있다면 표시 #}
+              {% if review.book_category_at_review %}
+                <span>카테고리: {{ review.book_category_at_review }}</span>
+              {% endif %}
+              {# "나의 독서타입"은 요구사항에서 제외됨 #}
             </div>
+            {% if request.user == review.user %}
+              {# 추후 수정/삭제 링크 위치 #}
+            {% endif %}
             <div class="review-interaction-buttons">
               <button type="button" onclick="alert('댓글 기능은 준비 중입니다.');">댓글 달기</button>
               <button type="button" onclick="alert('좋아요 기능은 준비 중입니다.');">좋아요</button>
             </div>
-            <div class="review-comments-placeholder-block">
-              댓글 영역 (준비 중)
-            </div>
+            <div class="review-comments-placeholder-block"> 댓글 영역 (준비 중) </div>
           </div>
         </div>
         {% endfor %}
       {% else %}
-        <div class="review-item-card">
-          <div class="review-user-avatar-placeholder"> 나의<br>리뷰 </div>
-          <div class="review-details-content">
-            <div class="review-item-stars"> <span class="filled">★</span><span class="filled">★</span><span class="filled">★</span><span class="filled">★</span><span>☆</span> </div>
-            <div class="review-text-block"> 이곳은 샘플 리뷰 내용입니다. 책이 정말 인상 깊었고, 많은 것을 배울 수 있었습니다. 특히 주인공의 성장이 감동적이었어요. 다른 분들께도 강력 추천합니다! </div>
-            <div class="review-meta-info"> <span>작성자: 김리뷰</span> <span>작성시간: 2025.05.22 10:30</span> <span>카테고리: 소설</span> <span>나의 독서타입: 감성형</span> </div>
-            <div class="review-interaction-buttons"> <button type="button" onclick="alert('댓글 기능은 준비 중입니다.');">댓글 달기</button> <button type="button" onclick="alert('좋아요 기능은 준비 중입니다.');">좋아요</button> </div>
-            <div class="review-comments-placeholder-block"> 댓글 영역 (준비 중) </div>
-          </div>
-        </div>
+        {# ▼▼▼ 예시 리뷰 HTML 완전 삭제 후, 메시지만 남김 ▼▼▼ #}
         <p class="no-reviews-message">아직 등록된 리뷰가 없습니다. 첫 번째 리뷰를 작성해주세요!</p>
       {% endif %}
     </div>
@@ -235,50 +254,54 @@
 </div>
 
 <script>
-  // ... (기존 JavaScript 코드 유지) ...
   const starRatingContainer = document.getElementById('writeStarRating');
-  if (starRatingContainer) {
-    const stars = starRatingContainer.querySelectorAll('span');
-    let currentRating = 0; // 이 변수를 submitReviewPlaceholder 함수에서 접근 가능하게 하려면 스코프 조정 필요
+  // ReviewForm에서 rating 필드의 id가 'id_rating_hidden'이고 name이 'rating'이라고 가정합니다.
+  // forms.py에서 widget=forms.HiddenInput(attrs={'id': 'id_rating_hidden'}) 으로 설정했습니다.
+  const ratingHiddenInput = document.querySelector('input[name="rating"]#id_rating_hidden');
 
-    stars.forEach((star, index) => {
-      star.addEventListener('click', () => {
-        currentRating = index + 1; // currentRating 업데이트
-        updateStars(stars, currentRating);
-        console.log('선택된 별점:', currentRating);
-      });
-      star.addEventListener('mouseover', () => { updateStarsVisual(stars, index + 1); });
-      star.addEventListener('mouseout', () => { updateStars(stars, currentRating); });
-    });
-
-    function updateStars(starElements, rating) {
-      starElements.forEach((s, i) => {
-        if (i < rating) { s.innerHTML = '★'; s.classList.add('filled'); }
-        else { s.innerHTML = '☆'; s.classList.remove('filled'); }
-      });
-    }
-    function updateStarsVisual(starElements, rating) {
-      starElements.forEach((s, i) => { s.innerHTML = i < rating ? '★' : '☆'; });
-    }
-  }
-
-  function submitReviewPlaceholder() {
-    const reviewText = document.getElementById('reviewTextarea').value;
-    const reviewCategory = document.getElementById('reviewCategory').value;
+  if (starRatingContainer && ratingHiddenInput) {
+    const stars = Array.from(starRatingContainer.querySelectorAll('span'));
+    // 폼에 초기값(예: 유효성 검사 실패 후 다시 로드될 때)이 있다면 그 값을 사용, 없다면 0
+    let currentRating = parseInt(ratingHiddenInput.value) || 0; 
     
-    // currentRating을 가져오는 방법 (starRatingContainer 스코프 내에 있으므로 직접 접근은 어려움)
-    // 1. 전역 변수로 만들거나, 2. hidden input에 저장 후 읽어오거나, 3. 이 함수를 starRatingContainer 스코프 내부로 옮기거나 콜백으로 처리
-    // 가장 간단한 방법은 starRatingContainer 스크립트 블록 내에서 currentRating에 접근 가능한 함수를 호출하는 것
-    // 또는, 별점 클릭 시 hidden input 값을 업데이트 하는 방식
-    let ratingValue = 0;
-    if (starRatingContainer) { // currentRating을 직접 접근하기 어렵다면, 선택된 별의 개수를 다시 세는 방식도 가능
-        const filledStars = starRatingContainer.querySelectorAll('span.filled');
-        ratingValue = filledStars.length;
+    function setStarsDisplay(rating) {
+        stars.forEach((star, index) => {
+            // data-value는 1부터 시작, index는 0부터 시작
+            if (index < rating) {
+                star.innerHTML = '★'; // 채워진 별
+                star.classList.add('filled');
+            } else {
+                star.innerHTML = '☆'; // 빈 별
+                star.classList.remove('filled');
+            }
+        });
     }
+    
+    setStarsDisplay(currentRating); // 페이지 로드 시 (또는 폼 다시 표시 시) 초기 별 표시
 
-
-    if (!reviewText.trim()) { alert('리뷰 내용을 입력해주세요.'); return; }
-    alert(`리뷰 등록 기능 준비 중입니다.\n내용: ${reviewText}\n카테고리: ${reviewCategory}\n별점: ${ratingValue}`);
+    stars.forEach(star => {
+      const starValue = parseInt(star.getAttribute('data-value')); // 각 span에 data-value="1", "2" ... 가 있어야 함
+      star.addEventListener('click', () => {
+        currentRating = starValue;
+        ratingHiddenInput.value = currentRating; // ✨ 중요: 숨겨진 필드에 값 설정!
+        setStarsDisplay(currentRating);
+        // console.log('선택된 별점:', currentRating, 'Hidden input value:', ratingHiddenInput.value); // 디버깅용
+      });
+      star.addEventListener('mouseover', () => {
+        // 마우스오버 시 임시로 별 채우기 (클릭 전까지)
+        const hoverRating = parseInt(star.getAttribute('data-value'));
+        stars.forEach((s, i) => { 
+            const sValue = parseInt(s.getAttribute('data-value'));
+            s.innerHTML = sValue <= hoverRating ? '★' : '☆'; 
+        });
+      });
+      star.addEventListener('mouseout', () => {
+        setStarsDisplay(currentRating); // 마우스 아웃 시, 클릭으로 확정된 별점으로 복원
+      });
+    });
   }
+
+  // submitReviewPlaceholder 함수는 Django 폼 제출을 사용하므로 이제 필요 없습니다.
+  // (혹시 이 함수를 다른 용도로 호출하고 있다면 해당 로직 확인 필요)
 </script>
 {% endblock %}
