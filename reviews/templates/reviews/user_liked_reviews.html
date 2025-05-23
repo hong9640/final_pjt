@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+{% block content %}
+<style>
+  .review-wrapper {
+    max-width: 1000px;
+    margin: 3rem auto;
+    padding: 2rem;
+    background-color: #ffffff;
+    border-radius: 20px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+    font-family: 'Noto Sans KR', sans-serif;
+  }
+
+  .review-title {
+    text-align: center;
+    font-size: 1.8rem;
+    color: #3E3025;
+    margin-bottom: 2rem;
+    font-family: 'Noto Serif KR', serif;
+  }
+
+  .review-card {
+    border-bottom: 1px solid #eee;
+    padding: 1rem 0;
+  }
+
+  .review-book a {
+    font-weight: bold;
+    font-size: 1.1rem;
+    color: #3E3025;
+    text-decoration: none;
+  }
+
+  .review-book a:hover {
+    text-decoration: underline;
+  }
+
+  .review-meta {
+    color: #7c6a59;
+    font-size: 0.9rem;
+  }
+
+  .review-content {
+    margin-top: 0.5rem;
+  }
+</style>
+
+<div class="review-wrapper">
+  <h2 class="review-title">❤️ {{ target_user.username }} 님이 좋아요한 리뷰</h2>
+
+  {% for like in likes %}
+    <div class="review-card">
+      <div class="review-book">
+        <a href="{% url 'books:book_detail' like.review.book.id %}">{{ like.review.book.title }}</a>
+      </div>
+      <div class="review-meta">
+        작성자: {{ like.review.user.username }} | 좋아요한 시각: {{ like.created_at|date:"Y-m-d H:i" }}
+      </div>
+      <div class="review-content">{{ like.review.content }}</div>
+    </div>
+  {% empty %}
+    <p class="review-meta">좋아요한 리뷰가 없습니다.</p>
+  {% endfor %}
+</div>
+{% endblock %}

@@ -6,6 +6,7 @@ from .models import Review, Comment, Like
 from .forms import ReviewForm, CommentForm
 from books.models import Book
 from django.urls import reverse
+from django.contrib.auth import get_user_model
 
 @login_required
 def add_review(request, book_id):
@@ -139,3 +140,23 @@ def delete_comment(request, comment_id):
     else:
         # GET 요청 시 책 상세 페이지로 리다이렉트
         return redirect('books:book_detail', book_id=comment.review.book.id)
+    
+
+def user_written_reviews(request, username):
+    User = get_user_model()
+    user = get_object_or_404(User, username=username)
+    reviews = Review.objects.filter(user=user).select_related('book')
+    return render(request, 'reviews/user_written_reviews.html', {
+        'target_user': user,
+        'reviews': reviews,
+    })
+
+def user_liked_reviews(request, username):
+    User = get_user_model()
+    user = get_object_or_404(User, username=username)
+    likes = Like.objects.filter(user=user).select_related('review__book', 'review__user')
+    return render(request, 'reviews/user_liked_reviews.html', {
+        'target_user': user,
+        'likes': likes,
+    })
+

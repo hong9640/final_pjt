@@ -15,4 +15,6 @@ urlpatterns = [
     path('<int:review_id>/comment/add/', views.add_comment, name='add_comment'),
     # Path for deleting a comment
     path('comment/<int:comment_id>/delete/', views.delete_comment, name='delete_comment'),
+    path('user/<str:username>/written/', views.user_written_reviews, name='user_written_reviews'),
+    path('user/<str:username>/liked/', views.user_liked_reviews, name='user_liked_reviews'),
 ]
