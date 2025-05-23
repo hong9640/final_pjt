@@ -36,17 +36,23 @@ def classify_category_group(second_level):
 
 def home(request):
     query = request.GET.get('q', None)
+    
+    # sticky_category_nav.html이 사용하는 category_groups와
+    # 다른 곳에서 사용할 수 있는 global_categories를 항상 컨텍스트에 포함합니다.
+    # sticky_category_nav.html이 category_groups (CATEGORY_GROUPS 리스트)를 사용하므로 이를 전달합니다.
     context = {
         'query': query,
-        # global_categories는 검색 결과가 아닐 때만 필요하므로, 아래에서 조건부로 추가
+        'global_categories': get_navigation_categories(), # 사용자님의 get_navigation_categories 함수 사용
+        'category_groups': CATEGORY_GROUPS, # sticky_category_nav.html이 순회하는 대상
     }
 
     if query:
         # 검색어가 있으면, 전체 책을 대상으로 검색
-        searched_books = Book.objects.filter(title__icontains=query).order_by('-pub_date') # 최신순 정렬 또는 원하는 정렬 방식
+        searched_books = Book.objects.filter(title__icontains=query).order_by('-pub_date')
         context['searched_books'] = searched_books
-        context['page_title'] = f"'{query}' 검색 결과" # 검색 결과 페이지 제목
-        # 검색 결과 페이지에서는 sticky_category_nav가 표시되지 않으므로 global_categories 불필요
+        context['page_title'] = f"'{query}' 검색 결과"
+        # 검색 결과 페이지에서는 기존 홈 콘텐츠(베스트셀러, 신간 등)는 전달하지 않음
+        # 'category_groups'는 이미 context 상단에 추가됨
     else:
         # 검색어가 없으면, 기존 홈 페이지 로직 수행
         bestseller_books_qs = Book.objects.filter(is_bestseller=True).select_related('category')
@@ -61,16 +67,17 @@ def home(request):
 
         new_books_qs = Book.objects.order_by('-pub_date')[:6]
 
+        # context.update를 사용하여 기존 context에 추가 (query, global_categories, category_groups는 유지됨)
         context.update({
             'grouped_bestsellers': dict(grouped_bestsellers),
-            'category_groups': CATEGORY_GROUPS, # 베스트셀러 탭 이름용
-            'bestseller_groups': list(grouped_bestsellers.keys()),
+            # 'category_groups': CATEGORY_GROUPS, # 이미 context 상단에 추가됨
+            'bestseller_groups': list(grouped_bestsellers.keys()), # 베스트셀러 탭 내부에서 사용
             'new_books': new_books_qs,
-            'global_categories': get_navigation_categories(), # 상단 네비게이션 바용
-            'page_title': "홈", # 기본 홈 페이지 제목
+            'page_title': "홈", 
         })
 
     return render(request, 'books/home.html', context)
+
 
 
 def bestseller_api(request):
@@ -138,41 +145,61 @@ def book_detail(request, book_id):
 
 
 def all_books_list(request):
+    query = request.GET.get('q')
     book_list_qs = Book.objects.all().order_by('-pub_date')
+
+    page_title_display = "전체 도서"
+    if query:
+        book_list_qs = book_list_qs.filter(title__icontains=query)
+        page_title_display = f"'{query}' 검색 결과 (전체 도서)"
+
     paginator = Paginator(book_list_qs, 9)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
 
     context = {
-        'page_title': "전체 도서",
+        'page_title': page_title_display,
         'page_obj': page_obj,
         'is_paginated': page_obj.has_other_pages(),
-        'global_categories': get_navigation_categories(),
-        'category_groups': CATEGORY_GROUPS,
+        'global_categories': get_navigation_categories(), # 네비게이션 바 데이터
+        'category_groups': CATEGORY_GROUPS,             # 네비게이션 바 데이터
+        'query': query,
     }
     return render(request, 'books/category_total.html', context)
 
 def books_by_category_view(request, category_id):
+    query = request.GET.get('q')
     clicked_category_object = get_object_or_404(Category, id=category_id)
+
     processed_name = clicked_category_object.name.strip().rstrip('>')
     name_parts = processed_name.split('>')
     key_name_part = name_parts[1].strip() if len(name_parts) > 1 else name_parts[0].strip()
-    display_name_for_title = key_name_part
-    filter_keyword = key_name_part
+    
+    # 기본 페이지 제목은 현재 카테고리 이름
+    page_title_display = key_name_part
 
-    relevant_categories = Category.objects.filter(name__icontains=filter_keyword)
+    # 해당 카테고리(또는 관련된 카테고리 그룹)의 책 목록 가져오기
+    # 여기서는 clicked_category_object의 이름을 포함하는 모든 카테고리의 책을 가져옵니다.
+    # 만약 정확히 해당 category_id에 속한 책만 보여주려면 필터링 로직을 수정해야 합니다.
+    relevant_categories = Category.objects.filter(name__icontains=key_name_part) # filter_keyword 대신 key_name_part 사용
     book_list_for_category = Book.objects.filter(category__in=relevant_categories).order_by('-pub_date').distinct()
+
+    if query:
+        book_list_for_category = book_list_for_category.filter(title__icontains=query)
+        page_title_display = f"'{query}' 검색 결과 ({key_name_part})" # 검색 시 페이지 제목 변경
 
     paginator = Paginator(book_list_for_category, 9)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
 
     context = {
-        'current_category': clicked_category_object,
-        'page_title': display_name_for_title,
+        'current_category_object': clicked_category_object, # 현재 카테고리 객체 (URL 생성 등에 사용)
+        'page_title': page_title_display,
         'page_obj': page_obj,
         'is_paginated': page_obj.has_other_pages(),
-        'global_categories': get_navigation_categories(),
+        'global_categories': get_navigation_categories(), # 네비게이션 바 데이터
+        'category_groups': CATEGORY_GROUPS,             # 네비게이션 바 데이터
+        'query': query,
     }
     return render(request, 'books/category.html', context)
 
@@ -191,30 +218,48 @@ def get_navigation_categories():
                 break
     return nav_list
 
-def books_by_group_view(request, group_name):
-    def normalize(s): return s.strip().replace(" ", "").lower()
-    group_name = group_name.replace("-", "/")
-    normalized_target = normalize(group_name)
+def books_by_group_view(request, group_name): # URL의 group_name은 슬러그 (예: 문학-소설)
+    query = request.GET.get('q')
 
+    actual_group_display_name = group_name # 기본값
+    for cat_group_in_list in CATEGORY_GROUPS:
+        if cat_group_in_list.replace("/", "-").lower() == group_name.lower():
+            actual_group_display_name = cat_group_in_list
+            break
+    if group_name.lower() == "기타": # URL 슬러그가 '기타'인 경우
+        actual_group_display_name = "기타"
+
+    # 해당 그룹의 책 필터링
     all_books = Book.objects.select_related('category').order_by('-pub_date')
-    filtered_books = []
+    filtered_books_for_this_group = []
     for book in all_books:
+        book_group_classified = "기타" # 기본 그룹
         if book.category:
-            second = extract_second_level(book.category.name)
-            group = classify_category_group(second)
-            if normalize(group) == normalized_target:
-                filtered_books.append(book)
+            second_level = extract_second_level(book.category.name)
+            book_group_classified = classify_category_group(second_level)
+        
+        if book_group_classified == actual_group_display_name:
+            filtered_books_for_this_group.append(book)
+    
+    page_title_display = actual_group_display_name
+    if query:
+        filtered_books_for_this_group = [
+            book for book in filtered_books_for_this_group 
+            if query.lower() in book.title.lower()
+        ]
+        page_title_display = f"'{query}' 검색 결과 ({actual_group_display_name})"
 
-    paginator = Paginator(filtered_books, 9)
+    paginator = Paginator(filtered_books_for_this_group, 9)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
 
     context = {
-        'page_title': group_name,
-        'current_group': group_name,
+        'page_title': page_title_display,
+        'current_group_slug': group_name, # 검색 폼 action URL 생성용
         'page_obj': page_obj,
         'is_paginated': page_obj.has_other_pages(),
-        'global_categories': get_navigation_categories(),
-        'category_groups': CATEGORY_GROUPS,
+        'global_categories': get_navigation_categories(), # 네비게이션 바 데이터
+        'category_groups': CATEGORY_GROUPS,             # 네비게이션 바 데이터
+        'query': query,
     }
     return render(request, 'books/category.html', context)
