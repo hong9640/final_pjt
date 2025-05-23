@@ -1,6 +1,6 @@
 # books/views.py
 from django.shortcuts import render, get_object_or_404
-from django.core.paginator import Paginator
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.http import JsonResponse
 from .models import Book, Category, Author
 from libraries.models import Library
@@ -37,24 +37,17 @@ def classify_category_group(second_level):
 def home(request):
     query = request.GET.get('q', None)
     
-    # sticky_category_nav.html이 사용하는 category_groups와
-    # 다른 곳에서 사용할 수 있는 global_categories를 항상 컨텍스트에 포함합니다.
-    # sticky_category_nav.html이 category_groups (CATEGORY_GROUPS 리스트)를 사용하므로 이를 전달합니다.
     context = {
         'query': query,
-        'global_categories': get_navigation_categories(), # 사용자님의 get_navigation_categories 함수 사용
-        'category_groups': CATEGORY_GROUPS, # sticky_category_nav.html이 순회하는 대상
+        'global_categories': get_navigation_categories(),
+        'category_groups': CATEGORY_GROUPS,
     }
 
     if query:
-        # 검색어가 있으면, 전체 책을 대상으로 검색
         searched_books = Book.objects.filter(title__icontains=query).order_by('-pub_date')
         context['searched_books'] = searched_books
         context['page_title'] = f"'{query}' 검색 결과"
-        # 검색 결과 페이지에서는 기존 홈 콘텐츠(베스트셀러, 신간 등)는 전달하지 않음
-        # 'category_groups'는 이미 context 상단에 추가됨
     else:
-        # 검색어가 없으면, 기존 홈 페이지 로직 수행
         bestseller_books_qs = Book.objects.filter(is_bestseller=True).select_related('category')
         grouped_bestsellers = defaultdict(list)
         for book in bestseller_books_qs:
@@ -67,13 +60,29 @@ def home(request):
 
         new_books_qs = Book.objects.order_by('-pub_date')[:6]
 
-        # context.update를 사용하여 기존 context에 추가 (query, global_categories, category_groups는 유지됨)
+        # --- 실시간 리뷰 페이지네이션 로직 추가 ---
+        all_latest_reviews_list = Review.objects.select_related('book', 'user').order_by('-created_at')
+        
+        review_paginator = Paginator(all_latest_reviews_list, 5) # 한 페이지에 5개씩
+        review_page_number = request.GET.get('review_page') # URL에서 review_page 파라미터 가져오기
+        
+        try:
+            latest_reviews_page_obj = review_paginator.page(review_page_number)
+        except PageNotAnInteger:
+            # review_page 파라미터가 정수가 아니면 첫 페이지를 보여줌
+            latest_reviews_page_obj = review_paginator.page(1)
+        except EmptyPage:
+            # review_page 파라미터가 유효한 페이지 범위를 벗어나면 마지막 페이지를 보여줌 (또는 첫 페이지로 처리)
+            latest_reviews_page_obj = review_paginator.page(review_paginator.num_pages) 
+            # 또는 latest_reviews_page_obj = review_paginator.page(1) 로 첫페이지로 보낼 수 있습니다.
+        # --- 실시간 리뷰 페이지네이션 로직 끝 ---
+
         context.update({
             'grouped_bestsellers': dict(grouped_bestsellers),
-            # 'category_groups': CATEGORY_GROUPS, # 이미 context 상단에 추가됨
-            'bestseller_groups': list(grouped_bestsellers.keys()), # 베스트셀러 탭 내부에서 사용
+            'bestseller_groups': list(grouped_bestsellers.keys()),
             'new_books': new_books_qs,
-            'page_title': "홈", 
+            'latest_reviews_page': latest_reviews_page_obj, # 페이지네이션된 리뷰 객체 전달
+            'page_title': "홈",
         })
 
     return render(request, 'books/home.html', context)
