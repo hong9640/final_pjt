@@ -126,7 +126,7 @@
   <div class="add-to-library-button-container">
     {% if is_in_library %}
       {# --- 책이 이미 서재에 있는 경우: "제거" 버튼 표시 --- #}
-      <form method="POST" action="{% url 'libraries:remove_from_library' book_id=book.id %}">
+      <form method="POST" action="{% url 'libraries:remove_from_library_to_detail' book_id=book.id %}">
         {% csrf_token %}
         <button type="submit" class="remove-from-library-button">내 서재에서 제거</button>
       </form>

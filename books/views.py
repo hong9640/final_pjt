@@ -1,42 +1,59 @@
 # books/views.py (계속)
-from django.http import JsonResponse
-from django.core.paginator import Paginator
 from django.shortcuts import render, get_object_or_404
-import re
-from .models import Category, Book, Author # Category 모델이 필요합니다.
+from django.core.paginator import Paginator
+from django.http import JsonResponse
+from .models import Book, Category, Author
 from libraries.models import Library
-from reviews.forms import ReviewForm 
-from reviews.models import Review
+import re
+from collections import defaultdict
 
+CATEGORY_GROUPS = [
+    "문학/소설", "어린이/청소년", "만화/웹툰",
+    "인문/사회", "자기계발/경제", "건강/취미",
+    "교육/수험서", "기타"
+]
+
+def extract_second_level(name):
+    parts = name.split(">")
+    return parts[1].strip() if len(parts) > 1 else name.strip()
+
+def classify_category_group(second_level):
+    group_map = {
+        "문학/소설": ["소설", "시", "희곡", "장르소설", "문학"],
+        "어린이/청소년": ["어린이", "초등", "청소년"],
+        "만화/웹툰": ["만화", "웹툰", "라이트노벨"],
+        "인문/사회": ["인문", "철학", "역사", "사회", "종교", "정치", "심리"],
+        "자기계발/경제": ["자기계발", "경제", "경영", "투자", "재테크", "비즈니스"],
+        "건강/취미": ["건강", "취미", "요리", "여행", "스포츠", "반려동물"],
+        "교육/수험서": ["수험서", "자격증", "교재", "외국어", "컴퓨터", "IT", "학습"],
+    }
+    for group, keywords in group_map.items():
+        if any(keyword in second_level for keyword in keywords):
+            return group
+    return "기타"
 
 def home(request):
-    # 기존 'categories'는 home.html의 로컬 탭용으로 유지 (second_levels 기반)
-    categories_qs_tabs = Category.objects.filter(name__startswith="국내도서>")
-    tab_categories = [] # 기존 second_levels 역할
-    seen_tabs = set()
-    for cat_tab in categories_qs_tabs:
-        parts = cat_tab.name.split(">")
-        if len(parts) > 1:
-            second = parts[1].strip()
-            if second not in seen_tabs:
-                seen_tabs.add(second)
-                tab_categories.append({'name': second, 'display_name': second, 'id': cat_tab.id})
-            if len(tab_categories) >= 6:
-                break
+    bestseller_books = Book.objects.filter(is_bestseller=True).select_related('category')
+    grouped_bestsellers = defaultdict(list)
+    for book in bestseller_books:
+        if book.category:
+            second_level = extract_second_level(book.category.name)
+            group = classify_category_group(second_level)
+        else:
+            group = "기타"
+        grouped_bestsellers[group].append(book)
 
-    # sticky_category_nav.html을 위한 카테고리 목록
-    nav_categories_for_sticky_bar = get_navigation_categories() # 헬퍼 함수 사용
-
-    bestseller_books = Book.objects.filter(is_bestseller=True).select_related('category')[:6]
     new_books = Book.objects.order_by('-pub_date')[:6]
 
     context = {
-        'categories': tab_categories, # home.html의 베스트셀러 필터 탭용
-        'global_categories': nav_categories_for_sticky_bar, # 고정 네비게이션 바용
-        'bestseller_books': bestseller_books,
+        'grouped_bestsellers': dict(grouped_bestsellers),
+        'category_groups': CATEGORY_GROUPS,
+        'bestseller_groups': list(grouped_bestsellers.keys()),  # home.html 필터용
         'new_books': new_books,
+        'global_categories': CATEGORY_GROUPS,
     }
     return render(request, 'books/home.html', context)
+
 
 def bestseller_api(request): # 이 뷰는 템플릿을 직접 렌더링하지 않으므로 수정 불필요
     category_id = request.GET.get("category_id")
@@ -57,36 +74,42 @@ def extract_primary_author_name(raw_author_str):
 
 def book_detail(request, book_id):
     book = get_object_or_404(Book, id=book_id)
-    author = book.author
+    author = getattr(book, 'author', None)
 
-    clean_author_name = ""
-    if author and isinstance(author.name, str): # author.name이 실제 문자열인지 확인
-        clean_author_name = author.name.split("(")[0].strip()
-    elif author: # author 객체는 있지만 이름이 문자열이 아니거나 None인 경우
-        clean_author_name = str(author.name) if author.name else "정보 없음"
-    else: # author 객체 자체가 None인 경우
-        clean_author_name = "정보 없음"
+    # author name 정제
+    if author and author.name:
+        clean_author_name = extract_primary_author_name(author.name)
+    else:
+        clean_author_name = ''
 
+    # 로그인 사용자 도서 보유 여부
     is_in_library = False
     if request.user.is_authenticated:
         if Library.objects.filter(user=request.user, book=book).exists():
             is_in_library = True
 
-    # 실제 리뷰 목록 가져오기 (Review 모델의 Meta ordering에 따라 정렬됨)
-    book_reviews = book.reviews.all() # Review.book의 related_name='reviews' 사용
+    # 샘플 리뷰 데이터
+    sample_reviews = [
+        {
+            'user': {'username': '김샘플', 'reading_type': '분석형'},
+            'rating': 4,
+            'content': '샘플 리뷰입니다. 책 내용이 아주 유익했어요.',
+            'created_at': '2025-05-20 10:00:00',
+            'category': 'IT',
+        },
+    ]
 
-    # 리뷰 작성 폼
-    review_form = ReviewForm()
-
+    # 고정 네비게이션 바용 카테고리
     nav_categories_for_sticky_bar = get_navigation_categories()
 
     context = {
         'book': book,
+        'author': author,
         'clean_author_name': clean_author_name,
-        'reviews': book_reviews,        # 실제 리뷰 목록
-        'review_form': review_form,     # 리뷰 작성 폼
+        'reviews': sample_reviews,
         'is_in_library': is_in_library,
         'global_categories': nav_categories_for_sticky_bar,
+        'category_groups': CATEGORY_GROUPS
     }
     return render(request, 'books/book_detail.html', context)
 
@@ -108,6 +131,7 @@ def all_books_list(request):
         'page_obj': page_obj,
         'is_paginated': page_obj.has_other_pages(),
         'global_categories': nav_categories_for_sticky_bar, # 고정 네비게이션 바용
+        'category_groups': CATEGORY_GROUPS,
     }
     return render(request, 'books/category_total.html', context)
 
@@ -193,3 +217,37 @@ def get_navigation_categories():
             if len(nav_list) >= 6:
                 break
     return nav_list
+
+def books_by_group_view(request, group_name):
+    def normalize(s):
+        return s.strip().replace(" ", "").lower()
+
+    group_name = group_name.replace("-", "/")  # 슬러그 되돌리기
+    normalized_target = normalize(group_name)
+
+    all_books = Book.objects.select_related('category').order_by('-pub_date')
+    filtered_books = []
+
+    for book in all_books:
+        if book.category:
+            second = extract_second_level(book.category.name)
+            group = classify_category_group(second)
+            normalized_group = normalize(group)
+
+            if normalized_group == normalized_target:
+                filtered_books.append(book)
+
+    paginator = Paginator(filtered_books, 9)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+
+    context = {
+        'page_title': group_name,
+        'current_group': group_name,
+        'page_obj': page_obj,
+        'is_paginated': page_obj.has_other_pages(),
+        'global_categories': get_navigation_categories(),
+        'category_groups': CATEGORY_GROUPS,
+    }
+    return render(request, 'books/category.html', context)
+
