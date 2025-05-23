@@ -108,9 +108,11 @@
       {% endif %}
     </div>
     <div class="book-meta-details">
-      <h1 class="book-main-title">{% if book %}{{ book.title }}{% else %}샘플 책 제목{% endif %}</h1>
+      <h1 class="book-main-title">{{ book.title }}</h1>
       <div class="book-info-block">
-        <p><strong>저자:</strong> {% if book.author %}{{ book.author.name|default:"정보 없음" }}{% else %}정보 없음{% endif %}</p>
+
+        <p><strong>저자:</strong> {{ book.author.name|default:"정보 없음" }}</p>
+
         <p><strong>출판사:</strong> {{ book.publisher|default:"정보 없음" }}</p>
         <p><strong>출간일:</strong> {{ book.pub_date|default:"정보 없음" }}</p>
       </div>
@@ -123,7 +125,9 @@
   {% if user.is_authenticated %}
   <div class="add-to-library-button-container">
     {% if is_in_library %}
-      <form method="POST" action="{% url 'libraries:remove_from_library' book_id=book.id %}">
+
+      <form method="POST" action="{% url 'libraries:remove_from_library_to_detail' book_id=book.id %}">
+
         {% csrf_token %}
         <button type="submit" class="remove-from-library-button">내 서재에서 제거</button>
       </form>
@@ -152,6 +156,7 @@
     </div>
   </section>
 
+
   <a href="{% if book and book.link %}{{ book.link }}{% else %}#{% endif %}" class="book-purchase-link" target="_blank">
     책 보러 가기 (알라딘 링크)
   </a>
@@ -165,6 +170,7 @@
           <div class="star-input-area" id="writeStarRating">
             <span data-value="1">☆</span><span data-value="2">☆</span><span data-value="3">☆</span><span data-value="4">☆</span><span data-value="5">☆</span>
           </div>
+
           {{ review_form.rating }} 
           {% if review_form.rating.errors %}<ul class="form-field-errors">{% for error in review_form.rating.errors %}<li>{{ error }}</li>{% endfor %}</ul>{% endif %}
           
@@ -175,16 +181,11 @@
           </div>
           
           <div class="form-row">
+
             <div class="review-buttons">
               <button type="submit">리뷰 등록</button>
             </div>
           </div>
-
-          {% if review_form.non_field_errors %}
-            <div class="form-errors" style="color: red; margin-top: 10px;">
-              {{ review_form.non_field_errors }}
-            </div>
-          {% endif %}
         </form>
       {% else %}
         <p><a href="{% url 'accounts:login' %}?next={{ request.path }}">로그인</a> 후 리뷰를 작성할 수 있습니다.</p>
@@ -198,13 +199,14 @@
         {% with review=item.review_obj like_count=item.like_count user_has_liked=item.user_has_liked comments_list=item.comments_list %}
         <div class="review-item-card" id="review-{{ review.id }}">
           <div class="review-user-avatar-placeholder">
-            {% if review.user.profile_image and review.user.profile_image.url %}
+            {% if review.user.profile_image %}
               <img src="{{ review.user.profile_image.url }}" alt="{{ review.user.username }}">
             {% else %}
               {{ review.user.username|slice:":1"|upper }}
             {% endif %}
           </div>
           <div class="review-details-content">
+
             <div class="review-item-stars-container">
               <div class="review-item-stars"> {% for i_star in "12345" %}
                   <span class="{% if i_star|add:0 <= review.rating %}filled{% endif %}">{% if i_star|add:0 <= review.rating %}★{% else %}☆{% endif %}</span>
@@ -219,6 +221,7 @@
               {% else %}
               <span class="text-sm text-gray-500" style="margin-left:0.5rem;">좋아요 {{ like_count }}</span>
               {% endif %}
+
             </div>
             <p style="font-weight: bold; margin-bottom: 0.25rem;">{{ review.user.username|default:"익명" }}</p>
             
@@ -226,11 +229,14 @@
               {{ review.content|linebreaksbr }}
             </div>
             <div class="review-meta-info">
+
+
               <span>작성시간: {{ review.created_at|date:"Y.m.d H:i" }}</span>
               {% if review.book_category_at_review %}
                 <span>카테고리: {{ review.book_category_at_review }}</span>
               {% endif %}
             </div>
+
 
             {% if request.user == review.user %}
               <div class="review-delete-button-container">
@@ -291,6 +297,7 @@
 document.addEventListener('DOMContentLoaded', function() {
   // 리뷰 작성 폼의 별점 로직 (기존 코드 유지)
   const starRatingContainer = document.getElementById('writeStarRating');
+
   const ratingHiddenInput = document.querySelector('form#reviewSubmissionForm input[name="rating"]#id_rating_hidden'); // 폼 ID 명시
 
   if (starRatingContainer && ratingHiddenInput) {
@@ -306,6 +313,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     }
+
     setStarsDisplay(currentRating);
 
     stars.forEach(star => {
@@ -317,6 +325,7 @@ document.addEventListener('DOMContentLoaded', function() {
       });
       star.addEventListener('mouseover', () => {
         const hoverRating = parseInt(star.getAttribute('data-value'));
+
         stars.forEach((s, i) => { 
             const sValue = parseInt(s.getAttribute('data-value'));
             s.innerHTML = sValue <= hoverRating ? '★' : '☆'; 
@@ -397,5 +406,6 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   });
 });
+
 </script>
 {% endblock %}
