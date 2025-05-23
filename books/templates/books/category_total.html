@@ -58,6 +58,12 @@
 
 <div class="category-total-page-content-wrapper"> {# 고정 네비게이션 바 아래로 밀어내기 위한 래퍼 #}
   <div class="category-total-sections-wrapper"> {# 기존 content-wrapper 역할 #}
+    <h1 class="page-title">
+      {% if page_title %} {{ page_title }}
+      {% elif current_category %} {{ current_category.name }}
+      {% else %} 도서 목록 {% endif %}
+    </h1>
+    
     <div class="search-bar">
       <form action="{% url 'books:all_books_list' %}" method="GET" style="display: flex;">
           <input type="text" name="q" placeholder="검색어를 입력하세요">
@@ -65,11 +71,6 @@
       </form>
     </div>
 
-    <h1 class="page-title">
-      {% if page_title %} {{ page_title }}
-      {% elif current_category %} {{ current_category.name }}
-      {% else %} 도서 목록 {% endif %}
-    </h1>
 
     {% if page_obj %}
       <div class="book-grid-display">

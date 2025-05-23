@@ -35,26 +35,43 @@ def classify_category_group(second_level):
     return "기타"
 
 def home(request):
-    bestseller_books = Book.objects.filter(is_bestseller=True).select_related('category')
-    grouped_bestsellers = defaultdict(list)
-    for book in bestseller_books:
-        if book.category:
-            second_level = extract_second_level(book.category.name)
-            group = classify_category_group(second_level)
-        else:
-            group = "기타"
-        grouped_bestsellers[group].append(book)
-
-    new_books = Book.objects.order_by('-pub_date')[:6]
-
+    query = request.GET.get('q', None)
     context = {
-        'grouped_bestsellers': dict(grouped_bestsellers),
-        'category_groups': CATEGORY_GROUPS,
-        'bestseller_groups': list(grouped_bestsellers.keys()),
-        'new_books': new_books,
-        'global_categories': CATEGORY_GROUPS,
+        'query': query,
+        # global_categories는 검색 결과가 아닐 때만 필요하므로, 아래에서 조건부로 추가
     }
+
+    if query:
+        # 검색어가 있으면, 전체 책을 대상으로 검색
+        searched_books = Book.objects.filter(title__icontains=query).order_by('-pub_date') # 최신순 정렬 또는 원하는 정렬 방식
+        context['searched_books'] = searched_books
+        context['page_title'] = f"'{query}' 검색 결과" # 검색 결과 페이지 제목
+        # 검색 결과 페이지에서는 sticky_category_nav가 표시되지 않으므로 global_categories 불필요
+    else:
+        # 검색어가 없으면, 기존 홈 페이지 로직 수행
+        bestseller_books_qs = Book.objects.filter(is_bestseller=True).select_related('category')
+        grouped_bestsellers = defaultdict(list)
+        for book in bestseller_books_qs:
+            if book.category:
+                second_level = extract_second_level(book.category.name)
+                group = classify_category_group(second_level)
+            else:
+                group = "기타"
+            grouped_bestsellers[group].append(book)
+
+        new_books_qs = Book.objects.order_by('-pub_date')[:6]
+
+        context.update({
+            'grouped_bestsellers': dict(grouped_bestsellers),
+            'category_groups': CATEGORY_GROUPS, # 베스트셀러 탭 이름용
+            'bestseller_groups': list(grouped_bestsellers.keys()),
+            'new_books': new_books_qs,
+            'global_categories': get_navigation_categories(), # 상단 네비게이션 바용
+            'page_title': "홈", # 기본 홈 페이지 제목
+        })
+
     return render(request, 'books/home.html', context)
+
 
 def bestseller_api(request):
     category_id = request.GET.get("category_id")
