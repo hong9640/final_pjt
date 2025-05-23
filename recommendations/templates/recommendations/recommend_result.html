@@ -7,10 +7,15 @@
   {% if books %}
     <div style="display:flex; justify-content:center; gap:2rem; flex-wrap:wrap; margin-top:2rem;">
       {% for book in books %}
-        <a href="#">
-          <strong>{{ book.title }}</strong>
+        <a href="{% url 'books:book_detail' book_id=book.id %}" style="text-decoration:none; color:inherit;">
+          <div style="width:180px; border-radius:12px; box-shadow:0 4px 8px rgba(0,0,0,0.1); overflow:hidden; background:white;">
+            <img src="{{ book.cover_image_url }}" alt="{{ book.title }}" style="width:100%; height:260px; object-fit:cover;">
+            <div style="padding:1rem;">
+              <h4 style="margin:0; font-size:1rem;">{{ book.title }}</h4>
+              <p style="font-size:0.9rem; color:#666;">{{ book.author.name }}</p>
+            </div>
+          </div>
         </a>
-        <p>{{ book.description }}</p>
       {% endfor %}
     </div>
   {% else %}
