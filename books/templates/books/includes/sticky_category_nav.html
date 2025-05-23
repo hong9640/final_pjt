@@ -1,33 +1,48 @@
 {% load custom_filters %}
 
 <style>
-  nav.sticky-category-navbar {
-    background-color: #b08968;
-    padding: 10px 20px;
-    top: 60px;
+  #sideCategoryMenu {
+    position: fixed;
+    top: 0;
     left: 0;
-    width: 100%;
-    z-index: 999;
-    box-sizing: border-box;
+    width: 250px;
+    height: 100%;
+    background-color: #EADDC8;
+    padding: 60px 20px 20px 20px;  /* 상단 padding 늘리기 */
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+    z-index: 1000;
   }
-  nav.sticky-category-navbar ul {
+
+  #sideCategoryMenu.active {
+    transform: translateX(0);
+  }
+
+  #sideCategoryMenu ul {
     list-style: none;
-    display: flex;
-    gap: 20px;
-    margin: 0;
     padding: 0;
+    margin: 0;
   }
-  nav.sticky-category-navbar a {
-    text-decoration: none;
-    color: black;
-    font-weight: bold;
+
+  #sideCategoryMenu li {
+    margin-bottom: 15px;
   }
-  nav.sticky-category-navbar a:hover {
+
+  #sideCategoryMenu a {
     color: white;
+    font-weight: bold;
+    text-decoration: none;
+    font-size: 1.1rem;
+  }
+
+  #sideCategoryMenu a:hover {
+    color: #f4ece4;
   }
 </style>
 
-<nav class="sticky-category-navbar">
+
+<div id="sideCategoryMenu">
   <ul>
     <li><a href="{% url 'books:all_books_list' %}">전체</a></li>
     {% for group in category_groups %}
@@ -40,4 +55,4 @@
       {% endif %}
     {% endfor %}
   </ul>
-</nav>
+</div>
