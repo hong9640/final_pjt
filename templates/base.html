@@ -7,58 +7,106 @@
   <style>
     body {
       font-family: 'Noto Serif KR', serif;
-      background-color:rgb(248, 248, 248);
+      background-color: rgb(248, 248, 248);
       margin: 0;
       padding: 0;
+      overflow-x: hidden;
     }
+
     header {
       background-color: #D2B9AD;
       padding: 1rem 2rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
+      position: relative;
+      z-index: 1;
     }
+
+    #menuToggleBtn {
+      background: none;
+      border: none;
+      font-size: 1.8rem;
+      cursor: pointer;
+      color: #2C1B13;
+    }
+
+    .logo-container {
+      padding-left: 0.5rem;
+    }
+
     .logo-container a, .logo-container img {
-        display: inline-block; /* 이미지가 링크 영역을 채우도록 */
-        vertical-align: middle; /* 수직 정렬 */
+      display: inline-block;
+      vertical-align: middle;
     }
+
     .logo-img {
-      height: 40px; /* 로고 이미지의 높이 지정 (원하는 크기로 조절) */
-      width: auto;   /* 너비는 비율에 맞게 자동 조절 */
+      height: 40px;
+      width: auto;
     }
+
     nav a {
       margin-left: 1rem;
       color: #2C1B13;
       text-decoration: none;
     }
+
     nav a:hover {
       color: #A67C52;
     }
+
     .container {
       padding: 0;
+    }
+
+    /* 오버레이 배경 */
+    #overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background-color: rgba(0, 0, 0, 0.3);
+      display: none;
+      z-index: 999;
+    }
+
+    #overlay.active {
+      display: block;
     }
   </style>
 </head>
 <body>
+
+  <!-- 오버레이 추가 -->
+  <div id="overlay"></div>
+
   <header>
-    <div class="logo-container">
-      <a href="{% url "books:home" %}">
-        <img src="{% static "images/book_logo.png" %}" alt="로고" class="logo-img">
-      </a>
+    <div style="display: flex; align-items: center; gap: 1rem;">
+      <button id="menuToggleBtn">☰</button>
+      <div class="logo-container">
+        <a href="{% url 'books:home' %}">
+          <img src="{% static 'images/book_logo.png' %}" alt="로고" class="logo-img">
+        </a>
+      </div>
     </div>
+
     <nav>
       {% if user.is_authenticated %}
-        <a href="{% url "books:home" %}">홈</a>
+        <a href="{% url 'books:home' %}">홈</a>
         <a href="#" onclick="openModal()">나를 위한 추천✨</a>
-        <a href="{% url "accounts:mypage" %}">마이페이지</a>
+        <a href="{% url 'accounts:mypage' %}">마이페이지</a>
       {% else %}
-      <a href="{% url "books:home" %}">홈</a>
-      <a href="{% url "accounts:signup" %}">회원가입</a>
-      <a href="{% url "accounts:login" %}">로그인</a>
+        <a href="{% url 'books:home' %}">홈</a>
+        <a href="{% url 'accounts:signup' %}">회원가입</a>
+        <a href="{% url 'accounts:login' %}">로그인</a>
       {% endif %}
     </nav>
-  {% include "recommendations/modal_input.html" %}
+
+    {% include "recommendations/modal_input.html" %}
   </header>
+
+  {% include "books/includes/sticky_category_nav.html" %}
 
   <div class="container">
     {% block content %}
@@ -66,25 +114,32 @@
   </div>
 
   <script>
-    function openSurveyPopup() {
-      const width = 720
-      const height = 800
-      const left = (screen.width - width) / 2
-      const top = (screen.height - height) / 2
-
-      {% comment %} window.open(
-        "{% url 'survey_start' %}",
-        "surveyPopup",
-        `width=${width},height=${height},top=${top},left=${left},toolbar=no,location=no,status=no,menubar=no,scrollbars=no,resizable=no`
-      ); {% endcomment %}
+    function openModal() {
+      document.getElementById('ai-recommend-modal').style.display = 'flex';
     }
 
-      function openModal() {
-        document.getElementById('ai-recommend-modal').style.display = 'flex';
-      }
-      function closeModal() {
-        document.getElementById('ai-recommend-modal').style.display = 'none';
-      }
+    function closeModal() {
+      document.getElementById('ai-recommend-modal').style.display = 'none';
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const toggleBtn = document.getElementById("menuToggleBtn");
+      const sideMenu = document.getElementById("sideCategoryMenu");
+      const overlay = document.getElementById("overlay");
+
+      // 열기
+      toggleBtn.addEventListener("click", () => {
+        sideMenu.classList.add("active");
+        overlay.classList.add("active");
+      });
+
+      // 닫기: 오버레이 클릭 시
+      overlay.addEventListener("click", () => {
+        sideMenu.classList.remove("active");
+        overlay.classList.remove("active");
+      });
+    });
   </script>
+
 </body>
 </html>

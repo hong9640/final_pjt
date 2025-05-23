@@ -96,6 +96,13 @@
   .remove-from-library-button { background-color: #d9534f; }
   .remove-from-library-button:hover { background-color: #c9302c; }
 
+  .swiper,
+  .swiper-slide,
+  .book-card {
+    position: relative;
+    z-index: 1;
+    transform: none !important;
+  }
 </style>
 
 <div class="book-detail-page-container">
@@ -144,7 +151,7 @@
     <h2>{{ clean_author_name }}</h2>
     <div class="author-layout">
       <div class="author-image-container">
-        {% if book.author and book.author.profile_image %}
+        {% if book.author and book.author.profile_image and book.author.profile_image.url %}
           <img src="{{ book.author.profile_image.url }}" alt="{{ book.author.name }}">
         {% else %}
           <img src="{% static 'images/author_default_img.png' %}" alt="기본 작가 이미지">
@@ -223,7 +230,7 @@
               {% endif %}
 
             </div>
-            <p style="font-weight: bold; margin-bottom: 0.25rem;">{{ review.user.username|default:"익명" }}</p>
+            <p style="font-weight: bold; margin-bottom: 0.25rem;">{% if user != review.user %}<a href="{% url 'accounts:userpage' review.user.username %}" style="text-decoration: none; color: inherit;">{{ review.user.username|default:"익명" }}</a>{% else %}{{ review.user.username|default:"익명" }}{% endif %}</p>
             
             <div class="review-text-block">
               {{ review.content|linebreaksbr }}
