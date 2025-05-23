@@ -67,20 +67,41 @@ def book_detail(request, book_id):
     }
     return render(request, 'books/book_detail.html', context)
 
-def books_category(request, category_id):
-    category = get_object_or_404(Category, id=category_id)
-    book_list = Book.objects.filter(category=category).order_by('-pub_date')
 
-    paginator = Paginator(book_list, 9) # 한 페이지에 9권씩 (3x3 그리드)
+def all_books_list(request):
+    """
+    모든 책 목록을 보여주는 뷰 (페이지네이션 포함)
+    category_total.html 템플릿을 재활용합니다.
+    """
+    # --- 네비게이션용 카테고리 목록 생성 (views.home에서 가져온 로직) ---
+    categories_qs_nav = Category.objects.filter(name__startswith="국내도서>") # 변수명 _nav 추가하여 구분
+    nav_categories_list = []
+    seen_nav_categories = set()
+    for cat_nav in categories_qs_nav: # 변수명 cat_nav 사용
+        parts = cat_nav.name.split(">")
+        if len(parts) > 1:
+            second_level_name = parts[1].strip()
+            if second_level_name not in seen_nav_categories:
+                seen_nav_categories.add(second_level_name)
+                nav_categories_list.append({
+                    'id': cat_nav.id,
+                    'name': second_level_name,
+                    'display_name': second_level_name # home 뷰와 일관성을 위해 추가
+                })
+            if len(nav_categories_list) >= 6: # 최대 6개
+                break
+    # --- 네비게이션용 카테고리 목록 생성 끝 ---
+
+    book_list_qs = Book.objects.all().order_by('-pub_date')
+
+    paginator = Paginator(book_list_qs, 9)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
-    
+
     context = {
-        'current_category': category,       # 현재 보고 있는 주 카테고리 객체
-        'page_obj': page_obj,               # 페이징된 책 목록
+        'page_title': "전체 도서",
+        'page_obj': page_obj,
         'is_paginated': page_obj.has_other_pages(),
-        # 'categories_for_nav' 와 같은 네비게이션 바용 카테고리 목록 전달 로직 제거
+        'categories': nav_categories_list, # <<< 'categories'를 컨텍스트에 추가!
     }
     return render(request, 'books/category_total.html', context)
-
-
