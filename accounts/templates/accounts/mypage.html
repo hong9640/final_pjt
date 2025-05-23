@@ -83,6 +83,9 @@
 
     <div class="profile-info">
       <div class="nickname">{{ request.user.nickname|default:request.user.username }}님</div>
+      <div style="font-size: 0.9rem; color: #555; margin-bottom: 0.5rem;">
+        팔로잉 {{ following_count }} | 팔로워 {{ follower_count }}
+      </div>
       <div class="action-buttons">
         <a href="{% url 'accounts:update' %}">회원정보 수정</a>
         <form method="POST" action="{% url 'accounts:logout' %}" style="display:inline;">

@@ -2,8 +2,10 @@
 from django.http import JsonResponse
 from django.core.paginator import Paginator
 from django.shortcuts import render, get_object_or_404
+import re
 from .models import Category, Book, Author # Category 모델이 필요합니다.
 from libraries.models import Library
+
 
 def home(request):
     # 기존 'categories'는 home.html의 로컬 탭용으로 유지 (second_levels 기반)
@@ -40,24 +42,54 @@ def bestseller_api(request): # 이 뷰는 템플릿을 직접 렌더링하지 �
     data = { "books": [ { "title": book.title, "cover_image_url": book.cover_image_url, } for book in books ] }
     return JsonResponse(data)
 
-def book_detail(request, book_id): # 이 뷰는 sticky_category_nav.html을 포함하는 템플릿을 렌더링 하므로 수정 필요
+def extract_primary_author_name(raw_author_str):
+    """
+    "황석희 (지은이), 홍길동 (옮긴이)" → "황석희"
+    "무라카미 하루키 (지은이)" → "무라카미 하루키"
+    "정유정" → "정유정"
+    """
+    first = raw_author_str.split(',')[0].strip()
+    cleaned = re.sub(r'\s*\([^)]*\)', '', first).strip()
+    return cleaned
+
+
+def book_detail(request, book_id):
     book = get_object_or_404(Book, id=book_id)
-    author = book.author
+    author = getattr(book, 'author', None)
+
+    # author name 정제
+    if author and author.name:
+        clean_author_name = extract_primary_author_name(author.name)
+    else:
+        clean_author_name = ''
+
+    # 로그인 사용자 도서 보유 여부
     is_in_library = False
     if request.user.is_authenticated:
         if Library.objects.filter(user=request.user, book=book).exists():
             is_in_library = True
-    sample_reviews = [ {'user': {'username': '김샘플', 'reading_type': '분석형'},'rating': 4,'content': '샘플 리뷰입니다. 책 내용이 아주 유익했어요.','created_at': '2025-05-20 10:00:00','category': 'IT',},]
 
-    # sticky_category_nav.html을 위한 카테고리 목록
-    nav_categories_for_sticky_bar = get_navigation_categories() # 헬퍼 함수 사용
+    # 샘플 리뷰 데이터
+    sample_reviews = [
+        {
+            'user': {'username': '김샘플', 'reading_type': '분석형'},
+            'rating': 4,
+            'content': '샘플 리뷰입니다. 책 내용이 아주 유익했어요.',
+            'created_at': '2025-05-20 10:00:00',
+            'category': 'IT',
+        },
+    ]
+
+    # 고정 네비게이션 바용 카테고리
+    nav_categories_for_sticky_bar = get_navigation_categories()
 
     context = {
         'book': book,
         'author': author,
+        'clean_author_name': clean_author_name,
         'reviews': sample_reviews,
         'is_in_library': is_in_library,
-        'global_categories': nav_categories_for_sticky_bar, # 고정 네비게이션 바용
+        'global_categories': nav_categories_for_sticky_bar,
     }
     return render(request, 'books/book_detail.html', context)
 

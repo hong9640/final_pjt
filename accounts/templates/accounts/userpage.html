@@ -41,7 +41,17 @@
   .follow-info {
     font-size: 0.9rem;
     color: #666;
-    margin-bottom: 1rem;
+    margin-bottom: 0.5rem;
+  }
+
+  #follow-btn {
+    padding: 0.4rem 1rem;
+    font-size: 0.9rem;
+    background-color: #d3bfa5;
+    color: #3E3025;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
   }
 
   .tab-menu {
@@ -91,7 +101,18 @@
 
     <div class="profile-info">
       <div class="nickname">{{ profile_user.nickname|default:profile_user.username }}님</div>
-      <div class="follow-info">팔로잉 2 | 팔로워 0</div>
+      <div class="follow-info" id="follow-info">
+        팔로잉 {{ profile_user.following.count }} | 팔로워 {{ profile_user.followers.count }}
+      </div>
+
+      <button id="follow-btn" data-username="{{ profile_user.username }}">
+        {% if is_following %}
+          언팔로우
+        {% else %}
+          팔로우
+        {% endif %}
+      </button>
+
       <div class="tab-menu">
         <div>작성한 리뷰</div>
         <div>좋아요 누른 리뷰</div>
@@ -104,4 +125,29 @@
     <div class="coming-soon">추후개발</div>
   </div>
 </div>
+
+<script>
+  document.getElementById('follow-btn').addEventListener('click', function () {
+    const username = this.dataset.username;
+
+    fetch(`/accounts/follow/${username}/`, {
+      method: 'POST',
+      headers: {
+        'X-CSRFToken': '{{ csrf_token }}',
+        'Content-Type': 'application/json',
+      }
+    })
+    .then(res => res.json())
+    .then(data => {
+      // 버튼 텍스트 변경
+      this.textContent = data.followed ? '언팔로우' : '팔로우';
+
+      // 팔로워 수 반영
+      const followInfo = document.getElementById('follow-info');
+      const followingText = followInfo.textContent.split('|')[0].trim();
+      followInfo.textContent = `${followingText} | 팔로워 ${data.follower_count}`;
+    })
+    .catch(err => alert('팔로우 요청 중 오류가 발생했습니다.'));
+  });
+</script>
 {% endblock %}

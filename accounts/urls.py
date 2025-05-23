@@ -12,4 +12,5 @@ urlpatterns = [
     path('mypage/', views.mypage_view, name='mypage'),
     path('update/', views.update, name='update'),
     path('user/<str:username>/', views.userpage_view, name='userpage'),
+    path('follow/<str:username>/', views.follow_toggle, name='follow_toggle'),
 ]
