@@ -18,6 +18,14 @@
       justify-content: space-between;
       align-items: center;
     }
+    .logo-container a, .logo-container img {
+        display: inline-block; /* 이미지가 링크 영역을 채우도록 */
+        vertical-align: middle; /* 수직 정렬 */
+    }
+    .logo-img {
+      height: 40px; /* 로고 이미지의 높이 지정 (원하는 크기로 조절) */
+      width: auto;   /* 너비는 비율에 맞게 자동 조절 */
+    }
     nav a {
       margin-left: 1rem;
       color: #2C1B13;
@@ -33,7 +41,11 @@
 </head>
 <body>
   <header>
-    <div>로고</div>
+    <div class="logo-container">
+      <a href="{% url "books:home" %}">
+        <img src="{% static "images/book_logo.png" %}" alt="로고" class="logo-img">
+      </a>
+    </div>
     <nav>
       {% if user.is_authenticated %}
         <a href="{% url "books:home" %}">홈</a>
