@@ -5,8 +5,8 @@ from django.shortcuts import render, get_object_or_404
 import re
 from .models import Category, Book, Author # Category 모델이 필요합니다.
 from libraries.models import Library
-from reviews.forms import ReviewForm 
-from reviews.models import Review
+from reviews.forms import ReviewForm, CommentForm
+from reviews.models import Review, Like
 
 
 def home(request):
@@ -60,11 +60,11 @@ def book_detail(request, book_id):
     author = book.author
 
     clean_author_name = ""
-    if author and isinstance(author.name, str): # author.name이 실제 문자열인지 확인
+    if author and isinstance(author.name, str):
         clean_author_name = author.name.split("(")[0].strip()
-    elif author: # author 객체는 있지만 이름이 문자열이 아니거나 None인 경우
+    elif author:
         clean_author_name = str(author.name) if author.name else "정보 없음"
-    else: # author 객체 자체가 None인 경우
+    else:
         clean_author_name = "정보 없음"
 
     is_in_library = False
@@ -72,19 +72,38 @@ def book_detail(request, book_id):
         if Library.objects.filter(user=request.user, book=book).exists():
             is_in_library = True
 
-    # 실제 리뷰 목록 가져오기 (Review 모델의 Meta ordering에 따라 정렬됨)
-    book_reviews = book.reviews.all() # Review.book의 related_name='reviews' 사용
+    # 리뷰 목록 가져오기 (효율성을 위해 prefetch_related 사용)
+    # 각 리뷰에 대한 댓글과 좋아요 정보도 함께 가져옵니다.
+    book_reviews_qs = book.reviews.select_related('user').prefetch_related(
+        'comments__user',  # 각 리뷰에 달린 댓글들과 댓글 작성자
+        'likes_received'   # 각 리뷰에 달린 좋아요 (카운트용)
+    ).order_by('-created_at') # Review 모델의 Meta ordering을 따르거나 여기서 명시
 
-    # 리뷰 작성 폼
+    # 리뷰, 좋아요 수, 사용자의 좋아요 여부, 댓글 폼, 댓글 목록을 각 리뷰 객체에 추가 (또는 템플릿에서 처리)
+    reviews_with_details = []
+    if request.user.is_authenticated:
+        user_liked_review_ids = set(Like.objects.filter(user=request.user, review__in=book_reviews_qs).values_list('review_id', flat=True))
+    
+    for review in book_reviews_qs:
+        details = {
+            'review_obj': review,
+            'like_count': review.likes_received.count(),
+            'user_has_liked': request.user.is_authenticated and review.id in user_liked_review_ids,
+            'comments_list': review.comments.all().order_by('created_at'), # 댓글은 생성 시간 순
+        }
+        reviews_with_details.append(details)
+
     review_form = ReviewForm()
+    comment_form = CommentForm() # ✨ 댓글 폼 인스턴스
 
     nav_categories_for_sticky_bar = get_navigation_categories()
 
     context = {
         'book': book,
         'clean_author_name': clean_author_name,
-        'reviews': book_reviews,        # 실제 리뷰 목록
-        'review_form': review_form,     # 리뷰 작성 폼
+        'reviews_with_details': reviews_with_details, # ✨ 수정된 리뷰 목록
+        'review_form': review_form,
+        'comment_form': comment_form, # ✨ 댓글 폼을 컨텍스트에 추가
         'is_in_library': is_in_library,
         'global_categories': nav_categories_for_sticky_bar,
     }

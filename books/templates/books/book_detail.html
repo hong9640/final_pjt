@@ -1,9 +1,8 @@
 {% extends "base.html" %}
 {% load static %}
-
-{% block content %}
+{% load i18n %} {% block content %}
 <style>
-  /* detail.html 특정 스타일 (기존 스타일 유지) */
+  /* 기존 스타일 유지 */
   .book-detail-page-container {
     max-width: 900px; margin: 2rem auto; padding: 2rem; background-color: #fff; box-shadow: 0 2px 10px rgba(0,0,0,0.05); border-radius: 8px;
   }
@@ -22,76 +21,81 @@
   .author-profile-block { background-color: #f7f7f7; padding: 1rem 1.5rem; border-radius: 4px; min-height: 80px; flex-grow: 1; font-size: 0.95em; color: #444; }
   .book-purchase-link { display: block; text-align: center; margin: 2rem 0 3rem 0; font-size: 1.2em; font-weight: bold; color: #A67C52; text-decoration: none; padding: 0.75rem; border: 1px solid #D2B9AD; border-radius: 4px; background-color: transparent; transition: background-color 0.3s, color 0.3s; }
   .book-purchase-link:hover { background-color: #D2B9AD; color: #fff; }
-  /* ... (리뷰 관련 스타일은 기존과 동일하게 유지) ... */
+  
   .review-main-section { padding-top: 2rem; border-top: 1px solid #e5e5e5; }
   .review-main-section h2 { font-size: 1.5em; margin-bottom: 1.5rem; color: #333; }
   .review-write-container, .review-list-container { margin-bottom: 2rem; }
+  
+  /* 리뷰 작성 폼 스타일 */
   .review-form-box { background-color: #fdfdfd; padding: 1.5rem; border: 1px solid #e9e9e9; border-radius: 8px; }
-  .review-form-box textarea { width: calc(100% - 2rem); min-height: 100px; margin-bottom: 1rem; padding: 0.8rem; border: 1px solid #ddd; border-radius: 4px; font-family: inherit; font-size: 0.95em; }
-  .review-form-box .star-input-area span, .review-item-stars span { font-size: 1.8em; color: #ccc; cursor: pointer; margin-right: 2px; }
-  .review-form-box .star-input-area span.filled, .review-item-stars span.filled { color: #f5a623; }
-  .review-form-box .form-row { display: flex; justify-content: space-between; align-items: center; gap: 1rem; margin-top: 1rem; }
-  .review-form-box input[type="text"] { padding: 0.75rem; border: 1px solid #ddd; border-radius: 4px; flex-grow: 1; font-size: 0.9em; }
-  .review-form-box .review-buttons button { background-color: #D2B9AD; color: #2C1B13; border: none; padding: 0.75rem 1.2rem; border-radius: 4px; cursor: pointer; font-weight: bold; margin-left: 0.5rem; transition: background-color 0.2s; }
+  /* 사용자가 제공한 `review_form.content` textarea 스타일을 따르도록 클래스 추가 또는 직접 스타일 적용 */
+  .review-form-box textarea#reviewTextarea { /* 기존 ID 셀렉터 유지 */
+    width: calc(100% - 2rem); min-height: 80px; /* 높이 약간 줄임 */
+    margin-bottom: 1rem; padding: 0.8rem; border: 1px solid #ddd; border-radius: 4px; 
+    font-family: inherit; font-size: 0.95em; 
+  }
+  .review-form-box .star-input-area span { font-size: 1.8em; color: #ccc; cursor: pointer; margin-right: 2px; } /* 기존 별 스타일 */
+  .review-form-box .star-input-area span.filled { color: #f5a623; } /* 채워진 별 스타일 */
+  .review-form-box .form-row { display: flex; justify-content: flex-end; align-items: center; gap: 1rem; margin-top: 1rem; } /* 버튼 오른쪽 정렬 */
+  .review-form-box .review-buttons button { background-color: #D2B9AD; color: #2C1B13; border: none; padding: 0.75rem 1.2rem; border-radius: 4px; cursor: pointer; font-weight: bold; transition: background-color 0.2s; }
   .review-form-box .review-buttons button:hover { background-color: #A67C52; color: #fff; }
-  .review-form-box .review-buttons button.secondary { background-color: #e0e0e0; color: #333; }
-  .review-form-box .review-buttons button.secondary:hover { background-color: #c0c0c0; }
-  .review-item-card { background-color: #fdfdfd; border: 1px solid #e9e9e9; border-radius: 8px; margin-bottom: 1.5rem; padding: 1.5rem; display: flex; gap: 1.5rem; }
-  .review-user-avatar-placeholder { width: 60px; height: 60px; background-color: #e0e0e0; border-radius: 4px; display: flex; align-items: center; justify-content: center; font-size: 0.8em; color: #777; text-align: center; flex-shrink: 0; }
+  
+  /* 리뷰 아이템 카드 스타일 */
+  .review-item-card { background-color: #fdfdfd; border: 1px solid #e9e9e9; border-radius: 8px; margin-bottom: 1.5rem; padding: 1.5rem; display: flex; gap: 1.5rem; position: relative; /* 삭제 버튼 위치 기준 */}
+  .review-user-avatar-placeholder { width: 50px; height: 50px; /* 약간 작게 조정 */ background-color: #e0e0e0; border-radius: 4px; display: flex; align-items: center; justify-content: center; font-size: 0.8em; color: #777; text-align: center; flex-shrink: 0; }
+  .review-user-avatar-placeholder img { width: 100%; height: 100%; object-fit: cover; border-radius: 4px; }
   .review-details-content { flex-grow: 1; }
+  .review-item-stars-container { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.5rem; } /* 별점과 좋아요 버튼을 감싸는 컨테이너 */
+  .review-item-stars span { font-size: 1.5em; color: #ccc; margin-right: 1px; } /* 리뷰 목록의 별 크기 조정 */
+  .review-item-stars span.filled { color: #f5a623; }
   .review-text-block { background-color: #f0f0f0; padding: 1rem; min-height: 60px; margin: 0.5rem 0 1rem 0; border-radius: 4px; font-size: 0.95em; }
   .review-meta-info { font-size: 0.85em; color: #666; margin-bottom: 1rem; }
   .review-meta-info span { margin-right: 1rem; }
-  .review-interaction-buttons button { background-color: #f0f0f0; color: #555; border: 1px solid #ddd; padding: 0.5rem 0.8rem; border-radius: 4px; cursor: pointer; margin-right: 0.5rem; font-size: 0.85em; }
-  .review-interaction-buttons button:hover { background-color: #e0e0e0; }
-  .review-comments-placeholder-block { background-color: #f0f0f0; padding: 1rem; min-height: 50px; margin-top: 1rem; border-radius: 4px; color: #777; font-size: 0.9em; }
   .no-reviews-message { text-align: center; color: #777; padding: 2rem; }
-  .add-to-library-button-container {
-    text-align: center;
-    margin: 1.5rem 0;
-  }
-  .add-to-library-button {
-    display: inline-block;
-    background-color: #A67C52;
-    color: white;
-    padding: 0.75rem 1.5rem;
-    border: none;
-    border-radius: 4px;
-    text-align: center;
-    text-decoration: none;
-    font-size: 1em; /* 글자 크기 */
-    font-weight: bold;
-    cursor: pointer;
-    transition: background-color 0.3s;
-  }
-  .add-to-library-button:hover {
-    background-color: #8c6b4a;
-  }
-  .add-to-library-button-container { text-align: center; margin: 1.5rem 0; }
-  .add-to-library-button { display: inline-block; background-color: #A67C52; color: white; padding: 0.75rem 1.5rem; border: none; border-radius: 4px; text-align: center; text-decoration: none; font-size: 1em; font-weight: bold; cursor: pointer; transition: background-color 0.3s; }
-  .add-to-library-button:hover { background-color: #8c6b4a; }
-
-  /* "내 서재에서 제거" 버튼 스타일 추가 */
-  .remove-from-library-button {
-    display: inline-block;
-    background-color: #d9534f; /* 예시: 빨간색 계열 */
-    color: white;
-    padding: 0.75rem 1.5rem;
-    border: none;
-    border-radius: 4px;
-    text-align: center;
-    text-decoration: none;
-    font-size: 1em;
-    font-weight: bold;
-    cursor: pointer;
-    transition: background-color 0.3s;
-  }
-  .remove-from-library-button:hover {
-    background-color: #c9302c; /* 호버 시 약간 어둡게 */
-  }
-  .star-rating-hidden-input { display: none; }
-  .review-user-avatar-placeholder img { width: 100%; height: 100%; object-fit: cover; border-radius: 4px; }
   .form-field-errors { color: red; font-size: 0.8em; list-style-type: none; padding-left: 0; margin-top: 2px; }
+
+  /* 좋아요 버튼 스타일 */
+  .like-button {
+    background-color: #f0f0f0; color: #555; border: 1px solid #ddd; 
+    padding: 0.3rem 0.6rem; border-radius: 4px; cursor: pointer;
+    font-size: 0.8em; transition: background-color 0.2s, color 0.2s;
+  }
+  .like-button:hover { background-color: #e0e0e0; }
+  .like-button.liked { background-color: #A67C52; color: white; border-color: #A67C52; }
+
+  /* 삭제 버튼 스타일 (리뷰 및 댓글 공통) */
+  .delete-button {
+    background-color: #ef4444; color: white; border: none;
+    padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.75rem;
+    cursor: pointer; transition: background-color 0.2s;
+  }
+  .delete-button:hover { background-color: #dc2626; }
+  .review-delete-button-container { position: absolute; top: 1rem; right: 1rem; } /* 리뷰 삭제 버튼 위치 */
+
+  /* 댓글 영역 스타일 */
+  .comments-section { margin-top: 1rem; padding-top: 1rem; border-top: 1px solid #f0f0f0; }
+  .comment-item { background-color: #f9f9f9; padding: 0.75rem; border-radius: 4px; margin-bottom: 0.75rem; font-size: 0.9em; }
+  .comment-item p { margin: 0 0 0.25rem 0; }
+  .comment-meta { font-size: 0.75em; color: #888; }
+  .comment-form textarea { 
+    width: 100%; min-height: 60px; margin-bottom: 0.5rem; padding: 0.5rem; 
+    border: 1px solid #ddd; border-radius: 4px; font-size: 0.9em;
+  }
+  .comment-form button { 
+    background-color: #5cb85c; color: white; border: none; 
+    padding: 0.5rem 1rem; border-radius: 4px; font-size: 0.85em; cursor: pointer;
+  }
+  .comment-form button:hover { background-color: #4cae4c; }
+  .add-to-library-button-container { text-align: center; margin: 1.5rem 0; }
+  .add-to-library-button, .remove-from-library-button { 
+    display: inline-block; color: white; padding: 0.75rem 1.5rem; border: none; border-radius: 4px; 
+    text-align: center; text-decoration: none; font-size: 1em; font-weight: bold; cursor: pointer; transition: background-color 0.3s; 
+  }
+  .add-to-library-button { background-color: #A67C52; }
+  .add-to-library-button:hover { background-color: #8c6b4a; }
+  .remove-from-library-button { background-color: #d9534f; }
+  .remove-from-library-button:hover { background-color: #c9302c; }
+
 </style>
 
 <div class="book-detail-page-container">
@@ -106,32 +110,24 @@
     <div class="book-meta-details">
       <h1 class="book-main-title">{% if book %}{{ book.title }}{% else %}샘플 책 제목{% endif %}</h1>
       <div class="book-info-block">
-        {% if book %}
-          {# ▼ 저자 정보 수정: book.author.name 사용 ▼ #}
-          <p><strong>저자:</strong> {% if book.author %}{{ book.author.name }}{% else %}정보 없음{% endif %}</p>
-          {# ▼ 출판사 정보: Book 모델에 'publisher' 필드가 있어야 합니다. 없다면 '정보 없음'으로 표시됩니다. ▼ #}
-          <p><strong>출판사:</strong> {{ book.publisher|default:"정보 없음" }}</p>
-          {# ▼ 출간일 정보 수정: book.pub_date 사용. CharField이므로 date 필터 사용에 주의. ▼ #}
-          <p><strong>출간일:</strong> {{ book.pub_date|default:"정보 없음" }}</p>
-        {% else %}
-          책 정보 (저자, 출판사, 출간일 등)
-        {% endif %}
+        <p><strong>저자:</strong> {% if book.author %}{{ book.author.name|default:"정보 없음" }}{% else %}정보 없음{% endif %}</p>
+        <p><strong>출판사:</strong> {{ book.publisher|default:"정보 없음" }}</p>
+        <p><strong>출간일:</strong> {{ book.pub_date|default:"정보 없음" }}</p>
       </div>
       <div class="book-description-block">
-        {% if book %}{{ book.description|linebreaksbr|default:"책 설명이 여기에 표시됩니다." }}{% else %}책 설명이 여기에 표시됩니다. 이 책은 매우 흥미로운 내용을 다루고 있으며...{% endif %}
+        {{ book.description|linebreaksbr|default:"책 설명이 여기에 표시됩니다." }}
       </div>
     </div>
   </section>
+
   {% if user.is_authenticated %}
   <div class="add-to-library-button-container">
     {% if is_in_library %}
-      {# --- 책이 이미 서재에 있는 경우: "제거" 버튼 표시 --- #}
       <form method="POST" action="{% url 'libraries:remove_from_library' book_id=book.id %}">
         {% csrf_token %}
         <button type="submit" class="remove-from-library-button">내 서재에서 제거</button>
       </form>
     {% else %}
-      {# --- 책이 서재에 없는 경우: "추가" 버튼 표시 --- #}
       <form method="POST" action="{% url 'libraries:add_to_library' book_id=book.id %}">
         {% csrf_token %}
         <button type="submit" class="add-to-library-button">내 서재에 추가</button>
@@ -139,55 +135,46 @@
     {% endif %}
   </div>
   {% endif %}
+
   <section class="author-info-section">
     <h2>{{ clean_author_name }}</h2>
     <div class="author-layout">
       <div class="author-image-container">
         {% if book.author and book.author.profile_image %}
-          <img src="{{ book.author.profile_image }}" alt="{{ book.author.name }}">
+          <img src="{{ book.author.profile_image.url }}" alt="{{ book.author.name }}">
         {% else %}
           <img src="{% static 'images/author_default_img.png' %}" alt="기본 작가 이미지">
         {% endif %}
       </div>
       <div class="author-profile-block">
-        {% if book.author and book.author.biography %}
-          {{ book.author.biography|linebreaksbr }}
-        {% else %}
-          작가 정보를 준비 중입니다.
-        {% endif %}
+        {{ book.author.biography|linebreaksbr|default:"작가 정보를 준비 중입니다." }}
       </div>
     </div>
   </section>
 
-  {# ▼ 구매 링크 수정: book.link 사용 ▼ #}
   <a href="{% if book and book.link %}{{ book.link }}{% else %}#{% endif %}" class="book-purchase-link" target="_blank">
     책 보러 가기 (알라딘 링크)
   </a>
 
- {# --- 리뷰 섹션 수정 --- #}
   <section class="review-main-section">
     <div class="review-write-container">
       <h2>리뷰 쓰기</h2>
       {% if user.is_authenticated %}
-        <form method="POST" action="{% url 'reviews:add_review' book_id=book.id %}" class="review-form-box">
+        <form method="POST" action="{% url 'reviews:add_review' book_id=book.id %}" class="review-form-box" id="reviewSubmissionForm">
           {% csrf_token %}
           <div class="star-input-area" id="writeStarRating">
             <span data-value="1">☆</span><span data-value="2">☆</span><span data-value="3">☆</span><span data-value="4">☆</span><span data-value="5">☆</span>
           </div>
-          {{ review_form.rating }} {# Hidden input for rating #}
+          {{ review_form.rating }} 
           {% if review_form.rating.errors %}<ul class="form-field-errors">{% for error in review_form.rating.errors %}<li>{{ error }}</li>{% endfor %}</ul>{% endif %}
           
-          <div style="margin-bottom: 1rem;">
+          <div style="margin-top: 1rem; margin-bottom: 1rem;">
             {{ review_form.content.label_tag }}<br>
-            {{ review_form.content }}
+            {{ review_form.content }} {# forms.py에서 id="reviewTextarea"로 지정된 위젯 사용 #}
             {% if review_form.content.errors %}<ul class="form-field-errors">{% for error in review_form.content.errors %}<li>{{ error }}</li>{% endfor %}</ul>{% endif %}
           </div>
-
-          {# "리뷰 카테고리" 입력 필드 제거 - 뷰에서 자동으로 책의 카테고리를 저장함 #}
-          {# {% if review_form.review_category_text %} ... {% endif %} 부분 삭제 #}
           
-          <div class="form-row"> {# 이 div는 버튼을 오른쪽 정렬하기 위해 유지할 수 있음 #}
-            <div style="flex-grow: 1;"></div> {# 왼쪽 공간을 채우기 위한 빈 div #}
+          <div class="form-row">
             <div class="review-buttons">
               <button type="submit">리뷰 등록</button>
             </div>
@@ -205,10 +192,11 @@
     </div>
 
     <div class="review-list-container">
-      <h2>리뷰 ({{ reviews.count }})</h2>
-      {% if reviews %}
-        {% for review in reviews %}
-        <div class="review-item-card">
+      <h2>리뷰 ({{ reviews_with_details|length }})</h2>
+      {% if reviews_with_details %}
+        {% for item in reviews_with_details %}
+        {% with review=item.review_obj like_count=item.like_count user_has_liked=item.user_has_liked comments_list=item.comments_list %}
+        <div class="review-item-card" id="review-{{ review.id }}">
           <div class="review-user-avatar-placeholder">
             {% if review.user.profile_image and review.user.profile_image.url %}
               <img src="{{ review.user.profile_image.url }}" alt="{{ review.user.username }}">
@@ -217,36 +205,82 @@
             {% endif %}
           </div>
           <div class="review-details-content">
-            <div class="review-item-stars">
-              {% for i_star in "12345" %}
-                <span class="{% if i_star|add:0 <= review.rating %}filled{% endif %}">{% if i_star|add:0 <= review.rating %}★{% else %}☆{% endif %}</span>
-              {% endfor %}
+            <div class="review-item-stars-container">
+              <div class="review-item-stars"> {% for i_star in "12345" %}
+                  <span class="{% if i_star|add:0 <= review.rating %}filled{% endif %}">{% if i_star|add:0 <= review.rating %}★{% else %}☆{% endif %}</span>
+                {% endfor %}
+              </div>
+              {% if user.is_authenticated %}
+              <button type="button" 
+                      class="like-button {% if user_has_liked %}liked{% endif %}" 
+                      data-review-id="{{ review.id }}">
+                좋아요 <span id="like-count-{{ review.id }}">{{ like_count }}</span>
+              </button>
+              {% else %}
+              <span class="text-sm text-gray-500" style="margin-left:0.5rem;">좋아요 {{ like_count }}</span>
+              {% endif %}
             </div>
+            <p style="font-weight: bold; margin-bottom: 0.25rem;">{{ review.user.username|default:"익명" }}</p>
+            
             <div class="review-text-block">
               {{ review.content|linebreaksbr }}
             </div>
             <div class="review-meta-info">
-              <span>작성자: {{ review.user.username|default:"익명" }}</span>
               <span>작성시간: {{ review.created_at|date:"Y.m.d H:i" }}</span>
-              {# Review 모델에 book_category_at_review 필드가 있고 값이 있다면 표시 #}
               {% if review.book_category_at_review %}
                 <span>카테고리: {{ review.book_category_at_review }}</span>
               {% endif %}
-              {# "나의 독서타입"은 요구사항에서 제외됨 #}
             </div>
+
             {% if request.user == review.user %}
-              {# 추후 수정/삭제 링크 위치 #}
+              <div class="review-delete-button-container">
+                <form action="{% url 'reviews:delete_review' review.id %}" method="POST" onsubmit="return confirm('정말로 이 리뷰를 삭제하시겠습니까?');">
+                    {% csrf_token %}
+                    <button type="submit" class="delete-button">삭제</button>
+                </form>
+              </div>
             {% endif %}
-            <div class="review-interaction-buttons">
-              <button type="button" onclick="alert('댓글 기능은 준비 중입니다.');">댓글 달기</button>
-              <button type="button" onclick="alert('좋아요 기능은 준비 중입니다.');">좋아요</button>
+            
+            <div class="comments-section">
+              <h4 style="font-size: 0.95em; font-weight: bold; margin-bottom: 0.75rem;">댓글 ({{ comments_list|length }})</h4>
+              {% if comments_list %}
+                {% for comment in comments_list %}
+                <div class="comment-item" id="comment-{{ comment.id }}">
+                  <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+                    <div>
+                      <p><strong>{{ comment.user.username }}:</strong> {{ comment.content|linebreaksbr }}</p>
+                      <p class="comment-meta">{{ comment.created_at|date:"y.m.d H:i" }}</p>
+                    </div>
+                    {% if request.user == comment.user %}
+                    <form action="{% url 'reviews:delete_comment' comment.id %}" method="POST" onsubmit="return confirm('정말로 이 댓글을 삭제하시겠습니까?');" style="margin-left: 0.5rem;">
+                        {% csrf_token %}
+                        <button type="submit" class="delete-button" style="padding:0.2rem 0.4rem; font-size:0.7rem;">삭제</button>
+                    </form>
+                    {% endif %}
+                  </div>
+                </div>
+                {% endfor %}
+              {% else %}
+                <p style="font-size: 0.85em; color: #777; font-style: italic;">아직 댓글이 없습니다.</p>
+              {% endif %}
+
+              {% if user.is_authenticated %}
+              <form method="POST" action="{% url 'reviews:add_comment' review.id %}" class="comment-form" style="margin-top: 1rem;">
+                  {% csrf_token %}
+                  {{ comment_form.content.label_tag }}
+                  {{ comment_form.content }} {# forms.py에서 정의된 위젯 사용 #}
+                  {% if comment_form.content.errors %}<ul class="form-field-errors">{% for error in comment_form.content.errors %}<li>{{ error }}</li>{% endfor %}</ul>{% endif %}
+                  <button type="submit" style="margin-top: 0.5rem;">댓글 달기</button>
+              </form>
+              {% else %}
+                <p style="font-size: 0.85em; color: #777; margin-top: 1rem;"><a href="{% url 'accounts:login' %}?next={{ request.path }}#review-{{ review.id }}" style="color: #A67C52; text-decoration: underline;">로그인</a> 후 댓글을 작성할 수 있습니다.</p>
+              {% endif %}
             </div>
-            <div class="review-comments-placeholder-block"> 댓글 영역 (준비 중) </div>
           </div>
         </div>
+        {% endwith %}
         {% endfor %}
       {% else %}
-        {# ▼▼▼ 예시 리뷰 HTML 완전 삭제 후, 메시지만 남김 ▼▼▼ #}
         <p class="no-reviews-message">아직 등록된 리뷰가 없습니다. 첫 번째 리뷰를 작성해주세요!</p>
       {% endif %}
     </div>
@@ -254,54 +288,114 @@
 </div>
 
 <script>
+document.addEventListener('DOMContentLoaded', function() {
+  // 리뷰 작성 폼의 별점 로직 (기존 코드 유지)
   const starRatingContainer = document.getElementById('writeStarRating');
-  // ReviewForm에서 rating 필드의 id가 'id_rating_hidden'이고 name이 'rating'이라고 가정합니다.
-  // forms.py에서 widget=forms.HiddenInput(attrs={'id': 'id_rating_hidden'}) 으로 설정했습니다.
-  const ratingHiddenInput = document.querySelector('input[name="rating"]#id_rating_hidden');
+  const ratingHiddenInput = document.querySelector('form#reviewSubmissionForm input[name="rating"]#id_rating_hidden'); // 폼 ID 명시
 
   if (starRatingContainer && ratingHiddenInput) {
     const stars = Array.from(starRatingContainer.querySelectorAll('span'));
-    // 폼에 초기값(예: 유효성 검사 실패 후 다시 로드될 때)이 있다면 그 값을 사용, 없다면 0
     let currentRating = parseInt(ratingHiddenInput.value) || 0; 
     
     function setStarsDisplay(rating) {
         stars.forEach((star, index) => {
-            // data-value는 1부터 시작, index는 0부터 시작
             if (index < rating) {
-                star.innerHTML = '★'; // 채워진 별
-                star.classList.add('filled');
+                star.innerHTML = '★'; star.classList.add('filled');
             } else {
-                star.innerHTML = '☆'; // 빈 별
-                star.classList.remove('filled');
+                star.innerHTML = '☆'; star.classList.remove('filled');
             }
         });
     }
-    
-    setStarsDisplay(currentRating); // 페이지 로드 시 (또는 폼 다시 표시 시) 초기 별 표시
+    setStarsDisplay(currentRating);
 
     stars.forEach(star => {
-      const starValue = parseInt(star.getAttribute('data-value')); // 각 span에 data-value="1", "2" ... 가 있어야 함
+      const starValue = parseInt(star.getAttribute('data-value'));
       star.addEventListener('click', () => {
         currentRating = starValue;
-        ratingHiddenInput.value = currentRating; // ✨ 중요: 숨겨진 필드에 값 설정!
+        ratingHiddenInput.value = currentRating;
         setStarsDisplay(currentRating);
-        // console.log('선택된 별점:', currentRating, 'Hidden input value:', ratingHiddenInput.value); // 디버깅용
       });
       star.addEventListener('mouseover', () => {
-        // 마우스오버 시 임시로 별 채우기 (클릭 전까지)
         const hoverRating = parseInt(star.getAttribute('data-value'));
         stars.forEach((s, i) => { 
             const sValue = parseInt(s.getAttribute('data-value'));
             s.innerHTML = sValue <= hoverRating ? '★' : '☆'; 
+            if (sValue <= hoverRating) s.classList.add('filled'); else s.classList.remove('filled');
         });
       });
-      star.addEventListener('mouseout', () => {
-        setStarsDisplay(currentRating); // 마우스 아웃 시, 클릭으로 확정된 별점으로 복원
-      });
+      star.addEventListener('mouseout', () => { setStarsDisplay(currentRating); });
     });
   }
 
-  // submitReviewPlaceholder 함수는 Django 폼 제출을 사용하므로 이제 필요 없습니다.
-  // (혹시 이 함수를 다른 용도로 호출하고 있다면 해당 로직 확인 필요)
+  // 리뷰 제출 시 별점 미선택 알림
+  const reviewSubmissionForm = document.getElementById('reviewSubmissionForm');
+  if (reviewSubmissionForm && ratingHiddenInput) {
+    reviewSubmissionForm.addEventListener('submit', function(event) {
+      if (!ratingHiddenInput.value || parseInt(ratingHiddenInput.value) === 0) {
+        alert('별점을 등록하세요!');
+        event.preventDefault(); // 폼 제출 중단
+      }
+    });
+  }
+
+  // AJAX를 이용한 좋아요 기능
+  const likeButtons = document.querySelectorAll('.like-button');
+  likeButtons.forEach(button => {
+    button.addEventListener('click', function() {
+      const reviewId = this.dataset.reviewId;
+      // CSRF 토큰 가져오기 (Django فرم에서 자동으로 생성된 토큰 사용)
+      const csrfTokenElement = document.querySelector('form#reviewSubmissionForm [name=csrfmiddlewaretoken]');
+      let csrfToken = '';
+      if (csrfTokenElement) {
+          csrfToken = csrfTokenElement.value;
+      } else {
+          // 대체 CSRF 토큰 로직 (예: meta 태그 또는 다른 폼에서 가져오기)
+          const genericCsrfTokenElement = document.querySelector('[name=csrfmiddlewaretoken]');
+          if (genericCsrfTokenElement) csrfToken = genericCsrfTokenElement.value;
+          else console.error('CSRF token not found on the page for like button.');
+      }
+      
+      if (!csrfToken) {
+          alert('요청을 처리할 수 없습니다. 페이지를 새로고침 해주세요.');
+          return;
+      }
+
+      fetch(`/reviews/${reviewId}/like/`, { // `reviews` 앱의 `urls.py`에 정의된 URL
+        method: 'POST',
+        headers: {
+          'X-CSRFToken': csrfToken,
+          'X-Requested-With': 'XMLHttpRequest', // Django의 request.is_ajax()가 true를 반환하도록 함
+          'Content-Type': 'application/json' 
+        },
+        // body: JSON.stringify({}) // POST 요청 시 필요하다면 body 추가
+      })
+      .then(response => {
+        if (!response.ok) { // 응답 상태 코드가 200-299 범위가 아닌 경우
+            return response.json().then(errData => { // 에러 메시지가 JSON 형태일 경우를 대비
+                throw new Error(errData.message || 'Network response was not ok: ' + response.statusText);
+            }).catch(() => { // JSON 파싱 실패 시 일반 에러
+                throw new Error('Network response was not ok: ' + response.statusText);
+            });
+        }
+        return response.json();
+      })
+      .then(data => {
+        const likeCountSpan = document.getElementById(`like-count-${reviewId}`);
+        if (likeCountSpan) {
+          likeCountSpan.textContent = data.like_count;
+        }
+        if (data.liked) {
+          this.classList.add('liked'); // 'liked' 클래스를 추가하여 스타일 변경
+        } else {
+          this.classList.remove('liked'); // 'liked' 클래스 제거
+        }
+      })
+      .catch(error => {
+        console.error('Error liking review:', error);
+        alert('좋아요 처리에 실패했습니다. 다시 시도해주세요. (' + error.message + ')');
+      });
+    });
+  });
+});
 </script>
 {% endblock %}
