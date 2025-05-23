@@ -12,6 +12,7 @@ from .forms import CustomUserChangeForm
 from recommendations.models import AIRecommendationBook
 from .models import Follow
 from django.http import JsonResponse
+from libraries.models import Library
 
 def signup_view(request):
     if request.method == 'POST':
@@ -41,9 +42,15 @@ def mypage_view(request):
     user = request.user
     recommendations = AIRecommendationBook.objects.filter(recommendation__user=user).select_related('book').order_by('-id')[:6]
 
-    return render(request, 'accounts/mypage.html', {
-        'recommendations': recommendations
-    })
+    my_library_preview = Library.objects.filter(user=user).select_related('book')[:3]
+
+    context = {
+        'following_count': user.following.count(),
+        'follower_count': user.followers.count(),
+        'recommendations': recommendations,
+        'my_library_preview': my_library_preview,  # 추가
+    }
+    return render(request, 'accounts/mypage.html', context)
 
 @login_required
 def logout_view(request):
@@ -63,40 +70,28 @@ def update(request):
         form = CustomUserChangeForm(instance=request.user)
     return render(request, 'accounts/update.html', {'form': form})
 
-
-@login_required
-def mypage_view(request):
-    user = request.user
-    recommendations = AIRecommendationBook.objects.filter(recommendation__user=user).select_related('book').order_by('-id')[:6]
-
-    # 팔로우 수 계산 추가
-    following_count = user.following.count()
-    follower_count = user.followers.count()
-
-    return render(request, 'accounts/mypage.html', {
-        'recommendations': recommendations,
-        'following_count': following_count,
-        'follower_count': follower_count,
-    })
-
-
 @login_required
 def userpage_view(request, username):
     User = get_user_model()
     user = get_object_or_404(User, username=username)
 
-    # 본인 마이페이지 접근이면 리다이렉트
+    # 본인 페이지일 경우 리다이렉트
     if user == request.user:
         return redirect('accounts:mypage')
 
     recommendations = AIRecommendationBook.objects.filter(recommendation__user=user).select_related('book').order_by('-id')[:6]
 
+    is_following = Follow.objects.filter(following_user=request.user, followed_user=user).exists()
+
+    library_preview = list(Library.objects.filter(user=user).select_related('book')[:3])
+
     return render(request, 'accounts/userpage.html', {
         'profile_user': user,
-        'recommendations': recommendations
+        'recommendations': recommendations,
+        'is_following': is_following,
+        'library_preview': library_preview,
     })
 
-@login_required
 @login_required
 def follow_toggle(request, username):
     target_user = get_object_or_404(get_user_model(), username=username)
