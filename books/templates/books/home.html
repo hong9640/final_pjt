@@ -118,7 +118,7 @@
   <!-- 상단 갈색 바 -->
   <nav class="top-nav">
     <ul>
-      <li><a href="#">전체</a></li>
+      <li><a href="{% url 'books:all_books_list' %}">전체</a></li>
       {% for category in categories %}
         <li><a href="#">{{ category.name }}</a></li>
       {% endfor %}
@@ -185,17 +185,18 @@
       id: '{{ book.id }}',
       category_id: '{{ book.category.id }}',
       title: '{{ book.title|escapejs }}',
-      cover_image_url: '{{ book.cover_image_url|escapejs }}'
+      cover_image_url: '{{ book.cover_image_url|escapejs }}',
+      detail_url: '{% url "books:book_detail" book_id=book.id %}'
     },
     {% endfor %}
   ];
 
   function filterCategory(categoryId) {
     const listDiv = document.getElementById('bestseller-list');
-    listDiv.innerHTML = '';
+    listDiv.innerHTML = ''; // 기존 목록을 비웁니다.
 
     let filteredBooks;
-    if (categoryId === 'all') {
+    if (categoryId === 'all') { 
       filteredBooks = allBooks;
     } else {
       filteredBooks = allBooks.filter(book => book.category_id === categoryId);
@@ -209,10 +210,12 @@
     filteredBooks.forEach(book => {
       const bookDiv = document.createElement('div');
       bookDiv.className = 'book-item';
+      // "자세히" 버튼을 포함하도록 innerHTML 수정
       bookDiv.innerHTML = `
         <img src="${book.cover_image_url}" alt="${book.title}">
         <p>${book.title}</p>
-      `;
+        <a href="${book.detail_url}" class="detail-link">자세히</a> 
+      `; // 👆 book.detail_url을 사용한 <a> 태그 추가
       listDiv.appendChild(bookDiv);
     });
   }
