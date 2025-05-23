@@ -1,0 +1,107 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<style>
+  .userpage-wrapper {
+    max-width: 850px;
+    margin: 3rem auto;
+    background-color: #f6f1ec;
+    border-radius: 16px;
+    padding: 3rem;
+    font-family: 'Noto Sans KR', sans-serif;
+  }
+
+  .profile-section {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    margin-bottom: 2rem;
+  }
+
+  .profile-photo {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-color: #ddd;
+  }
+
+  .profile-info {
+    flex-grow: 1;
+  }
+
+  .nickname {
+    font-size: 1.4rem;
+    font-weight: bold;
+    margin-bottom: 0.6rem;
+  }
+
+  .follow-info {
+    font-size: 0.9rem;
+    color: #666;
+    margin-bottom: 1rem;
+  }
+
+  .tab-menu {
+    display: flex;
+    gap: 1rem;
+    font-size: 1rem;
+    font-weight: bold;
+    justify-content: center;
+    margin-top: 2rem;
+  }
+
+  .tab-menu div {
+    cursor: pointer;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    background-color: #e7dcd2;
+    color: #3E3025;
+  }
+
+  .shelf-box {
+    margin-top: 3rem;
+    padding: 2rem;
+    background-color: white;
+    border-radius: 12px;
+    text-align: center;
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.05);
+  }
+
+  .shelf-title {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-bottom: 1.5rem;
+    color: #3E3025;
+  }
+
+  .coming-soon {
+    color: #ccc;
+    font-size: 1rem;
+  }
+</style>
+
+<div class="userpage-wrapper">
+  <div class="profile-section">
+    <div class="profile-photo" style="
+      background-image: url('{% if profile_user.profile_image %}{{ profile_user.profile_image.url }}{% else %}{% static 'accounts/profile_default.jpg' %}{% endif %}');
+    "></div>
+
+    <div class="profile-info">
+      <div class="nickname">{{ profile_user.nickname|default:profile_user.username }}님</div>
+      <div class="follow-info">팔로잉 2 | 팔로워 0</div>
+      <div class="tab-menu">
+        <div>작성한 리뷰</div>
+        <div>좋아요 누른 리뷰</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="shelf-box">
+    <div class="shelf-title">서재</div>
+    <div class="coming-soon">추후개발</div>
+  </div>
+</div>
+{% endblock %}

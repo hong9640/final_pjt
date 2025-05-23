@@ -1,13 +1,15 @@
 # accounts/views.py
 
 from django.contrib.auth import login, logout, authenticate
+from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from .forms import CustomUserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
 from django.shortcuts import render, redirect
 from .forms import CustomUserChangeForm
+from recommendations.models import AIRecommendationBook
 
 def signup_view(request):
     if request.method == 'POST':
@@ -34,7 +36,12 @@ def login_view(request):
 
 @login_required
 def mypage_view(request):
-    return render(request, 'accounts/mypage.html')
+    user = request.user
+    recommendations = AIRecommendationBook.objects.filter(recommendation__user=user).select_related('book').order_by('-id')[:6]
+
+    return render(request, 'accounts/mypage.html', {
+        'recommendations': recommendations
+    })
 
 @login_required
 def logout_view(request):
@@ -58,3 +65,19 @@ def update(request):
 @login_required
 def mypage(request):
     return render(request, 'accounts/mypage.html')
+
+@login_required
+def userpage_view(request, username):
+    User = get_user_model()
+    user = get_object_or_404(User, username=username)
+
+    # 본인 마이페이지 접근이면 리다이렉트
+    if user == request.user:
+        return redirect('accounts:mypage')
+
+    recommendations = AIRecommendationBook.objects.filter(recommendation__user=user).select_related('book').order_by('-id')[:6]
+
+    return render(request, 'accounts/userpage.html', {
+        'profile_user': user,
+        'recommendations': recommendations
+    })

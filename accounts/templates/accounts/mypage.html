@@ -3,75 +3,139 @@
 {% block content %}
 <style>
   .mypage-wrapper {
-    max-width: 700px;
+    max-width: 850px;
     margin: 3rem auto;
-    background-color: white;
+    background-color: #f6f1ec;
     border-radius: 16px;
-    padding: 2.5rem;
-    box-shadow: 0 6px 18px rgba(0,0,0,0.05);
+    padding: 3rem;
     font-family: 'Noto Sans KR', sans-serif;
-    text-align: center;
   }
 
-  .profile-img {
+  .profile-section {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    margin-bottom: 2rem;
+  }
+
+  .profile-photo {
     width: 120px;
     height: 120px;
     border-radius: 50%;
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    background-image: url("{% static 'accounts/profile_default.jpg' %}");
-    margin: 0 auto 1rem;
+    background-color: #ddd;
+  }
+
+  .profile-info {
+    flex-grow: 1;
   }
 
   .nickname {
-    font-size: 1.3rem;
+    font-size: 1.4rem;
     font-weight: bold;
+    margin-bottom: 0.6rem;
     color: #3E3025;
-    margin-bottom: 1rem;
   }
 
-  .logout-form button {
-    background-color: #8D6E63;
+  .action-buttons {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .action-buttons a,
+  .action-buttons button {
+    background-color: #BCAAA4;
     color: white;
     padding: 0.6rem 1.2rem;
     border: none;
     border-radius: 8px;
     font-weight: bold;
+    font-size: 0.95rem;
     cursor: pointer;
-    margin-top: 1rem;
+    text-decoration: none;
   }
 
-  .logout-form button:hover {
-    background-color: #6D4C41;
+  .action-buttons button:hover,
+  .action-buttons a:hover {
+    background-color: #a38e7a;
+  }
+
+  .recommend-box {
+    margin-top: 3rem;
+    background-color: #FAF7F4;
+    padding: 2rem;
+    border-radius: 16px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
   }
 </style>
 
 <div class="mypage-wrapper">
-  <!-- templates/accounts/mypage.html -->
-  <div class="profile-img" style="
-  background-image: url('{% if request.user.profile_image %}{{ request.user.profile_image.url }}{% else %}{% static 'accounts/profile_default.jpg' %}{% endif %}');
-  "></div>
+  <!-- 프로필 섹션 -->
+  <div class="profile-section">
+    <div class="profile-photo" style="
+      background-image: url('{% if request.user.profile_image %}{{ request.user.profile_image.url }}{% else %}{% static 'accounts/profile_default.jpg' %}{% endif %}');
+    "></div>
 
-  <div class="nickname">{{ request.user.username }} 님</div>
+    <div class="profile-info">
+      <div class="nickname">{{ request.user.nickname|default:request.user.username }}님</div>
+      <div class="action-buttons">
+        <a href="{% url 'accounts:update' %}">회원정보 수정</a>
+        <form method="POST" action="{% url 'accounts:logout' %}" style="display:inline;">
+          {% csrf_token %}
+          <button type="submit">로그아웃</button>
+        </form>
+      </div>
+    </div>
+  </div>
 
-  <a href="{% url 'accounts:update' %}" style="
-    display: inline-block;
-    margin-top: 1.5rem;
-    padding: 0.6rem 1.2rem;
-    background-color: #BCAAA4;
-    color: white;
-    border-radius: 8px;
-    font-weight: bold;
-    text-decoration: none;
-  ">
-    회원정보 수정
-  </a>
+  <!-- AI 추천 도서 -->
+  <div class="recommend-box">
+    <h3 style="font-size: 1.2rem; font-weight: bold; color: #3E3025; margin-bottom: 1rem;">
+      최근 AI 추천 도서
+    </h3>
 
-  <form method="POST" action="{% url 'accounts:logout' %}" class="logout-form">
-    {% csrf_token %}
-    <button type="submit">로그아웃</button>
-  </form>
-
+    {% if recommendations %}
+      <div style="display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center;">
+        {% for rec in recommendations %}
+          <a href="{% url 'books:book_detail' book_id=rec.book.id %}" style="text-decoration: none; color: inherit;">
+            <div style="width: 150px; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); overflow: hidden; background: white;">
+              <img src="{{ rec.book.cover_image_url }}" alt="{{ rec.book.title }}" style="width: 100%; height: 200px; object-fit: cover;">
+              <div style="padding: 0.5rem;">
+                <p style="font-size: 0.95rem; font-weight: bold; margin: 0;">{{ rec.book.title }}</p>
+                <p style="font-size: 0.85rem; color: #777;">{{ rec.book.author.name }}</p>
+              </div>
+            </div>
+          </a>
+        {% endfor %}
+      </div>
+    {% else %}
+      <p style="color: #777; margin-top: 1rem;">나만을 위한 AI 추천을 받아보세요!</p>
+      <button onclick="openRecommendModal()" 
+              style="margin-top: 1rem; padding: 0.7rem 1.5rem; background: #A67C52; color: white;
+                     border: none; border-radius: 8px; font-size: 1rem; cursor: pointer;">
+        AI 책 추천 받아보기
+      </button>
+    {% endif %}
+  </div>
 </div>
+
+<!-- 추천 모달 삽입 -->
+{% include 'recommendations/modal_input.html' %}
+
+<script>
+function openRecommendModal() {
+  const modal = document.getElementById('ai-recommend-modal');
+  if (modal) {
+    modal.style.display = 'flex';
+  } else {
+    alert('추천 모달을 찾을 수 없습니다.');
+  }
+}
+</script>
+
 {% endblock %}
