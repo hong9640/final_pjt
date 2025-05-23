@@ -104,34 +104,26 @@
       {% endif %}
     </div>
     <div class="book-meta-details">
-      <h1 class="book-main-title">{% if book %}{{ book.title }}{% else %}샘플 책 제목{% endif %}</h1>
+      <h1 class="book-main-title">{{ book.title }}</h1>
       <div class="book-info-block">
-        {% if book %}
-          {# ▼ 저자 정보 수정: book.author.name 사용 ▼ #}
-          <p><strong>저자:</strong> {% if book.author %}{{ book.author.name }}{% else %}정보 없음{% endif %}</p>
-          {# ▼ 출판사 정보: Book 모델에 'publisher' 필드가 있어야 합니다. 없다면 '정보 없음'으로 표시됩니다. ▼ #}
-          <p><strong>출판사:</strong> {{ book.publisher|default:"정보 없음" }}</p>
-          {# ▼ 출간일 정보 수정: book.pub_date 사용. CharField이므로 date 필터 사용에 주의. ▼ #}
-          <p><strong>출간일:</strong> {{ book.pub_date|default:"정보 없음" }}</p>
-        {% else %}
-          책 정보 (저자, 출판사, 출간일 등)
-        {% endif %}
+        <p><strong>저자:</strong> {{ book.author.name|default:"정보 없음" }}</p>
+        <p><strong>출판사:</strong> {{ book.publisher|default:"정보 없음" }}</p>
+        <p><strong>출간일:</strong> {{ book.pub_date|default:"정보 없음" }}</p>
       </div>
       <div class="book-description-block">
-        {% if book %}{{ book.description|linebreaksbr|default:"책 설명이 여기에 표시됩니다." }}{% else %}책 설명이 여기에 표시됩니다. 이 책은 매우 흥미로운 내용을 다루고 있으며...{% endif %}
+        {{ book.description|linebreaksbr|default:"책 설명이 여기에 표시됩니다." }}
       </div>
     </div>
   </section>
+
   {% if user.is_authenticated %}
   <div class="add-to-library-button-container">
     {% if is_in_library %}
-      {# --- 책이 이미 서재에 있는 경우: "제거" 버튼 표시 --- #}
       <form method="POST" action="{% url 'libraries:remove_from_library_to_detail' book_id=book.id %}">
         {% csrf_token %}
         <button type="submit" class="remove-from-library-button">내 서재에서 제거</button>
       </form>
     {% else %}
-      {# --- 책이 서재에 없는 경우: "추가" 버튼 표시 --- #}
       <form method="POST" action="{% url 'libraries:add_to_library' book_id=book.id %}">
         {% csrf_token %}
         <button type="submit" class="add-to-library-button">내 서재에 추가</button>
@@ -139,6 +131,7 @@
     {% endif %}
   </div>
   {% endif %}
+
   <section class="author-info-section">
     <h2>{{ clean_author_name }}</h2>
     <div class="author-layout">
@@ -159,12 +152,10 @@
     </div>
   </section>
 
-  {# ▼ 구매 링크 수정: book.link 사용 ▼ #}
-  <a href="{% if book and book.link %}{{ book.link }}{% else %}#{% endif %}" class="book-purchase-link" target="_blank">
+  <a href="{{ book.link|default:'#' }}" class="book-purchase-link" target="_blank">
     책 보러 가기 (알라딘 링크)
   </a>
 
- {# --- 리뷰 섹션 수정 --- #}
   <section class="review-main-section">
     <div class="review-write-container">
       <h2>리뷰 쓰기</h2>
@@ -174,30 +165,17 @@
           <div class="star-input-area" id="writeStarRating">
             <span data-value="1">☆</span><span data-value="2">☆</span><span data-value="3">☆</span><span data-value="4">☆</span><span data-value="5">☆</span>
           </div>
-          {{ review_form.rating }} {# Hidden input for rating #}
-          {% if review_form.rating.errors %}<ul class="form-field-errors">{% for error in review_form.rating.errors %}<li>{{ error }}</li>{% endfor %}</ul>{% endif %}
-          
-          <div style="margin-bottom: 1rem;">
+          {{ review_form.rating }}
+          <div>
             {{ review_form.content.label_tag }}<br>
             {{ review_form.content }}
-            {% if review_form.content.errors %}<ul class="form-field-errors">{% for error in review_form.content.errors %}<li>{{ error }}</li>{% endfor %}</ul>{% endif %}
           </div>
-
-          {# "리뷰 카테고리" 입력 필드 제거 - 뷰에서 자동으로 책의 카테고리를 저장함 #}
-          {# {% if review_form.review_category_text %} ... {% endif %} 부분 삭제 #}
-          
-          <div class="form-row"> {# 이 div는 버튼을 오른쪽 정렬하기 위해 유지할 수 있음 #}
-            <div style="flex-grow: 1;"></div> {# 왼쪽 공간을 채우기 위한 빈 div #}
+          <div class="form-row">
+            <div style="flex-grow: 1;"></div>
             <div class="review-buttons">
               <button type="submit">리뷰 등록</button>
             </div>
           </div>
-
-          {% if review_form.non_field_errors %}
-            <div class="form-errors" style="color: red; margin-top: 10px;">
-              {{ review_form.non_field_errors }}
-            </div>
-          {% endif %}
         </form>
       {% else %}
         <p><a href="{% url 'accounts:login' %}?next={{ request.path }}">로그인</a> 후 리뷰를 작성할 수 있습니다.</p>
@@ -210,7 +188,7 @@
         {% for review in reviews %}
         <div class="review-item-card">
           <div class="review-user-avatar-placeholder">
-            {% if review.user.profile_image and review.user.profile_image.url %}
+            {% if review.user.profile_image %}
               <img src="{{ review.user.profile_image.url }}" alt="{{ review.user.username }}">
             {% else %}
               {{ review.user.username|slice:":1"|upper }}
@@ -219,34 +197,30 @@
           <div class="review-details-content">
             <div class="review-item-stars">
               {% for i_star in "12345" %}
-                <span class="{% if i_star|add:0 <= review.rating %}filled{% endif %}">{% if i_star|add:0 <= review.rating %}★{% else %}☆{% endif %}</span>
+                <span class="{% if i_star|add:0 <= review.rating %}filled{% endif %}">
+                  {% if i_star|add:0 <= review.rating %}★{% else %}☆{% endif %}
+                </span>
               {% endfor %}
             </div>
             <div class="review-text-block">
               {{ review.content|linebreaksbr }}
             </div>
             <div class="review-meta-info">
-              <span>작성자: {{ review.user.username|default:"익명" }}</span>
+              <span>작성자: {{ review.user.username }}</span>
               <span>작성시간: {{ review.created_at|date:"Y.m.d H:i" }}</span>
-              {# Review 모델에 book_category_at_review 필드가 있고 값이 있다면 표시 #}
               {% if review.book_category_at_review %}
                 <span>카테고리: {{ review.book_category_at_review }}</span>
               {% endif %}
-              {# "나의 독서타입"은 요구사항에서 제외됨 #}
             </div>
-            {% if request.user == review.user %}
-              {# 추후 수정/삭제 링크 위치 #}
-            {% endif %}
             <div class="review-interaction-buttons">
               <button type="button" onclick="alert('댓글 기능은 준비 중입니다.');">댓글 달기</button>
               <button type="button" onclick="alert('좋아요 기능은 준비 중입니다.');">좋아요</button>
             </div>
-            <div class="review-comments-placeholder-block"> 댓글 영역 (준비 중) </div>
+            <div class="review-comments-placeholder-block">댓글 영역 (준비 중)</div>
           </div>
         </div>
         {% endfor %}
       {% else %}
-        {# ▼▼▼ 예시 리뷰 HTML 완전 삭제 후, 메시지만 남김 ▼▼▼ #}
         <p class="no-reviews-message">아직 등록된 리뷰가 없습니다. 첫 번째 리뷰를 작성해주세요!</p>
       {% endif %}
     </div>
@@ -255,53 +229,43 @@
 
 <script>
   const starRatingContainer = document.getElementById('writeStarRating');
-  // ReviewForm에서 rating 필드의 id가 'id_rating_hidden'이고 name이 'rating'이라고 가정합니다.
-  // forms.py에서 widget=forms.HiddenInput(attrs={'id': 'id_rating_hidden'}) 으로 설정했습니다.
   const ratingHiddenInput = document.querySelector('input[name="rating"]#id_rating_hidden');
 
   if (starRatingContainer && ratingHiddenInput) {
     const stars = Array.from(starRatingContainer.querySelectorAll('span'));
-    // 폼에 초기값(예: 유효성 검사 실패 후 다시 로드될 때)이 있다면 그 값을 사용, 없다면 0
-    let currentRating = parseInt(ratingHiddenInput.value) || 0; 
-    
+    let currentRating = parseInt(ratingHiddenInput.value) || 0;
+
     function setStarsDisplay(rating) {
-        stars.forEach((star, index) => {
-            // data-value는 1부터 시작, index는 0부터 시작
-            if (index < rating) {
-                star.innerHTML = '★'; // 채워진 별
-                star.classList.add('filled');
-            } else {
-                star.innerHTML = '☆'; // 빈 별
-                star.classList.remove('filled');
-            }
-        });
+      stars.forEach((star, index) => {
+        if (index < rating) {
+          star.innerHTML = '★';
+          star.classList.add('filled');
+        } else {
+          star.innerHTML = '☆';
+          star.classList.remove('filled');
+        }
+      });
     }
-    
-    setStarsDisplay(currentRating); // 페이지 로드 시 (또는 폼 다시 표시 시) 초기 별 표시
+
+    setStarsDisplay(currentRating);
 
     stars.forEach(star => {
-      const starValue = parseInt(star.getAttribute('data-value')); // 각 span에 data-value="1", "2" ... 가 있어야 함
+      const starValue = parseInt(star.getAttribute('data-value'));
       star.addEventListener('click', () => {
         currentRating = starValue;
-        ratingHiddenInput.value = currentRating; // ✨ 중요: 숨겨진 필드에 값 설정!
+        ratingHiddenInput.value = currentRating;
         setStarsDisplay(currentRating);
-        // console.log('선택된 별점:', currentRating, 'Hidden input value:', ratingHiddenInput.value); // 디버깅용
       });
       star.addEventListener('mouseover', () => {
-        // 마우스오버 시 임시로 별 채우기 (클릭 전까지)
         const hoverRating = parseInt(star.getAttribute('data-value'));
-        stars.forEach((s, i) => { 
-            const sValue = parseInt(s.getAttribute('data-value'));
-            s.innerHTML = sValue <= hoverRating ? '★' : '☆'; 
+        stars.forEach((s, i) => {
+          s.innerHTML = i < hoverRating ? '★' : '☆';
         });
       });
       star.addEventListener('mouseout', () => {
-        setStarsDisplay(currentRating); // 마우스 아웃 시, 클릭으로 확정된 별점으로 복원
+        setStarsDisplay(currentRating);
       });
     });
   }
-
-  // submitReviewPlaceholder 함수는 Django 폼 제출을 사용하므로 이제 필요 없습니다.
-  // (혹시 이 함수를 다른 용도로 호출하고 있다면 해당 로직 확인 필요)
 </script>
 {% endblock %}
