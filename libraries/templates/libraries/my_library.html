@@ -1,0 +1,123 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<style>
+  body {
+    background-color: #F4ECE4;
+  }
+
+  .library-wrapper {
+    max-width: 1000px;
+    margin: 3rem auto;
+    padding: 2rem;
+    background-color: #ffffff;
+    border-radius: 20px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+    font-family: 'Noto Sans KR', sans-serif;
+  }
+
+  .library-title {
+    text-align: center;
+    font-size: 1.8rem;
+    color: #3E3025;
+    margin-bottom: 2rem;
+    font-family: 'Noto Serif KR', serif;
+  }
+
+  .library-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 1.6rem;
+  }
+
+  .book-card {
+    background-color: #faf7f4;
+    border-radius: 14px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    padding: 1rem;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: transform 0.2s ease;
+    height: 100%;
+  }
+
+  .book-card:hover {
+    transform: translateY(-4px);
+  }
+
+  .book-card img {
+    width: 100%;
+    height: 210px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin-bottom: 0.6rem;
+  }
+
+  .book-title {
+    font-weight: 600;
+    color: #3E3025;
+    font-size: 0.95rem;
+    margin-bottom: 0.6rem;
+    text-decoration: none;
+    line-height: 1.4;
+  }
+
+  .book-title a {
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .remove-button {
+    margin-top: auto;
+    padding: 6px 10px;
+    font-size: 0.8rem;
+    background-color: #b08968;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+  }
+
+  .remove-button:hover {
+    background-color: #a47856;
+  }
+
+  .empty-message {
+    grid-column: 1 / -1;
+    text-align: center;
+    color: #7c6a59;
+    font-size: 1.1rem;
+  }
+</style>
+
+<div class="library-wrapper">
+  <h2 class="library-title">📚 내 서재</h2>
+
+  <div class="library-container">
+    {% for entry in my_books %}
+      <div class="book-card">
+        <div>
+          <a href="{% url 'books:book_detail' entry.book.id %}">
+            <img src="{{ entry.book.cover_image_url }}" alt="{{ entry.book.title }}">
+          </a>
+          <div class="book-title">
+            <a href="{% url 'books:book_detail' entry.book.id %}">
+              {{ entry.book.title }}
+            </a>
+          </div>
+        </div>
+          <a href="{% url 'libraries:remove_from_library_to_mylibrary' entry.book.id %}" class="remove-button">
+            서재에서 제거
+          </a>
+      </div>
+    {% empty %}
+      <p class="empty-message">내 서재에 추가된 책이 없습니다.</p>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}

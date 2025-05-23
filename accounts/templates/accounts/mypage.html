@@ -96,6 +96,8 @@
     </div>
   </div>
 
+  <a href="{% url 'libraries:my_library' %}" class="btn">내 서재</a>
+
   <!-- AI 추천 도서 -->
   <div class="recommend-box">
     <h3 style="font-size: 1.2rem; font-weight: bold; color: #3E3025; margin-bottom: 1rem;">
@@ -104,16 +106,30 @@
 
     {% if recommendations %}
       <div style="display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center;">
-        {% for rec in recommendations %}
-          <a href="{% url 'books:book_detail' book_id=rec.book.id %}" style="text-decoration: none; color: inherit;">
-            <div style="width: 150px; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); overflow: hidden; background: white;">
-              <img src="{{ rec.book.cover_image_url }}" alt="{{ rec.book.title }}" style="width: 100%; height: 200px; object-fit: cover;">
-              <div style="padding: 0.5rem;">
-                <p style="font-size: 0.95rem; font-weight: bold; margin: 0;">{{ rec.book.title }}</p>
-                <p style="font-size: 0.85rem; color: #777;">{{ rec.book.author.name }}</p>
-              </div>
+        {% for rec in recommendations|slice:":3" %}
+          <div style="width:180px; height:auto; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); overflow: hidden; background: white; display: flex; flex-direction: column;">
+            <a href="{% url 'books:book_detail' book_id=rec.book.id %}" style="text-decoration: none; color: inherit;">
+              <img src="{{ rec.book.cover_image_url }}" alt="{{ rec.book.title }}" style="width: 100%; height: 220px; object-fit: cover;">
+            </a>
+            <div style="padding: 0.5rem;">
+              <p style="font-size: 0.95rem; font-weight: bold; margin: 0;
+                        white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                {{ rec.book.title }}
+              </p>
+              <p style="font-size: 0.85rem; color: #777;
+                        white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                {{ rec.book.author.name }}
+              </p>
+              <form onsubmit="event.preventDefault(); addToLibraryAjax({{ rec.book.id }}, this.querySelector('button')); ">
+                {% csrf_token %}
+                <button type="submit"
+                  style="margin-top: 0.5rem; background:#8B5E3C; color:white;
+                         padding: 0.4rem 0.8rem; border:none; border-radius:6px; font-size:0.85rem; cursor:pointer;">
+                  내 서재에 추가
+                </button>
+              </form>
             </div>
-          </a>
+          </div>
         {% endfor %}
       </div>
     {% else %}
@@ -132,12 +148,28 @@
 
 <script>
 function openRecommendModal() {
-  const modal = document.getElementById('ai-recommend-modal');
-  if (modal) {
-    modal.style.display = 'flex';
-  } else {
-    alert('추천 모달을 찾을 수 없습니다.');
-  }
+  document.getElementById('ai-recommend-modal').style.display = 'flex';
+}
+
+function addToLibraryAjax(bookId, buttonElement) {
+  fetch(`/libraries/add/ajax/${bookId}/`, {
+    method: 'POST',
+    headers: {
+      'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value,
+    }
+  })
+  .then(res => res.json())
+  .then(data => {
+    if (data.success) {
+      buttonElement.remove();
+    } else {
+      buttonElement.remove(); // 이미 추가된 경우도 제거
+    }
+  })
+  .catch(err => {
+    alert('추가 실패');
+    console.error(err);
+  });
 }
 </script>
 
