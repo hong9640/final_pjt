@@ -60,7 +60,6 @@
 </div>
 
 <script>
-// 점점점 애니메이션
 let dotInterval = null;
 function startDotAnimation() {
   const dots = document.getElementById('dots');
@@ -75,7 +74,6 @@ function stopDotAnimation() {
   document.getElementById('dots').textContent = '.';
 }
 
-// 추천 요청 처리
 document.getElementById('ai-recommend-form').addEventListener('submit', async function(e) {
   e.preventDefault();
 
@@ -112,11 +110,11 @@ document.getElementById('ai-recommend-form').addEventListener('submit', async fu
     for (let book of data.books) {
       const card = `
         <a href="/books/book/${book.id}/" style="text-decoration:none; color:inherit;">
-          <div style="width:180px; border-radius:12px; box-shadow:0 4px 8px rgba(0,0,0,0.1); overflow:hidden; background:white;">
-            <img src="${book.cover_image_url}" alt="${book.title}" style="width:100%; height:260px; object-fit:cover;">
-            <div style="padding:1rem;">
-              <h4 style="margin:0; font-size:1rem;">${book.title}</h4>
-              <p style="font-size:0.9rem; color:#666;">${book.author}</p>
+          <div style="width:180px; height:330px; border-radius:12px; box-shadow:0 4px 8px rgba(0,0,0,0.1); overflow:hidden; background:white; display:flex; flex-direction:column;">
+            <img src="${book.cover_image_url}" alt="${book.title}" style="width:100%; height:220px; object-fit:cover;">
+            <div style="padding:0.8rem; flex:1;">
+              <h4 style="margin:0; font-size:1rem; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">${book.title}</h4>
+              <p style="font-size:0.85rem; color:#666; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">${book.author}</p>
             </div>
           </div>
         </a>
@@ -130,7 +128,6 @@ document.getElementById('ai-recommend-form').addEventListener('submit', async fu
   }
 });
 
-// 다시 추천받기 버튼 클릭 시
 function retryRecommend() {
   document.getElementById('form-area').style.display = 'block';
   document.getElementById('recommend-results').innerHTML = "";
@@ -138,7 +135,6 @@ function retryRecommend() {
   document.getElementById('recommend-title').innerText = "어떤 책을 추천받아 볼까?";
 }
 
-// 모달 닫기
 function closeModal() {
   document.getElementById('ai-recommend-modal').style.display = 'none';
   document.getElementById('recommend-results').innerHTML = "";
