@@ -26,3 +26,4 @@ class Book(models.Model):
     link = models.URLField(blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     is_bestseller = models.BooleanField(default=False)
+    publisher = models.CharField(max_length=255, blank=True)

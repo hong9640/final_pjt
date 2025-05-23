@@ -34,7 +34,7 @@ def get_restricted_recommendations(keyword):
 
     try:
         response = client.chat.completions.create(
-            model="gpt-3.5-turbo",
+            model="gpt-4o-mini",
             messages=[
                 {"role": "system", "content": "당신은 도서 큐레이터입니다."},
                 {"role": "user", "content": prompt}

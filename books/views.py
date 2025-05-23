@@ -3,6 +3,7 @@ from django.core.paginator import Paginator
 from django.shortcuts import render
 from .models import Category, Book, Author
 from django.shortcuts import render, get_object_or_404
+import re
 
 def home(request):
     categories_qs = Category.objects.filter(name__startswith="국내도서>")
@@ -42,28 +43,46 @@ def bestseller_api(request):
     }
     return JsonResponse(data)
 
+def extract_primary_author_name(raw_author_str):
+    """
+    "황석희 (지은이), 홍길동 (옮긴이)" → "황석희"
+    "무라카미 하루키 (지은이)" → "무라카미 하루키"
+    "정유정" → "정유정"
+    """
+    # ① 쉼표로 분할 후 첫 번째만 사용
+    first = raw_author_str.split(',')[0].strip()
+
+    # ② 괄호 제거
+    cleaned = re.sub(r'\s*\([^)]*\)', '', first).strip()
+    return cleaned
+
+
 
 def book_detail(request, book_id):
     book = get_object_or_404(Book, id=book_id)
-    # Book 모델에 'author' 필드가 ForeignKey 또는 OneToOneField로 연결되어 있다고 가정합니다.
-    # author 정보가 필요 없다면 아래 author 변수 및 context에서 제거해도 됩니다.
-    author = getattr(book, 'author', None) # author 필드가 없을 수도 있으니 getattr 사용
+    author = getattr(book, 'author', None)
 
-    # book_detail.html에서 사용할 리뷰 데이터 (아직 review 앱이 없으므로 빈 리스트 또는 샘플)
+    if author and author.name:
+        clean_author_name = extract_primary_author_name(author.name)
+    else:
+        clean_author_name = ''
+
+    # 샘플 리뷰
     sample_reviews = [
         {
             'user': {'username': '김샘플', 'reading_type': '분석형'},
             'rating': 4,
             'content': '샘플 리뷰입니다. 책 내용이 아주 유익했어요.',
-            'created_at': '2025-05-20 10:00:00', # datetime 객체로 전달하는 것이 좋음
+            'created_at': '2025-05-20 10:00:00',
             'category': 'IT',
         },
     ]
 
     context = {
         'book': book,
-        'author': author, # book_detail.html 에서 {{ author }} 또는 {{ book.author }} 로 접근
-        'reviews': sample_reviews, # book_detail.html에 reviews 변수 전달
+        'author': author,
+        'clean_author_name': clean_author_name,  # 템플릿에 전달
+        'reviews': sample_reviews,
     }
     return render(request, 'books/book_detail.html', context)
 
