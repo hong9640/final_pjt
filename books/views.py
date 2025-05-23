@@ -70,16 +70,33 @@ def extract_primary_author_name(raw_author_str):
 def book_detail(request, book_id):
     book = get_object_or_404(Book, id=book_id)
     author = getattr(book, 'author', None)
-    clean_author_name = extract_primary_author_name(author.name) if author and author.name else ''
 
+    # 저자명 정제 로직
+    if author and isinstance(author.name, str):
+        clean_author_name = re.sub(r'\s*\([^)]*\)', '', author.name.split(',')[0].strip())
+    elif author:
+        clean_author_name = str(author.name) if author.name else "정보 없음"
+    else:
+        clean_author_name = "정보 없음"
+
+    # 로그인 사용자 보유 여부
     is_in_library = False
     if request.user.is_authenticated:
         is_in_library = Library.objects.filter(user=request.user, book=book).exists()
 
-    # 리뷰
-    book_reviews_qs = book.reviews.select_related('user').prefetch_related('comments__user', 'likes_received').order_by('-created_at')
+    # 리뷰 목록, 좋아요 여부, 댓글 목록 처리
+    book_reviews_qs = book.reviews.select_related('user').prefetch_related(
+        'comments__user',
+        'likes_received'
+    ).order_by('-created_at')
+
     reviews_with_details = []
-    liked_ids = set(Like.objects.filter(user=request.user, review__in=book_reviews_qs).values_list('review_id', flat=True)) if request.user.is_authenticated else set()
+    liked_ids = set()
+    if request.user.is_authenticated:
+        liked_ids = set(
+            Like.objects.filter(user=request.user, review__in=book_reviews_qs)
+            .values_list('review_id', flat=True)
+        )
 
     for review in book_reviews_qs:
         reviews_with_details.append({
@@ -101,6 +118,7 @@ def book_detail(request, book_id):
         'category_groups': CATEGORY_GROUPS,
     }
     return render(request, 'books/book_detail.html', context)
+
 
 def all_books_list(request):
     book_list_qs = Book.objects.all().order_by('-pub_date')
