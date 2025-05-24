@@ -1,189 +1,301 @@
 {% extends "base.html" %}
-{% load static %}
+{% load static %} {# 만약 custom_filters 등 다른 태그 라이브러리를 사용한다면 여기에 함께 load 합니다. 예: {% load static custom_filters %} #}
 
 {% block content %}
   {% include "books/includes/sticky_category_nav.html" %}
 
 <style>
-  .category-total-page-content-wrapper { /* 이 클래스는 유지해도 되고, home.html과 유사하게 content-sections-wrapper 등으로 변경해도 됩니다. */
-    margin-top: 20px; 
-  }
-  .category-total-sections-wrapper { /* 이 클래스는 유지해도 되고, home.html과 유사하게 content-sections-wrapper 등으로 변경해도 됩니다. */
-    max-width: 1100px;
-    margin: 0 auto;
-    padding: 20px;
-    /* background-color: #f8f5f0; home.html 검색 결과는 section 배경을 사용할 수 있음 */
-  }
+    /* 기존 .category-total-page-content-wrapper, .category-total-sections-wrapper 등 스타일 유지 */
+    .category-total-page-content-wrapper {
+        /* margin-top: 20px; */
+    }
+    .category-total-sections-wrapper {
+        max-width: 1100px;
+        margin: 0 auto;
+        padding: 20px;
+        /* background-color: #f8f5f0; */
+    }
 
-  /* home.html의 검색창 스타일과 유사하게 (이미 거의 동일) */
-  .search-bar {
-    display: flex; justify-content: center; margin-bottom: 30px;
-  }
-  .search-bar input[type="text"] {
-    width: 300px; padding: 10px; border-radius: 15px 0 0 15px;
-    border: 1px solid #ccc; border-right: none;
-  }
-  .search-bar button {
-    padding: 10px 15px; border: 1px solid #ccc; background-color: #eee;
-    border-radius: 0 15px 15px 0; cursor: pointer;
-  }
+    /* === 검색창 및 드롭다운을 위한 CSS (이 부분을 확인 및 추가/수정) === */
+    .search-bar {
+        display: flex;            /* 내부 요소들을 가로로 배치 */
+        justify-content: center;  /* 중앙 정렬 */
+        margin-bottom: 30px;      /* 기존 간격 유지 */
+        align-items: stretch;     /* 드롭다운 버튼, 입력창, 검색버튼의 높이를 동일하게 맞춤 */
+    }
 
-  /* --- home.html의 검색 결과 제목 스타일 가져오기 --- */
-  .search-results-title-container { /* home.html의 .search-results-container > h2 와 유사한 역할 */
-    text-align: center;
-    margin-bottom: 25px; /* home.html의 .search-results-container h2 와 유사 */
-    margin-top: 20px; /* 기존 .page-title과 유사한 간격 */
-  }
-  .search-results-title-container h2 {
-    font-size: 1.8em; /* home.html의 .search-results-container h2 와 유사 */
-    color: #2C1B13;   /* home.html의 .search-results-container h2 와 유사 */
-    margin-top: 0;
-    margin-bottom: 0;
-    font-weight: bold; /* target 이미지 스타일 참고 */
-  }
-  .search-results-title-container h2 span.search-count {
-    font-size: 1.0em;
-    color: #555;
-    margin-left: 8px;
-    font-weight: bold;
-  }
-  /* --- END home.html 검색 결과 제목 스타일 --- */
+    .search-type-dropdown {
+        position: relative;       /* 드롭다운 옵션들의 위치 기준점 */
+        display: inline-block;    /* 다른 요소들과 같은 줄에 배치되도록 */
+    }
 
-  /* --- home.html의 .book-grid 및 .book-card 스타일 가져오기 --- */
-  .book-grid { /* home.html의 .book-grid 스타일 */
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px; 
-    justify-content: center; 
-    margin-bottom: 40px; /* 기존 .book-grid-display와 유사하게 */
-  }
-  .book-card { /* home.html의 .book-card 스타일 */
-    background-color: #fff;
-    padding: 15px;
-    border-radius: 10px;
-    text-align: center;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* home.html과 동일하게 */
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    width: 100%;
-    max-width: 200px; 
-    min-height: 280px; 
-  }
-  .book-card img { /* home.html의 .book-card img 스타일 */
-    width: 100%;
-    max-height: 180px;
-    object-fit: contain;
-    border-radius: 5px;
-    margin-bottom: 10px;
-  }
-  .book-card p { /* home.html의 .book-card p 스타일 (책 제목) */
-    font-size: 0.9em;
-    color: #333;
-    margin-bottom: 10px;
-    height: 3.2em; 
-    line-height: 1.6em; 
-    overflow: hidden;
-    text-overflow: ellipsis;
-    display: -webkit-box;
-    -webkit-line-clamp: 2; 
-    -webkit-box-orient: vertical;
-  }
-  .book-card .detail-link { /* home.html의 .detail-link 스타일 */
-    font-size: 0.8em;
-    color: #A67C52;
-    text-decoration: none;
-    font-weight: bold;
-    padding: 5px 0;
-    margin-top: auto; 
-  }
-  .book-card .detail-link:hover { /* home.html에는 없지만, 일관성을 위해 추가 가능 */
-    /* color: #8c6b4a; */ /* 예시 호버 색상 */
-  }
-  /* --- END home.html 카드 스타일 --- */
-  
-  .no-results { /* home.html의 .no-results 스타일 */
-    width: 100%; 
-    text-align: center;
-    margin-top: 20px;
-    padding: 40px 20px; /* 기존 .no-results-message와 유사하게 */
-    font-size: 1.2em;   /* 기존 .no-results-message와 유사하게 */
-    color: #777;       /* 기존 .no-results-message와 유사하게 */
-  }
+    .search-type-button {
+        background-color: #f8f8f8; /* 버튼 배경색 */
+        color: #333;               /* 버튼 글자색 */
+        padding: 0 12px;          /* 버튼 내부 좌우 패딩 */
+        border: 1px solid #ccc;   /* 테두리 */
+        border-right: none;       /* 오른쪽 테두리는 입력창과 연결되므로 제거 */
+        border-radius: 15px 0 0 15px; /* 왼쪽 모서리만 둥글게 */
+        cursor: pointer;
+        font-size: 14px;
+        height: 40px;             /* 입력창, 검색 버튼과 높이 통일 */
+        box-sizing: border-box;   /* 패딩, 테두리가 높이에 포함되도록 */
+        display: flex;            /* 내부 텍스트와 화살표 아이콘 정렬용 */
+        align-items: center;      /* 내부 요소들 수직 중앙 정렬 */
+        min-width: 100px;         /* 버튼의 최소 너비 */
+        justify-content: space-between; /* 텍스트와 화살표 사이에 공간 분배 */
+    }
 
-  /* 페이지네이션 스타일은 기존 .custom-pagination 유지 또는 home.html의 .pagination과 통일 */
-  .custom-pagination {
-    text-align: center; margin-top: 30px; padding: 10px;
-    border-radius: 4px; display: inline-block; left: 50%;
-    position: relative; transform: translateX(-50%); margin-bottom: 30px;
-  }
-  .custom-pagination a, .custom-pagination .current {
-    display: inline-block; padding: 8px 12px; margin: 0 2px;
-    color: #333; text-decoration: none; font-size: 1em;
-    border: 1px solid #ddd; border-radius: 4px;
-  }
-  .custom-pagination .current {
-    font-weight: bold; color: #2C1B13; background-color: #D2B9AD;
-    border-color: #D2B9AD;
-  }
-  .custom-pagination a:hover { background-color: #eee; }
-  .custom-pagination .separator { margin: 0 3px; color: #aaa; }
+    .search-type-button .arrow {
+        margin-left: 8px;         /* 텍스트와 화살표 사이 간격 */
+        font-size: 0.7em;         /* 화살표 크기 */
+        transition: transform 0.2s ease-in-out; /* 부드러운 회전 효과 */
+    }
+    .search-type-button.open .arrow { /* JavaScript로 'open' 클래스 추가 시 화살표 회전 */
+        transform: rotate(180deg);
+    }
 
+    .search-type-options {
+        display: none;            /* 평소에는 숨겨둠 (JavaScript로 block/none 토글) */
+        position: absolute;       /* 드롭다운 버튼 아래에 절대 위치로 배치 */
+        background-color: white;
+        min-width: 120px;         /* 버튼보다 약간 넓게 */
+        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.1); /* 그림자 효과 */
+        z-index: 1001;            /* 다른 요소들 (예: sticky_category_nav) 보다 위에 오도록 */
+        border: 1px solid #ddd;
+        border-top: none;         /* 버튼과 자연스럽게 이어지도록 위쪽 테두리 제거 */
+        border-radius: 0 0 4px 4px; /* 아래쪽 모서리만 살짝 둥글게 */
+        left: 0;                  /* 부모(.search-type-dropdown)의 왼쪽에 맞춤 */
+        top: 100%;                /* 버튼 바로 아래에 표시 */
+    }
+
+    .search-type-options a {
+        color: black;
+        padding: 10px 12px;
+        text-decoration: none;
+        display: block;           /* 각 옵션이 한 줄 전체를 차지하여 클릭 용이하게 */
+        font-size: 14px;
+        white-space: nowrap;      /* 옵션 텍스트가 길어도 줄바꿈되지 않도록 */
+    }
+
+    .search-type-options a:hover {
+        background-color: #f1f1f1;
+    }
+
+    /* 기존 검색 입력창 스타일 수정 */
+    .search-bar input[type="text"] {
+        width: 300px;             /* 기존 너비 유지 또는 필요시 조절 */
+        padding: 10px;
+        border-radius: 0;         /* 중요: 드롭다운과 이어지므로 왼쪽 둥근 모서리 제거 */
+        border: 1px solid #ccc;
+        border-left: none;        /* 중요: 드롭다운 버튼과 테두리가 겹치지 않도록 왼쪽 테두리 제거 */
+        border-right: none;       /* 중요: 검색 버튼과 테두리가 겹치지 않도록 오른쪽 테두리 제거 */
+        height: 40px;             /* 드롭다운 버튼, 검색 버튼과 높이 통일 */
+        box-sizing: border-box;
+        font-size: 14px;
+    }
+
+    /* 기존 검색 버튼 스타일 수정 */
+    .search-bar button[type="submit"] { /* 돋보기 버튼 */
+        padding: 10px 15px;
+        border: 1px solid #ccc;
+        background-color: #eee;
+        border-radius: 0 15px 15px 0; /* 오른쪽 모서리만 둥글게 */
+        cursor: pointer;
+        height: 40px;             /* 드롭다운 버튼, 입력창과 높이 통일 */
+        box-sizing: border-box;
+        font-size: 16px;          /* 돋보기 아이콘 크기 */
+    }
+    /* === END 검색창 및 드롭다운 CSS === */
+
+    /* --- 나머지 기존 스타일 (.search-results-title-container, .book-grid 등)은 그대로 유지 --- */
+    .search-results-title-container { 
+        text-align: center; margin-bottom: 25px; margin-top: 20px;
+    }
+    .search-results-title-container h2 {
+        font-size: 1.8em; color: #2C1B13; margin-top: 0; margin-bottom: 0; font-weight: bold;
+    }
+    .search-results-title-container h2 span.search-count {
+        font-size: 1.0em; color: #555; margin-left: 8px; font-weight: bold;
+    }
+    .book-grid { 
+        display: flex; flex-wrap: wrap; gap: 20px; justify-content: center; margin-bottom: 40px;
+    }
+    .book-card { 
+        background-color: #fff; padding: 15px; border-radius: 10px; text-align: center;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1); display: flex; flex-direction: column;
+        justify-content: space-between; width: 100%; max-width: 200px; min-height: 280px; 
+    }
+    .book-card img { 
+        width: 100%; max-height: 180px; object-fit: contain; border-radius: 5px; margin-bottom: 10px;
+    }
+    .book-card p { 
+        font-size: 0.9em; color: #333; margin-bottom: 10px; height: 3.2em; line-height: 1.6em; 
+        overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 2; 
+        -webkit-box-orient: vertical;
+    }
+    .book-card .detail-link { 
+        font-size: 0.8em; color: #A67C52; text-decoration: none; font-weight: bold;
+        padding: 5px 0; margin-top: auto; 
+    }
+    .no-results { 
+        width: 100%; text-align: center; margin-top: 20px; padding: 40px 20px; 
+        font-size: 1.2em; color: #777;       
+    }
+    /* 페이지네이션 스타일은 기존 .custom-pagination 유지 또는 home.html의 .pagination과 통일 */
+    .custom-pagination {
+        text-align: center; margin-top: 30px; padding: 10px;
+        border-radius: 4px; display: inline-block; left: 50%;
+        position: relative; transform: translateX(-50%); margin-bottom: 30px;
+    }
+    .custom-pagination a, .custom-pagination .current {
+        display: inline-block; padding: 8px 12px; margin: 0 2px;
+        color: #333; text-decoration: none; font-size: 1em;
+        border: 1px solid #ddd; border-radius: 4px;
+    }
+    .custom-pagination .current {
+        font-weight: bold; color: #2C1B13; background-color: #D2B9AD;
+        border-color: #D2B9AD;
+    }
+    .custom-pagination a:hover { background-color: #eee; }
+    .custom-pagination .separator { margin: 0 3px; color: #aaa; } /* 이미 존재 */
+    .custom-pagination .disabled {
+        color: #ccc; pointer-events: none; cursor: default; 
+        padding: 8px 12px; margin: 0 2px; border: 1px solid #ddd; border-radius: 4px;
+    }
 </style>
 
 <div class="category-total-page-content-wrapper">
-  <div class="category-total-sections-wrapper section"> {# 배경색 등을 위해 .section 클래스 추가 가능 #}
+    <div class="category-total-sections-wrapper section"> {# 배경색 등을 위해 .section 클래스 추가 가능 #}
     
-    <div class="search-results-title-container"> {# 변경된 제목 컨테이너 #}
-      <h2>
-        {{ page_title }} {# 뷰에서 전달된 page_title (예: "'검색어' 검색 결과 (전체 도서)") #}
-        {# 검색 건수를 page_title에 포함하거나, 여기서 별도 표시해야 함. #}
-        {# views.py에서 page_title에 건수를 포함하지 않는다면 여기서 추가 #}
-        {% if query %}<span class="search-count">({{ page_obj.paginator.count }}건)</span>{% endif %}
-      </h2>
-    </div>
-    
-    <div class="search-bar">
-      <form action="{% url 'books:all_books_list' %}" method="GET" style="display: flex;">
-          <input type="text" name="q" placeholder="전체 도서 검색" value="{{ query|default:'' }}">
-          <button type="submit">🔍</button>
-      </form>
-    </div>
-
-    {% if page_obj and page_obj.object_list %}
-      <div class="book-grid"> {# 변경된 그리드 클래스 #}
-        {% for book in page_obj %}
-          <div class="book-card"> {# 변경된 카드 클래스 #}
-            <a href="{% url 'books:book_detail' book_id=book.id %}">
-              <img src="{{ book.cover_image_url|default:'https://placehold.co/150x180/e2e8f0/a0aec0?text=No+Image' }}" alt="{{ book.title }}">
-            </a>
-            <p>{{ book.title }}</p>
-            <a href="{% url 'books:book_detail' book_id=book.id %}" class="detail-link">자세히 보기</a>
-          </div>
-        {% endfor %}
-      </div>
-
-      {% if is_paginated and page_obj.paginator.num_pages > 1 %}
-        <div class="custom-pagination">
-          {% for i in page_obj.paginator.page_range %}
-            {% if page_obj.number == i %}
-              <span class="current">{{ i }}</span>
-            {% else %}
-              <a href="?page={{ i }}{% if query %}&q={{ query }}{% endif %}">{{ i }}</a>
-            {% endif %}
-            {% if not forloop.last and page_obj.paginator.num_pages > 1 %}<span class="separator"></span>{% endif %}
-          {% endfor %}
+        <div class="search-results-title-container"> {# 변경된 제목 컨테이너 #}
+            <h2>
+                {{ page_title }} {# 뷰에서 전달된 page_title #}
+                {% if query %}<span class="search-count">({{ page_obj.paginator.count }}건)</span>{% endif %}
+            </h2>
         </div>
-      {% endif %}
-    {% else %}
-      <p class="no-results"> {# 변경된 결과 없음 메시지 클래스 (스타일에서 .no-results 정의 필요) #}
-        {% if query %}
-          '{{ query }}'에 대한 검색 결과가 없습니다.
+    
+        <div class="search-bar">
+            {# category_total.html의 경우 form action은 all_books_list 뷰로 #}
+            <form id="pageSearchForm" method="GET" action="{% url 'books:all_books_list' %}" style="display: flex;">
+                <div class="search-type-dropdown">
+                    <button type="button" id="searchTypeButton" class="search-type-button">
+                        <span id="selectedSearchType">
+                            {% if search_type == 'title' %}제목
+                            {% elif search_type == 'author' %}작가
+                            {% elif search_type == 'publisher' %}출판사
+                            {% elif search_type == 'integrated' %}통합검색
+                            {% else %}통합검색
+                            {% endif %}
+                        </span>
+                        <span class="arrow">▼</span>
+                    </button>
+                    <div id="searchTypeOptions" class="search-type-options">
+                        <a href="#" data-value="integrated" data-text="통합검색">통합검색</a>
+                        <a href="#" data-value="title" data-text="제목">제목</a>
+                        <a href="#" data-value="author" data-text="작가">작가</a>
+                        <a href="#" data-value="publisher" data-text="출판사">출판사</a>
+                    </div>
+                </div>
+                <input type="hidden" name="search_type" id="searchTypeInput" value="{{ search_type|default:'integrated' }}">
+                <input type="text" name="q" placeholder="검색어를 입력하세요." value="{{ query|default:'' }}">
+                <button type="submit">🔍</button>
+            </form>
+        </div>
+
+        {% if page_obj and page_obj.object_list %}
+            <div class="book-grid"> {# 변경된 그리드 클래스 #}
+                {% for book in page_obj %}
+                <div class="book-card"> {# 변경된 카드 클래스 #}
+                    <a href="{% url 'books:book_detail' book_id=book.id %}">
+                        <img src="{{ book.cover_image_url|default:'https://placehold.co/150x180/e2e8f0/a0aec0?text=No+Image' }}" alt="{{ book.title }}">
+                    </a>
+                    <p>{{ book.title }}</p>
+                    <a href="{% url 'books:book_detail' book_id=book.id %}" class="detail-link">자세히 보기</a>
+                </div>
+                {% endfor %}
+            </div>
+
+            {% if is_paginated and page_obj.paginator.num_pages > 1 %}
+            <div class="custom-pagination">
+                {% if first_page_jump_target %}
+                <a href="?page={{ first_page_jump_target }}{% if query %}&q={{ query }}&search_type={{ search_type }}{% endif %}" aria-label="First Page">&laquo;&laquo;</a>
+                {% else %}
+                <span class="disabled" aria-hidden="true">&laquo;&laquo;</span>
+                {% endif %}
+                {% if prev_single_page_target %}
+                <a href="?page={{ prev_single_page_target }}{% if query %}&q={{ query }}&search_type={{ search_type }}{% endif %}" aria-label="Previous Page">&laquo;</a>
+                {% else %}
+                <span class="disabled" aria-hidden="true">&laquo;</span>
+                {% endif %}
+                {% for page_num in visible_page_numbers %}
+                {% if page_obj.number == page_num %}
+                <span class="current">{{ page_num }}</span>
+                {% else %}
+                <a href="?page={{ page_num }}{% if query %}&q={{ query }}&search_type={{ search_type }}{% endif %}">{{ page_num }}</a>
+                {% endif %}
+                {% endfor %}
+                {% if next_single_page_target %}
+                <a href="?page={{ next_single_page_target }}{% if query %}&q={{ query }}&search_type={{ search_type }}{% endif %}" aria-label="Next Page">&raquo;</a>
+                {% else %}
+                <span class="disabled" aria-hidden="true">&raquo;</span>
+                {% endif %}
+                {% if last_page_jump_target %}
+                <a href="?page={{ last_page_jump_target }}{% if query %}&q={{ query }}&search_type={{ search_type }}{% endif %}" aria-label="Last Page">&raquo;&raquo;</a>
+                {% else %}
+                <span class="disabled" aria-hidden="true">&raquo;&raquo;</span>
+                {% endif %}
+            </div>
+            {% endif %}
         {% else %}
-          등록된 책이 없습니다.
+            <p class="no-results"> 
+                {% if query %}
+                '{{ query }}'에 대한 검색 결과가 없습니다.
+                {% else %}
+                등록된 책이 없습니다.
+                {% endif %}
+            </p>
         {% endif %}
-      </p>
-    {% endif %}
-  </div>
+    </div>
 </div>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    // --- 검색 타입 드롭다운 로직 ---
+    // 각 페이지에서 ID가 유일하게 사용된다고 가정합니다.
+    // 만약 ID가 중복될 가능성이 있다면, JavaScript 선택자를 더 구체적으로 (예: form ID 내부의 요소) 지정해야 합니다.
+    const searchTypeButton = document.getElementById('searchTypeButton');
+    const searchTypeOptions = document.getElementById('searchTypeOptions');
+    const selectedSearchTypeSpan = document.getElementById('selectedSearchType');
+    const searchTypeInput = document.getElementById('searchTypeInput');
+
+    if (searchTypeButton && searchTypeOptions && selectedSearchTypeSpan && searchTypeInput) {
+        searchTypeButton.addEventListener('click', function(event) {
+            event.stopPropagation(); 
+            const isOpen = searchTypeOptions.style.display === 'block';
+            searchTypeOptions.style.display = isOpen ? 'none' : 'block';
+            searchTypeButton.classList.toggle('open', !isOpen);
+        });
+
+        searchTypeOptions.querySelectorAll('a').forEach(option => {
+            option.addEventListener('click', function(e) {
+                e.preventDefault();
+                selectedSearchTypeSpan.textContent = this.dataset.text;
+                searchTypeInput.value = this.dataset.value;
+                searchTypeOptions.style.display = 'none';
+                searchTypeButton.classList.remove('open');
+            });
+        });
+
+        document.addEventListener('click', function(event) {
+            if (searchTypeOptions && searchTypeOptions.style.display === 'block' && 
+                searchTypeButton && !searchTypeButton.contains(event.target) && 
+                !searchTypeOptions.contains(event.target)) {
+                searchTypeOptions.style.display = 'none';
+                if (searchTypeButton) searchTypeButton.classList.remove('open');
+            }
+        });
+    }
+});
+</script>
 {% endblock content %}

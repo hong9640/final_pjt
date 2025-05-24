@@ -4,7 +4,6 @@
 <style>
   /* === 전체 페이지 및 기본 설정 === */
   body { /* 페이지 전체에 대한 기본 폰트 및 배경색 설정 (base.html에서 할 수도 있음) */
-    font-family: 'Noto Sans KR', sans-serif; /* 가독성 좋은 한글 폰트 예시 */
     background-color: #F8F9FA; /* 페이지 배경을 매우 밝은 회색으로 변경 */
     color: #343A40; /* 기본 텍스트 색상 */
   }
@@ -521,8 +520,8 @@
     <h2>{{ clean_author_name }}</h2>
     <div class="author-layout">
       <div class="author-image-container">
-        {% if book.author and book.author.profile_image and book.author.profile_image.url %}
-          <img src="{{ book.author.profile_image.url }}" alt="{{ book.author.name }}">
+        {% if book.author and book.author.profile_image %}
+          <img src="{{ book.author.profile_image }}" alt="{{ book.author.name }}">
         {% else %}
           <img src="{% static 'images/author_default_img.png' %}" alt="기본 작가 이미지">
         {% endif %}
