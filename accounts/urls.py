@@ -13,4 +13,5 @@ urlpatterns = [
     path('update/', views.update, name='update'),
     path('user/<str:username>/', views.userpage_view, name='userpage'),
     path('follow/<str:username>/', views.follow_toggle, name='follow_toggle'),
+    path('ajax/follow_list/<str:username>/', views.follow_list_view, name='follow_list'),
 ]

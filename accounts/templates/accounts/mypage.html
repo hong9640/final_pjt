@@ -10,7 +10,6 @@
     padding: 3rem;
     font-family: 'Noto Sans KR', sans-serif;
   }
-
   .profile-section {
     display: flex;
     align-items: center;
@@ -18,7 +17,6 @@
     margin-bottom: 2rem;
     justify-content: space-between;
   }
-
   .profile-photo {
     width: 120px;
     height: 120px;
@@ -28,30 +26,21 @@
     background-repeat: no-repeat;
     background-color: #ddd;
   }
-
   .profile-info {
     flex-grow: 1;
   }
-
   .nickname {
     font-size: 1.4rem;
     font-weight: bold;
     margin-bottom: 0.6rem;
     color: #3E3025;
   }
-
   .profile-controls {
     display: flex;
     flex-direction: column;
     gap: 0.4rem;
     align-items: flex-end;
   }
-
-  .profile-controls form,
-  .profile-controls a {
-    display: inline-block;
-  }
-
   .action-buttons {
     display: flex;
     gap: 1rem;
@@ -59,7 +48,6 @@
     justify-content: center;
     flex-wrap: wrap;
   }
-
   .action-buttons a,
   .action-buttons button {
     background-color: #BCAAA4;
@@ -72,12 +60,6 @@
     cursor: pointer;
     text-decoration: none;
   }
-
-  .action-buttons button:hover,
-  .action-buttons a:hover {
-    background-color: #a38e7a;
-  }
-
   .recommend-box {
     margin-top: 3rem;
     background-color: #FAF7F4;
@@ -85,34 +67,77 @@
     border-radius: 16px;
     box-shadow: 0 4px 12px rgba(0,0,0,0.05);
   }
+  .modal {
+    display: none;
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0,0,0,0.5);
+    align-items: center;
+    justify-content: center;
+    z-index: 2000;
+  }
+  .modal-content {
+    background: #fff;
+    padding: 1.5rem;
+    border-radius: 8px;
+    max-width: 400px; width: 90%;
+    max-height: 80%; overflow-y: auto;
+    position: relative;
+  }
+  .close-btn {
+    position: absolute;
+    top: 0.5rem; right: 0.8rem;
+    font-size: 1.2rem;
+    cursor: pointer;
+  }
+  .user-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.8rem;
+    margin-bottom: 0.5rem;
+  }
+  .user-link {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+  }
+  .user-item img {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+  .follow-toggle-btn {
+    background-color: #e0d6cd;
+    color: #3E3025;
+    border: none;
+    border-radius: 6px;
+    padding: 0.3rem 0.8rem;
+    font-size: 0.8rem;
+    cursor: pointer;
+  }
 </style>
 
 <div class="mypage-wrapper">
   <!-- 프로필 섹션 -->
   <div class="profile-section">
-    <div class="profile-photo" style="
-      background-image: url('{% if request.user.profile_image %}{{ request.user.profile_image.url }}{% else %}{% static 'accounts/profile_default.jpg' %}{% endif %}');
-    "></div>
-
+    <div class="profile-photo" style="background-image: url('{% if request.user.profile_image %}{{ request.user.profile_image.url }}{% else %}{% static 'accounts/profile_default.jpg' %}{% endif %}');"></div>
     <div class="profile-info">
-      <div class="nickname">
-        {{ request.user.nickname|default:request.user.username }}님
-      </div>
+      <div class="nickname">{{ request.user.nickname|default:request.user.username }}님</div>
       <div style="font-size: 0.9rem; color: #555;">
-        팔로잉 {{ following_count }} | 팔로워 {{ follower_count }}
+        <span class="follow-stat" data-type="following" data-username="{{ request.user.username }}">팔로잉 {{ following_count }}</span> |
+        <span class="follow-stat" data-type="followers" data-username="{{ request.user.username }}">팔로워 {{ follower_count }}</span>
       </div>
     </div>
-
     <div class="profile-controls">
       <a href="{% url 'accounts:update' %}" class="action-buttons">회원정보 수정</a>
-      <form method="POST" action="{% url 'accounts:logout' %}">
-        {% csrf_token %}
-        <button type="submit">로그아웃</button>
-      </form>
+      <form method="POST" action="{% url 'accounts:logout' %}">{% csrf_token %}<button type="submit">로그아웃</button></form>
     </div>
   </div>
 
-  <!-- 리뷰 관련 링크 -->
   <div class="action-buttons">
     <a href="{% url 'reviews:user_written_reviews' request.user.username %}">내가 작성한 리뷰</a>
     <a href="{% url 'reviews:user_liked_reviews' request.user.username %}">내가 좋아한 리뷰</a>
@@ -120,10 +145,7 @@
 
   <!-- AI 추천 도서 -->
   <div class="recommend-box">
-    <h3 style="font-size: 1.2rem; font-weight: bold; color: #3E3025; margin-bottom: 1rem;">
-      최근 AI 추천 도서
-    </h3>
-
+    <h3 style="font-size: 1.2rem; font-weight: bold; color: #3E3025; margin-bottom: 1rem;">최근 AI 추천 도서</h3>
     {% if recommendations %}
       <div style="display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center;">
         {% for rec in recommendations|slice:":3" %}
@@ -132,19 +154,11 @@
               <img src="{{ rec.book.cover_image_url }}" alt="{{ rec.book.title }}" style="width: 100%; height: 220px; object-fit: cover;">
             </a>
             <div style="padding: 0.5rem;">
-              <p style="font-size: 0.95rem; font-weight: bold; margin: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
-                {{ rec.book.title }}
-              </p>
-              <p style="font-size: 0.85rem; color: #777; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
-                {{ rec.book.author.name }}
-              </p>
-              <form onsubmit="event.preventDefault(); addToLibraryAjax({{ rec.book.id }}, this.querySelector('button')); ">
+              <p style="font-size: 0.95rem; font-weight: bold; margin: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{ rec.book.title }}</p>
+              <p style="font-size: 0.85rem; color: #777; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{ rec.book.author.name }}</p>
+              <form onsubmit="event.preventDefault(); addToLibraryAjax({{ rec.book.id }}, this.querySelector('button'));">
                 {% csrf_token %}
-                <button type="submit"
-                        style="margin-top: 0.5rem; background:#8B5E3C; color:white;
-                               padding: 0.4rem 0.8rem; border:none; border-radius:6px; font-size:0.85rem; cursor:pointer;">
-                  내 서재에 추가
-                </button>
+                <button type="submit" style="margin-top: 0.5rem; background:#8B5E3C; color:white; padding: 0.4rem 0.8rem; border:none; border-radius:6px; font-size:0.85rem; cursor:pointer;">내 서재에 추가</button>
               </form>
             </div>
           </div>
@@ -152,21 +166,13 @@
       </div>
     {% else %}
       <p style="color: #777; margin-top: 1rem;">나만을 위한 AI 추천을 받아보세요!</p>
-      <button onclick="openRecommendModal()"
-              style="margin-top: 1rem; padding: 0.7rem 1.5rem; background: #A67C52; color: white;
-                     border: none; border-radius: 8px; font-size: 1rem; cursor: pointer;">
-        AI 책 추천 받아보기
-      </button>
+      <button onclick="openRecommendModal()" style="margin-top: 1rem; padding: 0.7rem 1.5rem; background: #A67C52; color: white; border: none; border-radius: 8px; font-size: 1rem; cursor: pointer;">AI 책 추천 받아보기</button>
     {% endif %}
   </div>
 
   <!-- 내 서재 미리보기 -->
   <div class="recommend-box">
-    <h3 style="font-size: 1.2rem; font-weight: bold; color: #3E3025; margin-bottom: 1rem; text-align: center;">
-      내 서재
-    </h3>
-
-
+    <h3 style="font-size: 1.2rem; font-weight: bold; color: #3E3025; margin-bottom: 1rem; text-align: center;">내 서재</h3>
     {% if my_library_preview %}
       <div style="display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center;">
         {% for entry in my_library_preview %}
@@ -175,9 +181,7 @@
               <img src="{{ entry.book.cover_image_url }}" alt="{{ entry.book.title }}" style="width: 100%; height: 220px; object-fit: cover;">
             </a>
             <div style="padding: 0.5rem;">
-              <p style="font-size: 0.95rem; font-weight: bold; margin: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
-                {{ entry.book.title }}
-              </p>
+              <p style="font-size: 0.95rem; font-weight: bold; margin: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{ entry.book.title }}</p>
             </div>
           </div>
         {% endfor %}
@@ -185,12 +189,19 @@
     {% else %}
       <p style="color: #777; margin-top: 1rem;">아직 서재에 추가한 책이 없습니다.</p>
     {% endif %}
-
     <div style="margin-top: 1rem; text-align: center;">
       <a href="{% url 'libraries:my_library' %}" style="color: #8B5E3C; text-decoration: underline;">내 서재 전체 보기 →</a>
     </div>
   </div>
+</div>
 
+<!-- 팔로우 모달 -->
+<div id="follow-modal" class="modal">
+  <div class="modal-content">
+    <span class="close-btn">&times;</span>
+    <h3 id="modal-title"></h3>
+    <div id="modal-body"></div>
+  </div>
 </div>
 
 {% include 'recommendations/modal_input.html' %}
@@ -211,8 +222,6 @@ function addToLibraryAjax(bookId, buttonElement) {
   .then(data => {
     if (data.success) {
       buttonElement.remove();
-    } else {
-      buttonElement.remove();
     }
   })
   .catch(err => {
@@ -220,6 +229,75 @@ function addToLibraryAjax(bookId, buttonElement) {
     console.error(err);
   });
 }
-</script>
 
+document.querySelectorAll('.follow-stat').forEach(el => {
+  el.addEventListener('click', () => {
+    const type = el.dataset.type;
+    const username = el.dataset.username;
+    document.getElementById('modal-title').textContent = type === 'followers' ? '팔로워 목록' : '팔로잉 목록';
+    const modal = document.getElementById('follow-modal');
+    const body = document.getElementById('modal-body');
+    body.innerHTML = '<p>로딩 중...</p>';
+    modal.style.display = 'flex';
+
+    fetch(`/accounts/ajax/follow_list/${username}/?type=${type}`)
+      .then(res => res.json())
+      .then(data => {
+        if (data.users.length) {
+          const currentUsername = "{{ request.user.username }}";
+          body.innerHTML = data.users.map(u => {
+            const displayName = u.nickname || u.username;
+            const isSelf = u.username === currentUsername;
+            const followBtn = isSelf ? '' :
+              `<button class="follow-toggle-btn" data-username="${u.username}" data-following="${u.is_following}">${u.is_following ? '언팔로우' : '팔로우'}</button>`;
+            return `
+              <div class="user-item">
+                <div class="user-link" onclick="location.href='/accounts/user/${u.username}/'">
+                  <img src="${u.profile_image_url || '/static/accounts/profile_default.jpg'}" alt="${displayName}">
+                  <span>${displayName}님</span>
+                </div>
+                ${followBtn}
+              </div>
+            `;
+          }).join('');
+          attachFollowButtons();
+        } else {
+          body.innerHTML = '<p>목록이 없습니다.</p>';
+        }
+      })
+      .catch(() => {
+        body.innerHTML = '<p>불러오기 실패</p>';
+      });
+  });
+});
+
+document.querySelector('#follow-modal .close-btn').addEventListener('click', () => {
+  document.getElementById('follow-modal').style.display = 'none';
+});
+
+function attachFollowButtons() {
+  document.querySelectorAll('.follow-toggle-btn').forEach(btn => {
+    btn.addEventListener('click', function (e) {
+      e.stopPropagation();
+      const username = this.dataset.username;
+      const isFollowing = this.dataset.following === 'true';
+      fetch(`/accounts/follow/${username}/`, {
+        method: 'POST',
+        headers: {
+          'X-CSRFToken': '{{ csrf_token }}',
+        }
+      })
+      .then(res => res.json())
+      .then(data => {
+        this.textContent = data.followed ? '언팔로우' : '팔로우';
+        this.dataset.following = data.followed;
+      })
+      .catch(err => {
+        alert('팔로우 전환 실패');
+        console.error(err);
+      });
+    });
+  });
+}
+</script>
 {% endblock %}
