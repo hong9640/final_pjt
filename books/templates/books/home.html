@@ -129,6 +129,7 @@
         box-shadow: 0 5px 15px rgba(0,0,0,0.07); display: flex; flex-direction: column;
         justify-content: space-between; width: 100%; min-height: 290px;
         border: 1px solid #F0EBE3; transition: transform 0.3s ease, box-shadow 0.3s ease;
+        box-sizing: border-box;
     }
     .book-card img {
         width: 100%; max-height: 160px; object-fit: contain;
@@ -162,7 +163,7 @@
         display: flex; flex-direction: column;
     }
     .section h2 { margin-top: 0; margin-bottom: 15px; font-size: 1.5em; color: #2C1B13; }
-    .search-results-container { margin-top: 30px; }
+    .search-results-container { margin-top: 30px; margin-bottom: 30px }
     .search-results-container h2 {
         text-align: center; margin-bottom: 25px; font-size: 1.8em; color: #2C1B13;
     }
@@ -216,6 +217,24 @@
     .swiper-button-prev::after, .swiper-button-next::after { font-size: 22px; }
     .swiper-slide .book-card {
         z-index: 0 !important; transform: none !important; position: relative !important;
+    }
+    .custom-pagination { /* category_total.html 등에서 가져온 스타일 */
+        text-align: center; margin-top: 30px; padding: 10px;
+        border-radius: 4px; display: inline-block; left: 50%;
+        position: relative; transform: translateX(-50%); margin-bottom: 30px;
+    }
+    .custom-pagination a, .custom-pagination .current, .custom-pagination .disabled {
+        display: inline-block; padding: 8px 12px; margin: 0 2px;
+        color: #333; text-decoration: none; font-size: 1em;
+        border: 1px solid #ddd; border-radius: 4px;
+    }
+    .custom-pagination .current {
+        font-weight: bold; color: #2C1B13; background-color: #D2B9AD;
+        border-color: #D2B9AD;
+    }
+    .custom-pagination a:hover { background-color: #eee; }
+    .custom-pagination .disabled {
+        color: #ccc; pointer-events: none; cursor: default;
     }
 </style>
 
@@ -363,11 +382,11 @@
             <div class="search-results-container section">
                 <h2>
                     {{ page_title }}
-                    {% if searched_books %}({{ searched_books|length }}건){% endif %}
+                    {% if page_obj and page_obj.object_list %}({{ page_obj.paginator.count }}건){% endif %}
                 </h2>
-                {% if searched_books %}
+                {% if page_obj and page_obj.object_list %}
                 <div class="book-grid">
-                    {% for book in searched_books %}
+                    {% for book in page_obj %}
                     <div class="book-card">
                         <a href="{% url 'books:book_detail' book_id=book.id %}">
                             <img src="{{ book.cover_image_url|default:'https://placehold.co/150x180/e2e8f0/a0aec0?text=No+Image' }}" alt="{{ book.title }}">
@@ -377,6 +396,43 @@
                     </div>
                     {% endfor %}
                 </div>
+                 {# --- 검색 결과에 대한 페이지네이션 UI 추가 --- #}
+                {% if is_paginated and page_obj.paginator.num_pages > 1 %}
+                <div class="custom-pagination"> {# 다른 페이지들과 동일한 클래스 사용 #}
+                    {% if first_page_jump_target %}
+                    <a href="?page={{ first_page_jump_target }}{% if query %}&q={{ query }}&search_type={{ search_type }}{% endif %}" aria-label="First Page">&laquo;&laquo;</a>
+                    {% else %}
+                    <span class="disabled" aria-hidden="true">&laquo;&laquo;</span>
+                    {% endif %}
+
+                    {% if prev_single_page_target %}
+                    <a href="?page={{ prev_single_page_target }}{% if query %}&q={{ query }}&search_type={{ search_type }}{% endif %}" aria-label="Previous Page">&laquo;</a>
+                    {% else %}
+                    <span class="disabled" aria-hidden="true">&laquo;</span>
+                    {% endif %}
+
+                    {% for page_num in visible_page_numbers %}
+                    {% if page_obj.number == page_num %}
+                    <span class="current">{{ page_num }}</span> {# .current 사용 (기존 .current-page 대신) #}
+                    {% else %}
+                    <a href="?page={{ page_num }}{% if query %}&q={{ query }}&search_type={{ search_type }}{% endif %}">{{ page_num }}</a>
+                    {% endif %}
+                    {% endfor %}
+
+                    {% if next_single_page_target %}
+                    <a href="?page={{ next_single_page_target }}{% if query %}&q={{ query }}&search_type={{ search_type }}{% endif %}" aria-label="Next Page">&raquo;</a>
+                    {% else %}
+                    <span class="disabled" aria-hidden="true">&raquo;</span>
+                    {% endif %}
+
+                    {% if last_page_jump_target %}
+                    <a href="?page={{ last_page_jump_target }}{% if query %}&q={{ query }}&search_type={{ search_type }}{% endif %}" aria-label="Last Page">&raquo;&raquo;</a>
+                    {% else %}
+                    <span class="disabled" aria-hidden="true">&raquo;&raquo;</span>
+                    {% endif %}
+                </div>
+                {% endif %}
+                {# --- 페이지네이션 UI 추가 끝 --- #}
                 {% else %}
                 <p class="no-results">"{{ query }}"에 대한 검색 결과가 없습니다.</p>
                 {% endif %}
