@@ -2,110 +2,480 @@
 {% load static %}
 {% load i18n %} {% block content %}
 <style>
-  /* 기존 스타일 유지 */
+  /* === 전체 페이지 및 기본 설정 === */
+  body { /* 페이지 전체에 대한 기본 폰트 및 배경색 설정 (base.html에서 할 수도 있음) */
+    font-family: 'Noto Sans KR', sans-serif; /* 가독성 좋은 한글 폰트 예시 */
+    background-color: #F8F9FA; /* 페이지 배경을 매우 밝은 회색으로 변경 */
+    color: #343A40; /* 기본 텍스트 색상 */
+  }
+
   .book-detail-page-container {
-    max-width: 900px; margin: 2rem auto; padding: 2rem; background-color: #fff; box-shadow: 0 2px 10px rgba(0,0,0,0.05); border-radius: 8px;
+    max-width: 900px; 
+    margin: 3rem auto; /* 상하 여백 증가 */
+    padding: 2.5rem;   /* 내부 여백 증가 */
+    background-color: #fff; 
+    box-shadow: 0 8px 25px rgba(0,0,0,0.1); /* 그림자 효과 강화 */
+    border-radius: 12px; /* 모서리 둥글게 처리 */
   }
-  .book-primary-info-section { display: flex; gap: 2rem; margin-bottom: 2.5rem; }
-  .book-cover-container { flex: 0 0 220px; height: 330px; background-color: #f0f0f0; display: flex; align-items: center; justify-content: center; border-radius: 4px; overflow: hidden; }
-  .book-cover-container img { width: 100%; height: 100%; object-fit: cover; }
-  .book-meta-details { flex: 1; }
-  .book-main-title { font-size: 2.2em; font-weight: bold; color: #333; margin-top: 0; margin-bottom: 0.75rem; }
-  .book-info-block, .book-description-block { background-color: #f7f7f7; padding: 1rem 1.5rem; border-radius: 4px; margin-bottom: 1rem; min-height: 60px; font-size: 0.95em; color: #444; }
-  .book-description-block { min-height: 100px; }
-  .author-info-section { margin-bottom: 2.5rem; padding-top: 2rem; border-top: 1px solid #e5e5e5; }
-  .author-info-section h2 { font-size: 1.5em; margin-bottom: 1.5rem; color: #333; }
-  .author-layout { display: flex; align-items: center; gap: 1.5rem; }
-  .author-image-container { width: 100px; height: 100px; background-color: #e0e0e0; border-radius: 50%; display: flex; align-items: center; justify-content: center; overflow: hidden; flex-shrink: 0; }
-  .author-image-container img { width: 100%; height: 100%; object-fit: cover; }
-  .author-profile-block { background-color: #f7f7f7; padding: 1rem 1.5rem; border-radius: 4px; min-height: 80px; flex-grow: 1; font-size: 0.95em; color: #444; }
-  .book-purchase-link { display: block; text-align: center; margin: 2rem 0 3rem 0; font-size: 1.2em; font-weight: bold; color: #A67C52; text-decoration: none; padding: 0.75rem; border: 1px solid #D2B9AD; border-radius: 4px; background-color: transparent; transition: background-color 0.3s, color 0.3s; }
-  .book-purchase-link:hover { background-color: #D2B9AD; color: #fff; }
-  
-  .review-main-section { padding-top: 2rem; border-top: 1px solid #e5e5e5; }
-  .review-main-section h2 { font-size: 1.5em; margin-bottom: 1.5rem; color: #333; }
-  .review-write-container, .review-list-container { margin-bottom: 2rem; }
-  
-  /* 리뷰 작성 폼 스타일 */
-  .review-form-box { background-color: #fdfdfd; padding: 1.5rem; border: 1px solid #e9e9e9; border-radius: 8px; }
-  /* 사용자가 제공한 `review_form.content` textarea 스타일을 따르도록 클래스 추가 또는 직접 스타일 적용 */
-  .review-form-box textarea#reviewTextarea { /* 기존 ID 셀렉터 유지 */
-    width: calc(100% - 2rem); min-height: 80px; /* 높이 약간 줄임 */
-    margin-bottom: 1rem; padding: 0.8rem; border: 1px solid #ddd; border-radius: 4px; 
-    font-family: inherit; font-size: 0.95em; 
-  }
-  .review-form-box .star-input-area span { font-size: 1.8em; color: #ccc; cursor: pointer; margin-right: 2px; } /* 기존 별 스타일 */
-  .review-form-box .star-input-area span.filled { color: #f5a623; } /* 채워진 별 스타일 */
-  .review-form-box .form-row { display: flex; justify-content: flex-end; align-items: center; gap: 1rem; margin-top: 1rem; } /* 버튼 오른쪽 정렬 */
-  .review-form-box .review-buttons button { background-color: #D2B9AD; color: #2C1B13; border: none; padding: 0.75rem 1.2rem; border-radius: 4px; cursor: pointer; font-weight: bold; transition: background-color 0.2s; }
-  .review-form-box .review-buttons button:hover { background-color: #A67C52; color: #fff; }
-  
-  /* 리뷰 아이템 카드 스타일 */
-  .review-item-card { background-color: #fdfdfd; border: 1px solid #e9e9e9; border-radius: 8px; margin-bottom: 1.5rem; padding: 1.5rem; display: flex; gap: 1.5rem; position: relative; /* 삭제 버튼 위치 기준 */}
-  .review-user-avatar-placeholder { width: 50px; height: 50px; /* 약간 작게 조정 */ background-color: #e0e0e0; border-radius: 4px; display: flex; align-items: center; justify-content: center; font-size: 0.8em; color: #777; text-align: center; flex-shrink: 0; }
-  .review-user-avatar-placeholder img { width: 100%; height: 100%; object-fit: cover; border-radius: 4px; }
-  .review-details-content { flex-grow: 1; }
-  .review-item-stars-container { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.5rem; } /* 별점과 좋아요 버튼을 감싸는 컨테이너 */
-  .review-item-stars span { font-size: 1.5em; color: #ccc; margin-right: 1px; } /* 리뷰 목록의 별 크기 조정 */
-  .review-item-stars span.filled { color: #f5a623; }
-  .review-text-block { background-color: #f0f0f0; padding: 1rem; min-height: 60px; margin: 0.5rem 0 1rem 0; border-radius: 4px; font-size: 0.95em; }
-  .review-meta-info { font-size: 0.85em; color: #666; margin-bottom: 1rem; }
-  .review-meta-info span { margin-right: 1rem; }
-  .no-reviews-message { text-align: center; color: #777; padding: 2rem; }
-  .form-field-errors { color: red; font-size: 0.8em; list-style-type: none; padding-left: 0; margin-top: 2px; }
 
-  /* 좋아요 버튼 스타일 */
+  /* === 책 기본 정보 섹션 === */
+  .book-primary-info-section { 
+    display: flex; 
+    gap: 2.5rem; /* 간격 살짝 증가 */
+    margin-bottom: 3rem; /* 하단 여백 증가 */
+  }
+
+  .book-cover-container { 
+    flex: 0 0 250px; /* 표지 너비 약간 증가 */
+    height: 375px;   /* 표지 높이 비율에 맞게 증가 */
+    background-color: #E9ECEF; /* 표지 배경색 변경 */
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    border-radius: 8px; /* 모서리 둥글게 */
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1); /* 표지에 그림자 추가 */
+  }
+  .book-cover-container img { 
+    width: 100%; 
+    height: 100%; 
+    object-fit: cover; 
+  }
+
+  .book-meta-details { 
+    flex: 1; 
+  }
+  .book-main-title { 
+    font-size: 2.5em; /* 제목 크기 강조 */
+    font-weight: 700; /* 굵기 조정 */
+    color: #2C3E50; /* 제목 색상 (짙은 네이비 계열) */
+    margin-top: 0; 
+    margin-bottom: 1rem; 
+    line-height: 1.3;
+  }
+  .book-info-block, .book-description-block { 
+    background-color: #F8F9FA; /* 정보 블록 배경색 변경 */
+    padding: 1.25rem 1.75rem; /* 내부 여백 조정 */
+    border-radius: 8px; 
+    margin-bottom: 1.25rem; 
+    font-size: 0.98em; 
+    color: #495057; /* 텍스트 색상 */
+    border: 1px solid #E9ECEF; /* 옅은 테두리 추가 */
+  }
+  .book-info-block p strong {
+    color: #343A40; /* '저자:', '출판사:' 등 레이블 텍스트 색상 */
+    margin-right: 0.5em;
+  }
+  .book-description-block { 
+    min-height: 120px; 
+    line-height: 1.7; /* 설명 가독성 향상 */
+  }
+
+  /* === 서재 추가/제거 버튼 === */
+  .add-to-library-button-container { 
+    text-align: center; 
+    margin: 2rem 0 2.5rem 0; /* 여백 조정 */
+  }
+  .add-to-library-button, .remove-from-library-button { 
+    display: inline-block; 
+    color: white; 
+    padding: 0.8rem 2rem; /* 버튼 크기 조정 */
+    border: none; 
+    border-radius: 25px; /* 둥근 버튼 */
+    text-align: center; 
+    text-decoration: none; 
+    font-size: 1.05em; 
+    font-weight: 500; /* 굵기 조정 */
+    cursor: pointer; 
+    transition: all 0.3s ease; /* 부드러운 전환 효과 */
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  }
+  .add-to-library-button { 
+    background-image: linear-gradient(45deg, #00796B, #004D40); /* 딥 그린 그라데이션 */
+  }
+  .add-to-library-button:hover { 
+    background-image: linear-gradient(45deg, #004D40, #00796B);
+    box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+    transform: translateY(-2px);
+  }
+  .remove-from-library-button { 
+    background-image: linear-gradient(45deg, #D32F2F, #B71C1C); /* 레드 그라데이션 */
+  }
+  .remove-from-library-button:hover { 
+    background-image: linear-gradient(45deg, #B71C1C, #D32F2F);
+    box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+    transform: translateY(-2px);
+  }
+
+  /* === 저자 정보 섹션 === */
+  .author-info-section { 
+    margin-bottom: 3rem; 
+    padding-top: 2.5rem; 
+    border-top: 1px solid #DEE2E6; /* 구분선 색상 변경 */
+  }
+  .author-info-section h2 { 
+    font-size: 1.8em; /* 제목 크기 */
+    margin-bottom: 1.8rem; 
+    color: #2C3E50; /* 제목 색상 */
+    text-align: center;
+  }
+  .author-layout { 
+    display: flex; 
+    align-items: center; 
+    gap: 2rem; 
+  }
+  .author-image-container { 
+    width: 120px; /* 이미지 크기 증가 */
+    height: 120px; 
+    border-radius: 50%; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    overflow: hidden; 
+    flex-shrink: 0;
+    border: 4px solid #fff; /* 테두리 추가 */
+    box-shadow: 0 4px 15px rgba(0,0,0,0.15); /* 그림자 강화 */
+  }
+  .author-image-container img { 
+    width: 100%; 
+    height: 100%; 
+    object-fit: cover; 
+  }
+  .author-profile-block { 
+    background-color: #F8F9FA; 
+    padding: 1.5rem; 
+    border-radius: 8px; 
+    min-height: 100px; /* 높이 조정 */
+    flex-grow: 1; 
+    font-size: 0.95em; 
+    color: #495057;
+    border: 1px solid #E9ECEF;
+    line-height: 1.6;
+  }
+
+  /* === 구매 링크 === */
+  .book-purchase-link { 
+    display: block; 
+    text-align: center; 
+    margin: 2.5rem auto; /* 상하 여백 및 자동 중앙 정렬 */
+    width: fit-content; /* 내용에 맞는 너비 */
+    font-size: 1.2em; 
+    font-weight: 600; /* 굵기 증가 */
+    color: #FFFFFF;  /* 글자색 흰색으로 변경 */
+    background-image: linear-gradient(45deg, #FFB300, #FF8F00); /* 골드/오렌지 그라데이션 */
+    text-decoration: none; 
+    padding: 0.8rem 2.5rem; /* 패딩 조정 */
+    border: none; /* 테두리 제거 */
+    border-radius: 30px; /* 둥근 모서리 */
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  }
+  .book-purchase-link:hover { 
+    background-image: linear-gradient(45deg, #FF8F00, #FFB300);
+    box-shadow: 0 6px 18px rgba(0,0,0,0.2);
+    transform: translateY(-2px) scale(1.02);
+  }
+  
+  /* === 리뷰 섹션 === */
+  .review-main-section { 
+    padding-top: 2.5rem; 
+    border-top: 1px solid #DEE2E6; 
+  }
+  .review-main-section h2 { /* "리뷰 쓰기", "리뷰 (n)" 제목 공통 스타일 */
+    font-size: 1.8em; 
+    margin-bottom: 1.8rem; 
+    color: #2C3E50; 
+    text-align: center;
+  }
+  .review-write-container, .review-list-container { 
+    margin-bottom: 2.5rem; 
+  }
+  
+  /* 리뷰 작성 폼 */
+  .review-form-box { 
+    background-color: #FFFFFF; /* 배경 흰색 */
+    padding: 2rem; /* 내부 여백 증가 */
+    border: 1px solid #E9ECEF; 
+    border-radius: 12px; /* 모서리 둥글게 */
+    box-shadow: 0 6px 20px rgba(0,0,0,0.08); /* 그림자 추가 */
+  }
+  .review-form-box textarea#reviewTextarea { 
+    width: 100%; /* 너비 100%로 변경 (패딩은 box-sizing으로 제어) */
+    box-sizing: border-box; /* 패딩, 테두리를 너비에 포함 */
+    min-height: 100px; 
+    margin-bottom: 1rem; 
+    padding: 1rem; /* 패딩 증가 */
+    border: 1px solid #CED4DA; 
+    border-radius: 8px; 
+    font-family: inherit; 
+    font-size: 1em; /* 폰트 크기 증가 */
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  }
+  .review-form-box textarea#reviewTextarea:focus {
+    border-color: #00796B; /* 포커스 시 테두리 색 (액센트) */
+    box-shadow: 0 0 0 0.2rem rgba(0, 121, 107, 0.25); /* 포커스 시 그림자 */
+    outline: none;
+  }
+  .review-form-box .star-input-area { /* 별점 영역 가운데 정렬 */
+    text-align: center;
+    margin-bottom: 1rem;
+  }
+  .review-form-box .star-input-area span { 
+    font-size: 2.2em; /* 별 크기 증가 */
+    color: #E0E0E0; /* 비활성 별 색상 */
+    cursor: pointer; 
+    margin: 0 0.2rem; /* 별 사이 간격 */
+    transition: color 0.2s ease, transform 0.2s ease;
+  }
+  .review-form-box .star-input-area span:hover {
+    transform: scale(1.1); /* 호버 시 살짝 확대 */
+  }
+  .review-form-box .star-input-area span.filled { 
+    color: #FFC107; /* 채워진 별 색상 (골드) */
+  }
+  .review-form-box .form-row { 
+    display: flex; 
+    justify-content: center; /* 버튼 가운데 정렬 */
+    align-items: center; 
+    gap: 1rem; 
+    margin-top: 1.5rem; 
+  }
+  .review-form-box .review-buttons button { 
+    background-image: linear-gradient(45deg, #00796B, #004D40); /* 딥 그린 그라데이션 */
+    color: #fff; 
+    border: none; 
+    padding: 0.8rem 2.5rem; 
+    border-radius: 25px; 
+    cursor: pointer; 
+    font-weight: 500; 
+    font-size: 1.05em;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  }
+  .review-form-box .review-buttons button:hover { 
+    background-image: linear-gradient(45deg, #004D40, #00796B);
+    box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+    transform: translateY(-2px);
+  }
+  
+  /* 리뷰 아이템 카드 */
+  .review-item-card { 
+    background-color: #FFFFFF; 
+    border: 1px solid #E9ECEF; 
+    border-radius: 12px; 
+    margin-bottom: 2rem; /* 카드 간 간격 증가 */
+    padding: 1.8rem; /* 내부 여백 증가 */
+    display: flex; 
+    gap: 1.8rem; 
+    position: relative; 
+    box-shadow: 0 4px 15px rgba(0,0,0,0.07);
+    transition: box-shadow 0.3s ease;
+  }
+  .review-item-card:hover {
+    box-shadow: 0 8px 25px rgba(0,0,0,0.1); /* 호버 시 그림자 강조 */
+  }
+  .review-user-avatar-placeholder { 
+    width: 55px; 
+    height: 55px; 
+    background-color: #E9ECEF; 
+    border-radius: 50%; /* 원형 아바타 */
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    font-size: 1.2em; /* 글자 크기 증가 */
+    color: #495057; 
+    text-align: center; 
+    flex-shrink: 0; 
+    font-weight: bold;
+  }
+  .review-user-avatar-placeholder img { 
+    width: 100%; 
+    height: 100%; 
+    object-fit: cover; 
+    border-radius: 50%; 
+  }
+  .review-details-content { 
+    flex-grow: 1; 
+  }
+  .review-item-stars-container { 
+    display: flex; 
+    align-items: center; 
+    gap: 1rem; /* 별점과 좋아요 버튼 사이 간격 증가 */
+    margin-bottom: 0.75rem; 
+  }
+  .review-item-stars span { 
+    font-size: 1.6em; /* 별 크기 증가 */
+    color: #E0E0E0; 
+    margin-right: 2px; 
+  }
+  .review-item-stars span.filled { 
+    color: #FFC107; 
+  }
+  .review-text-block { 
+    background-color: #F8F9FA; 
+    padding: 1.2rem; 
+    min-height: 70px; 
+    margin: 0.8rem 0 1.2rem 0; 
+    border-radius: 8px; 
+    font-size: 1em; /* 본문 가독성 위해 폰트 크기 약간 증가 */
+    line-height: 1.6;
+    color: #495057;
+  }
+  .review-meta-info { 
+    font-size: 0.9em; /* 메타 정보 폰트 크기 */
+    color: #6C757D; /* 메타 정보 색상 */
+    margin-bottom: 1.2rem; 
+  }
+  .review-meta-info span { 
+    margin-right: 1.5rem; 
+  }
+  .no-reviews-message { 
+    text-align: center; 
+    color: #6C757D; 
+    padding: 2.5rem; 
+    font-size: 1.1em;
+  }
+  .form-field-errors { 
+    color: #E53935; /* 에러 색상 */
+    font-size: 0.85em; 
+    list-style-type: none; 
+    padding-left: 0; 
+    margin-top: 4px; 
+  }
+
+  /* 좋아요 버튼 */
   .like-button {
-    background-color: #f0f0f0; color: #555; border: 1px solid #ddd; 
-    padding: 0.3rem 0.6rem; border-radius: 4px; cursor: pointer;
-    font-size: 0.8em; transition: background-color 0.2s, color 0.2s;
+    background-color: #E9ECEF; 
+    color: #495057; 
+    border: 1px solid #DEE2E6; 
+    padding: 0.4rem 0.8rem; 
+    border-radius: 20px; /* 둥근 버튼 */
+    cursor: pointer;
+    font-size: 0.85em; 
+    font-weight: 500;
+    transition: all 0.2s ease;
   }
-  .like-button:hover { background-color: #e0e0e0; }
-  .like-button.liked { background-color: #A67C52; color: white; border-color: #A67C52; }
+  .like-button:hover { 
+    background-color: #DEE2E6; 
+    border-color: #CED4DA;
+  }
+  .like-button.liked { 
+    background-color: #00796B; /* 액센트 색상 (딥 그린) */
+    color: white; 
+    border-color: #00796B; 
+  }
+  .like-button.liked:hover {
+    background-color: #004D40;
+    border-color: #004D40;
+  }
 
-  /* 삭제 버튼 스타일 (리뷰 및 댓글 공통) */
+  /* 삭제 버튼 (리뷰 및 댓글 공통) */
   .delete-button {
-    background-color: #ef4444; color: white; border: none;
-    padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.75rem;
-    cursor: pointer; transition: background-color 0.2s;
+    background-color: transparent; /* 배경 투명 */
+    color: #E53935; /* 삭제 색상 */
+    border: 1px solid #E53935; /* 테두리 추가 */
+    padding: 0.3rem 0.6rem; 
+    border-radius: 20px; 
+    font-size: 0.8em; /* 폰트 크기 조정 */
+    cursor: pointer; 
+    transition: all 0.2s ease;
+    font-weight: 500;
   }
-  .delete-button:hover { background-color: #dc2626; }
-  .review-delete-button-container { position: absolute; top: 1rem; right: 1rem; } /* 리뷰 삭제 버튼 위치 */
+  .delete-button:hover { 
+    background-color: #E53935; 
+    color: white; 
+  }
+  .review-delete-button-container { 
+    position: absolute; 
+    top: 1.2rem; /* 위치 조정 */
+    right: 1.2rem; 
+  }
 
-  /* 댓글 영역 스타일 */
-  .comments-section { margin-top: 1rem; padding-top: 1rem; border-top: 1px solid #f0f0f0; }
-  .comment-item { background-color: #f9f9f9; padding: 0.75rem; border-radius: 4px; margin-bottom: 0.75rem; font-size: 0.9em; }
-  .comment-item p { margin: 0 0 0.25rem 0; }
-  .comment-meta { font-size: 0.75em; color: #888; }
+  /* 댓글 영역 */
+  .comments-section { 
+    margin-top: 1.5rem; 
+    padding-top: 1.5rem; 
+    border-top: 1px solid #E9ECEF; /* 구분선 색상 변경 */
+  }
+  .comments-section h4 {
+    font-size: 1.1em; /* 댓글 제목 크기 */
+    color: #343A40;
+    margin-bottom: 1rem;
+  }
+  .comment-item { 
+    background-color: #F8F9FA; /* 댓글 배경색 */
+    padding: 1rem; 
+    border-radius: 8px; 
+    margin-bottom: 1rem; 
+    font-size: 0.95em; /* 댓글 폰트 크기 */
+    border: 1px solid #E9ECEF;
+  }
+  .comment-item p { 
+    margin: 0 0 0.3rem 0; 
+    line-height: 1.5;
+  }
+  .comment-item strong { /* 댓글 작성자 이름 */
+    color: #00796B; /* 액센트 색상 */
+  }
+  .comment-meta { 
+    font-size: 0.8em; 
+    color: #6C757D; 
+  }
+
   .comment-form textarea { 
-    width: 100%; min-height: 60px; margin-bottom: 0.5rem; padding: 0.5rem; 
-    border: 1px solid #ddd; border-radius: 4px; font-size: 0.9em;
+    width: 100%;
+    box-sizing: border-box;
+    min-height: 70px; 
+    margin-bottom: 0.8rem; 
+    padding: 0.8rem; 
+    border: 1px solid #CED4DA; 
+    border-radius: 8px; 
+    font-size: 0.95em;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  }
+  .comment-form textarea:focus {
+    border-color: #00796B;
+    box-shadow: 0 0 0 0.2rem rgba(0, 121, 107, 0.25);
+    outline: none;
   }
   .comment-form button { 
-    background-color: #5cb85c; color: white; border: none; 
-    padding: 0.5rem 1rem; border-radius: 4px; font-size: 0.85em; cursor: pointer;
+    background-image: linear-gradient(45deg, #FFB300, #FF8F00); /* 댓글 버튼 (골드/오렌지) */
+    color: white; 
+    border: none; 
+    padding: 0.6rem 1.5rem; 
+    border-radius: 20px; 
+    font-size: 0.95em; 
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.3s ease;
   }
-  .comment-form button:hover { background-color: #4cae4c; }
-  .add-to-library-button-container { text-align: center; margin: 1.5rem 0; }
-  .add-to-library-button, .remove-from-library-button { 
-    display: inline-block; color: white; padding: 0.75rem 1.5rem; border: none; border-radius: 4px; 
-    text-align: center; text-decoration: none; font-size: 1em; font-weight: bold; cursor: pointer; transition: background-color 0.3s; 
+  .comment-form button:hover { 
+    background-image: linear-gradient(45deg, #FF8F00, #FFB300);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    transform: translateY(-1px);
   }
-  .add-to-library-button { background-color: #A67C52; }
-  .add-to-library-button:hover { background-color: #8c6b4a; }
-  .remove-from-library-button { background-color: #d9534f; }
-  .remove-from-library-button:hover { background-color: #c9302c; }
 
+  /* Swiper 관련 스타일은 이 페이지에 직접적인 영향이 없다면 제거해도 무방합니다. 
+     base.html 이나 다른 공통 CSS에 있다면 중복될 수 있습니다.
+     만약 이 페이지에서도 Swiper를 사용한다면 유지합니다. */
+  /*
   .swiper,
   .swiper-slide,
-  .book-card {
+  .book-card { 
     position: relative;
     z-index: 1;
-    transform: none !important;
+    transform: none !important; 
   }
+  */
+  /* 만약 book-card 클래스가 Swiper 내부에서도 사용된다면 위 규칙이 필요할 수 있지만,
+     현재 HTML 구조상으로는 이 페이지의 .book-card는 Swiper와 관련 없어 보입니다.
+     따라서 이 부분은 주석 처리하거나, Swiper 사용 여부에 따라 결정합니다.
+  */
+
 </style>
 
 <div class="book-detail-page-container">
+  {# ... (HTML 구조는 변경 없음) ... #}
   <section class="book-primary-info-section">
     <div class="book-cover-container">
       {% if book.cover_image_url %}
@@ -301,117 +671,115 @@
 </div>
 
 <script>
+// ... (기존 JavaScript는 변경 없음) ...
 document.addEventListener('DOMContentLoaded', function() {
-  // 리뷰 작성 폼의 별점 로직 (기존 코드 유지)
-  const starRatingContainer = document.getElementById('writeStarRating');
+  // 리뷰 작성 폼의 별점 로직 (기존 코드 유지)
+  const starRatingContainer = document.getElementById('writeStarRating');
 
-  const ratingHiddenInput = document.querySelector('form#reviewSubmissionForm input[name="rating"]#id_rating_hidden'); // 폼 ID 명시
+  const ratingHiddenInput = document.querySelector('form#reviewSubmissionForm input[name="rating"]#id_rating_hidden'); // 폼 ID 명시
 
-  if (starRatingContainer && ratingHiddenInput) {
-    const stars = Array.from(starRatingContainer.querySelectorAll('span'));
-    let currentRating = parseInt(ratingHiddenInput.value) || 0; 
-    
-    function setStarsDisplay(rating) {
-        stars.forEach((star, index) => {
-            if (index < rating) {
-                star.innerHTML = '★'; star.classList.add('filled');
-            } else {
-                star.innerHTML = '☆'; star.classList.remove('filled');
-            }
-        });
-    }
+  if (starRatingContainer && ratingHiddenInput) {
+    const stars = Array.from(starRatingContainer.querySelectorAll('span'));
+    let currentRating = parseInt(ratingHiddenInput.value) || 0; 
+    
+    function setStarsDisplay(rating) {
+        stars.forEach((star, index) => {
+            if (index < rating) {
+                star.innerHTML = '★'; star.classList.add('filled');
+            } else {
+                star.innerHTML = '☆'; star.classList.remove('filled');
+            }
+        });
+    }
 
-    setStarsDisplay(currentRating);
+    setStarsDisplay(currentRating);
 
-    stars.forEach(star => {
-      const starValue = parseInt(star.getAttribute('data-value'));
-      star.addEventListener('click', () => {
-        currentRating = starValue;
-        ratingHiddenInput.value = currentRating;
-        setStarsDisplay(currentRating);
-      });
-      star.addEventListener('mouseover', () => {
-        const hoverRating = parseInt(star.getAttribute('data-value'));
+    stars.forEach(star => {
+      const starValue = parseInt(star.getAttribute('data-value'));
+      star.addEventListener('click', () => {
+        currentRating = starValue;
+        ratingHiddenInput.value = currentRating;
+        setStarsDisplay(currentRating);
+      });
+      star.addEventListener('mouseover', () => {
+        const hoverRating = parseInt(star.getAttribute('data-value'));
 
-        stars.forEach((s, i) => { 
-            const sValue = parseInt(s.getAttribute('data-value'));
-            s.innerHTML = sValue <= hoverRating ? '★' : '☆'; 
-            if (sValue <= hoverRating) s.classList.add('filled'); else s.classList.remove('filled');
-        });
-      });
-      star.addEventListener('mouseout', () => { setStarsDisplay(currentRating); });
-    });
-  }
+        stars.forEach((s, i) => { 
+            const sValue = parseInt(s.getAttribute('data-value'));
+            s.innerHTML = sValue <= hoverRating ? '★' : '☆'; 
+            if (sValue <= hoverRating) s.classList.add('filled'); else s.classList.remove('filled');
+        });
+      });
+      star.addEventListener('mouseout', () => { setStarsDisplay(currentRating); });
+    });
+  }
 
-  // 리뷰 제출 시 별점 미선택 알림
-  const reviewSubmissionForm = document.getElementById('reviewSubmissionForm');
-  if (reviewSubmissionForm && ratingHiddenInput) {
-    reviewSubmissionForm.addEventListener('submit', function(event) {
-      if (!ratingHiddenInput.value || parseInt(ratingHiddenInput.value) === 0) {
-        alert('별점을 등록하세요!');
-        event.preventDefault(); // 폼 제출 중단
-      }
-    });
-  }
+  // 리뷰 제출 시 별점 미선택 알림
+  const reviewSubmissionForm = document.getElementById('reviewSubmissionForm');
+  if (reviewSubmissionForm && ratingHiddenInput) {
+    reviewSubmissionForm.addEventListener('submit', function(event) {
+      if (!ratingHiddenInput.value || parseInt(ratingHiddenInput.value) === 0) {
+        alert('별점을 등록하세요!');
+        event.preventDefault(); // 폼 제출 중단
+      }
+    });
+  }
 
-  // AJAX를 이용한 좋아요 기능
-  const likeButtons = document.querySelectorAll('.like-button');
-  likeButtons.forEach(button => {
-    button.addEventListener('click', function() {
-      const reviewId = this.dataset.reviewId;
-      // CSRF 토큰 가져오기 (Django فرم에서 자동으로 생성된 토큰 사용)
-      const csrfTokenElement = document.querySelector('form#reviewSubmissionForm [name=csrfmiddlewaretoken]');
-      let csrfToken = '';
-      if (csrfTokenElement) {
-          csrfToken = csrfTokenElement.value;
-      } else {
-          // 대체 CSRF 토큰 로직 (예: meta 태그 또는 다른 폼에서 가져오기)
-          const genericCsrfTokenElement = document.querySelector('[name=csrfmiddlewaretoken]');
-          if (genericCsrfTokenElement) csrfToken = genericCsrfTokenElement.value;
-          else console.error('CSRF token not found on the page for like button.');
-      }
-      
-      if (!csrfToken) {
-          alert('요청을 처리할 수 없습니다. 페이지를 새로고침 해주세요.');
-          return;
-      }
+  // AJAX를 이용한 좋아요 기능
+  const likeButtons = document.querySelectorAll('.like-button');
+  likeButtons.forEach(button => {
+    button.addEventListener('click', function() {
+      const reviewId = this.dataset.reviewId;
+      const csrfTokenElement = document.querySelector('form#reviewSubmissionForm [name=csrfmiddlewaretoken]');
+      let csrfToken = '';
+      if (csrfTokenElement) {
+          csrfToken = csrfTokenElement.value;
+      } else {
+          const genericCsrfTokenElement = document.querySelector('[name=csrfmiddlewaretoken]');
+          if (genericCsrfTokenElement) csrfToken = genericCsrfTokenElement.value;
+          else console.error('CSRF token not found on the page for like button.');
+      }
+      
+      if (!csrfToken) {
+          alert('요청을 처리할 수 없습니다. 페이지를 새로고침 해주세요.');
+          return;
+      }
 
-      fetch(`/reviews/${reviewId}/like/`, { // `reviews` 앱의 `urls.py`에 정의된 URL
-        method: 'POST',
-        headers: {
-          'X-CSRFToken': csrfToken,
-          'X-Requested-With': 'XMLHttpRequest', // Django의 request.is_ajax()가 true를 반환하도록 함
-          'Content-Type': 'application/json' 
-        },
-        // body: JSON.stringify({}) // POST 요청 시 필요하다면 body 추가
-      })
-      .then(response => {
-        if (!response.ok) { // 응답 상태 코드가 200-299 범위가 아닌 경우
-            return response.json().then(errData => { // 에러 메시지가 JSON 형태일 경우를 대비
-                throw new Error(errData.message || 'Network response was not ok: ' + response.statusText);
-            }).catch(() => { // JSON 파싱 실패 시 일반 에러
-                throw new Error('Network response was not ok: ' + response.statusText);
-            });
-        }
-        return response.json();
-      })
-      .then(data => {
-        const likeCountSpan = document.getElementById(`like-count-${reviewId}`);
-        if (likeCountSpan) {
-          likeCountSpan.textContent = data.like_count;
-        }
-        if (data.liked) {
-          this.classList.add('liked'); // 'liked' 클래스를 추가하여 스타일 변경
-        } else {
-          this.classList.remove('liked'); // 'liked' 클래스 제거
-        }
-      })
-      .catch(error => {
-        console.error('Error liking review:', error);
-        alert('좋아요 처리에 실패했습니다. 다시 시도해주세요. (' + error.message + ')');
-      });
-    });
-  });
+      fetch(`/reviews/${reviewId}/like/`, { 
+        method: 'POST',
+        headers: {
+          'X-CSRFToken': csrfToken,
+          'X-Requested-With': 'XMLHttpRequest', 
+          'Content-Type': 'application/json' 
+        },
+      })
+      .then(response => {
+        if (!response.ok) { 
+            return response.json().then(errData => { 
+                throw new Error(errData.message || 'Network response was not ok: ' + response.statusText);
+            }).catch(() => { 
+                throw new Error('Network response was not ok: ' + response.statusText);
+            });
+        }
+        return response.json();
+      })
+      .then(data => {
+        const likeCountSpan = document.getElementById(`like-count-${reviewId}`);
+        if (likeCountSpan) {
+          likeCountSpan.textContent = data.like_count;
+        }
+        if (data.liked) {
+          this.classList.add('liked'); 
+        } else {
+          this.classList.remove('liked'); 
+        }
+      })
+      .catch(error => {
+        console.error('Error liking review:', error);
+        alert('좋아요 처리에 실패했습니다. 다시 시도해주세요. (' + error.message + ')');
+      });
+    });
+  });
 });
 
 </script>
