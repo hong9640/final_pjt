@@ -37,37 +37,28 @@ def classify_category_group(second_level):
 
 def home(request):
     query = request.GET.get('q', None)
-    search_type = request.GET.get('search_type', 'integrated') # 기본값을 'integrated' (통합검색)으로 설정
+    search_type = request.GET.get('search_type', 'integrated')
 
     context = {
         'query': query,
-        'search_type': search_type, # search_type을 context에 추가
+        'search_type': search_type,
         'global_categories': get_navigation_categories(),
         'category_groups': CATEGORY_GROUPS,
     }
 
     if query:
-        books_qs = Book.objects.all() # 검색 대상이 될 기본 QuerySet
+        books_qs = Book.objects.all()
 
         if search_type == 'title':
             books_qs = books_qs.filter(title__icontains=query)
             context['page_title'] = f"'{query}' (제목) 검색 결과"
         elif search_type == 'author':
-            # Book 모델에 'author' ForeignKey 필드가 있고, Author 모델에 'name' 필드가 있다고 가정
             books_qs = books_qs.filter(author__name__icontains=query)
             context['page_title'] = f"'{query}' (작가) 검색 결과"
         elif search_type == 'publisher':
-            # Book 모델에 'publisher' CharField 또는 유사 필드가 있다고 가정
             books_qs = books_qs.filter(publisher__icontains=query)
             context['page_title'] = f"'{query}' (출판사) 검색 결과"
-        elif search_type == 'integrated': # 통합 검색
-            books_qs = books_qs.filter(
-                Q(title__icontains=query) |
-                Q(author__name__icontains=query) |
-                Q(publisher__icontains=query)
-            ).distinct() # 중복 결과 제거
-            context['page_title'] = f"'{query}' (통합) 검색 결과"
-        else: # 혹시 모를 다른 search_type 값일 경우 통합 검색으로 처리
+        else: # 'integrated' 또는 기타
             books_qs = books_qs.filter(
                 Q(title__icontains=query) |
                 Q(author__name__icontains=query) |
@@ -75,13 +66,25 @@ def home(request):
             ).distinct()
             context['page_title'] = f"'{query}' (통합) 검색 결과"
         
-        searched_books = books_qs.order_by('-pub_date')
-        context['searched_books'] = searched_books
-        # 참고: home 페이지 검색 결과에 대한 페이지네이션은 현재 구현되어 있지 않습니다.
-        # 만약 필요하다면 searched_books에 대해 Paginator를 적용하고 page_obj를 context에 추가해야 합니다.
+        searched_books_list = books_qs.order_by('-pub_date')
+
+        # --- 검색 결과에 대한 페이지네이션 추가 ---
+        paginator = Paginator(searched_books_list, 9) # 한 페이지에 9개씩 (다른 페이지와 동일하게)
+        page_number_str = request.GET.get('page') # 검색 결과 페이지 번호
+        page_obj = paginator.get_page(page_number_str)
+        
+        pagination_context_for_search = _get_custom_pagination_context(page_obj, paginator)
+
+        context['page_obj'] = page_obj # searched_books 대신 page_obj 전달
+        context['is_paginated'] = page_obj.has_other_pages()
+        context.update(pagination_context_for_search) # 페이지네이션 변수들 context에 추가
+        # context['searched_books'] = searched_books -> 이제 page_obj로 대체됨
+        # --- 페이지네이션 추가 끝 ---
+
     else:
         # 기존 홈 화면 로직 (검색어가 없을 때)
         bestseller_books_qs = Book.objects.filter(is_bestseller=True).select_related('category')
+        # ... (이하 기존 베스트셀러, 신간, 리뷰 로직 동일) ...
         grouped_bestsellers = defaultdict(list)
         for book in bestseller_books_qs:
             if book.category:
@@ -94,7 +97,7 @@ def home(request):
         new_books_qs = Book.objects.order_by('-pub_date')[:6]
         all_latest_reviews_list = Review.objects.select_related('book', 'user').order_by('-created_at')
         review_paginator = Paginator(all_latest_reviews_list, 5)
-        review_page_number = request.GET.get('review_page')
+        review_page_number = request.GET.get('review_page') # 리뷰 전용 페이지 파라미터
         try:
             latest_reviews_page_obj = review_paginator.page(review_page_number)
         except PageNotAnInteger:
@@ -109,6 +112,7 @@ def home(request):
             'latest_reviews_page': latest_reviews_page_obj,
             'page_title': "홈",
         })
+        
     return render(request, 'books/home.html', context)
 
 
