@@ -85,7 +85,7 @@
     flex-direction: column;
     justify-content: space-between;
     width: 100%;
-    max-width: 200px; /* 신간 도서 및 검색 결과 카드 크기 일관성 유지 */
+    {% comment %} max-width: 200px; /* 신간 도서 및 검색 결과 카드 크기 일관성 유지 */ {% endcomment %}
     min-height: 280px; /* 내용에 따라 높이가 달라지는 것을 방지하기 위한 최소 높이 (조정 가능) */
   }
   .book-card img {
@@ -152,6 +152,7 @@
     .sections { /* 데스크탑에서는 가로 정렬 */
       flex-direction: row;
       justify-content: space-between;
+      align-items: stretch;
     }
   }
 
@@ -160,6 +161,8 @@
     background-color: #f8f5f0;
     padding: 20px;
     border-radius: 8px;
+    display: flex;
+    flex-direction: column;
   }
 
   .section h2 {
@@ -180,10 +183,9 @@
     color: #2C1B13;  
   }
   .book-grid { /* 신간도서, 검색결과 도서 목록 공통 그리드 스타일 */
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px; /* 카드 간 간격 */
-    justify-content: center; /* 중앙 정렬 */
+    display: grid; /* Flexbox 대신 Grid 사용 */
+    grid-template-columns: repeat(3, 1fr); /* 한 줄에 3개의 동일한 너비의 컬럼 생성 */
+    gap: 40px;
   }
   .no-results { /* 검색 결과 없을 때 메시지 스타일 */
     width: 100%; /* book-grid 내부에서 전체 너비 차지 */
@@ -204,7 +206,8 @@
     box-shadow: 0 2px 4px rgba(0,0,0,0.05);
     display: flex;
     flex-direction: column;
-    justify-content: space-between; 
+    justify-content: space-between;
+    flex-grow: 1;
   }
   .review-items-list { 
       display: flex;
