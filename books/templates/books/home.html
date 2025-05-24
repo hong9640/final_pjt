@@ -76,29 +76,32 @@
   }
 
   .book-card {
-    background-color: #fff;
-    padding: 15px;
-    border-radius: 10px;
+    background-color: #fff; /* 부드러운 크림색 배경 */
+    padding: 20px;            /* 내부 여백을 조금 더 넉넉하게 */
+    border-radius: 12px;       /* 모서리를 더 둥글게 */
     text-align: center;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.07); /* 그림자를 약간 더 부드럽고 깊게 */
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    width: 100%;
-    {% comment %} max-width: 200px; /* 신간 도서 및 검색 결과 카드 크기 일관성 유지 */ {% endcomment %}
-    min-height: 280px; /* 내용에 따라 높이가 달라지는 것을 방지하기 위한 최소 높이 (조정 가능) */
+    width: 100%; /* 그리드 레이아웃에 의해 너비가 결정되도록 함 */
+    {% comment %} max-width: 200px; {% endcomment %} /* 이전 요청에 따라 주석 처리 유지 */
+    min-height: 290px; /* 최소 높이, 내용에 따라 조절 가능 */
+    border: 1px solid #F0EBE3; /* 매우 옅은 따뜻한 색상의 테두리 */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* 부드러운 호버 효과 */
   }
+
   .book-card img {
     width: 100%;
-    max-height: 180px;
+    max-height: 160px;
     object-fit: contain;
-    border-radius: 5px;
-    margin-bottom: 10px;
+    border-radius: 6px;
+    margin-bottom: 15px;
   }
   .book-card p { /* 책 제목 스타일 */
     font-size: 0.9em;
-    color: #333;
-    margin-bottom: 10px;
+    color: #5D4037;
+    margin-bottom: 12px;
     height: 3.2em; 
     line-height: 1.6em; 
     overflow: hidden;
@@ -108,11 +111,12 @@
     -webkit-box-orient: vertical;
   }
   .detail-link { /* 자세히 보기 링크 스타일 */
-    font-size: 0.8em;
-    color: #A67C52;
+    font-size: 0.85em;
+    color: #BF5700;
     text-decoration: none;
     font-weight: bold;
-    padding: 5px 0;
+    padding: 6px 0;
+    transition: color 0.2s ease;
     margin-top: auto; /* 카드가 flex-direction: column 일때 하단에 붙도록 */
   }
 
@@ -185,7 +189,7 @@
   .book-grid { /* 신간도서, 검색결과 도서 목록 공통 그리드 스타일 */
     display: grid; /* Flexbox 대신 Grid 사용 */
     grid-template-columns: repeat(3, 1fr); /* 한 줄에 3개의 동일한 너비의 컬럼 생성 */
-    gap: 40px;
+    gap: 45px;
   }
   .no-results { /* 검색 결과 없을 때 메시지 스타일 */
     width: 100%; /* book-grid 내부에서 전체 너비 차지 */
