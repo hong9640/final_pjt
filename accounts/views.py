@@ -121,3 +121,29 @@ def follow_toggle(request, username):
         'followed': followed,
         'follower_count': follower_count,
     })
+
+@login_required
+def follow_list_view(request, username):
+    """
+    AJAX 요청으로 특정 유저의 팔로잉 또는 팔로워 목록을 JSON으로 반환
+    GET 파라미터: type=following 또는 type=followers
+    """
+    User = get_user_model()
+    target_user = get_object_or_404(User, username=username)
+    list_type = request.GET.get('type')
+
+    if list_type == 'followers':
+        qs = Follow.objects.filter(followed_user=target_user).select_related('following_user')
+        users = [rel.following_user for rel in qs]
+    else:  # following
+        qs = Follow.objects.filter(following_user=target_user).select_related('followed_user')
+        users = [rel.followed_user for rel in qs]
+
+    data = []
+    for u in users:
+        data.append({
+            'username': u.username,
+            'nickname': u.nickname or u.username,
+            'profile_image_url': u.profile_image.url if u.profile_image else '',
+        })
+    return JsonResponse({'users': data})
