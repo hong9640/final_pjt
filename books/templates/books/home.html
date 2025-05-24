@@ -48,8 +48,8 @@
     border-radius: 16px;
     box-shadow: 0 4px 12px rgba(0,0,0,0.05);
     margin-bottom: 3rem;
-    position: relative;
-    z-index: 0;
+    position: relative; /* z-index 적용을 위해 추가하셨던 내용 */
+    z-index: 0;         /* 모달 문제 해결을 위해 추가하셨던 내용 */
   }
 
 
@@ -85,9 +85,9 @@
     flex-direction: column;
     justify-content: space-between;
     width: 100%;
-    max-width: 200px;
+    max-width: 200px; /* 신간 도서 및 검색 결과 카드 크기 일관성 유지 */
+    min-height: 280px; /* 내용에 따라 높이가 달라지는 것을 방지하기 위한 최소 높이 (조정 가능) */
   }
-
   .book-card img {
     width: 100%;
     max-height: 180px;
@@ -95,8 +95,7 @@
     border-radius: 5px;
     margin-bottom: 10px;
   }
-
-  .book-card p {
+  .book-card p { /* 책 제목 스타일 */
     font-size: 0.9em;
     color: #333;
     margin-bottom: 10px;
@@ -108,14 +107,15 @@
     -webkit-line-clamp: 2; 
     -webkit-box-orient: vertical;
   }
-
-  .detail-link {
+  .detail-link { /* 자세히 보기 링크 스타일 */
     font-size: 0.8em;
     color: #A67C52;
     text-decoration: none;
     font-weight: bold;
     padding: 5px 0;
+    margin-top: auto; /* 카드가 flex-direction: column 일때 하단에 붙도록 */
   }
+
 
   .category-tabs {
     display: flex;
@@ -141,7 +141,7 @@
     color: white;
   }
 
-  .sections {
+  .sections { /* 신간도서와 실시간리뷰를 감싸는 div */
     display: flex;
     flex-direction: column;
     gap: 30px;
@@ -149,13 +149,13 @@
   }
 
   @media (min-width: 768px) {
-    .sections {
+    .sections { /* 데스크탑에서는 가로 정렬 */
       flex-direction: row;
       justify-content: space-between;
     }
   }
 
-  .section {
+  .section { /* 신간도서, 실시간리뷰, 검색결과 섹션 공통 스타일 */
     flex: 1;
     background-color: #f8f5f0;
     padding: 20px;
@@ -165,30 +165,53 @@
   .section h2 {
     margin-top: 0;
     margin-bottom: 15px;
-    font-size: 1.5em;
+    font-size: 1.5em; /* 신간, 리뷰 섹션 제목 크기 */
     color: #2C1B13;
   }
 
-  /* --- 실시간 리뷰 섹션 스타일 --- */
+  /* --- 검색 결과 표시 스타일 --- */
+  .search-results-container { /* 검색 결과 전체를 감싸는 컨테이너 */
+    margin-top: 30px; /* 검색창과의 간격 */
+  }
+  .search-results-container h2 { /* 검색 결과 제목 스타일 */
+    text-align: center;
+    margin-bottom: 25px;
+    font-size: 1.8em; 
+    color: #2C1B13;  
+  }
+  .book-grid { /* 신간도서, 검색결과 도서 목록 공통 그리드 스타일 */
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px; /* 카드 간 간격 */
+    justify-content: center; /* 중앙 정렬 */
+  }
+  .no-results { /* 검색 결과 없을 때 메시지 스타일 */
+    width: 100%; /* book-grid 내부에서 전체 너비 차지 */
+    text-align: center;
+    margin-top: 20px;
+    font-size: 1.1em;
+    color: #555;
+  }
+  /* --- END 검색 결과 표시 스타일 --- */
+
+
+  /* --- 실시간 리뷰 섹션 스타일 (기존 유지) --- */
   .review-placeholder {
     background-color: #fff;
-    /* min-height: 200px; 페이지네이션으로 인해 높이가 유동적이므로 제거하거나 auto로 설정 */
-    min-height: 270px; /* 5개 아이템 + 페이지네이션 높이 고려한 대략적인 최소 높이, 조정 필요 */
+    min-height: 270px; 
     border-radius: 10px;
     padding: 15px;
     box-shadow: 0 2px 4px rgba(0,0,0,0.05);
     display: flex;
     flex-direction: column;
-    justify-content: space-between; /* 아이템과 페이지네이션 사이에 공간 분배 */
+    justify-content: space-between; 
   }
-  .review-items-list { /* 리뷰 아이템들을 감싸는 div 추가 */
+  .review-items-list { 
       display: flex;
       flex-direction: column;
       gap: 10px; 
-      margin-bottom: 15px; /* 페이지네이션과의 간격 */
+      margin-bottom: 15px; 
   }
-
-
   .home-review-item {
     display: block;
     padding: 10px;
@@ -234,68 +257,65 @@
   }
   /* --- END 실시간 리뷰 섹션 스타일 --- */
 
-  /* --- 페이지네이션 스타일 --- */
+  /* --- 페이지네이션 스타일 (기존 유지) --- */
   .pagination {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 20px; /* 리뷰 목록과의 간격 */
+    margin-top: 20px; 
     padding: 10px 0;
   }
   .pagination a, .pagination span {
-    color: #A67C52; /* 기본 색상 */
+    color: #A67C52; 
     text-decoration: none;
     padding: 8px 12px;
     margin: 0 4px;
-    border: 1px solid #D2B9AD; /* 테두리 */
-    border-radius: 4px; /* 둥근 모서리 */
+    border: 1px solid #D2B9AD; 
+    border-radius: 4px; 
     transition: background-color 0.2s, color 0.2s;
     font-size: 0.9em;
   }
   .pagination a:hover {
-    background-color: #D2B9AD; /* 호버 시 배경색 */
+    background-color: #D2B9AD; 
     color: white;
     border-color: #D2B9AD;
   }
   .pagination .current-page {
-    background-color: #A67C52; /* 현재 페이지 배경색 (요청 이미지와 유사하게) */
+    background-color: #A67C52; 
     color: white;
     border-color: #A67C52;
     font-weight: bold;
   }
-  .pagination .disabled { /* 이전/다음 비활성화 시 (선택적) */
+  .pagination .disabled { 
     color: #ccc;
     border-color: #eee;
-    pointer-events: none; /* 클릭 불가 */
+    pointer-events: none; 
   }
   /* --- END 페이지네이션 스타일 --- */
 
 
+  /* Swiper 관련 스타일 (기존 유지) */
   .swiper-button-prev,
   .swiper-button-next {
     color: #A67C52 !important;
     transition: color 0.3s ease, transform 0.3s ease;
   }
-
   .swiper-button-prev:hover,
   .swiper-button-next:hover {
     color: #3E3025 !important;
     transform: scale(1.3);
   }
-
   .swiper-button-prev,
   .swiper-button-next {
     top: 40%;
     width: 40px;
     height: 40px;
   }
-
   .swiper-button-prev::after,
   .swiper-button-next::after {
     font-size: 22px;
   }
-
-  .swiper-slide .book-card {
+  .swiper-slide .book-card { /* Swiper 내부 카드 z-index 문제 해결용 */
     z-index: 0 !important;
     transform: none !important;
     position: relative !important;
@@ -312,131 +332,141 @@
       </form>
     </div>
 
-    {% if not query %} {# 검색 결과가 없을 때만 베스트셀러, 신간, 리뷰 섹션 표시 #}
-    <section class="bestseller-section">
-      <h2>베스트셀러</h2>
-      <div id="bestseller-list">
-        {% for group, books in grouped_bestsellers.items %}
-          {% with slug=group|slugify_filter %}
-            {% if slug %}
-              <div class="book-carousel-wrapper {% if forloop.first %}active{% endif %}" data-group="{{ slug }}">
-                <div class="swiper" id="swiper-{{ slug }}">
-                  <div class="swiper-wrapper">
-                    {% for book in books %}
-                    <div class="swiper-slide">
-                      <div class="book-card">
-                        <a href="{% url 'books:book_detail' book_id=book.id %}">
-                          <img src="{{ book.cover_image_url|default:'https://placehold.co/150x180/e2e8f0/a0aec0?text=No+Image' }}" alt="{{ book.title }}">
-                        </a>
-                        <p>{{ book.title }}</p>
-                        <a href="{% url 'books:book_detail' book_id=book.id %}" class="detail-link">자세히 보기</a>
+    {% if not query %} {# 검색어가 없을 때 기존 홈 콘텐츠 표시 #}
+      <section class="bestseller-section">
+        <h2>베스트셀러</h2>
+        <div id="bestseller-list">
+          {% for group, books in grouped_bestsellers.items %}
+            {% with slug=group|slugify_filter %}
+              {% if slug %}
+                <div class="book-carousel-wrapper {% if forloop.first %}active{% endif %}" data-group="{{ slug }}">
+                  <div class="swiper" id="swiper-{{ slug }}">
+                    <div class="swiper-wrapper">
+                      {% for book in books %}
+                      <div class="swiper-slide">
+                        <div class="book-card">
+                          <a href="{% url 'books:book_detail' book_id=book.id %}">
+                            <img src="{{ book.cover_image_url|default:'https://placehold.co/150x180/e2e8f0/a0aec0?text=No+Image' }}" alt="{{ book.title }}">
+                          </a>
+                          <p>{{ book.title }}</p>
+                          <a href="{% url 'books:book_detail' book_id=book.id %}" class="detail-link">자세히 보기</a>
+                        </div>
                       </div>
+                      {% endfor %}
                     </div>
-                    {% endfor %}
+                    <div class="swiper-button-next"></div>
+                    <div class="swiper-button-prev"></div>
                   </div>
-                  <div class="swiper-button-next"></div>
-                  <div class="swiper-button-prev"></div>
                 </div>
-              </div>
-            {% endif %}
-          {% endwith %}
-        {% endfor %}
-      </div>
-
-      {% if bestseller_groups %}
-        <div class="category-tabs">
-          {% for group_name in bestseller_groups %}
-            {% with slug=group_name|slugify_filter %}
-              {% if slug %} 
-                <button class="category-tab {% if forloop.first %}active{% endif %}">{{ group_name }}</button>
               {% endif %}
             {% endwith %}
           {% endfor %}
         </div>
-      {% endif %}
-    </section>
 
-    <div class="sections">
-      <section class="section new-books">
-        <h2>신간 도서</h2>
-        <div class="book-grid" style="display: flex; flex-wrap: wrap; gap: 20px; justify-content: center;">
-          {% for book in new_books %}
-            <div class="book-card">
-              <a href="{% url 'books:book_detail' book_id=book.id %}">
-                <img src="{{ book.cover_image_url|default:'https://placehold.co/150x180/e2e8f0/a0aec0?text=No+Image' }}" alt="{{ book.title }}">
-              </a>
-              <p>{{ book.title }}</p>
-              <a href="{% url 'books:book_detail' book_id=book.id %}" class="detail-link">자세히 보기</a>
-            </div>
-          {% empty %}
-            <p class="no-results" style="width:100%;">현재 신간 도서 정보가 없습니다.</p>
-          {% endfor %}
-        </div>
+        {% if bestseller_groups %}
+          <div class="category-tabs">
+            {% for group_name in bestseller_groups %}
+              {% with slug=group_name|slugify_filter %}
+                {% if slug %} 
+                  <button class="category-tab {% if forloop.first %}active{% endif %}">{{ group_name }}</button>
+                {% endif %}
+              {% endwith %}
+            {% endfor %}
+          </div>
+        {% endif %}
       </section>
 
-      <section class="section reviews">
-        <h2>실시간 리뷰</h2>
-        <div class="review-placeholder">
-          <div class="review-items-list"> {# 리뷰 아이템들을 감싸는 div #}
-            {% if latest_reviews_page and latest_reviews_page.object_list %} {# Page 객체와 그 안의 object_list 확인 #}
-              {% for review in latest_reviews_page %} {# 이제 latest_reviews_page를 순회 #}
-                <a href="{% url 'books:book_detail' book_id=review.book.id %}#review-{{ review.id }}" class="home-review-item">
-                  {% if review.book %}
-                  <div class="review-book-title">{{ review.book.title }}</div>
-                  {% endif %}
-                  <div class="review-content-preview">{{ review.content|truncatewords_html:12 }}</div>
-                  <div class="review-meta">
-                    {% if review.user %}<span>{{ review.user.username }}</span> | {% endif %}
-                    <span>{{ review.created_at|date:"y.m.d H:i" }}</span>
-                  </div>
+      <div class="sections"> {# 신간 도서와 실시간 리뷰를 묶는 div #}
+        <section class="section new-books">
+          <h2>신간 도서</h2>
+          <div class="book-grid"> {# 신간 도서 그리드 #}
+            {% for book in new_books %}
+              <div class="book-card">
+                <a href="{% url 'books:book_detail' book_id=book.id %}">
+                  <img src="{{ book.cover_image_url|default:'https://placehold.co/150x180/e2e8f0/a0aec0?text=No+Image' }}" alt="{{ book.title }}">
                 </a>
-              {% endfor %}
-            {% else %}
-              <p class="no-reviews-home">최근 등록된 리뷰가 없습니다.</p>
-            {% endif %}
+                <p>{{ book.title }}</p>
+                <a href="{% url 'books:book_detail' book_id=book.id %}" class="detail-link">자세히 보기</a>
+              </div>
+            {% empty %}
+              <p class="no-results">현재 신간 도서 정보가 없습니다.</p>
+            {% endfor %}
           </div>
+        </section>
 
-          {# --- 페이지네이션 UI --- #}
-          {% if latest_reviews_page.has_other_pages %} {# 페이지가 여러 개 있을 때만 페이지네이션 표시 #}
-          <div class="pagination">
-            {% if latest_reviews_page.has_previous %}
-              <a href="?review_page={{ latest_reviews_page.previous_page_number }}{% if query %}&q={{ query }}{% endif %}" title="이전 페이지">&laquo;</a>
-            {% else %}
-              {# <span class="disabled">&laquo;</span> #}
-            {% endif %}
+        <section class="section reviews">
+          <h2>실시간 리뷰</h2>
+          <div class="review-placeholder">
+            <div class="review-items-list">
+              {% if latest_reviews_page and latest_reviews_page.object_list %}
+                {% for review in latest_reviews_page %}
+                  <a href="{% url 'books:book_detail' book_id=review.book.id %}#review-{{ review.id }}" class="home-review-item">
+                    {% if review.book %}
+                    <div class="review-book-title">{{ review.book.title }}</div>
+                    {% endif %}
+                    <div class="review-content-preview">{{ review.content|truncatewords_html:12 }}</div>
+                    <div class="review-meta">
+                      {% if review.user %}<span>{{ review.user.username }}</span> | {% endif %}
+                      <span>{{ review.created_at|date:"y.m.d H:i" }}</span>
+                    </div>
+                  </a>
+                {% endfor %}
+              {% else %}
+                <p class="no-reviews-home">최근 등록된 리뷰가 없습니다.</p>
+              {% endif %}
+            </div>
 
-            {% for i in latest_reviews_page.paginator.page_range %}
-              {% if latest_reviews_page.number == i %}
-                <span class="current-page">{{ i }}</span>
-              {% elif i > latest_reviews_page.number|add:'-3' and i < latest_reviews_page.number|add:'3' %} 
-                {# 현재 페이지 주변 2개 페이지만 표시 (예: 1 ... 4 5 6 ... 10) #}
-                <a href="?review_page={{ i }}{% if query %}&q={{ query }}{% endif %}">{{ i }}</a>
-              {% elif i == 1 or i == latest_reviews_page.paginator.num_pages %}
-                 {# 항상 첫 페이지와 마지막 페이지는 보여주되, 현재 페이지와 너무 멀리 떨어져 있고, 주변 페이지도 아니면 ...으로 대체 #}
-                 {% if i == 1 and latest_reviews_page.number > 3 %}
+            {% if latest_reviews_page.has_other_pages %}
+            <div class="pagination">
+              {% if latest_reviews_page.has_previous %}
+                <a href="?review_page={{ latest_reviews_page.previous_page_number }}{% if query %}&q={{ query }}{% endif %}" title="이전 페이지">&laquo;</a>
+              {% endif %}
+              {% for i in latest_reviews_page.paginator.page_range %}
+                {% if latest_reviews_page.number == i %}
+                  <span class="current-page">{{ i }}</span>
+                {% elif i > latest_reviews_page.number|add:'-3' and i < latest_reviews_page.number|add:'3' %} 
+                  <a href="?review_page={{ i }}{% if query %}&q={{ query }}{% endif %}">{{ i }}</a>
+                {% elif i == 1 or i == latest_reviews_page.paginator.num_pages %}
+                  {% if i == 1 and latest_reviews_page.number > 3 %}
                     <a href="?review_page={{ i }}{% if query %}&q={{ query }}{% endif %}">{{ i }}</a>
                     {% if latest_reviews_page.number > 4 %}<span>...</span>{% endif %}
-                 {% elif i == latest_reviews_page.paginator.num_pages and latest_reviews_page.number < latest_reviews_page.paginator.num_pages|add:'-3' %}
+                  {% elif i == latest_reviews_page.paginator.num_pages and latest_reviews_page.number < latest_reviews_page.paginator.num_pages|add:'-3' %}
                     {% if latest_reviews_page.number < latest_reviews_page.paginator.num_pages|add:'-4' %}<span>...</span>{% endif %}
                     <a href="?review_page={{ i }}{% if query %}&q={{ query }}{% endif %}">{{ i }}</a>
-                 {% endif %}
+                  {% endif %}
+                {% endif %}
+              {% endfor %}
+              {% if latest_reviews_page.has_next %}
+                <a href="?review_page={{ latest_reviews_page.next_page_number }}{% if query %}&q={{ query }}{% endif %}" title="다음 페이지">&raquo;</a>
               {% endif %}
-            {% endfor %}
-
-            {% if latest_reviews_page.has_next %}
-              <a href="?review_page={{ latest_reviews_page.next_page_number }}{% if query %}&q={{ query }}{% endif %}" title="다음 페이지">&raquo;</a>
-            {% else %}
-              {# <span class="disabled">&raquo;</span> #}
+            </div>
             {% endif %}
           </div>
-          {% endif %}
-          {# --- END 페이지네이션 UI --- #}
-        </div>
-      </section>
-    </div>
-    {% endif %} {# {% if not query %} 의 끝 #}
-  </div>
-</div>
+        </section>
+      </div>
+    {% else %} {# <<< 검색어가 있을 때 (query가 존재할 때) 표시될 내용 시작 >>> #}
+      <div class="search-results-container section"> {# 검색 결과를 .section 스타일과 유사하게 감쌈 #}
+        <h2>"{{ query }}" 검색 결과 ({{ searched_books|length }}건)</h2>
+        {% if searched_books %}
+          <div class="book-grid"> {# 신간 도서 및 다른 카테고리 페이지와 동일한 그리드 클래스 사용 #}
+            {% for book in searched_books %}
+              <div class="book-card">
+                <a href="{% url 'books:book_detail' book_id=book.id %}">
+                  <img src="{{ book.cover_image_url|default:'https://placehold.co/150x180/e2e8f0/a0aec0?text=No+Image' }}" alt="{{ book.title }}">
+                </a>
+                <p>{{ book.title }}</p>
+                <a href="{% url 'books:book_detail' book_id=book.id %}" class="detail-link">자세히 보기</a>
+              </div>
+            {% endfor %}
+          </div>
+        {% else %}
+          <p class="no-results">"{{ query }}"에 대한 검색 결과가 없습니다.</p>
+        {% endif %}
+      </div>
+    {% endif %} {# {% if not query %} / {% else %} 의 끝 #}
+
+  </div> {# content-sections-wrapper 끝 #}
+</div> {# content-wrapper 끝 #}
 
 <script>
   const swiperInstances = {};
