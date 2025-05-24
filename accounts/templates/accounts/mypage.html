@@ -9,6 +9,7 @@
     border-radius: 16px;
     padding: 3rem;
   }
+
   .profile-section {
     display: flex;
     align-items: center;
@@ -16,6 +17,7 @@
     margin-bottom: 2rem;
     justify-content: space-between;
   }
+
   .profile-photo {
     width: 120px;
     height: 120px;
@@ -25,21 +27,47 @@
     background-repeat: no-repeat;
     background-color: #ddd;
   }
+
   .profile-info {
     flex-grow: 1;
   }
+
   .nickname {
     font-size: 1.4rem;
     font-weight: bold;
     margin-bottom: 0.6rem;
     color: #3E3025;
   }
+
   .profile-controls {
     display: flex;
     flex-direction: column;
     gap: 0.4rem;
     align-items: flex-end;
+    font-size: 0.9rem;
   }
+
+  .small-button {
+    background-color: #D7BFAF;
+    color: #3E3025;
+    padding: 0.4rem 0.8rem;
+    border: none;
+    border-radius: 6px;
+    font-weight: 500;
+    font-size: 0.85rem;
+    cursor: pointer;
+    text-decoration: none;
+  }
+
+  .logout-box {
+    background-color: transparent;
+    color: #888;
+    padding: 0.2rem 0.6rem;
+    border: none;
+    font-size: 0.8rem;
+    cursor: pointer;
+  }
+
   .action-buttons {
     display: flex;
     gap: 1rem;
@@ -47,10 +75,10 @@
     justify-content: center;
     flex-wrap: wrap;
   }
-  .action-buttons a,
-  .action-buttons button {
+
+  .action-buttons a {
     background-color: #BCAAA4;
-    color: white;
+    color: #3E3025;
     padding: 0.6rem 1.2rem;
     border: none;
     border-radius: 8px;
@@ -59,6 +87,7 @@
     cursor: pointer;
     text-decoration: none;
   }
+
   .recommend-box {
     margin-top: 3rem;
     background-color: #FAF7F4;
@@ -66,6 +95,7 @@
     border-radius: 16px;
     box-shadow: 0 4px 12px rgba(0,0,0,0.05);
   }
+
   .modal {
     display: none;
     position: fixed;
@@ -76,6 +106,7 @@
     justify-content: center;
     z-index: 2000;
   }
+
   .modal-content {
     background: #fff;
     padding: 1.5rem;
@@ -84,12 +115,14 @@
     max-height: 80%; overflow-y: auto;
     position: relative;
   }
+
   .close-btn {
     position: absolute;
     top: 0.5rem; right: 0.8rem;
     font-size: 1.2rem;
     cursor: pointer;
   }
+
   .user-item {
     display: flex;
     align-items: center;
@@ -97,18 +130,21 @@
     gap: 0.8rem;
     margin-bottom: 0.5rem;
   }
+
   .user-link {
     display: flex;
     align-items: center;
     gap: 0.5rem;
     cursor: pointer;
   }
+
   .user-item img {
     width: 32px;
     height: 32px;
     border-radius: 50%;
     object-fit: cover;
   }
+
   .follow-toggle-btn {
     background-color: #e0d6cd;
     color: #3E3025;
@@ -116,7 +152,6 @@
     border-radius: 6px;
     padding: 0.3rem 0.8rem;
     font-size: 0.8rem;
-    min-width: 72px;
     cursor: pointer;
   }
 </style>
@@ -132,8 +167,11 @@
       </div>
     </div>
     <div class="profile-controls">
-      <a href="{% url 'accounts:update' %}" class="action-buttons">회원정보 수정</a>
-      <form method="POST" action="{% url 'accounts:logout' %}">{% csrf_token %}<button type="submit">로그아웃</button></form>
+      <a href="{% url 'accounts:update' %}" class="small-button">회원정보 수정</a>
+      <form method="POST" action="{% url 'accounts:logout' %}">
+        {% csrf_token %}
+        <button type="submit" class="logout-box">로그아웃</button>
+      </form>
     </div>
   </div>
 
@@ -142,7 +180,30 @@
     <a href="{% url 'reviews:user_liked_reviews' request.user.username %}">내가 좋아한 리뷰</a>
   </div>
 
-  <!-- 생략 없는 추천 도서, 서재 영역 포함 -->
+  <div class="recommend-box">
+    <h3 style="font-size: 1.2rem; font-weight: bold; color: #3E3025;">최근 추천 받은 책</h3>
+    {% if recommendations %}
+      <div style="display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center;">
+        {% for rec in recommendations %}
+          <div style="width:180px; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); background: white;">
+            <a href="{% url 'books:book_detail' rec.book.id %}">
+              <img src="{{ rec.book.cover_image_url }}" style="width: 100%; height: 220px; object-fit: cover;">
+            </a>
+            <div style="padding: 0.5rem;">
+              <p style="font-weight: bold;">{{ rec.book.title }}</p>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    {% else %}
+      <p style="color: #777; text-align: center;">아직 추천 받은 책이 없습니다.</p>
+      <div style="text-align: center; margin-top: 1rem;">
+        <button onclick="openRecommendModal()" style="padding: 0.6rem 1.2rem; background: #A67C52; color: white; border: none; border-radius: 8px; font-weight: bold; cursor: pointer;">
+          추천받으러 가기 &raquo;
+        </button>
+      </div>
+    {% endif %}
+  </div>
 
   <div class="recommend-box">
     <h3 style="font-size: 1.2rem; font-weight: bold; color: #3E3025;">내 서재</h3>
@@ -168,7 +229,8 @@
   </div>
 </div>
 
-<!-- 팔로우 모달 -->
+{% include 'recommendations/modal_input.html' %}
+
 <div id="follow-modal" class="modal">
   <div class="modal-content">
     <span class="close-btn">&times;</span>
@@ -177,25 +239,9 @@
   </div>
 </div>
 
-{% include 'recommendations/modal_input.html' %}
-
 <script>
 function openRecommendModal() {
   document.getElementById('ai-recommend-modal').style.display = 'flex';
-}
-
-function addToLibraryAjax(bookId, buttonElement) {
-  fetch(`/libraries/add/ajax/${bookId}/`, {
-    method: 'POST',
-    headers: {
-      'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value,
-    }
-  })
-  .then(res => res.json())
-  .then(data => {
-    if (data.success) buttonElement.remove();
-  })
-  .catch(err => alert('추가 실패'));
 }
 
 document.querySelectorAll('.follow-stat').forEach(el => {
@@ -216,11 +262,8 @@ document.querySelectorAll('.follow-stat').forEach(el => {
           body.innerHTML = data.users.map(u => {
             const displayName = u.nickname || u.username;
             const isSelf = u.username === currentUsername;
-            const isFollowing = u.is_following === true || u.is_following === 'true';
             const followBtn = isSelf ? '' :
-              `<button class="follow-toggle-btn" data-username="${u.username}" data-following="${isFollowing.toString()}">
-                ${isFollowing ? '언팔로우' : '팔로우'}
-              </button>`;
+              `<button class="follow-toggle-btn" data-username="${u.username}" data-following="${u.is_following}">${u.is_following ? '언팔로우' : '팔로우'}</button>`;
             return `
               <div class="user-item">
                 <div class="user-link" onclick="location.href='/accounts/user/${u.username}/'">
@@ -228,14 +271,17 @@ document.querySelectorAll('.follow-stat').forEach(el => {
                   <span>${displayName}님</span>
                 </div>
                 ${followBtn}
-              </div>`;
+              </div>
+            `;
           }).join('');
-          setTimeout(() => attachFollowButtons(), 0);
+          attachFollowButtons();
         } else {
           body.innerHTML = '<p>목록이 없습니다.</p>';
         }
       })
-      .catch(() => body.innerHTML = '<p>불러오기 실패</p>');
+      .catch(() => {
+        body.innerHTML = '<p>불러오기 실패</p>';
+      });
   });
 });
 
@@ -248,8 +294,6 @@ function attachFollowButtons() {
     btn.addEventListener('click', function (e) {
       e.stopPropagation();
       const username = this.dataset.username;
-      const isFollowing = this.dataset.following === 'true';
-      this.disabled = true;
       fetch(`/accounts/follow/${username}/`, {
         method: 'POST',
         headers: {
@@ -259,10 +303,12 @@ function attachFollowButtons() {
       .then(res => res.json())
       .then(data => {
         this.textContent = data.followed ? '언팔로우' : '팔로우';
-        this.dataset.following = data.followed.toString();
+        this.dataset.following = data.followed;
       })
-      .catch(err => alert('팔로우 실패'))
-      .finally(() => this.disabled = false);
+      .catch(err => {
+        alert('팔로우 전환 실패');
+        console.error(err);
+      });
     });
   });
 }
