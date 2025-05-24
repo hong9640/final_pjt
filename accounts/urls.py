@@ -2,6 +2,8 @@
 
 from django.urls import path
 from . import views
+from django.contrib.auth import views as auth_views
+from .forms import CustomPasswordChangeForm
 
 app_name = 'accounts'
 
@@ -14,4 +16,9 @@ urlpatterns = [
     path('user/<str:username>/', views.userpage_view, name='userpage'),
     path('follow/<str:username>/', views.follow_toggle, name='follow_toggle'),
     path('ajax/follow_list/<str:username>/', views.follow_list_view, name='follow_list'),
+    path('password_change/', auth_views.PasswordChangeView.as_view(
+        template_name='accounts/password_change.html',
+        success_url='/accounts/mypage/',
+        form_class=CustomPasswordChangeForm,
+    ), name='password_change'),
 ]

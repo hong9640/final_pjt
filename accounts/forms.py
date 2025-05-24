@@ -3,7 +3,7 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import UserCreationForm
 from django.core.exceptions import ValidationError
 from django.contrib.auth.password_validation import validate_password
-
+from django.contrib.auth.forms import PasswordChangeForm
 User = get_user_model()
 
 class CustomUserCreationForm(UserCreationForm):
@@ -104,3 +104,10 @@ class CustomUserChangeForm(forms.ModelForm):
             'nickname': forms.TextInput(attrs={'placeholder': '닉네임'}),
             'email': forms.EmailInput(attrs={'placeholder': '이메일'}),
         }
+
+class CustomPasswordChangeForm(PasswordChangeForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        # 각 필드의 도움말(help_text)을 제거
+        for field in self.fields.values():
+            field.help_text = None
