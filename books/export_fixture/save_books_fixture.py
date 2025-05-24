@@ -21,6 +21,7 @@ def export_books_fixture(path="books/fixtures/books.json"):
                 "category": book.category_id,
                 "created_at": book.created_at.isoformat(),
                 "is_bestseller": book.is_bestseller,
+                "publisher": book.publisher,
             }
         })
 

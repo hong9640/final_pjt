@@ -3,573 +3,6 @@
     "model": "books.author",
     "pk": 1,
     "fields": {
-      "name": "아마노 아키라 (지은이)",
-      "profile_image": "https://upload.wikimedia.org/wikipedia/commons/8/8e/Akira_Amano.jpg",
-      "biography": "아마노 아키라(天野 明, 1973년 ~ )는 일본의 여성만화가이다."
-    }
-  },
-  {
-    "model": "books.author",
-    "pk": 2,
-    "fields": {
-      "name": "모데스토 가르시아 (지은이), 하비 데 카스트로 (그림), 엄지영 (옮긴이)",
-      "profile_image": null,
-      "biography": ""
-    }
-  },
-  {
-    "model": "books.author",
-    "pk": 3,
-    "fields": {
-      "name": "메가로스쿨 언어논리연구소 (지은이)",
-      "profile_image": null,
-      "biography": ""
-    }
-  },
-  {
-    "model": "books.author",
-    "pk": 4,
-    "fields": {
-      "name": "선자은 (글), 이태영 (그림), 표창원 (기획)",
-      "profile_image": null,
-      "biography": ""
-    }
-  },
-  {
-    "model": "books.author",
-    "pk": 5,
-    "fields": {
-      "name": "트롤 (지은이), 김정화 (옮긴이)",
-      "profile_image": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c7/John_Bauer_1915.jpg/330px-John_Bauer_1915.jpg",
-      "biography": "트롤(troll)은 스칸디나비아와 스코틀랜드의 전설에 등장하는, 인간과 비슷한 모습의 거인족이다. 산의 동굴이나 다 허물어져가는 오두막에 살며, 키는 4~11피트(1.2~3.3m)이며, 몸무게가 1톤이 넘는다. 수명은 무려 300년이다."
-    }
-  },
-  {
-    "model": "books.author",
-    "pk": 6,
-    "fields": {
-      "name": "해커스 GSAT 취업교육연구소 (지은이)",
-      "profile_image": null,
-      "biography": ""
-    }
-  },
-  {
-    "model": "books.author",
-    "pk": 7,
-    "fields": {
-      "name": "여성곤, 송형근 (지은이)",
-      "profile_image": null,
-      "biography": ""
-    }
-  },
-  {
-    "model": "books.author",
-    "pk": 8,
-    "fields": {
-      "name": "삼성출판사 편집부 (엮은이)",
-      "profile_image": null,
-      "biography": ""
-    }
-  },
-  {
-    "model": "books.author",
-    "pk": 9,
-    "fields": {
-      "name": "법학전문대학원협의회 (엮은이)",
-      "profile_image": null,
-      "biography": "법학전문대학원협의회(法學專門大學院協議會, Korean Association of Law Schools)는 대한민국의 법학전문대학원 단체로 선발과 공동정책, 학술교류 등을 담당한다. 대표적으로 법학적성시험을 주관한다. 서울특별시 중구 서소문로 11길 34에 위치하고 있다."
-    }
-  },
-  {
-    "model": "books.author",
-    "pk": 10,
-    "fields": {
-      "name": "메가로스쿨 언어논리연구소 (엮은이)",
-      "profile_image": null,
-      "biography": ""
-    }
-  },
-  {
-    "model": "books.author",
-    "pk": 11,
-    "fields": {
-      "name": "백휴 (지은이)",
-      "profile_image": null,
-      "biography": ""
-    }
-  },
-  {
-    "model": "books.author",
-    "pk": 12,
-    "fields": {
-      "name": "미쓰다 신조 (지은이), 김은모 (옮긴이)",
-      "profile_image": null,
-      "biography": ""
-    }
-  },
-  {
-    "model": "books.author",
-    "pk": 13,
-    "fields": {
-      "name": "김하연 (지은이)",
-      "profile_image": null,
-      "biography": "김하연은 다음 사람을 가리킨다.김하연(1981년 ~ )은 대한민국의 미스코리아 경기 진 출신 배우이다.\n김하연(1995년 ~ )은 대한민국의 배우이다.\n김하연(2010년 ~ )은 대한민국의 배우이다."
-    }
-  },
-  {
-    "model": "books.author",
-    "pk": 14,
-    "fields": {
-      "name": "법학전문대학원협의회 (지은이)",
-      "profile_image": null,
-      "biography": "법학전문대학원협의회(法學專門大學院協議會, Korean Association of Law Schools)는 대한민국의 법학전문대학원 단체로 선발과 공동정책, 학술교류 등을 담당한다. 대표적으로 법학적성시험을 주관한다. 서울특별시 중구 서소문로 11길 34에 위치하고 있다."
-    }
-  },
-  {
-    "model": "books.author",
-    "pk": 15,
-    "fields": {
-      "name": "무경, 박상민, 박소해, 이지유, 조동신 (지은이)",
-      "profile_image": null,
-      "biography": "무경에는 다음과 무경 난데무경(無敬)은 불교 용어 증 하나이다.\n무경(武庚, ? ~ ?)은 상나라 말기의 인물이다."
-    }
-  },
-  {
-    "model": "books.author",
-    "pk": 16,
-    "fields": {
-      "name": "윤자영 (지은이), 이갑규 (그림)",
-      "profile_image": null,
-      "biography": "윤자영(尹滋瑛, 1894년 9월 13일 ~ 1938년 10월 14일)은 사회주의 계열에서 활동한 한국의 독립운동가이다. 지하 활동 중 사용한 가명으로 윤소야(尹蘇野 또는 尹笑也)와 정일영(丁一英)이 있다."
-    }
-  },
-  {
-    "model": "books.author",
-    "pk": 17,
-    "fields": {
-      "name": "정은숙 (지은이), 이주희 (그림)",
-      "profile_image": null,
-      "biography": "정은숙이라는 이름을 가진 사람은 다음과 같다.정은숙 (정당인)\n정은숙 (아나운서)\n정은숙 (방송작가)\n정은숙 (만화가)\n정은숙 (출판인)\n정은숙 (성악가)\n정은숙 (성우)\n정수라의 본명"
-    }
-  },
-  {
-    "model": "books.author",
-    "pk": 18,
-    "fields": {
-      "name": "도기성 (지은이), 김은영 (감수)",
-      "profile_image": null,
-      "biography": ""
-    }
-  },
-  {
-    "model": "books.author",
-    "pk": 19,
-    "fields": {
-      "name": "김태호 (글), 홍승우 (그림), 김민형 (기획)",
-      "profile_image": null,
-      "biography": "김태호는 다음의 인물을 가리킨다."
-    }
-  },
-  {
-    "model": "books.author",
-    "pk": 20,
-    "fields": {
-      "name": "히가시노 게이고 (지은이), 민경욱 (옮긴이)",
-      "profile_image": null,
-      "biography": "히가시노 게이고(일본어: 東野 圭吾 , 1958년 2월 4일 ~ )는 일본의 소설가이다. 오사카 출신으로 오사카 부립대학 전기공학과 졸업 후 일본전장주식회사에서 엔지니어로 근무하며 추리 소설을 저술하였다. 1985년 《방과 후》로 제31회 에도가와 란포상을 수상하며 작가로 데뷔하였다. 이후 퇴직 후 도쿄로 올라와, 작가로 전념하고 있다. 그의 소설은 추리, 느와르급 서스펜스, 패러디, 엔터테인먼트 등 다채로운 분야에서 다양하게 있다. 또 원자력 발전이나 뇌 이식과 같이 과학적 소재를 다룬 소설도 여러 편 있다."
-    }
-  },
-  {
-    "model": "books.author",
-    "pk": 21,
-    "fields": {
-      "name": "송병건 (지은이)",
-      "profile_image": null,
-      "biography": ""
-    }
-  },
-  {
-    "model": "books.author",
-    "pk": 22,
-    "fields": {
-      "name": "허현경 (지은이)",
-      "profile_image": null,
-      "biography": ""
-    }
-  },
-  {
-    "model": "books.author",
-    "pk": 23,
-    "fields": {
-      "name": "애거사 크리스티 (지은이), 이가형 (옮긴이)",
-      "profile_image": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cf/Agatha_Christie.png/330px-Agatha_Christie.png",
-      "biography": "애거사 크리스티(본명: Dame Agatha Christie, Lady Mallowan, DBE, 1890년 9월 15일 ~ 1976년 1월 12일)는 영국의 추리 소설 작가이다. 메리 웨스트매컷(Mary Westmacott)이란 필명으로 연애 소설을 집필하기도 하였으나, 80여 편의 추리 소설에서 애거서 크리스티란 이름으로 대중에게 널리 알려졌다. 그녀가 창조해 낸 벨기에의 명탐정 에르퀼 푸아로와 제인 마플은 대중적인 사랑을 받았으며, 그녀는 추리 소설 장르에서 주목받는 작가로서 추리 소설의 여왕이라 불린다."
-    }
-  },
-  {
-    "model": "books.author",
-    "pk": 24,
-    "fields": {
-      "name": "이가라시 리쓰토 (지은이), 허하나 (옮긴이)",
-      "profile_image": null,
-      "biography": ""
-    }
-  },
-  {
-    "model": "books.author",
-    "pk": 25,
-    "fields": {
-      "name": "개러스 무어 (지은이), 마가리다 에스테베즈 (그림), 브론테살롱 (옮긴이)",
-      "profile_image": null,
-      "biography": ""
-    }
-  },
-  {
-    "model": "books.author",
-    "pk": 26,
-    "fields": {
-      "name": "로버트 앨런 (지은이), 김요한 (옮긴이), 멘사코리아 (감수)",
-      "profile_image": null,
-      "biography": ""
-    }
-  },
-  {
-    "model": "books.author",
-    "pk": 27,
-    "fields": {
-      "name": "카타세 차시바 (지은이), 시로다이라 교 (원작), 오경화 (옮긴이)",
-      "profile_image": null,
-      "biography": ""
-    }
-  },
-  {
-    "model": "books.author",
-    "pk": 28,
-    "fields": {
-      "name": "해커스 취업교육연구소 (지은이)",
-      "profile_image": null,
-      "biography": ""
-    }
-  },
-  {
-    "model": "books.author",
-    "pk": 29,
-    "fields": {
-      "name": "조승연 (지은이)",
-      "profile_image": null,
-      "biography": "조승연은 다음 사람 등을 가리킨다.조승연: 대한민국의 배우\n조승연(1972년~): 대한민국의 배우\n조승연(1974년~): 대한민국의 기업인, 개명 전 조현아(조양호의 딸)\n조승연(1981년~): 대한민국의 작가\n조승연(1996년~): WOODZ의 본명. 대한민국의 보이 그룹 유니크, 엑스원의 멤버"
-    }
-  },
-  {
-    "model": "books.author",
-    "pk": 30,
-    "fields": {
-      "name": "조성우 (지은이)",
-      "profile_image": null,
-      "biography": "조성우는 다음 사람을 가리킨다.조성우는 대한민국의 영화 음악 감독이다.\n조성우는 전 KBO 리그 SK 와이번스의 내야수, 지명타자이다.\n조성우는 전 KBO 리그 한화 이글스의 투수이다."
-    }
-  },
-  {
-    "model": "books.author",
-    "pk": 31,
-    "fields": {
-      "name": "임성훈 (지은이)",
-      "profile_image": null,
-      "biography": "임성훈은 다음 사람을 가리킨다.임성훈(1950년 ~ )은 대한민국의 방송인이다.\n임성훈(林成勳, 1959년 ~ )은 대한민국의 공무원으로, 전직 전남 나주시장이다.\n임성훈(1970년 ~ 2008년)은 대한민국의 음악 그룹 거북이의 구성원이었던 터틀맨의 본명이다.\n임성훈은 대한민국의 희극 배우이다.\n임성훈(1997년 ~ )은 대한민국 속초시에서 사업하는 청년으로 [2025년 기대가 되는 20대] 인물 중 한명이다."
-    }
-  },
-  {
-    "model": "books.author",
-    "pk": 32,
-    "fields": {
-      "name": "유현준 (지은이)",
-      "profile_image": null,
-      "biography": "유현준은 다음 사람을 가리킨다.유현준(1969년 ~ )은 대한민국의 건축가이다.\n유현준(1997년 ~ )은 대한민국의 농구 선수이다."
-    }
-  },
-  {
-    "model": "books.author",
-    "pk": 33,
-    "fields": {
-      "name": "우석(브라운스톤) (지은이)",
-      "profile_image": null,
-      "biography": "우석의 다른 뜻은 다음과 같다.우석은 조선과 대한제국의 황족 겸 정치가인 흥친왕 이희의 호이다.\n우석(雨石)은 대한제국 관료 직위를 지낸 대한민국 독립운동가 최기보의 호이다.\n우석은 대한민국 기업가 김종익의 호이다.\n우석은 대한민국 극작가 겸 연극연출가 박진의 호이다.\n우석은 대한민국 화가 겸 외교관 장발의 호이다.\n우석은 대한민국 군인 겸 정치가 이후락의 호이다.\n우석은 대한민국 기업가 겸 정치가 임택근의 호이다.\n우석은 대한민국 배우 겸 대학 교수 신성일의 호이다.\n우석은 대한민국 기업가 겸 정치가 박지원의 호이다.\n우석은 대한민국 정치가 겸 대학 교수 정세현의 호이다.\n우석은 대한민국 배우 겸 대학 교수 한인수의 호이다.\n우석은 대한민국 법조인 겸 대학 교수 강지원의 호이다.\n우석(雨石)은 대한민국 정치가 겸 대학 교수 박종진의 호이다.\n우석은 대한민국의 보이 그룹 펜타곤의 구성원이다."
-    }
-  },
-  {
-    "model": "books.author",
-    "pk": 34,
-    "fields": {
-      "name": "이명현 (지은이)",
-      "profile_image": null,
-      "biography": "이명현의 다른 뜻은 다음과 같다.이명현(李命賢, 1706년 ~ 1772년)은 조선 후기의 문신이다.\n이명현(李明賢, 1942년 ~ )은 경기도 고양시 일산서구 대화동 성저마을 10단지에 거주하는 프로게이다\n이명현(1984년 ~ )은 자전거 경기 선수이다.\n리밍셴(李明賢, 1973년 ~ )은 중화민국의 정치인이다."
-    }
-  },
-  {
-    "model": "books.author",
-    "pk": 35,
-    "fields": {
-      "name": "시부야 노부히로 (지은이), 양지영 (옮긴이)",
-      "profile_image": null,
-      "biography": ""
-    }
-  },
-  {
-    "model": "books.author",
-    "pk": 36,
-    "fields": {
-      "name": "조찬영, 이지혜 (지은이)",
-      "profile_image": null,
-      "biography": ""
-    }
-  },
-  {
-    "model": "books.author",
-    "pk": 37,
-    "fields": {
-      "name": "김윤태 (지은이)",
-      "profile_image": null,
-      "biography": "김윤태는 다음 사람을 가리킨다.김윤태(金潤泰, 1939 ~ 2010)는 대한민국의 바둑 기사이다.\n김윤태(1960 ~ )는 대한민국의 신학자 겸 교수이다.\n김윤태(金侖兌, 1965 ~ )는 대한민국의 정치인이다.\n김윤태(1972 ~ )는 대한민국 배우 윤이준의 본명이다.\n김윤태(1990 ~ )는 대한민국의 농구 선수이다.\n김윤태(金玧台, 2004 ~ )는 대한민국의 바둑 기사이다."
-    }
-  },
-  {
-    "model": "books.author",
-    "pk": 38,
-    "fields": {
-      "name": "최진석 (지은이)",
-      "profile_image": null,
-      "biography": "최진석은 다음 항목을 함의한다.최진석 (철학자)\n최진석 (기업인)\n최진석 (작곡가)\n최진석 "
-    }
-  },
-  {
-    "model": "books.author",
-    "pk": 39,
-    "fields": {
-      "name": "이광연 (지은이)",
-      "profile_image": null,
-      "biography": "이광연은 다음 사람을 가리킨다.이광연(1964년~)은 대한민국의 한의사이다.\n이광연(1977년~)은 대한민국의 아나운서이다.\n이광연(1999년~)은 대한민국의 축구 선수이다."
-    }
-  },
-  {
-    "model": "books.author",
-    "pk": 40,
-    "fields": {
-      "name": "박웅현, 강창래 (지은이)",
-      "profile_image": null,
-      "biography": ""
-    }
-  },
-  {
-    "model": "books.author",
-    "pk": 41,
-    "fields": {
-      "name": "리베카 솔닛 (지은이), 김정아 (옮긴이)",
-      "profile_image": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e3/Rebecca_Solnit_cropped.jpg/330px-Rebecca_Solnit_cropped.jpg",
-      "biography": "리베카 솔닛(영어: Rebecca Solnit, 1961년 6월 24일 ~ )은 미국의 저술가, 비평가, 역사가, 여권운동가이다. 1980년대부터 환경, 반핵, 인권 방면으로 다양한 현장운동에 참여해왔다. 저서 《남자들은 자꾸 나를 가르치려 든다》에서 남성들의 여성에 대한 설명강박을 비판하였는데, 요는 '맨스플레인'이라는 여성주의 용어를 탄생시켰다."
-    }
-  },
-  {
-    "model": "books.author",
-    "pk": 42,
-    "fields": {
-      "name": "이문열 (지은이), 한현동 (원작), 윤종문 (구성)",
-      "profile_image": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/33/Yi_Munyeol.jpg/330px-Yi_Munyeol.jpg",
-      "biography": "이문열(李文烈, 1948년 6월 24일 ~ )은 대한민국의 소설가이며, 한국외국어대학교 석좌교수이다. 본관은 재령이다."
-    }
-  },
-  {
-    "model": "books.author",
-    "pk": 43,
-    "fields": {
-      "name": "강유원 (지은이)",
-      "profile_image": null,
-      "biography": "강유원(姜鈕遠, 1962년 ~ )은 대한민국의 인문학자다. 철학과 역사와 문학을 위시해 다양한 분야 인문학책을 쓰거나 번역했다. 몇몇 매체에 서평이나 칼럼을 기고하며, 주로 대학 밖에 있는 공공 영역에서 인문학을 강의하고 있다."
-    }
-  },
-  {
-    "model": "books.author",
-    "pk": 44,
-    "fields": {
-      "name": "서경식 (지은이), 최재혁 (옮긴이)",
-      "profile_image": null,
-      "biography": "서경식(徐京植, 1951년~2023년 12월 18일)은 대한민국의 저술가이자 작가이다. 도쿄 경제대학 현대법학부 교수였다. 리쓰메이칸 대학 교수인 서승과 인권운동가인 서준식의 동생이다."
-    }
-  },
-  {
-    "model": "books.author",
-    "pk": 45,
-    "fields": {
-      "name": "고미숙 (지은이)",
-      "profile_image": null,
-      "biography": "고미숙(1960년 3월 30일 ~ )은 대한민국의 문학평론가이다."
-    }
-  },
-  {
-    "model": "books.author",
-    "pk": 46,
-    "fields": {
-      "name": "김종원 (지은이)",
-      "profile_image": null,
-      "biography": "김종원의 다른 뜻은 다음과 같다.김종원(金宗元, 1922 ~ 1964)은 일제 강점기와 대한민국의 군인, 경찰이다.\n김종원(1957 ~ )은 대한민국의 가수 배일호의 본명이다.\n김종원(1975 ~ )은 대한민국의 유도 선수이다.\n김종원(1985 ~ )은 대한민국의 희극 배우다."
-    }
-  },
-  {
-    "model": "books.author",
-    "pk": 47,
-    "fields": {
-      "name": "최경아 (지은이)",
-      "profile_image": null,
-      "biography": "최경아(1969년 ~ )는 대한민국의 여성 만화가이다. 1991년 겨울나비로 데뷔하였으며 만화가 이빈, 원수연, 한승원과 지인 사이로 있다. 배우자는 만화가 엄재경이다."
-    }
-  },
-  {
-    "model": "books.author",
-    "pk": 48,
-    "fields": {
-      "name": "김태완 (지은이)",
-      "profile_image": null,
-      "biography": "김태완의 다른 뜻은 다음과 같다.김태완(1969 ~ 2023)은 대한민국의 노동운동가이다. 전국택배노동조합 수석부위원장이었다.\n김태완(金泰完, 1971 ~ )은 대한민국의 전 축구 선수이자, 현 천안 시티 FC의 감독이다.\n김태완(金泰完, 1981 ~ )은 전 KBO 리그 삼성 라이온즈의 내야수이다.\n김태완(金泰完, 1984 ~ )은 전 KBO 리그 넥센 히어로즈의 외야수, 내야수, 지명타자이자, 현 KBO 리그 고양 히어로즈의 타격코치이다.\n김태완(1987 ~ )은 서바이벌 스타오디션으로 데뷔한 대한민국의 영화 배우이다.\n김태완(1994 ~ 1999)은 대한민국의 대구 어린이 황산 테러 사건의 피해자이다.\n김태완(1995 ~ )은 대한민국의 리그 오브 레전드 프로게이머이다.\n김태완(? ~ )은 대한민국의 수화 통역사이다."
-    }
-  },
-  {
-    "model": "books.author",
-    "pk": 49,
-    "fields": {
-      "name": "길벗교육연구회 (지은이)",
-      "profile_image": null,
-      "biography": ""
-    }
-  },
-  {
-    "model": "books.author",
-    "pk": 50,
-    "fields": {
-      "name": "얼 쇼리스 (지은이), 이병곤, 임정아, 고병헌 (옮긴이)",
-      "profile_image": null,
-      "biography": ""
-    }
-  },
-  {
-    "model": "books.author",
-    "pk": 51,
-    "fields": {
-      "name": "야마나 테츠시 (지은이), 최성현 (옮긴이)",
-      "profile_image": null,
-      "biography": ""
-    }
-  },
-  {
-    "model": "books.author",
-    "pk": 52,
-    "fields": {
-      "name": "백상경제연구원, 최형선, 전미경, 강안, 최은, 박준용, 안나미, 박정호, 이용택, 이세환, 신창호, 이창후 (지은이)",
-      "profile_image": null,
-      "biography": ""
-    }
-  },
-  {
-    "model": "books.author",
-    "pk": 53,
-    "fields": {
-      "name": "최진기, 서선연 (지은이)",
-      "profile_image": null,
-      "biography": "최진기는 대한민국의 방송인, 강사이다. 1967년생이다."
-    }
-  },
-  {
-    "model": "books.author",
-    "pk": 54,
-    "fields": {
-      "name": "김종원 (지은이), 소소하이 (그림)",
-      "profile_image": null,
-      "biography": "김종원의 다른 뜻은 다음과 같다.김종원(金宗元, 1922 ~ 1964)은 일제 강점기와 대한민국의 군인, 경찰이다.\n김종원(1957 ~ )은 대한민국의 가수 배일호의 본명이다.\n김종원(1975 ~ )은 대한민국의 유도 선수이다.\n김종원(1985 ~ )은 대한민국의 희극 배우다."
-    }
-  },
-  {
-    "model": "books.author",
-    "pk": 55,
-    "fields": {
-      "name": "김사업 (지은이)",
-      "profile_image": null,
-      "biography": ""
-    }
-  },
-  {
-    "model": "books.author",
-    "pk": 56,
-    "fields": {
-      "name": "이태승 (지은이)",
-      "profile_image": null,
-      "biography": "이태승(1983년 10월 14일 ~ )은 대한민국의 배우이다. KBS 21기 공채 탤런트로 데뷔했다."
-    }
-  },
-  {
-    "model": "books.author",
-    "pk": 57,
-    "fields": {
-      "name": "로버트 해그스트롬 (지은이), 박성진 (옮긴이)",
-      "profile_image": null,
-      "biography": ""
-    }
-  },
-  {
-    "model": "books.author",
-    "pk": 58,
-    "fields": {
-      "name": "김호귀 (지은이)",
-      "profile_image": null,
-      "biography": ""
-    }
-  },
-  {
-    "model": "books.author",
-    "pk": 59,
-    "fields": {
-      "name": "안상헌 (지은이)",
-      "profile_image": null,
-      "biography": ""
-    }
-  },
-  {
-    "model": "books.author",
-    "pk": 60,
-    "fields": {
-      "name": "이민정 (지은이)",
-      "profile_image": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4a/%EC%9D%B4%EB%AF%BC%EC%A0%95%2C_%27%EC%B2%AD%EC%88%9C%EB%AF%B8_%EA%B0%80%EB%93%9D%27_%281%29.jpg/330px-%EC%9D%B4%EB%AF%BC%EC%A0%95%2C_%27%EC%B2%AD%EC%88%9C%EB%AF%B8_%EA%B0%80%EB%93%9D%27_%281%29.jpg",
-      "biography": "이민정(李珉廷, 1982년 2월 16일 ~ )은 대한민국의 배우이며 샵 오디션에 참석했지만 \"아직은 못 할 것 같다\"면서 고사했다."
-    }
-  },
-  {
-    "model": "books.author",
-    "pk": 61,
-    "fields": {
-      "name": "여르미 (지은이)",
-      "profile_image": null,
-      "biography": ""
-    }
-  },
-  {
-    "model": "books.author",
-    "pk": 62,
-    "fields": {
-      "name": "김용규 (지은이)",
-      "profile_image": null,
-      "biography": "김용규는 다음 사람을 가리킨다.김용규(1923년 ~ )는 대한민국의 비전향 장기수이다.\n김용규(1941년 ~ )는 대한민국의 외교관이다.\n김용규(金龍奎, 1954년 ~ )는 대한민국의 전라북도 정읍시의원이었다.\n김용규(1955년 ~ )는 경기도 광주시장을 지낸 대한민국의 정치인이다.\n김용규(金容奎, 1955년 ~ )는 대한민국의 경기도 용인시의원이었다.\n김용규(金龍圭, 1968년 ~ )는 대한민국의 충청북도 청주시의원이었다."
-    }
-  },
-  {
-    "model": "books.author",
-    "pk": 63,
-    "fields": {
-      "name": "장성익 (지은이), 이진아 (그림)",
-      "profile_image": null,
-      "biography": ""
-    }
-  },
-  {
-    "model": "books.author",
-    "pk": 64,
-    "fields": {
       "name": "이지성 (지은이)",
       "profile_image": null,
       "biography": "이지성(1983년 12월 20일 ~ )은 대한민국의 희극 배우이다."
@@ -577,898 +10,7 @@
   },
   {
     "model": "books.author",
-    "pk": 65,
-    "fields": {
-      "name": "연세대학교 인문학연구원 (지은이)",
-      "profile_image": null,
-      "biography": ""
-    }
-  },
-  {
-    "model": "books.author",
-    "pk": 66,
-    "fields": {
-      "name": "이정수, 이동환 (지은이)",
-      "profile_image": null,
-      "biography": "이정수는 다음 사람 등을 가리킨다."
-    }
-  },
-  {
-    "model": "books.author",
-    "pk": 67,
-    "fields": {
-      "name": "김태진 (지은이)",
-      "profile_image": null,
-      "biography": "김태진은 다음 사람을 가리킨다.김태진(金太鎭, 1899~?)은 일제 강점기의 관료이다.\n김태진(金兌鎭, 1905~1949)은 일제 강점기에 주로 활동한 한국의 극작가이다.\n김태진(1969~)은 대한민국의 축구 선수, 지도자이다.\n김태진(金泰振, 1971~)은 대한민국의 전직 광주광역시 서구의원이다.\n김태진(1974~)은 대한민국의 농구 선수이다.\n김태진(1977~)은 대한민국의 축구 선수이다.\n김태진은 대한민국의 가수인 진엑스(1980.4~)의 본명이다.\n김태진(1980.8~)은 대한민국의 방송인이다.\n김태진(1984.8~)은 대한민국의 축구 선수이다.\n김태진(1984.10.29~)은 대한민국의 축구 선수이다.\n김태진(1984~)은 대한민국의 한의사, 배우, 뮤지션이다.\n김태진(1990~)은 대한민국의 배우이다.\n김태진(金太珍, 1995~)은 KBO 리그 키움 히어로즈의 내야수이다."
-    }
-  },
-  {
-    "model": "books.author",
-    "pk": 68,
-    "fields": {
-      "name": "박홍순 (지은이)",
-      "profile_image": null,
-      "biography": ""
-    }
-  },
-  {
-    "model": "books.author",
-    "pk": 69,
-    "fields": {
-      "name": "주경아, 정재화 (지은이)",
-      "profile_image": null,
-      "biography": ""
-    }
-  },
-  {
-    "model": "books.author",
-    "pk": 70,
-    "fields": {
-      "name": "싯다르타 히베이루 (지은이), 조은아 (옮긴이)",
-      "profile_image": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Sidarta_Ribeiro.jpg/330px-Sidarta_Ribeiro.jpg",
-      "biography": "시다르타 톨렌다우 고메스 히베이루(포르투갈어: Sidarta Tollendal Gomes Ribeiro, 1971년 4월 16일~)는 브라질 생물학자로 의 신경과학에 대한 업적을 남겼다."
-    }
-  },
-  {
-    "model": "books.author",
-    "pk": 71,
-    "fields": {
-      "name": "김정욱 (지은이), 최우빈 (그림), 강대진 (감수)",
-      "profile_image": null,
-      "biography": "김정욱의 다른 뜻은 다음과 같다.김정욱(金晶旭, 1883년 ~ ?)은 일제 강점기의 경찰이다.\n김정욱(1926년 ~ 2022년)은 대한민국의 무용가이다.\n김정욱(1946년 ~ )은 대한민국의 환경학자이다.\n김정욱(1961년 ~ )은 대한민국의 작사가, 작곡가, 음반 프로듀서이다.\n김정욱(1971년 ~ )은 대한민국의 부산광역시 해운대구의원이다.\n김정욱(1976년 ~ )은 대한민국의 축구 선수이다.\n김정욱(1980년 ~ )은 대한민국의 배우이다.\n김정욱(1984년 ~ )은 대한민국의 축구 선수이다.\n김정욱(1993년 ~ )은 대한민국의 배우이다.\n김정욱(1985년 ~ )은 대한민국의 축구 선수이다.\n김정욱 은 대한민국의 판타지장르 소설가이다."
-    }
-  },
-  {
-    "model": "books.author",
-    "pk": 72,
-    "fields": {
-      "name": "김태진, 백승휴 (지은이)",
-      "profile_image": null,
-      "biography": "김태진은 다음 사람을 가리킨다.김태진(金太鎭, 1899~?)은 일제 강점기의 관료이다.\n김태진(金兌鎭, 1905~1949)은 일제 강점기에 주로 활동한 한국의 극작가이다.\n김태진(1969~)은 대한민국의 축구 선수, 지도자이다.\n김태진(金泰振, 1971~)은 대한민국의 전직 광주광역시 서구의원이다.\n김태진(1974~)은 대한민국의 농구 선수이다.\n김태진(1977~)은 대한민국의 축구 선수이다.\n김태진은 대한민국의 가수인 진엑스(1980.4~)의 본명이다.\n김태진(1980.8~)은 대한민국의 방송인이다.\n김태진(1984.8~)은 대한민국의 축구 선수이다.\n김태진(1984.10.29~)은 대한민국의 축구 선수이다.\n김태진(1984~)은 대한민국의 한의사, 배우, 뮤지션이다.\n김태진(1990~)은 대한민국의 배우이다.\n김태진(金太珍, 1995~)은 KBO 리그 키움 히어로즈의 내야수이다."
-    }
-  },
-  {
-    "model": "books.author",
-    "pk": 73,
-    "fields": {
-      "name": "자연 (지은이)",
-      "profile_image": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/36/Hopetoun_falls.jpg/330px-Hopetoun_falls.jpg",
-      "biography": "자연(自然, 영어: Nature, 그리스어: physis)은 산, 강, 바다 등 생명력을 가지고 스스로 생성, 발전하는 것을 말한다. 주로 인간의 유전적 성질 전체나 환경에 의한 성질을 가리키는 말이기도 하다.인간의 영향이 미치지 않은 그대로의 현상과 그에 따른 물질\n산, 바다, 호수, 강과 같은 자연 환경\n사람을 제외한 자연물 모두\n사람을 포함한 하늘과 땅, 우주 만물\n인위적이지 않은 행동이나 현상"
-    }
-  },
-  {
-    "model": "books.author",
-    "pk": 74,
-    "fields": {
-      "name": "강신주 (지은이)",
-      "profile_image": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/22/%EA%B0%95%EC%8B%A0%EC%A3%BC_%EB%B2%99%EC%BB%A41.png/330px-%EA%B0%95%EC%8B%A0%EC%A3%BC_%EB%B2%99%EC%BB%A41.png",
-      "biography": "강신주(姜信珠, 1967년 ~ )는 대한민국에서 철학을 이야기하는 사람이다. 대한민국 경상남도 함양에서 출생하였다. 연세대학교에서 화학공학 학사 학위를, 서울대학교에서 철학 석사 학위를, 연세대학교에서 철학 박사 학위를 취득하였다. 2007년부터 문사철(文史哲) 기획위원회의 위원으로 활동하고 있다."
-    }
-  },
-  {
-    "model": "books.author",
-    "pk": 75,
-    "fields": {
-      "name": "마누엘 루이스 후라도 (지은이), 이경상 (옮긴이)",
-      "profile_image": null,
-      "biography": ""
-    }
-  },
-  {
-    "model": "books.author",
-    "pk": 76,
-    "fields": {
-      "name": "Coco Uzuki (지은이), 정효진 (옮긴이)",
-      "profile_image": null,
-      "biography": ""
-    }
-  },
-  {
-    "model": "books.author",
-    "pk": 77,
-    "fields": {
-      "name": "후쿠다 신이치 (지은이), 박연지 (옮긴이)",
-      "profile_image": null,
-      "biography": ""
-    }
-  },
-  {
-    "model": "books.author",
-    "pk": 78,
-    "fields": {
-      "name": "한강 (지은이)",
-      "profile_image": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/Korea-Seoul-Han_River-01.jpg/330px-Korea-Seoul-Han_River-01.jpg",
-      "biography": "한강(漢江, 영어: Hangang 또는 Hangang River)은 대한민국 강원특별자치도 태백시에서 시작하여 한반도 중부를 동에서 서로 통과해 황해로 유입되는 한국의 주요 하천이다. 태백산맥의 금대봉 정상부 북쪽 비탈에서 발원하여 강화해협 부근의 어귀로 흘러가는 물줄기를 본류로 한다. 대한민국의 관찬 자료집인 《한국하천일람》 2013년 판에 따르면 본류 총연장은 494km 남짓이다."
-    }
-  },
-  {
-    "model": "books.author",
-    "pk": 79,
-    "fields": {
-      "name": "양안다 (지은이)",
-      "profile_image": null,
-      "biography": ""
-    }
-  },
-  {
-    "model": "books.author",
-    "pk": 80,
-    "fields": {
-      "name": "소라하나 미아 (지은이)",
-      "profile_image": null,
-      "biography": ""
-    }
-  },
-  {
-    "model": "books.author",
-    "pk": 81,
-    "fields": {
-      "name": "필리파 페리 (지은이), 방수연 (옮긴이)",
-      "profile_image": null,
-      "biography": ""
-    }
-  },
-  {
-    "model": "books.author",
-    "pk": 82,
-    "fields": {
-      "name": "원형준 (지은이)",
-      "profile_image": null,
-      "biography": ""
-    }
-  },
-  {
-    "model": "books.author",
-    "pk": 83,
-    "fields": {
-      "name": "앙드레 코스톨라니 (지은이), 한윤진 (옮긴이)",
-      "profile_image": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Kostolany_Heller.jpg/330px-Kostolany_Heller.jpg",
-      "biography": "앙드레 코스톨라니(헝가리어: André Kostolany, 1906년 2월 9일 ~ 1999년 9월 14일)는 헝가리 유대인 출신의 투자가이다. 유럽의 워렌 버핏, 주식의 신이라고도 불린다. 전세계 10개 도시에 집을 가졌고, 헝가리어, 프랑스어, 영어, 독일어의 4개국어에 능통했다."
-    }
-  },
-  {
-    "model": "books.author",
-    "pk": 84,
-    "fields": {
-      "name": "류시화 (엮은이)",
-      "profile_image": null,
-      "biography": "류시화(1958년~)는 대한민국의 시인이자 번역가이며 본명은 안재찬이다. 대광고등학교와 경희대학교 국어국문학과를 졸업하였고 현재는 서울 명륜동에 작업실을 두고 있다."
-    }
-  },
-  {
-    "model": "books.author",
-    "pk": 85,
-    "fields": {
-      "name": "에리히 프롬 (지은이), 황문수 (옮긴이)",
-      "profile_image": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/72/Erich_Fromm_1974.jpg/330px-Erich_Fromm_1974.jpg",
-      "biography": "에리히 젤리히만 프롬(독일어: Erich Seligmann Fromm, 1900년 3월 23일 ~ 1980년 3월 18일)은 세계적으로 유명한 유대인이자 독일계 미국인으로 사회심리학자이면서 정신분석학자, 인문주의 철학자이다."
-    }
-  },
-  {
-    "model": "books.author",
-    "pk": 86,
-    "fields": {
-      "name": "사단법인 전국유료실버타운협회 포푸라샤 편집부 (지은이), 이지수 (옮긴이)",
-      "profile_image": null,
-      "biography": ""
-    }
-  },
-  {
-    "model": "books.author",
-    "pk": 87,
-    "fields": {
-      "name": "혜민 (지은이), 이응견 (그림)",
-      "profile_image": null,
-      "biography": "라이언 봉석 주(Ryan Bongsuk Joo, 1973년 12월 12일 ~)는 대한민국에서 활동하는 대한불교 조계종의 한국계 미국인 비구 승려이며, 본명은 라이언 봉석 주(영어: Ryan Bongsuk Joo), 법명은 태훈(慧敏)이다. 대한민국의 외국인 등록에는 대한민국 국적 당시 이름인 주봉석으로 등록하였다."
-    }
-  },
-  {
-    "model": "books.author",
-    "pk": 88,
-    "fields": {
-      "name": "노기리 요코 (지은이)",
-      "profile_image": null,
-      "biography": ""
-    }
-  },
-  {
-    "model": "books.author",
-    "pk": 89,
-    "fields": {
-      "name": "달리아 이정현 (지은이)",
-      "profile_image": null,
-      "biography": ""
-    }
-  },
-  {
-    "model": "books.author",
-    "pk": 90,
-    "fields": {
-      "name": "게리 채프먼 (지은이), 장동숙, 황을호 (옮긴이)",
-      "profile_image": null,
-      "biography": ""
-    }
-  },
-  {
-    "model": "books.author",
-    "pk": 91,
-    "fields": {
-      "name": "김달 (지은이)",
-      "profile_image": null,
-      "biography": "김달은 대한민국의 만화가이다."
-    }
-  },
-  {
-    "model": "books.author",
-    "pk": 92,
-    "fields": {
-      "name": "김용택 (지은이)",
-      "profile_image": "https://upload.wikimedia.org/wikipedia/ko/thumb/6/6e/%EA%B9%80%EC%9A%A9%ED%83%9D_%EC%8B%9C%EC%9D%B8_%EC%82%AC%EC%9D%B8.JPG/330px-%EA%B9%80%EC%9A%A9%ED%83%9D_%EC%8B%9C%EC%9D%B8_%EC%82%AC%EC%9D%B8.JPG",
-      "biography": "김용택(金龍澤, 1948년 8월 26일~현재)은 대한민국의 시인이다."
-    }
-  },
-  {
-    "model": "books.author",
-    "pk": 93,
-    "fields": {
-      "name": "정신 (지은이), 사이이다 (사진), 공민선 (디자인)",
-      "profile_image": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1c/Blessing_genie_Dur_Sharrukin.jpg/330px-Blessing_genie_Dur_Sharrukin.jpg",
-      "biography": "정신(精神)은 육체나 물질에 대립되는 영혼이나 마음, 사물을 느끼고 생각하며 판단하는 능력 또는 그런 작용, 마음의 자세나 태도, 사물의 근본적인 의의나 목적 또는 이념이나 사상 등을 가리키는 말이다."
-    }
-  },
-  {
-    "model": "books.author",
-    "pk": 94,
-    "fields": {
-      "name": "다카하시 유타 (지은이), 윤은혜 (옮긴이)",
-      "profile_image": null,
-      "biography": ""
-    }
-  },
-  {
-    "model": "books.author",
-    "pk": 95,
-    "fields": {
-      "name": "임형규 (지은이)",
-      "profile_image": null,
-      "biography": ""
-    }
-  },
-  {
-    "model": "books.author",
-    "pk": 96,
-    "fields": {
-      "name": "예소연 (지은이)",
-      "profile_image": null,
-      "biography": ""
-    }
-  },
-  {
-    "model": "books.author",
-    "pk": 97,
-    "fields": {
-      "name": "샘 맥브래트니 (지은이), 아니타 제람 (그림), 김서정 (옮긴이)",
-      "profile_image": null,
-      "biography": ""
-    }
-  },
-  {
-    "model": "books.author",
-    "pk": 98,
-    "fields": {
-      "name": "진은영 (지은이)",
-      "profile_image": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a8/Jin_Eun-young_2019_%28P1020327%29.jpg/330px-Jin_Eun-young_2019_%28P1020327%29.jpg",
-      "biography": "진은영(1970년~)은 대한민국의 시인이자 철학자이다."
-    }
-  },
-  {
-    "model": "books.author",
-    "pk": 99,
-    "fields": {
-      "name": "시노아 (지은이)",
-      "profile_image": null,
-      "biography": ""
-    }
-  },
-  {
-    "model": "books.author",
-    "pk": 100,
-    "fields": {
-      "name": "ma2 (지은이)",
-      "profile_image": null,
-      "biography": ""
-    }
-  },
-  {
-    "model": "books.author",
-    "pk": 101,
-    "fields": {
-      "name": "마이클 노턴 (지은이), 홍한결 (옮긴이)",
-      "profile_image": null,
-      "biography": ""
-    }
-  },
-  {
-    "model": "books.author",
-    "pk": 102,
-    "fields": {
-      "name": "나카노 마야카 (지은이)",
-      "profile_image": null,
-      "biography": ""
-    }
-  },
-  {
-    "model": "books.author",
-    "pk": 103,
-    "fields": {
-      "name": "박완서 (지은이)",
-      "profile_image": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/38/Park_Wanso.jpg/330px-Park_Wanso.jpg",
-      "biography": "박완서(한국 한자: 朴婉緖, 1931년 10월 20일 ~ 2011년 1월 22일)는 대한민국의 소설가이다. 본관은 반남(潘南)이며 경기도 개풍군 출생이다. 40세의 나이에 《여성동아》 장편 소설 공모전에 〈나목〉(裸木)으로 당선되어 등단하였다. 등단한 이후 꾸준히 소설과 산문을 쓰며 작가로 활동하였다."
-    }
-  },
-  {
-    "model": "books.author",
-    "pk": 104,
-    "fields": {
-      "name": "히로 치히로 (지은이)",
-      "profile_image": null,
-      "biography": ""
-    }
-  },
-  {
-    "model": "books.author",
-    "pk": 105,
-    "fields": {
-      "name": "알랭 드 보통 (지은이), 정영목 (옮긴이)",
-      "profile_image": "https://upload.wikimedia.org/wikipedia/commons/4/4d/Alaindebotton.png",
-      "biography": "알랭 드 보통(Alain de Botton, 1969년 12월 20일 ~ )은 스위스 취리히에서 태어난 철학자, 소설가, 수필가이다. 현재 영국 런던에서 가족과 함께 거주 중이다. 또한 '한국인이 가장 사랑하는 작가' 중 한 명으로 손꼽히는 알랭 드 보통은 2008년 영국 런던에 세운 '인생학교'의 교장으로 활동 중이다."
-    }
-  },
-  {
-    "model": "books.author",
-    "pk": 106,
-    "fields": {
-      "name": "존 가트맨 (지은이), 남은영 (감수)",
-      "profile_image": null,
-      "biography": ""
-    }
-  },
-  {
-    "model": "books.author",
-    "pk": 107,
-    "fields": {
-      "name": "오오세토 리쿠 (지은이)",
-      "profile_image": null,
-      "biography": ""
-    }
-  },
-  {
-    "model": "books.author",
-    "pk": 108,
-    "fields": {
-      "name": "김창옥 (지은이)",
-      "profile_image": null,
-      "biography": ""
-    }
-  },
-  {
-    "model": "books.author",
-    "pk": 109,
-    "fields": {
-      "name": "유혜주, 조정연 (지은이)",
-      "profile_image": null,
-      "biography": ""
-    }
-  },
-  {
-    "model": "books.author",
-    "pk": 110,
-    "fields": {
-      "name": "제이크 비긴 (지은이), 최소라, 이코베 (옮긴이)",
-      "profile_image": null,
-      "biography": ""
-    }
-  },
-  {
-    "model": "books.author",
-    "pk": 111,
-    "fields": {
-      "name": "유선혜 (지은이)",
-      "profile_image": null,
-      "biography": "유선혜(1984년 6월 20일 ~)는 대한민국의 피겨스케이팅 선수다."
-    }
-  },
-  {
-    "model": "books.author",
-    "pk": 112,
-    "fields": {
-      "name": "알랭 드 보통 (지은이), 공경희 (옮긴이)",
-      "profile_image": "https://upload.wikimedia.org/wikipedia/commons/4/4d/Alaindebotton.png",
-      "biography": "알랭 드 보통(Alain de Botton, 1969년 12월 20일 ~ )은 스위스 취리히에서 태어난 철학자, 소설가, 수필가이다. 현재 영국 런던에서 가족과 함께 거주 중이다. 또한 '한국인이 가장 사랑하는 작가' 중 한 명으로 손꼽히는 알랭 드 보통은 2008년 영국 런던에 세운 '인생학교'의 교장으로 활동 중이다."
-    }
-  },
-  {
-    "model": "books.author",
-    "pk": 113,
-    "fields": {
-      "name": "스미노 요루 (지은이), 이소담 (옮긴이)",
-      "profile_image": null,
-      "biography": "스미노 요루(일본어: 住野よる)는 일본의 소설가이다. 2014년 소설가가 되자 웹사이트에 투고한 첫 웹 소설 《너의 췌장을 먹고 싶어》가 좋은 반응을 얻어서, 이듬해 정식 출판함으로써 전업 소설가로 데뷔했다."
-    }
-  },
-  {
-    "model": "books.author",
-    "pk": 114,
-    "fields": {
-      "name": "PC사랑 편집부 (지은이)",
-      "profile_image": null,
-      "biography": ""
-    }
-  },
-  {
-    "model": "books.author",
-    "pk": 115,
-    "fields": {
-      "name": "유수연 (지은이)",
-      "profile_image": null,
-      "biography": "유수연(1972년 1월 22일~ )은 대한민국의 영어 강사, 학원인이다."
-    }
-  },
-  {
-    "model": "books.author",
-    "pk": 116,
-    "fields": {
-      "name": "아케비 (지은이)",
-      "profile_image": null,
-      "biography": ""
-    }
-  },
-  {
-    "model": "books.author",
-    "pk": 117,
-    "fields": {
-      "name": "신형철 (지은이)",
-      "profile_image": null,
-      "biography": "신형철(1976년 ~ )은 대한민국의 문학평론가, 교수이다."
-    }
-  },
-  {
-    "model": "books.author",
-    "pk": 118,
-    "fields": {
-      "name": "이치조 미사키 (지은이), 김윤경 (옮긴이)",
-      "profile_image": null,
-      "biography": "오늘 밤, 세계에서 이 사랑이 사라진다 해도(일본어: 今夜、世界からこの恋が消えても)는 이치조 미사키의 소설이다. 2019년 제26회 전격 소설 대상(미디어 워크스 문고상)을 수상했다. 수상시 타이틀은 \"마음은 너를 그리니까\"(心は君を描くから)이다."
-    }
-  },
-  {
-    "model": "books.author",
-    "pk": 119,
-    "fields": {
-      "name": "타카나가 히나코 (지은이)",
-      "profile_image": null,
-      "biography": ""
-    }
-  },
-  {
-    "model": "books.author",
-    "pk": 120,
-    "fields": {
-      "name": "최승자 (지은이)",
-      "profile_image": "https://upload.wikimedia.org/wikipedia/commons/6/68/Choi_Seung-ja.jpg",
-      "biography": "최승자(崔勝子, 1952년~)는 대한민국의 시인이다."
-    }
-  },
-  {
-    "model": "books.author",
-    "pk": 121,
-    "fields": {
-      "name": "SLL (지은이)",
-      "profile_image": null,
-      "biography": "SLL의 다른 뜻은 다음과 같다.시에라리온 리온(Sierra Leonean leone)\nB세포 만성 림프성 백혈병(B-cell chronic lymphocytic leukemia)\n"
-    }
-  },
-  {
-    "model": "books.author",
-    "pk": 122,
-    "fields": {
-      "name": "MBC드라마 (지은이)",
-      "profile_image": null,
-      "biography": ""
-    }
-  },
-  {
-    "model": "books.author",
-    "pk": 123,
-    "fields": {
-      "name": "이경규 (지은이)",
-      "profile_image": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/21/191025_%EC%9D%B4%EA%B2%BD%EA%B7%9C_%284%29.jpg/330px-191025_%EC%9D%B4%EA%B2%BD%EA%B7%9C_%284%29.jpg",
-      "biography": "이경규(본명: 이명규, 1960년 9월 21일 ~ )는 대한민국의 희극인, MC이다."
-    }
-  },
-  {
-    "model": "books.author",
-    "pk": 124,
-    "fields": {
-      "name": "왓챠, 래몽래인 (지은이)",
-      "profile_image": "https://upload.wikimedia.org/wikipedia/commons/b/b8/%EC%99%93%EC%B1%A0_%EB%A1%9C%EA%B3%A0_2021.png",
-      "biography": "왓챠는 2011년 9월에 설립된 대한민국의 소프트웨어 회사이다. 대표 박태훈은 서울과학고를 졸업하고 KAIST 전산학과를 중퇴한 후 원지현, 이태현, 이충재와 설립하였다. 영화 추천 프로그램\"왓챠(Watcha)\"를 개발하였다. 2012년 카카오벤처스(당시 케이큐브벤처스)로부터 초기투자를 유치하고, 2013년 메가인베스트먼트와 삼호그린인베스트먼트, 캡스톤파트너스로부터 25억원 규모의 투자를 유치하였다. 2015년 8월 6일 '왓챠'는 기존 영화 중심의 콘텐츠를 드라마까지 확장하고 피드·댓글 기능 도입과 태그 기반 추천 등을 핵심으로 업데이트한 '왓챠 3.0'을 발표했다."
-    }
-  },
-  {
-    "model": "books.author",
-    "pk": 125,
-    "fields": {
-      "name": "한진수 (지은이)",
-      "profile_image": null,
-      "biography": "한진수의 다른 뜻은 다음과 같다."
-    }
-  },
-  {
-    "model": "books.author",
-    "pk": 126,
-    "fields": {
-      "name": "최문희, 이효원, 심다현, 신나영, 박지영, 윤영진, 전승희, 김위아 (지은이)",
-      "profile_image": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0f/170204_%EB%B3%B4%EB%84%88%EC%8A%A4%EB%B2%A0%EC%9D%B4%EB%B9%84_-_%EC%9D%8C%EC%95%85%EC%A4%91%EC%8B%AC_%ED%8C%AC%EB%AF%B8%ED%8C%85_Bonusbaby_-_Music_Core_fanmeeting_%2815P%29_%288%29.jpg/330px-170204_%EB%B3%B4%EB%84%88%EC%8A%A4%EB%B2%A0%EC%9D%B4%EB%B9%84_-_%EC%9D%8C%EC%95%85%EC%A4%91%EC%8B%AC_%ED%8C%AC%EB%AF%B8%ED%8C%85_Bonusbaby_-_Music_Core_fanmeeting_%2815P%29_%288%29.jpg",
-      "biography": "문희(본명: 최문희, 1997년 4월 25일 ~ )는 대한민국의 배우이자 가수이다."
-    }
-  },
-  {
-    "model": "books.author",
-    "pk": 127,
-    "fields": {
-      "name": "곽한영 (지은이)",
-      "profile_image": null,
-      "biography": ""
-    }
-  },
-  {
-    "model": "books.author",
-    "pk": 128,
-    "fields": {
-      "name": "화앤담픽쳐스, 스토리컬쳐 (지은이)",
-      "profile_image": null,
-      "biography": ""
-    }
-  },
-  {
-    "model": "books.author",
-    "pk": 129,
-    "fields": {
-      "name": "홍자성 (지은이), 이규호 (해제)",
-      "profile_image": null,
-      "biography": ""
-    }
-  },
-  {
-    "model": "books.author",
-    "pk": 130,
-    "fields": {
-      "name": "강성태 (지은이)",
-      "profile_image": null,
-      "biography": "강성태는 다음 사람 등을 가리킨다.강성태(姜聲邰, 1903~1976): 대한민국의 정치인. 제8대 상공부장관. 제4대 국회의원\n강성태(姜成泰, 1960~): 대한민국의 정치인. 민선 8기 부산 수영구청장\n강성태(姜成泰, 1965~): 대한민국의 노동법 전공 법학자\n강성태(1983~): 대한민국의 학원인. 공신닷컴의 CEO"
-    }
-  },
-  {
-    "model": "books.author",
-    "pk": 131,
-    "fields": {
-      "name": "구정화 (지은이)",
-      "profile_image": null,
-      "biography": ""
-    }
-  },
-  {
-    "model": "books.author",
-    "pk": 132,
-    "fields": {
-      "name": "브라이언 딜런 (지은이), 김정아 (옮긴이)",
-      "profile_image": null,
-      "biography": ""
-    }
-  },
-  {
-    "model": "books.author",
-    "pk": 133,
-    "fields": {
-      "name": "황석희 (지은이)",
-      "profile_image": null,
-      "biography": "황석희는 대한민국의 영화 번역가이다. 강원대학교 영어교육학과를 졸업했다. 데드풀 (영화)을 비롯해 소니 픽처스 엔터테인먼트의 스파이더맨 영화 시리즈를 비롯해 워너뮤직의 뮤직비디오들을 번역했다."
-    }
-  },
-  {
-    "model": "books.author",
-    "pk": 134,
-    "fields": {
-      "name": "김교빈, 이현구 (지은이), 이부록 (그림)",
-      "profile_image": null,
-      "biography": "김시훈(1987년 12월 29일 ~ )은 대한민국의 전 축구 선수이다. 개명 전 이름우 김교빈으로 현재 성남 FC 골키퍼 코치로 재직중이다."
-    }
-  },
-  {
-    "model": "books.author",
-    "pk": 135,
-    "fields": {
-      "name": "권경민 (지은이)",
-      "profile_image": null,
-      "biography": "권경민(1982년 1월 3일~)은 대한민국의 다이빙 선수로, 1996년 하계 올림픽과 2000년 하계 올림픽에 참가했다."
-    }
-  },
-  {
-    "model": "books.author",
-    "pk": 136,
-    "fields": {
-      "name": "김지호 (지은이)",
-      "profile_image": null,
-      "biography": "김지호는 다음 사람을 가리킨다."
-    }
-  },
-  {
-    "model": "books.author",
-    "pk": 137,
-    "fields": {
-      "name": "홍정욱 (지은이)",
-      "profile_image": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/90/%ED%99%8D%EC%A0%95%EC%9A%B1%EC%A0%84%EA%B5%AD%ED%9A%8C%EC%9D%98%EC%9B%90.webp/330px-%ED%99%8D%EC%A0%95%EC%9A%B1%EC%A0%84%EA%B5%AD%ED%9A%8C%EC%9D%98%EC%9B%90.webp.png",
-      "biography": "홍정욱(洪政旭, 1970년 3월 14일~)은 대한민국의 기업인, 정치인이다. 헤럴드그룹 회장이며, 제18대 국회의원(2008. 5.~2012. 5.)이다."
-    }
-  },
-  {
-    "model": "books.author",
-    "pk": 138,
-    "fields": {
-      "name": "조성오 (지은이), 이우일 (그림)",
-      "profile_image": null,
-      "biography": ""
-    }
-  },
-  {
-    "model": "books.author",
-    "pk": 139,
-    "fields": {
-      "name": "박성혁 (지은이)",
-      "profile_image": null,
-      "biography": "박승혁(1990년 5월 30일 ~ )은 조선민주주의인민공화국의 축구 선수이다. 포지션은 수비수로, 2010년 FIFA 월드컵에 최종 엔트리에 포함되었지만, 본선 경기에서 기용되지는 않았다."
-    }
-  },
-  {
-    "model": "books.author",
-    "pk": 140,
-    "fields": {
-      "name": "이보람 (지은이)",
-      "profile_image": null,
-      "biography": "이보람은 다음 사람을 가리킨다.이보람(1987년 ~ )은 대한민국의 가수이다. 음악그룹 씨야의 일원으로 활동하였다.\n이보람(1988년 ~ )은 대한민국의 여자 배구 선수이다.\n이보람(1992년 ~ )은 대한민국의 가수이다.\n이보람은 보람튜브의 주인공이다."
-    }
-  },
-  {
-    "model": "books.author",
-    "pk": 141,
-    "fields": {
-      "name": "임수진(밤호수) (지은이)",
-      "profile_image": null,
-      "biography": "임수진(1945년 7월 5일 ~ )은 대한민국의 정치인이다. 제43·44·45대 진안군수를 역임했다."
-    }
-  },
-  {
-    "model": "books.author",
-    "pk": 142,
-    "fields": {
-      "name": "김훈 (지은이)",
-      "profile_image": null,
-      "biography": "김훈의 다른 뜻은 다음과 같다.김훈(金訓, ? ~ 1015)은 고려의 무신이자 반역자이다.\n김훈(金薰, 1870 ~ ?)은 일제 강점기의 관료이다.\n김훈(1900 ~ ?)은 대한민국의 전 국회의원, 전 상공부 장관이다.\n김훈(金勳, 1901? ∼ 1938?)은 한국의 독립운동가이다.\n김훈(金勳, 1909 ~ 1986)은 제4,5대 국회의원을 지낸 대한민국의 정치인이다.\n김훈(1924 ~ )은 대한민국의 화가이다.\n김훈(1944 ~ )은 대한민국의 전 공무원이다.\n김훈(金薰, 1948 ~ )은 대한민국의 소설가이다.\n김훈(金訓, 1970 ~ )은 대한민국의 전 야구 선수이다. 전 해태 타이거즈의 외야수이다.\n김훈(金勳, 1973 ~ )은 대한민국의 농구 선수이다.\n김훈(1980 ~ )은 대한민국의 종합격투기 선수이다.\n김훈(1982 ~ )은 대한민국의 전라남도 목포시의원이다.\n김훈은 대한민국 만화가 고행석의 만화에 등장하는 캐릭터이다.\n김훈은 대한민국의 태권도 선수이다."
-    }
-  },
-  {
-    "model": "books.author",
-    "pk": 143,
-    "fields": {
-      "name": "스튜디오 드래곤 (지은이)",
-      "profile_image": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/72/Studio_Dragon_LOGO_%282022%29.png/330px-Studio_Dragon_LOGO_%282022%29.png",
-      "biography": "스튜디오드래곤 주식회사(영어: Studio Dragon Corporation)는 대한민국의 드라마 제작 기업으로 CJ(주)의 자회사 CJ ENM의 계열사이다. CJ E&M은 2010년 3월 드라마사업에 본격적으로 뛰어들었고, 2016년 5월 3일에 스튜디오드래곤을 설립하였다. 본사는 서울특별시 마포구 상암산로 75 에 있다."
-    }
-  },
-  {
-    "model": "books.author",
-    "pk": 144,
-    "fields": {
-      "name": "하지현 (지은이)",
-      "profile_image": null,
-      "biography": "하지현(河智賢, 1967 ~ )은 대한민국의 정신건강의학과 전문의이다."
-    }
-  },
-  {
-    "model": "books.author",
-    "pk": 145,
-    "fields": {
-      "name": "아이작 아시모프 (지은이), 권루시안 (옮긴이)",
-      "profile_image": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/34/Isaac.Asimov01.jpg/330px-Isaac.Asimov01.jpg",
-      "biography": "아이작 아시모프(영어: Isaac Asimov, 영어 발음: /ˈaɪzək ˈæzɪmɒv/, 1920년 1월 2일 ~ 1992년 4월 6일)는 소련 출신 미국의 과학 소설가, 저술가, 보스턴 대학교의 생화학 교수이다. 아시모프는 죽기 전까지 500권 이상의 책을 쓰고 다듬어 로버트 A. 하인라인, 아서 C. 클라크와 함께 SF계의 \"삼대 거장\"(Big Three)으로 간주된다. 9만여 개의 편지와 엽서를 쓰고 받기도 했는데, 과학소설뿐만 아니라 미스터리와 판타지 등의 장르의 소설도 썼다."
-    }
-  },
-  {
-    "model": "books.author",
-    "pk": 146,
-    "fields": {
-      "name": "김창완 (지은이)",
-      "profile_image": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/Kim_Chang-wan_%28cropped%29.jpg/330px-Kim_Chang-wan_%28cropped%29.jpg",
-      "biography": "김창완(金昌完, 1954년 2월 22일~)은 대한민국의 싱어송라이터이자 음악가 겸 배우 겸 방송인이다. 1977년부터 31년 남짓 동안 포크 록 음악 밴드 《산울림》의 리더로 활약했다."
-    }
-  },
-  {
-    "model": "books.author",
-    "pk": 147,
-    "fields": {
-      "name": "김교빈 (지은이), 이부록 (그림)",
-      "profile_image": null,
-      "biography": "김시훈(1987년 12월 29일 ~ )은 대한민국의 전 축구 선수이다. 개명 전 이름우 김교빈으로 현재 성남 FC 골키퍼 코치로 재직중이다."
-    }
-  },
-  {
-    "model": "books.author",
-    "pk": 148,
-    "fields": {
-      "name": "김만권 (지은이)",
-      "profile_image": null,
-      "biography": ""
-    }
-  },
-  {
-    "model": "books.author",
-    "pk": 149,
-    "fields": {
-      "name": "스튜디오S (지은이)",
-      "profile_image": null,
-      "biography": "주식회사 스튜디오S(영어: Studio S)는 대한민국의 드라마 제작사로, SBS의 자회사이다."
-    }
-  },
-  {
-    "model": "books.author",
-    "pk": 150,
-    "fields": {
-      "name": "마르쿠스 아우렐리우스, 루키우스 안나이우스 세네카, 플루타르코스, 마르쿠스 툴리우스 키케로 (지은이), 천병희 (옮긴이)",
-      "profile_image": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b4/Marcus_Aurelius_bust_Istanbul_Archaeological_Museum_-_inv._5129_T.jpg/330px-Marcus_Aurelius_bust_Istanbul_Archaeological_Museum_-_inv._5129_T.jpg",
-      "biography": "마르쿠스 아우렐리우스 안토니누스(라틴어: Marcus Aurelius Antoninus, 121년 4월 26일 - 180년 3월 17일)는 로마 제국의 제16대 황제(161 - 180년)이자 스토아 학파 철학자이다. 그는 오현제 라고 알려진 통치자들 중 마지막 인물이자, 두 번째로는 마르쿠스 아우렐리우스의 아들 콤모두스 이전 로마 제국의 상대적 평화와 안정성의 시기인 팍스 로마나 의 마지막 황제였다. 그는 140년, 145년, 161년에 집정관직을 수행하기도 했다."
-    }
-  },
-  {
-    "model": "books.author",
-    "pk": 151,
-    "fields": {
-      "name": "스튜디오 커피브레이크 (지은이)",
-      "profile_image": null,
-      "biography": ""
-    }
-  },
-  {
-    "model": "books.author",
-    "pk": 152,
-    "fields": {
-      "name": "김필영 (지은이)",
-      "profile_image": null,
-      "biography": ""
-    }
-  },
-  {
-    "model": "books.author",
-    "pk": 153,
-    "fields": {
-      "name": "이연실 (지은이)",
-      "profile_image": null,
-      "biography": ""
-    }
-  },
-  {
-    "model": "books.author",
-    "pk": 154,
-    "fields": {
-      "name": "박혜란 (지은이)",
-      "profile_image": null,
-      "biography": ""
-    }
-  },
-  {
-    "model": "books.author",
-    "pk": 155,
-    "fields": {
-      "name": "이학주 (지은이)",
-      "profile_image": null,
-      "biography": "이학주의 다른 뜻은 다음과 같다.이학주(1986년 ~ )는 대한민국의 전 프로게이머이다.\n이학주(1989년 ~ )는 대한민국의 배우이다.\n이학주(李學周, 1990년 ~ )는 전 KBO 리그 롯데 자이언츠의 내야수이다."
-    }
-  },
-  {
-    "model": "books.author",
-    "pk": 156,
-    "fields": {
-      "name": "한비야 (지은이)",
-      "profile_image": null,
-      "biography": "한비야(韓飛野, 개명 전 이름 한인순, 1958년 6월 26일 ~, 서울 출생)는 대한민국의 국제구호활동가이자 작가, 전 월드비전 긴급구호팀 팀장이다."
-    }
-  },
-  {
-    "model": "books.author",
-    "pk": 157,
-    "fields": {
-      "name": "김태균 (지은이)",
-      "profile_image": null,
-      "biography": "김태균의 다른 뜻은 다음과 같다."
-    }
-  },
-  {
-    "model": "books.author",
-    "pk": 158,
-    "fields": {
-      "name": "황보름 (지은이)",
-      "profile_image": null,
-      "biography": ""
-    }
-  },
-  {
-    "model": "books.author",
-    "pk": 159,
-    "fields": {
-      "name": "남성현 (지은이)",
-      "profile_image": null,
-      "biography": "남성현(南成鉉, 1958년 ~ )은 대한민국의 제34대 산림청장인 공무원이다."
-    }
-  },
-  {
-    "model": "books.author",
-    "pk": 160,
-    "fields": {
-      "name": "조지 오웰 (지은이), 이한중 (옮긴이)",
-      "profile_image": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7a/George-orwell-BBC.jpg/330px-George-orwell-BBC.jpg",
-      "biography": "에릭 아서 블레어(영어: Eric Arthur Blair, 1903년 6월 25일~1950년 1월 21일)는 조지 오웰(영어: George Orwell)이라는 필명으로 널리 알려진, 인도 제국에서 태어난 영국의 작가이자 언론인이다. 명료한 문체로 사회 부조리를 고발하고 전체주의에 대한 비판과 민주사회주의에 대한 지지를 표한 것으로 유명하다."
-    }
-  },
-  {
-    "model": "books.author",
-    "pk": 161,
-    "fields": {
-      "name": "지크문트 프로이트 (지은이), 박종대 (옮긴이)",
-      "profile_image": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/Sigmund_Freud_LIFE.jpg/330px-Sigmund_Freud_LIFE.jpg",
-      "biography": "지그문트 프로이트(독일어: Sigmund Freud 지크문트 프로이트[*], 독일어 발음: [ˈziːkmʊnt ˈfrɔʏt], 1856년 5월 6일~1939년 9월 23일)는 오스트리아의 심리학자로 정신분석학의 창시자이다. 본명은 지기스문트 슐로모 프로이트(독일어: Sigismund Schlomo Freud)이다."
-    }
-  },
-  {
-    "model": "books.author",
-    "pk": 162,
-    "fields": {
-      "name": "앤피오엔터테인먼트, 바이포엠스튜디오, SLL (지은이)",
-      "profile_image": null,
-      "biography": "앤피오엔터테인먼트는 대한민국의 종합엔터테인먼트회사이다. 변호사, 키이스트 대표이사, JYP엔터테인먼트 부사장였던 표종록이 2019년에 새로 설립한 배우 전문 기획사 및 드라마•영화 제작사이다."
-    }
-  },
-  {
-    "model": "books.author",
-    "pk": 163,
-    "fields": {
-      "name": "mbc 드라마 [연인] 제작진 (지은이)",
-      "profile_image": null,
-      "biography": ""
-    }
-  },
-  {
-    "model": "books.author",
-    "pk": 164,
+    "pk": 2,
     "fields": {
       "name": "한상복 (지은이)",
       "profile_image": null,
@@ -1477,7 +19,7 @@
   },
   {
     "model": "books.author",
-    "pk": 165,
+    "pk": 3,
     "fields": {
       "name": "데일 카네기 (지은이), 베스트트랜스 (옮긴이)",
       "profile_image": null,
@@ -1486,7 +28,7 @@
   },
   {
     "model": "books.author",
-    "pk": 166,
+    "pk": 4,
     "fields": {
       "name": "서동진 (지은이)",
       "profile_image": null,
@@ -1495,7 +37,7 @@
   },
   {
     "model": "books.author",
-    "pk": 167,
+    "pk": 5,
     "fields": {
       "name": "얼 나이팅게일 (지은이), 정지현 (옮긴이)",
       "profile_image": null,
@@ -1504,7 +46,7 @@
   },
   {
     "model": "books.author",
-    "pk": 168,
+    "pk": 6,
     "fields": {
       "name": "마크 코켈버그 (지은이), 연아람 (옮긴이)",
       "profile_image": null,
@@ -1513,7 +55,7 @@
   },
   {
     "model": "books.author",
-    "pk": 169,
+    "pk": 7,
     "fields": {
       "name": "조신영, 박현찬 (지은이)",
       "profile_image": null,
@@ -1522,7 +64,7 @@
   },
   {
     "model": "books.author",
-    "pk": 170,
+    "pk": 8,
     "fields": {
       "name": "스켑틱 협회 편집부 (엮은이)",
       "profile_image": null,
@@ -1531,7 +73,7 @@
   },
   {
     "model": "books.author",
-    "pk": 171,
+    "pk": 9,
     "fields": {
       "name": "재수 (지은이)",
       "profile_image": null,
@@ -1540,7 +82,7 @@
   },
   {
     "model": "books.author",
-    "pk": 172,
+    "pk": 10,
     "fields": {
       "name": "알랭 드 보통, 인생학교 (지은이), 백현주 (옮긴이)",
       "profile_image": "https://upload.wikimedia.org/wikipedia/commons/4/4d/Alaindebotton.png",
@@ -1549,7 +91,7 @@
   },
   {
     "model": "books.author",
-    "pk": 173,
+    "pk": 11,
     "fields": {
       "name": "톰 버틀러 보던 (지은이), 이정은, 전원미 (옮긴이)",
       "profile_image": null,
@@ -1558,7 +100,7 @@
   },
   {
     "model": "books.author",
-    "pk": 174,
+    "pk": 12,
     "fields": {
       "name": "아르누보 편집부 (지은이)",
       "profile_image": null,
@@ -1567,7 +109,7 @@
   },
   {
     "model": "books.author",
-    "pk": 175,
+    "pk": 13,
     "fields": {
       "name": "김현두 (지은이)",
       "profile_image": null,
@@ -1576,7 +118,7 @@
   },
   {
     "model": "books.author",
-    "pk": 176,
+    "pk": 14,
     "fields": {
       "name": "알랭 드 보통, 인생학교 (지은이), 신인수 (옮긴이)",
       "profile_image": "https://upload.wikimedia.org/wikipedia/commons/4/4d/Alaindebotton.png",
@@ -1585,7 +127,7 @@
   },
   {
     "model": "books.author",
-    "pk": 177,
+    "pk": 15,
     "fields": {
       "name": "미키 맥기 (지은이), 김상화 (옮긴이)",
       "profile_image": null,
@@ -1594,7 +136,7 @@
   },
   {
     "model": "books.author",
-    "pk": 178,
+    "pk": 16,
     "fields": {
       "name": "조성진 (지은이)",
       "profile_image": null,
@@ -1603,7 +145,7 @@
   },
   {
     "model": "books.author",
-    "pk": 179,
+    "pk": 17,
     "fields": {
       "name": "안나 카타리나 샤프너 (지은이), 윤희기 (옮긴이)",
       "profile_image": null,
@@ -1612,7 +154,7 @@
   },
   {
     "model": "books.author",
-    "pk": 180,
+    "pk": 18,
     "fields": {
       "name": "한상복 (지은이), 전지은 (글), 김성신 (그림)",
       "profile_image": null,
@@ -1621,7 +163,7 @@
   },
   {
     "model": "books.author",
-    "pk": 181,
+    "pk": 19,
     "fields": {
       "name": "폴 매케나 (지은이), 서진 (엮은이)",
       "profile_image": null,
@@ -1630,7 +172,7 @@
   },
   {
     "model": "books.author",
-    "pk": 182,
+    "pk": 20,
     "fields": {
       "name": "김경민 (글), 추덕영 (그림)",
       "profile_image": null,
@@ -1639,16 +181,7 @@
   },
   {
     "model": "books.author",
-    "pk": 183,
-    "fields": {
-      "name": "김미경 (지은이)",
-      "profile_image": null,
-      "biography": "김미경은 다음 사람 등을 가리킨다."
-    }
-  },
-  {
-    "model": "books.author",
-    "pk": 184,
+    "pk": 21,
     "fields": {
       "name": "최준형, 박광희 (지은이)",
       "profile_image": null,
@@ -1657,7 +190,16 @@
   },
   {
     "model": "books.author",
-    "pk": 185,
+    "pk": 22,
+    "fields": {
+      "name": "김미경 (지은이)",
+      "profile_image": null,
+      "biography": "김미경은 다음 사람 등을 가리킨다."
+    }
+  },
+  {
+    "model": "books.author",
+    "pk": 23,
     "fields": {
       "name": "이규은 (지은이)",
       "profile_image": null,
@@ -1666,7 +208,7 @@
   },
   {
     "model": "books.author",
-    "pk": 186,
+    "pk": 24,
     "fields": {
       "name": "김성회 (지은이)",
       "profile_image": null,
@@ -1675,7 +217,7 @@
   },
   {
     "model": "books.author",
-    "pk": 187,
+    "pk": 25,
     "fields": {
       "name": "박일순 (지은이)",
       "profile_image": null,
@@ -1684,7 +226,7 @@
   },
   {
     "model": "books.author",
-    "pk": 188,
+    "pk": 26,
     "fields": {
       "name": "한영희 (지은이), 추덕영 (그림)",
       "profile_image": null,
@@ -1693,7 +235,7 @@
   },
   {
     "model": "books.author",
-    "pk": 189,
+    "pk": 27,
     "fields": {
       "name": "전지은 (지은이), 김성신 (그림)",
       "profile_image": null,
@@ -1702,16 +244,7 @@
   },
   {
     "model": "books.author",
-    "pk": 190,
-    "fields": {
-      "name": "ALC 편집부 (지은이), 정은희 (옮긴이)",
-      "profile_image": null,
-      "biography": ""
-    }
-  },
-  {
-    "model": "books.author",
-    "pk": 191,
+    "pk": 28,
     "fields": {
       "name": "이지은(지니쌤) (지은이)",
       "profile_image": null,
@@ -1720,7 +253,16 @@
   },
   {
     "model": "books.author",
-    "pk": 192,
+    "pk": 29,
+    "fields": {
+      "name": "ALC 편집부 (지은이), 정은희 (옮긴이)",
+      "profile_image": null,
+      "biography": ""
+    }
+  },
+  {
+    "model": "books.author",
+    "pk": 30,
     "fields": {
       "name": "로버트 콜리어 (지은이), 서진 (편저)",
       "profile_image": null,
@@ -1729,7 +271,7 @@
   },
   {
     "model": "books.author",
-    "pk": 193,
+    "pk": 31,
     "fields": {
       "name": "유채은, 조규판 (지은이)",
       "profile_image": null,
@@ -1738,7 +280,7 @@
   },
   {
     "model": "books.author",
-    "pk": 194,
+    "pk": 32,
     "fields": {
       "name": "전지은 (지은이), 토드 홉킨스, 레이 힐버트 (원작), 최수연 (그림)",
       "profile_image": null,
@@ -1747,7 +289,7 @@
   },
   {
     "model": "books.author",
-    "pk": 195,
+    "pk": 33,
     "fields": {
       "name": "바딤 젤란드 (지은이), 정승혜 (옮긴이)",
       "profile_image": null,
@@ -1756,7 +298,7 @@
   },
   {
     "model": "books.author",
-    "pk": 196,
+    "pk": 34,
     "fields": {
       "name": "정예슬 (지은이)",
       "profile_image": null,
@@ -1765,7 +307,7 @@
   },
   {
     "model": "books.author",
-    "pk": 197,
+    "pk": 35,
     "fields": {
       "name": "양태석 (지은이), 최정인 (그림)",
       "profile_image": null,
@@ -1774,25 +316,7 @@
   },
   {
     "model": "books.author",
-    "pk": 198,
-    "fields": {
-      "name": "정진 (지은이), 조신영, 박현찬 (원작), 김지혁 (그림)",
-      "profile_image": null,
-      "biography": "정진의 뜻은 다음과 같다.정진(精進)은 불교의 개념으로, 근(勤)이라고도 한다.\n정진은 세이시라고도 하며 닫힌 수역에서 발생하는 정상파를 의미한다."
-    }
-  },
-  {
-    "model": "books.author",
-    "pk": 199,
-    "fields": {
-      "name": "김경아, 김은숙, 김태경, 손청희, 신승희, 양은영, 어수혜, 이명희, 이미영, 이은경 (지은이)",
-      "profile_image": null,
-      "biography": "김경아는 다음 사람을 가리킨다."
-    }
-  },
-  {
-    "model": "books.author",
-    "pk": 200,
+    "pk": 36,
     "fields": {
       "name": "데일 카네기 (지은이), 정내현 (옮긴이)",
       "profile_image": null,
@@ -1801,7 +325,25 @@
   },
   {
     "model": "books.author",
-    "pk": 201,
+    "pk": 37,
+    "fields": {
+      "name": "정진 (지은이), 조신영, 박현찬 (원작), 김지혁 (그림)",
+      "profile_image": null,
+      "biography": "정진의 뜻은 다음과 같다.정진(精進)은 불교의 개념으로, 근(勤)이라고도 한다.\n정진은 세이시라고도 하며 닫힌 수역에서 발생하는 정상파를 의미한다."
+    }
+  },
+  {
+    "model": "books.author",
+    "pk": 38,
+    "fields": {
+      "name": "김경아, 김은숙, 김태경, 손청희, 신승희, 양은영, 어수혜, 이명희, 이미영, 이은경 (지은이)",
+      "profile_image": null,
+      "biography": "김경아는 다음 사람을 가리킨다."
+    }
+  },
+  {
+    "model": "books.author",
+    "pk": 39,
     "fields": {
       "name": "유영만 (지은이)",
       "profile_image": null,
@@ -1810,7 +352,7 @@
   },
   {
     "model": "books.author",
-    "pk": 202,
+    "pk": 40,
     "fields": {
       "name": "김미옥, 김서영, 최정아 (지은이)",
       "profile_image": null,
@@ -1819,16 +361,7 @@
   },
   {
     "model": "books.author",
-    "pk": 203,
-    "fields": {
-      "name": "박경인, 권준모 (지은이)",
-      "profile_image": null,
-      "biography": ""
-    }
-  },
-  {
-    "model": "books.author",
-    "pk": 204,
+    "pk": 41,
     "fields": {
       "name": "데일 카네기 (지은이), 바른번역 (옮긴이)",
       "profile_image": null,
@@ -1837,7 +370,16 @@
   },
   {
     "model": "books.author",
-    "pk": 205,
+    "pk": 42,
+    "fields": {
+      "name": "박경인, 권준모 (지은이)",
+      "profile_image": null,
+      "biography": ""
+    }
+  },
+  {
+    "model": "books.author",
+    "pk": 43,
     "fields": {
       "name": "도키코치(황선희) (지은이)",
       "profile_image": null,
@@ -1846,448 +388,538 @@
   },
   {
     "model": "books.author",
-    "pk": 206,
+    "pk": 44,
     "fields": {
-      "name": "비키 마이런, 브렛 위터 (지은이), 배유정 (옮긴이)",
+      "name": "마누엘 루이스 후라도 (지은이), 이경상 (옮긴이)",
       "profile_image": null,
       "biography": ""
     }
   },
   {
     "model": "books.author",
-    "pk": 207,
+    "pk": 45,
     "fields": {
-      "name": "로빈 허턴 (지은이), 황하민 (옮긴이)",
+      "name": "Coco Uzuki (지은이), 정효진 (옮긴이)",
       "profile_image": null,
       "biography": ""
     }
   },
   {
     "model": "books.author",
-    "pk": 208,
+    "pk": 46,
     "fields": {
-      "name": "이호철 (지은이)",
-      "profile_image": null,
-      "biography": "이호철의 다른 뜻은 다음과 같다.이호철(李浩哲, 1932년 ~ 2016년)는 대한민국의 소설가이다.\n이호철(1958년 ~ )는 대한민국의 공무원이다.\n이호철(1985년 ~ )는 대한민국의 배우이다.\n이호철(李鎬澈, 1987년 ~ )는 대한민국의 연극배우이다.\n이호철는 대한민국의 아나운서이다."
-    }
-  },
-  {
-    "model": "books.author",
-    "pk": 209,
-    "fields": {
-      "name": "히사이시 조 (Joe Hisaishi) (지은이), 이선희 (옮긴이)",
-      "profile_image": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6d/2008-03-14_Joe_Hisaishi.jpg/330px-2008-03-14_Joe_Hisaishi.jpg",
-      "biography": "히사이시 조(일본어: 久石讓, ひさいし じょう, 1950년 12월 6일 ~ )는 일본의 음악가, 작곡가, 지휘자이다. 본명은 후지사와 마모루(일본어: 藤澤守, ふじさわ まもる)이다. 영화 클래식 음악을 작곡한 작곡가이자 현대 클래식 작곡가, 거장 중 한 사람이다."
-    }
-  },
-  {
-    "model": "books.author",
-    "pk": 210,
-    "fields": {
-      "name": "장남호, 이묘희, 이지숙, 금종애, 윤혜영, 유재신, 박미경, 강혜선, 김은영 (지은이)",
+      "name": "후쿠다 신이치 (지은이), 박연지 (옮긴이)",
       "profile_image": null,
       "biography": ""
     }
   },
   {
     "model": "books.author",
-    "pk": 211,
+    "pk": 47,
     "fields": {
-      "name": "후지코 F. 후지오 (지은이)",
-      "profile_image": null,
-      "biography": "후지코 F. 후지오(藤子・F・不二雄 1933년 12월 1일 ~ 1996년 9월 23일)는 일본의 만화가이다. 본명은 후지모토 히로시(藤本 弘)(ふじもと ひろし)이다. 선배인 테즈카 오사무의 영향을 받았다."
+      "name": "한강 (지은이)",
+      "profile_image": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/Korea-Seoul-Han_River-01.jpg/330px-Korea-Seoul-Han_River-01.jpg",
+      "biography": "한강(漢江, 영어: Hangang 또는 Hangang River)은 대한민국 강원특별자치도 태백시에서 시작하여 한반도 중부를 동에서 서로 통과해 황해로 유입되는 한국의 주요 하천이다. 태백산맥의 금대봉 정상부 북쪽 비탈에서 발원하여 강화해협 부근의 어귀로 흘러가는 물줄기를 본류로 한다. 대한민국의 관찬 자료집인 《한국하천일람》 2013년 판에 따르면 본류 총연장은 494km 남짓이다."
     }
   },
   {
     "model": "books.author",
-    "pk": 212,
+    "pk": 48,
     "fields": {
-      "name": "윤재수 (지은이)",
-      "profile_image": null,
-      "biography": ""
-    }
-  },
-  {
-    "model": "books.author",
-    "pk": 213,
-    "fields": {
-      "name": "채신석, 김재호 (지은이)",
+      "name": "양안다 (지은이)",
       "profile_image": null,
       "biography": ""
     }
   },
   {
     "model": "books.author",
-    "pk": 214,
+    "pk": 49,
     "fields": {
-      "name": "김문태 (지은이), 이상미 (그림)",
+      "name": "소라하나 미아 (지은이)",
       "profile_image": null,
       "biography": ""
     }
   },
   {
     "model": "books.author",
-    "pk": 215,
+    "pk": 50,
     "fields": {
-      "name": "심재원, Danton Ford, Paul Kim (지은이)",
-      "profile_image": null,
-      "biography": "심재원의 다른 뜻은 다음과 같다.심재원 은 전 KBO 리그 선수이다.\n심재원 은 대한민국의 전 축구 선수이다.\n심재원 은 대한민국의 배우이다.\n심재원 은 대한민국의 가수이다."
-    }
-  },
-  {
-    "model": "books.author",
-    "pk": 216,
-    "fields": {
-      "name": "사라 함마르크란스, 카트린 산드베리 (지은이), 김아영 (옮긴이)",
+      "name": "원형준 (지은이)",
       "profile_image": null,
       "biography": ""
     }
   },
   {
     "model": "books.author",
-    "pk": 217,
+    "pk": 51,
     "fields": {
-      "name": "임마누엘 스베덴보리 (지은이), 스베덴보리 연구회 (엮은이)",
+      "name": "필리파 페리 (지은이), 방수연 (옮긴이)",
       "profile_image": null,
       "biography": ""
     }
   },
   {
     "model": "books.author",
-    "pk": 218,
+    "pk": 52,
     "fields": {
-      "name": "류동규 (지은이)",
+      "name": "앙드레 코스톨라니 (지은이), 한윤진 (옮긴이)",
+      "profile_image": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Kostolany_Heller.jpg/330px-Kostolany_Heller.jpg",
+      "biography": "앙드레 코스톨라니(헝가리어: André Kostolany, 1906년 2월 9일 ~ 1999년 9월 14일)는 헝가리 유대인 출신의 투자가이다. 유럽의 워렌 버핏, 주식의 신이라고도 불린다. 전세계 10개 도시에 집을 가졌고, 헝가리어, 프랑스어, 영어, 독일어의 4개국어에 능통했다."
+    }
+  },
+  {
+    "model": "books.author",
+    "pk": 53,
+    "fields": {
+      "name": "류시화 (엮은이)",
+      "profile_image": null,
+      "biography": "류시화(1958년~)는 대한민국의 시인이자 번역가이며 본명은 안재찬이다. 대광고등학교와 경희대학교 국어국문학과를 졸업하였고 현재는 서울 명륜동에 작업실을 두고 있다."
+    }
+  },
+  {
+    "model": "books.author",
+    "pk": 54,
+    "fields": {
+      "name": "에리히 프롬 (지은이), 황문수 (옮긴이)",
+      "profile_image": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/72/Erich_Fromm_1974.jpg/330px-Erich_Fromm_1974.jpg",
+      "biography": "에리히 젤리히만 프롬(독일어: Erich Seligmann Fromm, 1900년 3월 23일 ~ 1980년 3월 18일)은 세계적으로 유명한 유대인이자 독일계 미국인으로 사회심리학자이면서 정신분석학자, 인문주의 철학자이다."
+    }
+  },
+  {
+    "model": "books.author",
+    "pk": 55,
+    "fields": {
+      "name": "사단법인 전국유료실버타운협회 포푸라샤 편집부 (지은이), 이지수 (옮긴이)",
       "profile_image": null,
       "biography": ""
     }
   },
   {
     "model": "books.author",
-    "pk": 219,
+    "pk": 56,
     "fields": {
-      "name": "열린기획 (엮은이), 이윤선 (감수)",
+      "name": "혜민 (지은이), 이응견 (그림)",
+      "profile_image": null,
+      "biography": "라이언 봉석 주(Ryan Bongsuk Joo, 1973년 12월 12일 ~)는 대한민국에서 활동하는 대한불교 조계종의 한국계 미국인 비구 승려이며, 본명은 라이언 봉석 주(영어: Ryan Bongsuk Joo), 법명은 태훈(慧敏)이다. 대한민국의 외국인 등록에는 대한민국 국적 당시 이름인 주봉석으로 등록하였다."
+    }
+  },
+  {
+    "model": "books.author",
+    "pk": 57,
+    "fields": {
+      "name": "노기리 요코 (지은이)",
       "profile_image": null,
       "biography": ""
     }
   },
   {
     "model": "books.author",
-    "pk": 220,
+    "pk": 58,
     "fields": {
-      "name": "나상길 (지은이)",
-      "profile_image": null,
-      "biography": "나상길(羅相吉, 1961년 3월 1일 ~ )은 대한민국 인천광역시의회 의원이다."
-    }
-  },
-  {
-    "model": "books.author",
-    "pk": 221,
-    "fields": {
-      "name": "김수광 (엮은이), 곽혜원 (그림)",
-      "profile_image": null,
-      "biography": "김수광(金秀光, 1941년 3월 27일 ~ )은 대한민국의 제4·5대 경상북도의원이다."
-    }
-  },
-  {
-    "model": "books.author",
-    "pk": 222,
-    "fields": {
-      "name": "조윤범 (지은이)",
+      "name": "달리아 이정현 (지은이)",
       "profile_image": null,
       "biography": ""
     }
   },
   {
     "model": "books.author",
-    "pk": 223,
+    "pk": 59,
     "fields": {
-      "name": "홍혜진 (지은이)",
+      "name": "김달 (지은이)",
       "profile_image": null,
-      "biography": "홍혜진에는 다음의 동명이인이 있다.홍혜진(1977년 ~ )은 대한민국의 디자이너이다.\n홍혜진(1992년 ~ )은 대한민국의 레이싱 모델이다."
+      "biography": "김달은 대한민국의 만화가이다."
     }
   },
   {
     "model": "books.author",
-    "pk": 224,
+    "pk": 60,
     "fields": {
-      "name": "유희란 (지은이)",
-      "profile_image": null,
-      "biography": ""
-    }
-  },
-  {
-    "model": "books.author",
-    "pk": 225,
-    "fields": {
-      "name": "구리 료헤이, 다케모도 고노스케 (지은이), 이가혜 (그림), 최영혁 (옮긴이)",
+      "name": "게리 채프먼 (지은이), 장동숙, 황을호 (옮긴이)",
       "profile_image": null,
       "biography": ""
     }
   },
   {
     "model": "books.author",
-    "pk": 226,
+    "pk": 61,
     "fields": {
-      "name": "마크 L. 왈츠 (지은이), 서진희 (옮긴이)",
+      "name": "김용택 (지은이)",
+      "profile_image": "https://upload.wikimedia.org/wikipedia/ko/thumb/6/6e/%EA%B9%80%EC%9A%A9%ED%83%9D_%EC%8B%9C%EC%9D%B8_%EC%82%AC%EC%9D%B8.JPG/330px-%EA%B9%80%EC%9A%A9%ED%83%9D_%EC%8B%9C%EC%9D%B8_%EC%82%AC%EC%9D%B8.JPG",
+      "biography": "김용택(金龍澤, 1948년 8월 26일~현재)은 대한민국의 시인이다."
+    }
+  },
+  {
+    "model": "books.author",
+    "pk": 62,
+    "fields": {
+      "name": "정신 (지은이), 사이이다 (사진), 공민선 (디자인)",
+      "profile_image": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1c/Blessing_genie_Dur_Sharrukin.jpg/330px-Blessing_genie_Dur_Sharrukin.jpg",
+      "biography": "정신(精神)은 육체나 물질에 대립되는 영혼이나 마음, 사물을 느끼고 생각하며 판단하는 능력 또는 그런 작용, 마음의 자세나 태도, 사물의 근본적인 의의나 목적 또는 이념이나 사상 등을 가리키는 말이다."
+    }
+  },
+  {
+    "model": "books.author",
+    "pk": 63,
+    "fields": {
+      "name": "다카하시 유타 (지은이), 윤은혜 (옮긴이)",
       "profile_image": null,
       "biography": ""
     }
   },
   {
     "model": "books.author",
-    "pk": 227,
+    "pk": 64,
     "fields": {
-      "name": "진한보라색 jinhanborasaeg (지은이)",
+      "name": "임형규 (지은이)",
       "profile_image": null,
       "biography": ""
     }
   },
   {
     "model": "books.author",
-    "pk": 228,
+    "pk": 65,
     "fields": {
-      "name": "우리누리 (지은이), 백명식 (그림)",
+      "name": "예소연 (지은이)",
       "profile_image": null,
       "biography": ""
     }
   },
   {
     "model": "books.author",
-    "pk": 229,
+    "pk": 66,
     "fields": {
-      "name": "한치호, 천준호, 정신일, 김영수 (지은이)",
+      "name": "샘 맥브래트니 (지은이), 아니타 제람 (그림), 김서정 (옮긴이)",
       "profile_image": null,
       "biography": ""
     }
   },
   {
     "model": "books.author",
-    "pk": 230,
+    "pk": 67,
     "fields": {
-      "name": "박광희, 캐나다 교사 영낭훈 연구팀 (지은이)",
+      "name": "진은영 (지은이)",
+      "profile_image": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a8/Jin_Eun-young_2019_%28P1020327%29.jpg/330px-Jin_Eun-young_2019_%28P1020327%29.jpg",
+      "biography": "진은영(1970년~)은 대한민국의 시인이자 철학자이다."
+    }
+  },
+  {
+    "model": "books.author",
+    "pk": 68,
+    "fields": {
+      "name": "ma2 (지은이)",
       "profile_image": null,
       "biography": ""
     }
   },
   {
     "model": "books.author",
-    "pk": 231,
+    "pk": 69,
     "fields": {
-      "name": "신경미 (지은이)",
+      "name": "마이클 노턴 (지은이), 홍한결 (옮긴이)",
       "profile_image": null,
       "biography": ""
     }
   },
   {
     "model": "books.author",
-    "pk": 232,
+    "pk": 70,
     "fields": {
-      "name": "최학수, 정은실 (지은이)",
+      "name": "박완서 (지은이)",
+      "profile_image": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/38/Park_Wanso.jpg/330px-Park_Wanso.jpg",
+      "biography": "박완서(한국 한자: 朴婉緖, 1931년 10월 20일 ~ 2011년 1월 22일)는 대한민국의 소설가이다. 본관은 반남(潘南)이며 경기도 개풍군 출생이다. 40세의 나이에 《여성동아》 장편 소설 공모전에 〈나목〉(裸木)으로 당선되어 등단하였다. 등단한 이후 꾸준히 소설과 산문을 쓰며 작가로 활동하였다."
+    }
+  },
+  {
+    "model": "books.author",
+    "pk": 71,
+    "fields": {
+      "name": "알랭 드 보통 (지은이), 정영목 (옮긴이)",
+      "profile_image": "https://upload.wikimedia.org/wikipedia/commons/4/4d/Alaindebotton.png",
+      "biography": "알랭 드 보통(Alain de Botton, 1969년 12월 20일 ~ )은 스위스 취리히에서 태어난 철학자, 소설가, 수필가이다. 현재 영국 런던에서 가족과 함께 거주 중이다. 또한 '한국인이 가장 사랑하는 작가' 중 한 명으로 손꼽히는 알랭 드 보통은 2008년 영국 런던에 세운 '인생학교'의 교장으로 활동 중이다."
+    }
+  },
+  {
+    "model": "books.author",
+    "pk": 72,
+    "fields": {
+      "name": "존 가트맨 (지은이), 남은영 (감수)",
       "profile_image": null,
       "biography": ""
     }
   },
   {
     "model": "books.author",
-    "pk": 233,
+    "pk": 73,
     "fields": {
-      "name": "박정엽 (지은이)",
+      "name": "시노아 (지은이)",
       "profile_image": null,
       "biography": ""
     }
   },
   {
     "model": "books.author",
-    "pk": 234,
+    "pk": 74,
     "fields": {
-      "name": "tvN STORY 〈벌거벗은 한국사〉 제작팀 (지은이)",
+      "name": "히로 치히로 (지은이)",
       "profile_image": null,
       "biography": ""
     }
   },
   {
     "model": "books.author",
-    "pk": 235,
+    "pk": 75,
     "fields": {
-      "name": "최영기 (지은이)",
-      "profile_image": null,
-      "biography": "최영기는 다음 사람을 가리킨다.최영기(1891년~?)는 한국의 독립운동가이다.\n최영기(1897년~1943년)는 한국의 독립운동가이다.\n최영기(1925년~2004년)는 대한민국의 육상 선수이다.\n"
-    }
-  },
-  {
-    "model": "books.author",
-    "pk": 236,
-    "fields": {
-      "name": "무로후시 준코 (지은이), 정택상 (옮긴이)",
+      "name": "오오세토 리쿠 (지은이)",
       "profile_image": null,
       "biography": ""
     }
   },
   {
     "model": "books.author",
-    "pk": 237,
+    "pk": 76,
     "fields": {
-      "name": "이태석 (지은이)",
-      "profile_image": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ed/Fr_LeeTaeSeok_SDB.jpg/330px-Fr_LeeTaeSeok_SDB.jpg",
-      "biography": "이태석(李泰錫, 1962년 10월 17일 ~ 2010년 1월 14일)은 대한민국의 살레시오회 소속 선교사 사제 겸 의사로 아프리카 수단 남부(현재는 남수단)의 와랍 주에 있는 마을인 톤즈의 돈보스코 미션에서 교육 활동과 의료 활동을 펼치다가 2008년 11월 한국에 휴가차 입국하였을 때, 대장암 4기를 진단받아 톤즈로 돌아가지 못하고 2010년 1월 14일 암투병 끝에 선종하였다."
-    }
-  },
-  {
-    "model": "books.author",
-    "pk": 238,
-    "fields": {
-      "name": "심만수 (엮은이), 윤종태 (그림)",
+      "name": "김창옥 (지은이)",
       "profile_image": null,
       "biography": ""
     }
   },
   {
     "model": "books.author",
-    "pk": 239,
+    "pk": 77,
     "fields": {
-      "name": "이상교 (지은이), 이은복 (그림)",
-      "profile_image": null,
-      "biography": "이상교는 1949년 서울 동대문구 신설동에서 아버지 이덕중과 어머니 소진원의 4남 4녀 가운데 둘째로 태어났다. 이른 생일로 일곱 살 때 서울 동대문구에 소재한 전농초등학교에 입학했으나, 아버지의 전근으로 경기도 강화군 길상초등학교로 전학을 갔다. 그리하여 유년 시절의 대부분을 강화에서 보냈다.\n1962년 길상초등학교를 졸업(37회)하고 초등학교 인근의 남녀공학인 강남중학교에 진학하고 2학년 때 다시 서울 전농동으로 이사해 와 성동여중으로 전학했다. 이때 소설 《마그마》를 쓴 소설가 이정호 선생님을 담임으로 만나면서 글쓰기가 시작되었다. 성동여자중학교를 졸업해 성동여자실업고등학교에 진학해 공부를 마치고 1968년에 졸업했다. 건강을 이유로 대학에는 진학하지 않았고 대체로 집에 머물면서 초등학교 아이들 과외 지도를 했다.\n1973년 월간지 「소년」을 통해 동시 부문 3회 추천 완료를 마쳤으며 이듬해인 1974년 조선일보 신춘문예에 동시 부문에서 가작으로 입선했다. 당선작이 있는 입선이었는데, 윤석중 선생님의 심사로 동시 ＜달맞이 꽃＞까지 선에 든 것이었다. 또한 같은 해, 「월간문학」 제16회 신인문학상(동시 부문)을 받게 되었는데 작품은 「나무」였다. 그후 1977년 조선일보와 동아일보 신춘문예 동화 부문에서 당선되었다. \n동화작가가 되고 나서 1985년과 2004년 한국동화문학상, 1993년 해강아동문학상, 1996년 소년한국일보사 세종아동문학상을 받았고, 2008년에는 한국 동시문학회 회장을 역임했다. 2012년 제17회 박홍근 아동문학상을 동시집 《좀이 쑤신다》로 수상하였고, 2016년에는 IBBY 어너리스트 출품작에 동시집 《예쁘다고 말해줘》가 선정되었다. 2020년 《찰방찰방 밤을 건너》로 권정생문학상을 수상하였다. 2022년 아스트리드 린드그렌 추모 문학상 한국 후보로 선정되었다. 2023년 대한출판문화협회(출협)가 주최하는 서울국제도서전에서 2023년 ‘한국에서 가장 아름다운 책’ 10권 가운데 그림책으로 유일하게 《할머니네 집지킴이》(엔씨소프트, 이상교 글, 한병호 그림)가 선정되었다."
-    }
-  },
-  {
-    "model": "books.author",
-    "pk": 240,
-    "fields": {
-      "name": "로버트 웨버 (지은이), 김세광 (옮긴이)",
-      "profile_image": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/27/Robert-webber-trailer.jpg/330px-Robert-webber-trailer.jpg",
-      "biography": "로버트 웨버(Robert Webber, 1924년 10월 14일 ~ 1989년 5월 19일)는 미국의 배우, 텔레비전 배우, 영화배우이다."
-    }
-  },
-  {
-    "model": "books.author",
-    "pk": 241,
-    "fields": {
-      "name": "서혜란 (지은이)",
+      "name": "제이크 비긴 (지은이), 최소라, 이코베 (옮긴이)",
       "profile_image": null,
       "biography": ""
     }
   },
   {
     "model": "books.author",
-    "pk": 242,
+    "pk": 78,
     "fields": {
-      "name": "유다정 (지은이), 우지현 (그림)",
-      "profile_image": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/Lake_kinshuko.JPG/330px-Lake_kinshuko.JPG",
-      "biography": "유다정(湯田町)은 이와테현 중서부에 위치했으며 유다온천으로 잘 알려진 마을이다. 2005년 11월 1일에 사와우치촌과 합병해, 니시와가정이 되었다."
-    }
-  },
-  {
-    "model": "books.author",
-    "pk": 243,
-    "fields": {
-      "name": "고정욱, 도종환, 서정윤, 이해인, 최윤희 (지은이), 김율도, 김형선 (엮은이)",
-      "profile_image": null,
-      "biography": "고정욱에 대한 다른 뜻은 다음과 같다.고정욱(1960년 ~ )은 작가이다.\n고정욱(1977년 ~ )은 대한민국의 변호사, 변리사이다."
-    }
-  },
-  {
-    "model": "books.author",
-    "pk": 244,
-    "fields": {
-      "name": "고훈 (지은이)",
-      "profile_image": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/NintokuTomb_Aerial_photograph_2007.jpg/330px-NintokuTomb_Aerial_photograph_2007.jpg",
-      "biography": "고훈(古墳)은 동북아시아의 거석 무덤 또는 고분이다. 고분은 주로 3세기 중반부터 7세기 초까지 일본 열도에서 만들어졌다."
-    }
-  },
-  {
-    "model": "books.author",
-    "pk": 245,
-    "fields": {
-      "name": "마티 케이건 (지은이), 황진수 (옮긴이)",
+      "name": "유혜주, 조정연 (지은이)",
       "profile_image": null,
       "biography": ""
     }
   },
   {
     "model": "books.author",
-    "pk": 246,
+    "pk": 79,
     "fields": {
-      "name": "유복근 (지은이)",
+      "name": "유키 소노마 (지은이), 정은희 (옮긴이)",
       "profile_image": null,
       "biography": ""
     }
   },
   {
     "model": "books.author",
-    "pk": 247,
+    "pk": 80,
     "fields": {
-      "name": "원유상 (지은이)",
+      "name": "나카노 마야카 (지은이)",
       "profile_image": null,
       "biography": ""
     }
   },
   {
     "model": "books.author",
-    "pk": 248,
+    "pk": 81,
     "fields": {
-      "name": "심만수 (엮은이), 전필식, 윤종태, 김은주 (그림)",
+      "name": "유선혜 (지은이)",
+      "profile_image": null,
+      "biography": "유선혜(1984년 6월 20일 ~)는 대한민국의 피겨스케이팅 선수다."
+    }
+  },
+  {
+    "model": "books.author",
+    "pk": 82,
+    "fields": {
+      "name": "알랭 드 보통 (지은이), 공경희 (옮긴이)",
+      "profile_image": "https://upload.wikimedia.org/wikipedia/commons/4/4d/Alaindebotton.png",
+      "biography": "알랭 드 보통(Alain de Botton, 1969년 12월 20일 ~ )은 스위스 취리히에서 태어난 철학자, 소설가, 수필가이다. 현재 영국 런던에서 가족과 함께 거주 중이다. 또한 '한국인이 가장 사랑하는 작가' 중 한 명으로 손꼽히는 알랭 드 보통은 2008년 영국 런던에 세운 '인생학교'의 교장으로 활동 중이다."
+    }
+  },
+  {
+    "model": "books.author",
+    "pk": 83,
+    "fields": {
+      "name": "유수연 (지은이)",
+      "profile_image": null,
+      "biography": "유수연(1972년 1월 22일~ )은 대한민국의 영어 강사, 학원인이다."
+    }
+  },
+  {
+    "model": "books.author",
+    "pk": 84,
+    "fields": {
+      "name": "아케비 (지은이)",
       "profile_image": null,
       "biography": ""
     }
   },
   {
     "model": "books.author",
-    "pk": 249,
+    "pk": 85,
     "fields": {
-      "name": "양태석 (지은이), 전필식 (그림)",
+      "name": "노하린, 김문수 (지은이)",
       "profile_image": null,
       "biography": ""
     }
   },
   {
     "model": "books.author",
-    "pk": 250,
+    "pk": 86,
     "fields": {
-      "name": "김진익 (지은이)",
+      "name": "쿠보타 마루 (지은이)",
       "profile_image": null,
       "biography": ""
     }
   },
   {
     "model": "books.author",
-    "pk": 251,
+    "pk": 87,
     "fields": {
-      "name": "교사선교회 (지은이)",
+      "name": "신형철 (지은이)",
+      "profile_image": null,
+      "biography": "신형철(1976년 ~ )은 대한민국의 문학평론가, 교수이다."
+    }
+  },
+  {
+    "model": "books.author",
+    "pk": 88,
+    "fields": {
+      "name": "PC사랑 편집부 (지은이)",
       "profile_image": null,
       "biography": ""
     }
   },
   {
     "model": "books.author",
-    "pk": 252,
+    "pk": 89,
     "fields": {
-      "name": "앤디 앤드루스 (글), 필립 허스트 (그림), 김서정 (옮긴이)",
+      "name": "스미노 요루 (지은이), 이소담 (옮긴이)",
+      "profile_image": null,
+      "biography": "스미노 요루(일본어: 住野よる)는 일본의 소설가이다. 2014년 소설가가 되자 웹사이트에 투고한 첫 웹 소설 《너의 췌장을 먹고 싶어》가 좋은 반응을 얻어서, 이듬해 정식 출판함으로써 전업 소설가로 데뷔했다."
+    }
+  },
+  {
+    "model": "books.author",
+    "pk": 90,
+    "fields": {
+      "name": "타카나가 히나코 (지은이)",
       "profile_image": null,
       "biography": ""
     }
   },
   {
     "model": "books.author",
-    "pk": 253,
+    "pk": 91,
     "fields": {
-      "name": "이희숙 (지은이)",
+      "name": "오세훈 (지은이)",
+      "profile_image": "https://upload.wikimedia.org/wikipedia/commons/4/43/%EC%98%A4%EC%84%B8%ED%9B%88%EC%8B%9C%EC%9E%A5.jpg",
+      "biography": "오세훈(吳世勳, 1961년 1월 4일~)은 대한민국의 변호사 출신 정치인이다. 제16대 국회의원을 역임했고, 제33·34·38·39대 서울특별시장이다."
+    }
+  },
+  {
+    "model": "books.author",
+    "pk": 92,
+    "fields": {
+      "name": "서현직 (지은이)",
       "profile_image": null,
-      "biography": "이희숙은 다음 사람을 가리킨다."
+      "biography": ""
     }
   },
   {
     "model": "books.author",
-    "pk": 254,
+    "pk": 93,
     "fields": {
-      "name": "김동인, 김유정, 나도향, 심훈, 이효석, 현진건 (지은이), 정선경 (그림)",
-      "profile_image": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f1/%EA%B9%80%EB%8F%99%EC%9D%B8_%EC%9E%91%EA%B0%80.jpg/330px-%EA%B9%80%EB%8F%99%EC%9D%B8_%EC%9E%91%EA%B0%80.jpg",
-      "biography": "김동인(金東仁, 1900년 10월 2일~1951년 1월 5일)은 친일반민족행위자, 소설가, 문학평론가, 시인, 언론인이다. 본관은 전주(全州), 호는 금동(琴童), 금동인(琴童仁), 춘사(春士), 만덕(萬德), 시어딤이다. 현재 어린이대공원에 그의 문학비가 세워져 있다."
+      "name": "칸자이 유키 (지은이), 히게네코 (그림), 박정철 (옮긴이)",
+      "profile_image": null,
+      "biography": ""
     }
   },
   {
     "model": "books.author",
-    "pk": 255,
+    "pk": 94,
+    "fields": {
+      "name": "조창훈 (지은이)",
+      "profile_image": null,
+      "biography": ""
+    }
+  },
+  {
+    "model": "books.author",
+    "pk": 95,
+    "fields": {
+      "name": "서정희, 구윤철, 신진영, 박홍재, 이의영, 김흥종, 박정수, 이한주, 황상민 (지은이)",
+      "profile_image": null,
+      "biography": "서정희는 다음 사람 등을 가리킨다.서정희(徐廷禧, 1886년~1950년 납북): 대한민국의 정치인. 제헌 국회의원\n서정희(徐貞姬, 1962년~): 대한민국의 광고 모델, 방송인\n서정희(1985년~): 대한민국의 양궁 선수"
+    }
+  },
+  {
+    "model": "books.author",
+    "pk": 96,
+    "fields": {
+      "name": "고든 맥도날드 (지은이), 홍화옥, 김명희 (옮긴이)",
+      "profile_image": null,
+      "biography": ""
+    }
+  },
+  {
+    "model": "books.author",
+    "pk": 97,
+    "fields": {
+      "name": "이지연 (지은이)",
+      "profile_image": null,
+      "biography": "이지연은 한국인 인명으로, 다음 사람을 가리킨다."
+    }
+  },
+  {
+    "model": "books.author",
+    "pk": 98,
+    "fields": {
+      "name": "존 C. 맥스웰 (지은이), 김고명 (옮긴이), 전옥표 (감수)",
+      "profile_image": null,
+      "biography": ""
+    }
+  },
+  {
+    "model": "books.author",
+    "pk": 99,
+    "fields": {
+      "name": "유명산 (지은이)",
+      "profile_image": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/42/Peak_of_Yumyeong_Mountain.JPG/330px-Peak_of_Yumyeong_Mountain.JPG",
+      "biography": "유명산(有明山)은 대한민국 경기도 양평군과 가평군 사이에 있는 높이 862m의 산이다. 산 정상에서는 멀리 북한강과 청평호를 비롯해 용문산, 화악산, 명지산 등의 모습이 보이고 발 아래로 남한강도 보인다."
+    }
+  },
+  {
+    "model": "books.author",
+    "pk": 100,
+    "fields": {
+      "name": "EBS 아기성장보고서 제작팀 (지은이)",
+      "profile_image": null,
+      "biography": ""
+    }
+  },
+  {
+    "model": "books.author",
+    "pk": 101,
+    "fields": {
+      "name": "랄프 W. 네이버 (지은이), 주희채 (옮긴이)",
+      "profile_image": null,
+      "biography": ""
+    }
+  },
+  {
+    "model": "books.author",
+    "pk": 102,
+    "fields": {
+      "name": "리처드 포스터 (지은이), 황을호, 권달천 (옮긴이)",
+      "profile_image": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8f/Author_Richard_Foster.jpg/330px-Author_Richard_Foster.jpg",
+      "biography": "리처드 포스터(Richard J. Foster)는 미국 아주사 퍼시픽 대학교, 미시건의 스프링 아버 대학교의 영성신학 교수이며, \"레노바레\"(Renovare)의 설립자다. 영성 운동의 대중화에 힘쓰고 있으며, 삶에 적용되고 이웃과 사회의 영성을 깊게 하는 크리스천 영성의 영향력을 넓혀나가고 있다. 포스터의 종교는 퀘이커교이다."
+    }
+  },
+  {
+    "model": "books.author",
+    "pk": 103,
     "fields": {
       "name": "채사장, 마케마케 (지은이), 정용환 (그림)",
       "profile_image": null,
@@ -2296,7 +928,718 @@
   },
   {
     "model": "books.author",
-    "pk": 256,
+    "pk": 104,
+    "fields": {
+      "name": "존 R. 마일스 (지은이), 임지연 (옮긴이)",
+      "profile_image": null,
+      "biography": ""
+    }
+  },
+  {
+    "model": "books.author",
+    "pk": 105,
+    "fields": {
+      "name": "김경록 (지은이)",
+      "profile_image": null,
+      "biography": "김경록은 다음 사람을 가리킨다.김경록(1973년 ~ )은 대한민국의 교육가 겸 정치가 출신의 대학 교수이다.\n김경록(1983년 ~ )은 대한민국의 가수이다.\n김경록(1979년 ~ )은 대한민국의 농구 선수이다."
+    }
+  },
+  {
+    "model": "books.author",
+    "pk": 106,
+    "fields": {
+      "name": "EBS 60분 부모 제작팀 (지은이), 김수연 (감수)",
+      "profile_image": null,
+      "biography": ""
+    }
+  },
+  {
+    "model": "books.author",
+    "pk": 107,
+    "fields": {
+      "name": "김명호, 양승언 (지은이)",
+      "profile_image": null,
+      "biography": "김명호는 다음 사람을 가리킨다.김명호(金明昊)는 일제 강점기의 천도교 지도자이다.\n김명호(金命鎬, 1923년 ~ 2022년)는 대한민국의 의사이자 연세대학교 명예교수였다.\n김명호(1935년 ~ )는 한국은행 총재를 역임한 대한민국의 금융인이다.\n김명호(1944년 ~ )는 대한민국의 경기도 수원시의원이다.\n김명호(1957년 ~ )는 석궁 사건과 관련된 대한민국의 수학자이다.\n김명호(金明浩, 1960년 ~ )는 대한민국의 경상북도의원이다.\n김명호는 황장엽 암살 지령에 투입된 조선민주주의인민공화국 공작원이다.\n김명호는 유플러스 노동조합 위원장이자 보건복지부 보건의료정책심의위원회 위원이다."
+    }
+  },
+  {
+    "model": "books.author",
+    "pk": 108,
+    "fields": {
+      "name": "안호기 (지은이)",
+      "profile_image": null,
+      "biography": ""
+    }
+  },
+  {
+    "model": "books.author",
+    "pk": 109,
+    "fields": {
+      "name": "변향미, 구은주, 김성호, 김소영, 변선옥 (지은이)",
+      "profile_image": null,
+      "biography": ""
+    }
+  },
+  {
+    "model": "books.author",
+    "pk": 110,
+    "fields": {
+      "name": "최재천, 안희경 (원작), 박현숙 (글), 함주해 (그림)",
+      "profile_image": null,
+      "biography": "최재천은 다음 사람 등을 가리킨다.최재천(崔在天, 1954~): 대한민국의 동물행동학자. 초대 국립생태원장\n최재천(崔載千, 1963~): 대한민국의 정치인. 제17·19대 국회의원"
+    }
+  },
+  {
+    "model": "books.author",
+    "pk": 111,
+    "fields": {
+      "name": "박소영 (지은이)",
+      "profile_image": null,
+      "biography": "박소영이라는 이름을 가진 사람은 다음과 같다."
+    }
+  },
+  {
+    "model": "books.author",
+    "pk": 112,
+    "fields": {
+      "name": "강소민, 김민혜, 송라헬, 이예린, 임은영, 정소이, 조은해, 최지원, 김주원 (지은이)",
+      "profile_image": null,
+      "biography": ""
+    }
+  },
+  {
+    "model": "books.author",
+    "pk": 113,
+    "fields": {
+      "name": "사이토 나오키 (지은이), 김재훈 (옮긴이)",
+      "profile_image": null,
+      "biography": "사이토 나오키(일본어: さいとうなおき, Saito Naoki, 1982년 11월 13일 ~ )는 일본의 일러스트레이터, 만화가, 유튜버이다. 그는 듀얼마스터즈 트레이딩 카드 게임, 포켓몬 트레이딩 카드 게임 및 하츠네 미쿠 상품에 정기적으로 기여하는 아티스트이다. 그는 또한 드라갈리아 로스트 게임의 메인 일러스트레이터이자 캐릭터 디자이너이기도 하다. 만화가로서 그는 2010년부터 2014년까지 바키(Baki Domoe)의 글을 쓰고 그림을 그렸다. 또한 사이토는 예술 작품을 개선하는 방법에 대한 조언을 제공하는 유튜브 채널을 운영하고 그 내용을 바탕으로 여러 권의 책을 출판했다."
+    }
+  },
+  {
+    "model": "books.author",
+    "pk": 114,
+    "fields": {
+      "name": "제갈명(단단) (지은이)",
+      "profile_image": null,
+      "biography": ""
+    }
+  },
+  {
+    "model": "books.author",
+    "pk": 115,
+    "fields": {
+      "name": "김원철, 강윤경, 김연목, 이지영 (지은이), 전선진 (그림)",
+      "profile_image": null,
+      "biography": "김원철(1964년 5월 30일 ~ )은 대한민국의 건축가다."
+    }
+  },
+  {
+    "model": "books.author",
+    "pk": 116,
+    "fields": {
+      "name": "키타하라 타카히코 (지은이), 이지현 (옮긴이)",
+      "profile_image": null,
+      "biography": ""
+    }
+  },
+  {
+    "model": "books.author",
+    "pk": 117,
+    "fields": {
+      "name": "이선용 (지은이)",
+      "profile_image": null,
+      "biography": ""
+    }
+  },
+  {
+    "model": "books.author",
+    "pk": 118,
+    "fields": {
+      "name": "사단법인 푸른아우성 (지은이), 이수연 (그림), 구성애 (감수)",
+      "profile_image": null,
+      "biography": ""
+    }
+  },
+  {
+    "model": "books.author",
+    "pk": 119,
+    "fields": {
+      "name": "제프리 웨스트 (지은이), 이한음 (옮긴이)",
+      "profile_image": null,
+      "biography": ""
+    }
+  },
+  {
+    "model": "books.author",
+    "pk": 120,
+    "fields": {
+      "name": "래리 크랩, 댄 알렌더 (지은이), 김성녀 (옮긴이)",
+      "profile_image": null,
+      "biography": ""
+    }
+  },
+  {
+    "model": "books.author",
+    "pk": 121,
+    "fields": {
+      "name": "교사삶책 집필팀 (지은이)",
+      "profile_image": null,
+      "biography": ""
+    }
+  },
+  {
+    "model": "books.author",
+    "pk": 122,
+    "fields": {
+      "name": "한상민 (지은이), 조성헌 (그림)",
+      "profile_image": null,
+      "biography": "한상민(1985년 3월 10일 ~ )은 대한민국의 전직 축구 선수이자 현 축구 지도자로 현역 시절 포지션은 미드필더였으며 현재 당진시민축구단의 감독을 맡고 있다."
+    }
+  },
+  {
+    "model": "books.author",
+    "pk": 123,
+    "fields": {
+      "name": "혼다 히데오 (지은이), 왕언경 (옮긴이)",
+      "profile_image": null,
+      "biography": "혼다 히데오(일본어: ほんだ ひでお)는 다음 사람을 가리킨다."
+    }
+  },
+  {
+    "model": "books.author",
+    "pk": 124,
+    "fields": {
+      "name": "백은별 (지은이)",
+      "profile_image": null,
+      "biography": ""
+    }
+  },
+  {
+    "model": "books.author",
+    "pk": 125,
+    "fields": {
+      "name": "이근철 (지은이)",
+      "profile_image": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/73/%EC%9D%B4%EA%B7%BC%EC%B2%A0%2C.jpg/330px-%EC%9D%B4%EA%B7%BC%EC%B2%A0%2C.jpg",
+      "biography": "이근철(1966년 7월 2일 ~ )은 대한민국의 방송인/영어교육 전문가/멘토링(열정/창의성/소통/세계문화/인문학/자기계발) 강연자이다."
+    }
+  },
+  {
+    "model": "books.author",
+    "pk": 126,
+    "fields": {
+      "name": "박현숙 (지은이)",
+      "profile_image": null,
+      "biography": "박현숙의 다른 뜻은 다음과 같다.박현숙(朴賢淑, 1896년 ~ 1980년)은 평양 지역에서 활동한 한국의 독립 운동가이며 대한민국의 제4대, 제6대 국회의원이다.\n박현숙(朴賢淑, 1914년 ~ 1981년)은 광주학생운동에 참가한 한국의 독립 운동가이다.\n박현숙(朴賢淑, 1926년 ~ 2020년)은 대한민국의 극작가이다.\n박현숙(1968년 ~ )은 대한민국의 배우이다.\n박현숙(朴賢淑, 1969년 ~ )은 대한민국의 농구 선수이다.\n박현숙(1985년 ~ )은 조선민주주의인민공화국의 역도 선수이다.\n박현숙은 대한민국의 동화 작가이다. 대표작으론 <수상한 시리즈>, <실시간 검색어 1위> 등이 있다."
+    }
+  },
+  {
+    "model": "books.author",
+    "pk": 127,
+    "fields": {
+      "name": "벤 알드리지 (지은이), 정시윤 (옮긴이)",
+      "profile_image": null,
+      "biography": "벤 올드리지(영어: Ben Aldridge)는 잉글랜드의 배우이다. M. 나이트 샤말란 감독의 영화 《똑똑똑》에서 앤드루 역을 맡았다."
+    }
+  },
+  {
+    "model": "books.author",
+    "pk": 128,
+    "fields": {
+      "name": "이형빈, 김성수 (지은이)",
+      "profile_image": null,
+      "biography": ""
+    }
+  },
+  {
+    "model": "books.author",
+    "pk": 129,
+    "fields": {
+      "name": "이소영 (지은이)",
+      "profile_image": null,
+      "biography": "이소영은 다음 사람을 가리킨다."
+    }
+  },
+  {
+    "model": "books.author",
+    "pk": 130,
+    "fields": {
+      "name": "벳시 프랑코 (지은이), 정지현 (옮긴이)",
+      "profile_image": null,
+      "biography": ""
+    }
+  },
+  {
+    "model": "books.author",
+    "pk": 131,
+    "fields": {
+      "name": "송재일, 송홍규, 정형근, 가은아, 권대광, 유리 (지은이)",
+      "profile_image": null,
+      "biography": "송재일(1984년 2월 8일 ~ )는 대한민국의 희극 배우이다."
+    }
+  },
+  {
+    "model": "books.author",
+    "pk": 132,
+    "fields": {
+      "name": "조셉 머피 (지은이), 조율리 (옮긴이)",
+      "profile_image": null,
+      "biography": "조셉 머피(Joseph Murphy)는 다음을 가리킨다.조셉 머피 (작가)\n조셉 머피 (아이스하키)\n조셉 머피 (정치인)\n"
+    }
+  },
+  {
+    "model": "books.author",
+    "pk": 133,
+    "fields": {
+      "name": "세리자와 렌 (지은이), 오시연 (옮긴이)",
+      "profile_image": null,
+      "biography": ""
+    }
+  },
+  {
+    "model": "books.author",
+    "pk": 134,
+    "fields": {
+      "name": "신규진 (지은이)",
+      "profile_image": null,
+      "biography": "신규진(1990년 1월 1일 ~ )는 대한민국의 희극인이다."
+    }
+  },
+  {
+    "model": "books.author",
+    "pk": 135,
+    "fields": {
+      "name": "이민주 (지은이)",
+      "profile_image": null,
+      "biography": "이민주(1987년 6월 12일 ~ )은 대한민국의 개그맨이다."
+    }
+  },
+  {
+    "model": "books.author",
+    "pk": 136,
+    "fields": {
+      "name": "강금주 (지은이)",
+      "profile_image": null,
+      "biography": ""
+    }
+  },
+  {
+    "model": "books.author",
+    "pk": 137,
+    "fields": {
+      "name": "존 헤네시 (지은이), 구세희 (옮긴이)",
+      "profile_image": null,
+      "biography": ""
+    }
+  },
+  {
+    "model": "books.author",
+    "pk": 138,
+    "fields": {
+      "name": "천경호 (지은이)",
+      "profile_image": null,
+      "biography": ""
+    }
+  },
+  {
+    "model": "books.author",
+    "pk": 139,
+    "fields": {
+      "name": "시대공무원시험연구소 (지은이)",
+      "profile_image": null,
+      "biography": ""
+    }
+  },
+  {
+    "model": "books.author",
+    "pk": 140,
+    "fields": {
+      "name": "박상기 (지은이), 불곰 (그림)",
+      "profile_image": null,
+      "biography": "박삼기의 다른 뜻은 다음과 같다.박象기(朴霜基, 1952년 ~ )는 대한민국의 제65대 법무부 장관이다.\n박삼기(朴相己, 1952년 ~ )는 대한민국의 제21대 주제네바 대사이다."
+    }
+  },
+  {
+    "model": "books.author",
+    "pk": 141,
+    "fields": {
+      "name": "유지혜 (지은이)",
+      "profile_image": null,
+      "biography": "유지혜의 다른 뜻은 다음과 같다.유지혜(1976 ~ )는 대한민국의 여자 전직 탁구 선수이다.\n유지혜(1987 ~ )는 대한민국의 여자 배우이다.\n유지혜(1989 ~ )는 2013년 대한민국 미스코리아 울산 선(善) 입상자이다.\n유지혜(1991 ~ )는 대한민국의 여자 가수이다.\n유지혜(1993 ~ )는 2014년 대한민국 미스코리아 서울 미(美) 입상자이다.\n유지혜(1993 ~ )는 대한민국의 여자 전직 농구 선수이다."
+    }
+  },
+  {
+    "model": "books.author",
+    "pk": 142,
+    "fields": {
+      "name": "마르쿠스 툴리우스 키케로 (지은이), 천병희 (옮긴이)",
+      "profile_image": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/Bust_of_Cicero_%281st-cent._BC%29_-_Palazzo_Nuovo_-_Musei_Capitolini_-_Rome_2016.jpg/330px-Bust_of_Cicero_%281st-cent._BC%29_-_Palazzo_Nuovo_-_Musei_Capitolini_-_Rome_2016.jpg",
+      "biography": "키케로(라틴어: Marcus Tullius Cicero)는 로마의 정치인, 변호사이자 작가이다. 기원전 106년 1월 3일 이탈리아 아르피눔에서 부유한 기사 계급 집안의 두 형제 중 맏이로 태어나 기원전 43년 12월 7일(율리우스력) 포르미아에서 피살되어 세상을 떠났다."
+    }
+  },
+  {
+    "model": "books.author",
+    "pk": 143,
+    "fields": {
+      "name": "워터멜론 컴퍼니 (지은이)",
+      "profile_image": null,
+      "biography": ""
+    }
+  },
+  {
+    "model": "books.author",
+    "pk": 144,
+    "fields": {
+      "name": "하이케 팔러 (지은이), 발레리오 비달리 (그림), 김서정 (옮긴이)",
+      "profile_image": null,
+      "biography": ""
+    }
+  },
+  {
+    "model": "books.author",
+    "pk": 145,
+    "fields": {
+      "name": "원유순 (지은이), 주미 (그림)",
+      "profile_image": null,
+      "biography": "원유순은 대한민국의 동화작가이자 초등학교 교사이다. 경인교육대학교(구 인천교육대학교)를 졸업하고 1978년 인천광역시 백석초등학교에서 교사 생활을 시작했다. 1990년『아동문학평론』으로 신인상 수상했고 1993년 계몽사 아동문학상을 받으며 두각을 나타냈다. 2011년 제43회 소천아동문학상을 수상했다."
+    }
+  },
+  {
+    "model": "books.author",
+    "pk": 146,
+    "fields": {
+      "name": "배정원, 전판교 (지은이), 소윤 (그림)",
+      "profile_image": null,
+      "biography": ""
+    }
+  },
+  {
+    "model": "books.author",
+    "pk": 147,
+    "fields": {
+      "name": "넬레 노이하우스 (지은이), 전은경 (옮긴이)",
+      "profile_image": "https://upload.wikimedia.org/wikipedia/commons/d/dc/Nele_Neuhaus_2016.jpg",
+      "biography": "코넬리아 노이하우스(독일어: Cornelia Neuhaus, 1967년 6월 20일 ~ )는 독일의 작가이다."
+    }
+  },
+  {
+    "model": "books.author",
+    "pk": 148,
+    "fields": {
+      "name": "프랑수아 를로르 (지은이), 발레리 해밀 (그림), 이은정 (옮긴이)",
+      "profile_image": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/40/Fran%C3%A7ois_Lelord.jpg/330px-Fran%C3%A7ois_Lelord.jpg",
+      "biography": "프랑수아 를로르(프랑스어: François Lelord, 1953년 6월 22일 파리 ~ )는 프랑스의 정신의학자이자 저술가이다.꾸뻬 씨의 행복 여행\n감정의 힘\n엑토르, 그리고 사랑의 비밀\n혼란스런 사랑 나라의 윌리크\n다루기 힘든 사람들을 어떻게 대할 것인가\n미치광이들을 위한 자유\n엑토르 씨의 시간 여행(Le nouveau voyage d'Hector a la recherche du temps qui passe)\n정신과 의사의 콩트"
+    }
+  },
+  {
+    "model": "books.author",
+    "pk": 149,
+    "fields": {
+      "name": "하이라이츠 어린이 (Highlights for Children) (지은이)",
+      "profile_image": null,
+      "biography": ""
+    }
+  },
+  {
+    "model": "books.author",
+    "pk": 150,
+    "fields": {
+      "name": "마라 비슨달 (지은이), 박우정 (옮긴이)",
+      "profile_image": null,
+      "biography": "마라 비슨달(Mara Hvistendahl)은 미국의 언론인이다. 성별 선택 낙태로 인한 남초 사회의 문제를 다룬《남성 과잉 사회: 지워져버린 소녀들의 진실과 도래할 인류의 재앙》으로 퓰리처상 일반 논픽션 부문 최종 후보에 올랐다."
+    }
+  },
+  {
+    "model": "books.author",
+    "pk": 151,
+    "fields": {
+      "name": "설흔 (지은이)",
+      "profile_image": null,
+      "biography": ""
+    }
+  },
+  {
+    "model": "books.author",
+    "pk": 152,
+    "fields": {
+      "name": "모리스 블랑쇼 (지은이), 류재화 (옮긴이)",
+      "profile_image": null,
+      "biography": "모리스 블랑쇼(Maurice Blanchot)는 프랑스의 소설가, 문학비평가, 철학자로, 1907년 9월 22일 손에루아르 드브루즈 코뮌의 마을, 캥에서 태어나 2003년 2월 20일 이블린 메닐생드니에서 사망했다. “그는 일생 동안 전적으로 문학에 몸을 바쳤고 자신의 특질인 침묵에 전념했다.”"
+    }
+  },
+  {
+    "model": "books.author",
+    "pk": 153,
+    "fields": {
+      "name": "크리스티나 퍼니발 (지은이), 케이티 드와이어 (그림), 이은경 (옮긴이)",
+      "profile_image": null,
+      "biography": ""
+    }
+  },
+  {
+    "model": "books.author",
+    "pk": 154,
+    "fields": {
+      "name": "민음사 편집부 (엮은이)",
+      "profile_image": null,
+      "biography": ""
+    }
+  },
+  {
+    "model": "books.author",
+    "pk": 155,
+    "fields": {
+      "name": "장자크 상페 (지은이), 양영란 (옮긴이)",
+      "profile_image": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/Salon_du_livre_de_Paris_2011_-_Jean-Jacques_Semp%C3%A9_-_005.jpg/330px-Salon_du_livre_de_Paris_2011_-_Jean-Jacques_Semp%C3%A9_-_005.jpg",
+      "biography": "장자크 상페(프랑스어: Jean-Jacques Sempé, 1932년 8월 17일~2022년 8월 11일)는 프랑스의 삽화가이다.\n1932년 8월 17일 보르도에서 태어났다. 그가 그림을 그리기 시작한 것은 소년 시절, 악단에서 연주하는 것을 꿈꾸며 재즈 음악가들을 그리면서부터였다. 1960년 르네 고시니를 알게 되어 함께 『꼬마 니콜라』를 만들기 시작했다. 이 작품은 대성공을 거두었고 1962년에 첫 번째 작품집 『쉬운 일은 아무것도 없다』가 나올 때 그는 이미 프랑스에서 데생의 일인자가 되어 있었다. 이후 드노엘 출판사와 갈리마르 출판사에서 지금까지 서른 권 가까운 작품집을 발표했고, 이 책들은 세계 여러 나라 말로 번역되었다."
+    }
+  },
+  {
+    "model": "books.author",
+    "pk": 156,
+    "fields": {
+      "name": "앨리스 먼로 (지은이), 서정은 (옮긴이)",
+      "profile_image": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Alice_Munro.jpg/330px-Alice_Munro.jpg",
+      "biography": "앨리스 앤 먼로(영어: Alice Ann Munro, 1931년 7월 10일~2024년 5월 13일)는 캐나다의 소설가이다. 2009년 국제 부커상, 2013년 노벨 문학상을 수상하였다."
+    }
+  },
+  {
+    "model": "books.author",
+    "pk": 157,
+    "fields": {
+      "name": "슈테판 츠바이크 (지은이), 오지원 (옮긴이)",
+      "profile_image": "https://upload.wikimedia.org/wikipedia/commons/7/75/Stefan_Zweig_1900_cropped.jpg",
+      "biography": "슈테판 츠바이크(독일어: Stefan Zweig, 1881년 11월 28일 ~ 1942년 2월 22일)는 오스트리아의 소설가·저널리스트·극작가·전기작가이다.\n빈에서 태어났으며, 나치가 정권을 잡자 브라질로 망명하였다가, 마지막 작품인 《발자크》를 미처 완성하지 못한 채 페트로폴리스에서 젊은 아내와 함께 자살하였다. 형식적 완성미가 풍부하고, 프로이트의 심리학을 응용하여 쓴 우수한 단편 소설들이 많다. 유럽 문화의 전통을 유지하려고 노력하였고, 대표작으로 《감정의 혼란》(1926),《광기와 우연의 역사》(1927-1941)가 있다."
+    }
+  },
+  {
+    "model": "books.author",
+    "pk": 158,
+    "fields": {
+      "name": "김경희 (지은이), 장동일 (그림)",
+      "profile_image": null,
+      "biography": "김경희는 다음 사람 등을 가리킨다.김경희(金敬姬, 1946년~) : 김일성의 딸. 조선민주주의인민공화국의 정치인\n김경희 : 유명출판사 지식산업사의 대표. 배우 손비야의 조부\n김경희(1955년~) : 대한민국의 정치인. 민선 8기 이천시장\n김경희 : 대한민국의 성우\n김경희(1966년~) : 대한민국의 여자 배구 선수. 이재영, 이다영 자매의 어머니\n김경희(1974년~) : 대한민국의 희극인\n김경희 : 대한민국의 드라마 작가\n김경희 : 대한민국의 SBS 기자\n김경희 : 대한민국의 가수 소찬휘의 본명"
+    }
+  },
+  {
+    "model": "books.author",
+    "pk": 159,
+    "fields": {
+      "name": "마츠이 유세이 (지은이)",
+      "profile_image": null,
+      "biography": "마츠이 유세이(일본어: 松井 優征, 1979년 1월 31일 - )는 일본의 만화가이다. 사이타마현의 이루마시에서 태어났으며, 남성이다."
+    }
+  },
+  {
+    "model": "books.author",
+    "pk": 160,
+    "fields": {
+      "name": "앤서니 브라운 (지은이), 장미란 (옮긴이)",
+      "profile_image": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d8/Anthony_Browne_November_2010.JPG/330px-Anthony_Browne_November_2010.JPG",
+      "biography": "앤서니 에드워드 튜더 브라운(영어: Anthony Edward Tudor Browne, CBE, 1946년 9월 11일 ~ )은 영국의 동화작가이자 일러스트레이터이다."
+    }
+  },
+  {
+    "model": "books.author",
+    "pk": 161,
+    "fields": {
+      "name": "김희숙 (글), 심춘숙 (그림)",
+      "profile_image": null,
+      "biography": "김희숙의 다른 뜻은 다음과 같다.김희숙은 대한민국의 가수 겸 영화배우인 백설희의 본명이다.\n김희숙은 대한민국의 가수인 김세레나의 본명이다.\n김희숙는 조선민주주의인민공화국의 정치인인 김희숙이다."
+    }
+  },
+  {
+    "model": "books.author",
+    "pk": 162,
+    "fields": {
+      "name": "에이미 크루즈 로젠탈 (글), 제인 다이어, 브룩 다이어 (그림), 최현경 (옮긴이)",
+      "profile_image": null,
+      "biography": ""
+    }
+  },
+  {
+    "model": "books.author",
+    "pk": 163,
+    "fields": {
+      "name": "송아주 (지은이), 최정인 (그림)",
+      "profile_image": null,
+      "biography": ""
+    }
+  },
+  {
+    "model": "books.author",
+    "pk": 164,
+    "fields": {
+      "name": "김경아 (글), 오수진 (그림)",
+      "profile_image": null,
+      "biography": "김경아는 다음 사람을 가리킨다."
+    }
+  },
+  {
+    "model": "books.author",
+    "pk": 165,
+    "fields": {
+      "name": "박갑성 (지은이), 김형국 (엮은이)",
+      "profile_image": null,
+      "biography": ""
+    }
+  },
+  {
+    "model": "books.author",
+    "pk": 166,
+    "fields": {
+      "name": "마르쿠스 툴리우스 키케로 (지은이), 김성숙 (옮긴이)",
+      "profile_image": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/Bust_of_Cicero_%281st-cent._BC%29_-_Palazzo_Nuovo_-_Musei_Capitolini_-_Rome_2016.jpg/330px-Bust_of_Cicero_%281st-cent._BC%29_-_Palazzo_Nuovo_-_Musei_Capitolini_-_Rome_2016.jpg",
+      "biography": "키케로(라틴어: Marcus Tullius Cicero)는 로마의 정치인, 변호사이자 작가이다. 기원전 106년 1월 3일 이탈리아 아르피눔에서 부유한 기사 계급 집안의 두 형제 중 맏이로 태어나 기원전 43년 12월 7일(율리우스력) 포르미아에서 피살되어 세상을 떠났다."
+    }
+  },
+  {
+    "model": "books.author",
+    "pk": 167,
+    "fields": {
+      "name": "마테오 리치 (이마두), 마르티노 마르티니 (지은이), 정민 (옮긴이)",
+      "profile_image": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8f/Matteo_Ricci_2.jpg/330px-Matteo_Ricci_2.jpg",
+      "biography": "마테오 리치(이탈리아어: Matteo Ricci, 중국어 간체자: 利玛窦, 정체자: 利瑪竇, 병음: Lì Mǎdòu 리마더우[*], 한자음: 이마두, 1552년 10월 6일 ~ 1610년 5월 11일)는 로마 가톨릭교회의 사제이자, 중국을 비롯한 아시아 대륙에 기독교 신앙을 정착시킨 이탈리아 출신 예수회 선교사이다. 호(號)는 서강(西江), 청태(淸泰)·존칭은 태서유사(泰西儒士)이다."
+    }
+  },
+  {
+    "model": "books.author",
+    "pk": 168,
+    "fields": {
+      "name": "정선애 (지은이), 박우진 (그림)",
+      "profile_image": null,
+      "biography": ""
+    }
+  },
+  {
+    "model": "books.author",
+    "pk": 169,
+    "fields": {
+      "name": "하유지 (지은이)",
+      "profile_image": null,
+      "biography": ""
+    }
+  },
+  {
+    "model": "books.author",
+    "pk": 170,
+    "fields": {
+      "name": "기타마루 유지 (지은이), 송해영 (옮긴이)",
+      "profile_image": null,
+      "biography": ""
+    }
+  },
+  {
+    "model": "books.author",
+    "pk": 171,
+    "fields": {
+      "name": "마르쿠스 툴리우스 키케로 (지은이), 김남우 (옮긴이)",
+      "profile_image": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/Bust_of_Cicero_%281st-cent._BC%29_-_Palazzo_Nuovo_-_Musei_Capitolini_-_Rome_2016.jpg/330px-Bust_of_Cicero_%281st-cent._BC%29_-_Palazzo_Nuovo_-_Musei_Capitolini_-_Rome_2016.jpg",
+      "biography": "키케로(라틴어: Marcus Tullius Cicero)는 로마의 정치인, 변호사이자 작가이다. 기원전 106년 1월 3일 이탈리아 아르피눔에서 부유한 기사 계급 집안의 두 형제 중 맏이로 태어나 기원전 43년 12월 7일(율리우스력) 포르미아에서 피살되어 세상을 떠났다."
+    }
+  },
+  {
+    "model": "books.author",
+    "pk": 172,
+    "fields": {
+      "name": "박은철 (지은이), 이우일 (그림)",
+      "profile_image": null,
+      "biography": "박은철(朴殷哲, 1981년 1월 18일~)은 대한민국의 레슬링 선수, 지도자이다. 2008년 하계 올림픽에서 남자 그레코로만형 밴텀급 종목 동메달을 획득했다."
+    }
+  },
+  {
+    "model": "books.author",
+    "pk": 173,
+    "fields": {
+      "name": "필립 포조 디 보르고 (지은이), 최복현 (옮긴이)",
+      "profile_image": null,
+      "biography": ""
+    }
+  },
+  {
+    "model": "books.author",
+    "pk": 174,
+    "fields": {
+      "name": "손원평 (지은이), 만물상 (그림)",
+      "profile_image": null,
+      "biography": "손원평(孫元平, 1979년 4월 21일 ~ )은 대한민국의 소설가이다."
+    }
+  },
+  {
+    "model": "books.author",
+    "pk": 175,
+    "fields": {
+      "name": "아벨 보나르 (지은이)",
+      "profile_image": null,
+      "biography": ""
+    }
+  },
+  {
+    "model": "books.author",
+    "pk": 176,
+    "fields": {
+      "name": "우리누리 (지은이), 김형연 (그림)",
+      "profile_image": null,
+      "biography": ""
+    }
+  },
+  {
+    "model": "books.author",
+    "pk": 177,
+    "fields": {
+      "name": "제이크 냅, 존 제라츠키 (지은이), 박우정 (옮긴이)",
+      "profile_image": null,
+      "biography": ""
+    }
+  },
+  {
+    "model": "books.author",
+    "pk": 178,
+    "fields": {
+      "name": "박현숙 (지은이), 정경아 (그림)",
+      "profile_image": null,
+      "biography": "박현숙의 다른 뜻은 다음과 같다.박현숙(朴賢淑, 1896년 ~ 1980년)은 평양 지역에서 활동한 한국의 독립 운동가이며 대한민국의 제4대, 제6대 국회의원이다.\n박현숙(朴賢淑, 1914년 ~ 1981년)은 광주학생운동에 참가한 한국의 독립 운동가이다.\n박현숙(朴賢淑, 1926년 ~ 2020년)은 대한민국의 극작가이다.\n박현숙(1968년 ~ )은 대한민국의 배우이다.\n박현숙(朴賢淑, 1969년 ~ )은 대한민국의 농구 선수이다.\n박현숙(1985년 ~ )은 조선민주주의인민공화국의 역도 선수이다.\n박현숙은 대한민국의 동화 작가이다. 대표작으론 <수상한 시리즈>, <실시간 검색어 1위> 등이 있다."
+    }
+  },
+  {
+    "model": "books.author",
+    "pk": 179,
+    "fields": {
+      "name": "박은정 (지은이), 남주현 (그림)",
+      "profile_image": null,
+      "biography": "박은정은 다음 사람을 가리킨다.박은정(1952년 ~ )은 대한민국의 국민권익위원회 위원장이다.\n박은정(1972년 ~ )은 대한민국의 검사이다.\n박은정은 울산방송(ubc) 앵커 출신의 방송인이다.\n박은정은 대한민국의 러시아어 번역가이다.\n박은정은 대한민국의 교수이다."
+    }
+  },
+  {
+    "model": "books.author",
+    "pk": 180,
+    "fields": {
+      "name": "지영 (지은이)",
+      "profile_image": null,
+      "biography": "지영이라는 이름을 가진 사람은 다음과 같다.지영(기원전 565~533) - 중국 춘추 시대 진나라의 정치인. 6경의 일원.\n지영(智永, 기원후 6세기) - 남조·수나라의 서승. 왕희지의 7대손.\n지영(智英, 17세기) - 조선의 화승.\n하지영(이전 예명: 지영, 1982~) - 대한민국의 희극인."
+    }
+  },
+  {
+    "model": "books.author",
+    "pk": 181,
+    "fields": {
+      "name": "아카이 시라후 (지은이)",
+      "profile_image": null,
+      "biography": ""
+    }
+  },
+  {
+    "model": "books.author",
+    "pk": 182,
+    "fields": {
+      "name": "서정오 (지은이), 이우정 (그림)",
+      "profile_image": null,
+      "biography": ""
+    }
+  },
+  {
+    "model": "books.author",
+    "pk": 183,
     "fields": {
       "name": "배세진 (지은이)",
       "profile_image": null,
@@ -2305,7 +1648,7 @@
   },
   {
     "model": "books.author",
-    "pk": 257,
+    "pk": 184,
     "fields": {
       "name": "김재훈, 서정욱 (지은이)",
       "profile_image": null,
@@ -2314,7 +1657,7 @@
   },
   {
     "model": "books.author",
-    "pk": 258,
+    "pk": 185,
     "fields": {
       "name": "지바 마사야 (지은이), 전경아 (옮긴이), 김정운 (추천)",
       "profile_image": null,
@@ -2323,7 +1666,7 @@
   },
   {
     "model": "books.author",
-    "pk": 259,
+    "pk": 186,
     "fields": {
       "name": "토마스 아키나리 (지은이), 장하나 (옮긴이)",
       "profile_image": null,
@@ -2332,7 +1675,7 @@
   },
   {
     "model": "books.author",
-    "pk": 260,
+    "pk": 187,
     "fields": {
       "name": "비톨트 곰브로비치 (지은이), 김용석 (옮긴이)",
       "profile_image": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ae/Witold_Gombrowicz_by_Bohdan_Paczowski_-_detail.jpg/330px-Witold_Gombrowicz_by_Bohdan_Paczowski_-_detail.jpg",
@@ -2341,7 +1684,7 @@
   },
   {
     "model": "books.author",
-    "pk": 261,
+    "pk": 188,
     "fields": {
       "name": "서동욱 (지은이)",
       "profile_image": null,
@@ -2350,11 +1693,668 @@
   },
   {
     "model": "books.author",
-    "pk": 262,
+    "pk": 189,
     "fields": {
       "name": "로랑스 드빌레르 (지은이), 박효은 (옮긴이)",
       "profile_image": null,
       "biography": ""
+    }
+  },
+  {
+    "model": "books.author",
+    "pk": 190,
+    "fields": {
+      "name": "변정수 (지은이)",
+      "profile_image": "https://upload.wikimedia.org/wikipedia/commons/e/e7/200103_%EB%B3%80%EC%A0%95%EC%88%98.jpg",
+      "biography": "변정수(1974년 4월 15일 ~ )는 대한민국의 배우, 모델이다."
+    }
+  },
+  {
+    "model": "books.author",
+    "pk": 191,
+    "fields": {
+      "name": "야마구치 슈 (지은이), 김윤경 (옮긴이)",
+      "profile_image": null,
+      "biography": ""
+    }
+  },
+  {
+    "model": "books.author",
+    "pk": 192,
+    "fields": {
+      "name": "이지영 (지은이)",
+      "profile_image": null,
+      "biography": "이지영은 다음과 같은 뜻이 있다."
+    }
+  },
+  {
+    "model": "books.author",
+    "pk": 193,
+    "fields": {
+      "name": "마이클 E. 거버 (지은이), 이제용 (옮긴이)",
+      "profile_image": null,
+      "biography": ""
+    }
+  },
+  {
+    "model": "books.author",
+    "pk": 194,
+    "fields": {
+      "name": "레베카 라인하르트 (지은이), 장혜경 (옮긴이)",
+      "profile_image": null,
+      "biography": ""
+    }
+  },
+  {
+    "model": "books.author",
+    "pk": 195,
+    "fields": {
+      "name": "강신주 (지은이)",
+      "profile_image": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/22/%EA%B0%95%EC%8B%A0%EC%A3%BC_%EB%B2%99%EC%BB%A41.png/330px-%EA%B0%95%EC%8B%A0%EC%A3%BC_%EB%B2%99%EC%BB%A41.png",
+      "biography": "강신주(姜信珠, 1967년 ~ )는 대한민국에서 철학을 이야기하는 사람이다. 대한민국 경상남도 함양에서 출생하였다. 연세대학교에서 화학공학 학사 학위를, 서울대학교에서 철학 석사 학위를, 연세대학교에서 철학 박사 학위를 취득하였다. 2007년부터 문사철(文史哲) 기획위원회의 위원으로 활동하고 있다."
+    }
+  },
+  {
+    "model": "books.author",
+    "pk": 196,
+    "fields": {
+      "name": "코디정 (지은이)",
+      "profile_image": null,
+      "biography": ""
+    }
+  },
+  {
+    "model": "books.author",
+    "pk": 197,
+    "fields": {
+      "name": "김종원 (지은이)",
+      "profile_image": null,
+      "biography": "김종원의 다른 뜻은 다음과 같다.김종원(金宗元, 1922 ~ 1964)은 일제 강점기와 대한민국의 군인, 경찰이다.\n김종원(1957 ~ )은 대한민국의 가수 배일호의 본명이다.\n김종원(1975 ~ )은 대한민국의 유도 선수이다.\n김종원(1985 ~ )은 대한민국의 희극 배우다."
+    }
+  },
+  {
+    "model": "books.author",
+    "pk": 198,
+    "fields": {
+      "name": "차이즈친 (지은이), 마오실리우 (그림), 라미파 (옮긴이)",
+      "profile_image": null,
+      "biography": ""
+    }
+  },
+  {
+    "model": "books.author",
+    "pk": 199,
+    "fields": {
+      "name": "아즈마 히로키 (지은이), 안천 (옮긴이)",
+      "profile_image": null,
+      "biography": "아즈마 히로키(東 浩紀 , 1971년 5월 9일 ~ )는 일본의 비평가이자 소설가이다. 스스로를 ‘사상가 견습’이라고 칭한다. 애칭은 아즈망(일본어: あずまん)이다."
+    }
+  },
+  {
+    "model": "books.author",
+    "pk": 200,
+    "fields": {
+      "name": "김용규 (지은이)",
+      "profile_image": null,
+      "biography": "김용규는 다음 사람을 가리킨다.김용규(1923년 ~ )는 대한민국의 비전향 장기수이다.\n김용규(1941년 ~ )는 대한민국의 외교관이다.\n김용규(金龍奎, 1954년 ~ )는 대한민국의 전라북도 정읍시의원이었다.\n김용규(1955년 ~ )는 경기도 광주시장을 지낸 대한민국의 정치인이다.\n김용규(金容奎, 1955년 ~ )는 대한민국의 경기도 용인시의원이었다.\n김용규(金龍圭, 1968년 ~ )는 대한민국의 충청북도 청주시의원이었다."
+    }
+  },
+  {
+    "model": "books.author",
+    "pk": 201,
+    "fields": {
+      "name": "브렌던 오도너휴 (지은이), 허성심 (옮긴이)",
+      "profile_image": null,
+      "biography": ""
+    }
+  },
+  {
+    "model": "books.author",
+    "pk": 202,
+    "fields": {
+      "name": "게오르그 빌헬름 프리드리히 헤겔 (지은이), 서정혁 (옮긴이)",
+      "profile_image": null,
+      "biography": ""
+    }
+  },
+  {
+    "model": "books.author",
+    "pk": 203,
+    "fields": {
+      "name": "박영규 (지은이)",
+      "profile_image": null,
+      "biography": "박영규는 다음 사람 등을 가리킨다.박영규(朴英規): 후백제(後百濟)의 무신(武臣). 순천 박씨(順天 朴氏) 시조\n박영규: 박정희 대통령의 할아버지(조부)\n박영규(?~1592년): 조선 중기의 의병장\n박영규(1953년~): 대한민국의 배우\n박영규(1994년~): 보이그룹 MVP소속의 래퍼. 예명 PK"
+    }
+  },
+  {
+    "model": "books.author",
+    "pk": 204,
+    "fields": {
+      "name": "이진민 (지은이)",
+      "profile_image": null,
+      "biography": ""
+    }
+  },
+  {
+    "model": "books.author",
+    "pk": 205,
+    "fields": {
+      "name": "마이클 슈어 (지은이), 염지선 (옮긴이)",
+      "profile_image": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/07/Michael_Schur_2012_%28cropped%29.jpg/330px-Michael_Schur_2012_%28cropped%29.jpg",
+      "biography": "마이클 허버트 슈어(영어: Michael Herbert Schur, 1975년 10월 29일~)은 미국의 텔레비전 프로듀서, 각본가, 감독, 배우이다. 미국에서 리메이크된 코미디 시리즈 《오피스》의 제작과 각본을 맡았고, 《오피스》의 제작자 그레그 대니얼스와 함께 《팍스 앤 레크리에이션》을 공동 제작했다. 《굿 플레이스》의 제작을 비롯해 코미디 시리즈 《브루클린 나인-나인》을 공동 제작했으며, 《마스터 오브 제로》 시리즈의 프로듀서를 맡았다. 또한 《오피스》에서 모스 슈르트 역을 맡기도 했다. 2021년에는 피콕의 코미디 시리즈 《러더퍼드 폴스》를 동료 두 명과 함께 공동 제작했다."
+    }
+  },
+  {
+    "model": "books.author",
+    "pk": 206,
+    "fields": {
+      "name": "이규완 (지은이)",
+      "profile_image": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f7/%EC%9D%B4%EA%B7%9C%EC%99%84.jpg/330px-%EC%9D%B4%EA%B7%9C%EC%99%84.jpg",
+      "biography": "이규완(李圭完, 1862년 11월 15일 ~ 1946년 12월 15일)은 조선 후기의 왕족 출신 무신, 군인이자 일제강점기의 관료, 사상가였다. 그는 박영효의 식객이 되었다가 갑신정변에 행동대장 격으로 참여한 인물로, 박영효의 집사 출신이었다. 그는 서재필 등과 함께 병조 조련국 소속 군사를 이끌고 수구파 대신을 척살하는 역할을 하였다."
+    }
+  },
+  {
+    "model": "books.author",
+    "pk": 207,
+    "fields": {
+      "name": "울리히 호프만 (지은이), 이상희 (옮긴이)",
+      "profile_image": null,
+      "biography": ""
+    }
+  },
+  {
+    "model": "books.author",
+    "pk": 208,
+    "fields": {
+      "name": "오가와 히토시 (지은이), 이정미 (옮긴이)",
+      "profile_image": null,
+      "biography": ""
+    }
+  },
+  {
+    "model": "books.author",
+    "pk": 209,
+    "fields": {
+      "name": "강용수 (지은이)",
+      "profile_image": "https://upload.wikimedia.org/wikipedia/commons/7/70/%EA%B0%95%EC%9A%A9%EC%88%98_%EC%95%BC%EA%B5%AC_%EC%84%A0%EC%88%98.jpg",
+      "biography": "강용수(姜龍洙, ?~)는 롯데 자이언트에서 뛰었던 전 야구 선수다. 동인천고등학교를 졸업했으며, 1977년 대륙간컵 국가대표를 뽑기 위한 선발전에 후보로 선정되어 참가했지만 최종 엔트리에 승선하지는 못했다.\n한편, 1975년 9월 롯데 오리온즈 입단 교섭이 있었지만 나이가 많다는 이유로 가네다 마사이치 당시 감독이 반대해 좌절됐다."
+    }
+  },
+  {
+    "model": "books.author",
+    "pk": 210,
+    "fields": {
+      "name": "애니 로슨 (지은이), 박지선 (옮긴이)",
+      "profile_image": null,
+      "biography": ""
+    }
+  },
+  {
+    "model": "books.author",
+    "pk": 211,
+    "fields": {
+      "name": "이충녕 (지은이)",
+      "profile_image": null,
+      "biography": ""
+    }
+  },
+  {
+    "model": "books.author",
+    "pk": 212,
+    "fields": {
+      "name": "에드문트 후설 (지은이), 박지영 (옮긴이)",
+      "profile_image": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8f/Edmund_Husserl_1900.jpg/330px-Edmund_Husserl_1900.jpg",
+      "biography": "에드문트 후설(독일어: Edmund Husserl, 1859년 4월 8일 - 1938년 4월 27일)은 현대철학의 주요 사상 가운데 하나인 현상학의 체계를 놓은 철학자이다. 그는 심리주의와 역사주의에 대한 비평을 통해 실증주의와 결별하였다. 그가 유대인이라고 하지만, 유대인은 인종적 분류가 아니라 유대교를 믿는 사람을 가리키는 종교적 분류일 뿐이다."
+    }
+  },
+  {
+    "model": "books.author",
+    "pk": 213,
+    "fields": {
+      "name": "강성태 (지은이)",
+      "profile_image": null,
+      "biography": "강성태는 다음 사람 등을 가리킨다.강성태(姜聲邰, 1903~1976): 대한민국의 정치인. 제8대 상공부장관. 제4대 국회의원\n강성태(姜成泰, 1960~): 대한민국의 정치인. 민선 8기 부산 수영구청장\n강성태(姜成泰, 1965~): 대한민국의 노동법 전공 법학자\n강성태(1983~): 대한민국의 학원인. 공신닷컴의 CEO"
+    }
+  },
+  {
+    "model": "books.author",
+    "pk": 214,
+    "fields": {
+      "name": "장 폴 주아리 (지은이), 배정은 (옮긴이)",
+      "profile_image": null,
+      "biography": ""
+    }
+  },
+  {
+    "model": "books.author",
+    "pk": 215,
+    "fields": {
+      "name": "이케다 다이사쿠, 로케시 찬드라 (지은이)",
+      "profile_image": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8f/DaisakuIkedaTokyoMay2010.jpg/330px-DaisakuIkedaTokyoMay2010.jpg",
+      "biography": "이케다 다이사쿠(일본어: 池田大作, 1928년 1월 2일~2023년 11월 15일)는 일본의 작가이다."
+    }
+  },
+  {
+    "model": "books.author",
+    "pk": 216,
+    "fields": {
+      "name": "이왕주 (지은이)",
+      "profile_image": null,
+      "biography": ""
+    }
+  },
+  {
+    "model": "books.author",
+    "pk": 217,
+    "fields": {
+      "name": "문성원 (지은이)",
+      "profile_image": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8f/Slayers_mma.jpg/330px-Slayers_mma.jpg",
+      "biography": "문성원(1988년 10월 29일 ~ )은 대한민국의 전직 스타크래프트, 스타크래프트 II 프로게이머이자 현직 오버워치 프로게임단 지도자로 선수 시절 종족은 테란, 아이디는 MMA를 사용했으며 현재 서울 다이너스티의 코치를 맡고 있다."
+    }
+  },
+  {
+    "model": "books.author",
+    "pk": 218,
+    "fields": {
+      "name": "오카모토 유이치로 (지은이), 이정미 (옮긴이)",
+      "profile_image": null,
+      "biography": ""
+    }
+  },
+  {
+    "model": "books.author",
+    "pk": 219,
+    "fields": {
+      "name": "백휴 (지은이)",
+      "profile_image": null,
+      "biography": ""
+    }
+  },
+  {
+    "model": "books.author",
+    "pk": 220,
+    "fields": {
+      "name": "뉴필로소퍼 편집부 (엮은이)",
+      "profile_image": null,
+      "biography": ""
+    }
+  },
+  {
+    "model": "books.author",
+    "pk": 221,
+    "fields": {
+      "name": "알랭 드 보통 (지은이), 정명진 (옮긴이)",
+      "profile_image": "https://upload.wikimedia.org/wikipedia/commons/4/4d/Alaindebotton.png",
+      "biography": "알랭 드 보통(Alain de Botton, 1969년 12월 20일 ~ )은 스위스 취리히에서 태어난 철학자, 소설가, 수필가이다. 현재 영국 런던에서 가족과 함께 거주 중이다. 또한 '한국인이 가장 사랑하는 작가' 중 한 명으로 손꼽히는 알랭 드 보통은 2008년 영국 런던에 세운 '인생학교'의 교장으로 활동 중이다."
+    }
+  },
+  {
+    "model": "books.author",
+    "pk": 222,
+    "fields": {
+      "name": "아니키우스 보이티우스 (지은이), 박문재 (옮긴이)",
+      "profile_image": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/Boethius_initial_consolation_philosophy.jpg/330px-Boethius_initial_consolation_philosophy.jpg",
+      "biography": "아니키우스 만리우스 토르콰투스 세베리누스 보이티우스(라틴어: Anicius Manlius Torquatus Sererinus Boethius, 480년~524년)는 로마 최후의 저술가·철학자이다."
+    }
+  },
+  {
+    "model": "books.author",
+    "pk": 223,
+    "fields": {
+      "name": "르네 데카르트 (지은이), 이현복 (옮긴이)",
+      "profile_image": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/73/Frans_Hals_-_Portret_van_Ren%C3%A9_Descartes.jpg/330px-Frans_Hals_-_Portret_van_Ren%C3%A9_Descartes.jpg",
+      "biography": "르네 데카르트(프랑스어: René Descartes [ʁəne dekaʁt][*], 라틴어: Renatus Cartesius 레나투스 카르테시우스[*], 문화어: 르네 데까르뜨, 1596년 3월 31일 - 1650년 2월 11일)는 프랑스의 철학자, 수학자, 과학자, 근대 철학의 아버지, 해석기하학의 창시자로 불린다. 그는 합리론의 대표주자이며 본인의 대표 저서 《방법서설》에서 ‘나는 생각한다, 고로 존재한다.(Cogito ergo sum)’는 계몽사상의 '자율적이고 합리적인 주체'의 근본 원리를 처음으로 확립한 것으로 유명하다. 또한 데카르트는 신존재 증명을 한 유신론자였으며 평생 로마 가톨릭의 신앙을 지켰다. 하지만 그의 신앙은 일반적인 가톨릭 기독교 신앙과 달랐으며, 오히려 기계론적인 관점에서의 신 개념을 만들어 내어 이신론에 영향을 주었다."
+    }
+  },
+  {
+    "model": "books.author",
+    "pk": 224,
+    "fields": {
+      "name": "김교빈, 이현구 (지은이), 이부록 (그림)",
+      "profile_image": null,
+      "biography": "김시훈(1987년 12월 29일 ~ )은 대한민국의 전 축구 선수이다. 개명 전 이름우 김교빈으로 현재 성남 FC 골키퍼 코치로 재직중이다."
+    }
+  },
+  {
+    "model": "books.author",
+    "pk": 225,
+    "fields": {
+      "name": "아마노 아키라 (지은이)",
+      "profile_image": "https://upload.wikimedia.org/wikipedia/commons/8/8e/Akira_Amano.jpg",
+      "biography": "아마노 아키라(天野 明, 1973년 ~ )는 일본의 여성만화가이다."
+    }
+  },
+  {
+    "model": "books.author",
+    "pk": 226,
+    "fields": {
+      "name": "모데스토 가르시아 (지은이), 하비 데 카스트로 (그림), 엄지영 (옮긴이)",
+      "profile_image": null,
+      "biography": ""
+    }
+  },
+  {
+    "model": "books.author",
+    "pk": 227,
+    "fields": {
+      "name": "선자은 (글), 이태영 (그림), 표창원 (기획)",
+      "profile_image": null,
+      "biography": ""
+    }
+  },
+  {
+    "model": "books.author",
+    "pk": 228,
+    "fields": {
+      "name": "메가로스쿨 언어논리연구소 (지은이)",
+      "profile_image": null,
+      "biography": ""
+    }
+  },
+  {
+    "model": "books.author",
+    "pk": 229,
+    "fields": {
+      "name": "트롤 (지은이), 김정화 (옮긴이)",
+      "profile_image": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c7/John_Bauer_1915.jpg/330px-John_Bauer_1915.jpg",
+      "biography": "트롤(troll)은 스칸디나비아와 스코틀랜드의 전설에 등장하는, 인간과 비슷한 모습의 거인족이다. 산의 동굴이나 다 허물어져가는 오두막에 살며, 키는 4~11피트(1.2~3.3m)이며, 몸무게가 1톤이 넘는다. 수명은 무려 300년이다."
+    }
+  },
+  {
+    "model": "books.author",
+    "pk": 230,
+    "fields": {
+      "name": "해커스 GSAT 취업교육연구소 (지은이)",
+      "profile_image": null,
+      "biography": ""
+    }
+  },
+  {
+    "model": "books.author",
+    "pk": 231,
+    "fields": {
+      "name": "여성곤, 송형근 (지은이)",
+      "profile_image": null,
+      "biography": ""
+    }
+  },
+  {
+    "model": "books.author",
+    "pk": 232,
+    "fields": {
+      "name": "삼성출판사 편집부 (엮은이)",
+      "profile_image": null,
+      "biography": ""
+    }
+  },
+  {
+    "model": "books.author",
+    "pk": 233,
+    "fields": {
+      "name": "법학전문대학원협의회 (엮은이)",
+      "profile_image": null,
+      "biography": "법학전문대학원협의회(法學專門大學院協議會, Korean Association of Law Schools)는 대한민국의 법학전문대학원 단체로 선발과 공동정책, 학술교류 등을 담당한다. 대표적으로 법학적성시험을 주관한다. 서울특별시 중구 서소문로 11길 34에 위치하고 있다."
+    }
+  },
+  {
+    "model": "books.author",
+    "pk": 234,
+    "fields": {
+      "name": "메가로스쿨 언어논리연구소 (엮은이)",
+      "profile_image": null,
+      "biography": ""
+    }
+  },
+  {
+    "model": "books.author",
+    "pk": 235,
+    "fields": {
+      "name": "미쓰다 신조 (지은이), 김은모 (옮긴이)",
+      "profile_image": null,
+      "biography": ""
+    }
+  },
+  {
+    "model": "books.author",
+    "pk": 236,
+    "fields": {
+      "name": "김하연 (지은이)",
+      "profile_image": null,
+      "biography": "김하연은 다음 사람을 가리킨다.김하연(1981년 ~ )은 대한민국의 미스코리아 경기 진 출신 배우이다.\n김하연(1995년 ~ )은 대한민국의 배우이다.\n김하연(2010년 ~ )은 대한민국의 배우이다."
+    }
+  },
+  {
+    "model": "books.author",
+    "pk": 237,
+    "fields": {
+      "name": "법학전문대학원협의회 (지은이)",
+      "profile_image": null,
+      "biography": "법학전문대학원협의회(法學專門大學院協議會, Korean Association of Law Schools)는 대한민국의 법학전문대학원 단체로 선발과 공동정책, 학술교류 등을 담당한다. 대표적으로 법학적성시험을 주관한다. 서울특별시 중구 서소문로 11길 34에 위치하고 있다."
+    }
+  },
+  {
+    "model": "books.author",
+    "pk": 238,
+    "fields": {
+      "name": "무경, 박상민, 박소해, 이지유, 조동신 (지은이)",
+      "profile_image": null,
+      "biography": "무경에는 다음과 무경 난데무경(無敬)은 불교 용어 증 하나이다.\n무경(武庚, ? ~ ?)은 상나라 말기의 인물이다."
+    }
+  },
+  {
+    "model": "books.author",
+    "pk": 239,
+    "fields": {
+      "name": "윤자영 (지은이), 이갑규 (그림)",
+      "profile_image": null,
+      "biography": "윤자영(尹滋瑛, 1894년 9월 13일 ~ 1938년 10월 14일)은 사회주의 계열에서 활동한 한국의 독립운동가이다. 지하 활동 중 사용한 가명으로 윤소야(尹蘇野 또는 尹笑也)와 정일영(丁一英)이 있다."
+    }
+  },
+  {
+    "model": "books.author",
+    "pk": 240,
+    "fields": {
+      "name": "정은숙 (지은이), 이주희 (그림)",
+      "profile_image": null,
+      "biography": "정은숙이라는 이름을 가진 사람은 다음과 같다.정은숙 (정당인)\n정은숙 (아나운서)\n정은숙 (방송작가)\n정은숙 (만화가)\n정은숙 (출판인)\n정은숙 (성악가)\n정은숙 (성우)\n정수라의 본명"
+    }
+  },
+  {
+    "model": "books.author",
+    "pk": 241,
+    "fields": {
+      "name": "도기성 (지은이), 김은영 (감수)",
+      "profile_image": null,
+      "biography": ""
+    }
+  },
+  {
+    "model": "books.author",
+    "pk": 242,
+    "fields": {
+      "name": "김태호 (글), 홍승우 (그림), 김민형 (기획)",
+      "profile_image": null,
+      "biography": "김태호는 다음의 인물을 가리킨다."
+    }
+  },
+  {
+    "model": "books.author",
+    "pk": 243,
+    "fields": {
+      "name": "히가시노 게이고 (지은이), 민경욱 (옮긴이)",
+      "profile_image": null,
+      "biography": "히가시노 게이고(일본어: 東野 圭吾 , 1958년 2월 4일 ~ )는 일본의 소설가이다. 오사카 출신으로 오사카 부립대학 전기공학과 졸업 후 일본전장주식회사에서 엔지니어로 근무하며 추리 소설을 저술하였다. 1985년 《방과 후》로 제31회 에도가와 란포상을 수상하며 작가로 데뷔하였다. 이후 퇴직 후 도쿄로 올라와, 작가로 전념하고 있다. 그의 소설은 추리, 느와르급 서스펜스, 패러디, 엔터테인먼트 등 다채로운 분야에서 다양하게 있다. 또 원자력 발전이나 뇌 이식과 같이 과학적 소재를 다룬 소설도 여러 편 있다."
+    }
+  },
+  {
+    "model": "books.author",
+    "pk": 244,
+    "fields": {
+      "name": "송병건 (지은이)",
+      "profile_image": null,
+      "biography": ""
+    }
+  },
+  {
+    "model": "books.author",
+    "pk": 245,
+    "fields": {
+      "name": "허현경 (지은이)",
+      "profile_image": null,
+      "biography": ""
+    }
+  },
+  {
+    "model": "books.author",
+    "pk": 246,
+    "fields": {
+      "name": "개러스 무어 (지은이), 마가리다 에스테베즈 (그림), 브론테살롱 (옮긴이)",
+      "profile_image": null,
+      "biography": ""
+    }
+  },
+  {
+    "model": "books.author",
+    "pk": 247,
+    "fields": {
+      "name": "애거사 크리스티 (지은이), 이가형 (옮긴이)",
+      "profile_image": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cf/Agatha_Christie.png/330px-Agatha_Christie.png",
+      "biography": "애거사 크리스티(본명: Dame Agatha Christie, Lady Mallowan, DBE, 1890년 9월 15일 ~ 1976년 1월 12일)는 영국의 추리 소설 작가이다. 메리 웨스트매컷(Mary Westmacott)이란 필명으로 연애 소설을 집필하기도 하였으나, 80여 편의 추리 소설에서 애거서 크리스티란 이름으로 대중에게 널리 알려졌다. 그녀가 창조해 낸 벨기에의 명탐정 에르퀼 푸아로와 제인 마플은 대중적인 사랑을 받았으며, 그녀는 추리 소설 장르에서 주목받는 작가로서 추리 소설의 여왕이라 불린다."
+    }
+  },
+  {
+    "model": "books.author",
+    "pk": 248,
+    "fields": {
+      "name": "이가라시 리쓰토 (지은이), 허하나 (옮긴이)",
+      "profile_image": null,
+      "biography": ""
+    }
+  },
+  {
+    "model": "books.author",
+    "pk": 249,
+    "fields": {
+      "name": "로버트 앨런 (지은이), 김요한 (옮긴이), 멘사코리아 (감수)",
+      "profile_image": null,
+      "biography": ""
+    }
+  },
+  {
+    "model": "books.author",
+    "pk": 250,
+    "fields": {
+      "name": "카타세 차시바 (지은이), 시로다이라 교 (원작), 오경화 (옮긴이)",
+      "profile_image": null,
+      "biography": ""
+    }
+  },
+  {
+    "model": "books.author",
+    "pk": 251,
+    "fields": {
+      "name": "해커스 취업교육연구소 (지은이)",
+      "profile_image": null,
+      "biography": ""
+    }
+  },
+  {
+    "model": "books.author",
+    "pk": 252,
+    "fields": {
+      "name": "조승연 (지은이)",
+      "profile_image": null,
+      "biography": "조승연은 다음 사람 등을 가리킨다.조승연: 대한민국의 배우\n조승연(1972년~): 대한민국의 배우\n조승연(1974년~): 대한민국의 기업인, 개명 전 조현아(조양호의 딸)\n조승연(1981년~): 대한민국의 작가\n조승연(1996년~): WOODZ의 본명. 대한민국의 보이 그룹 유니크, 엑스원의 멤버"
+    }
+  },
+  {
+    "model": "books.author",
+    "pk": 253,
+    "fields": {
+      "name": "조성우 (지은이)",
+      "profile_image": null,
+      "biography": "조성우는 다음 사람을 가리킨다.조성우는 대한민국의 영화 음악 감독이다.\n조성우는 전 KBO 리그 SK 와이번스의 내야수, 지명타자이다.\n조성우는 전 KBO 리그 한화 이글스의 투수이다."
+    }
+  },
+  {
+    "model": "books.author",
+    "pk": 254,
+    "fields": {
+      "name": "임성훈 (지은이)",
+      "profile_image": null,
+      "biography": "임성훈은 다음 사람을 가리킨다.임성훈(1950년 ~ )은 대한민국의 방송인이다.\n임성훈(林成勳, 1959년 ~ )은 대한민국의 공무원으로, 전직 전남 나주시장이다.\n임성훈(1970년 ~ 2008년)은 대한민국의 음악 그룹 거북이의 구성원이었던 터틀맨의 본명이다.\n임성훈은 대한민국의 희극 배우이다.\n임성훈(1997년 ~ )은 대한민국 속초시에서 사업하는 청년으로 [2025년 기대가 되는 20대] 인물 중 한명이다."
+    }
+  },
+  {
+    "model": "books.author",
+    "pk": 255,
+    "fields": {
+      "name": "유현준 (지은이)",
+      "profile_image": null,
+      "biography": "유현준은 다음 사람을 가리킨다.유현준(1969년 ~ )은 대한민국의 건축가이다.\n유현준(1997년 ~ )은 대한민국의 농구 선수이다."
+    }
+  },
+  {
+    "model": "books.author",
+    "pk": 256,
+    "fields": {
+      "name": "우석(브라운스톤) (지은이)",
+      "profile_image": null,
+      "biography": "우석의 다른 뜻은 다음과 같다.우석은 조선과 대한제국의 황족 겸 정치가인 흥친왕 이희의 호이다.\n우석(雨石)은 대한제국 관료 직위를 지낸 대한민국 독립운동가 최기보의 호이다.\n우석은 대한민국 기업가 김종익의 호이다.\n우석은 대한민국 극작가 겸 연극연출가 박진의 호이다.\n우석은 대한민국 화가 겸 외교관 장발의 호이다.\n우석은 대한민국 군인 겸 정치가 이후락의 호이다.\n우석은 대한민국 기업가 겸 정치가 임택근의 호이다.\n우석은 대한민국 배우 겸 대학 교수 신성일의 호이다.\n우석은 대한민국 기업가 겸 정치가 박지원의 호이다.\n우석은 대한민국 정치가 겸 대학 교수 정세현의 호이다.\n우석은 대한민국 배우 겸 대학 교수 한인수의 호이다.\n우석은 대한민국 법조인 겸 대학 교수 강지원의 호이다.\n우석(雨石)은 대한민국 정치가 겸 대학 교수 박종진의 호이다.\n우석은 대한민국의 보이 그룹 펜타곤의 구성원이다."
+    }
+  },
+  {
+    "model": "books.author",
+    "pk": 257,
+    "fields": {
+      "name": "이명현 (지은이)",
+      "profile_image": null,
+      "biography": "이명현의 다른 뜻은 다음과 같다.이명현(李命賢, 1706년 ~ 1772년)은 조선 후기의 문신이다.\n이명현(李明賢, 1942년 ~ )은 경기도 고양시 일산서구 대화동 성저마을 10단지에 거주하는 프로게이다\n이명현(1984년 ~ )은 자전거 경기 선수이다.\n리밍셴(李明賢, 1973년 ~ )은 중화민국의 정치인이다."
+    }
+  },
+  {
+    "model": "books.author",
+    "pk": 258,
+    "fields": {
+      "name": "시부야 노부히로 (지은이), 양지영 (옮긴이)",
+      "profile_image": null,
+      "biography": ""
+    }
+  },
+  {
+    "model": "books.author",
+    "pk": 259,
+    "fields": {
+      "name": "조찬영, 이지혜 (지은이)",
+      "profile_image": null,
+      "biography": ""
+    }
+  },
+  {
+    "model": "books.author",
+    "pk": 260,
+    "fields": {
+      "name": "김윤태 (지은이)",
+      "profile_image": null,
+      "biography": "김윤태는 다음 사람을 가리킨다.김윤태(金潤泰, 1939 ~ 2010)는 대한민국의 바둑 기사이다.\n김윤태(1960 ~ )는 대한민국의 신학자 겸 교수이다.\n김윤태(金侖兌, 1965 ~ )는 대한민국의 정치인이다.\n김윤태(1972 ~ )는 대한민국 배우 윤이준의 본명이다.\n김윤태(1990 ~ )는 대한민국의 농구 선수이다.\n김윤태(金玧台, 2004 ~ )는 대한민국의 바둑 기사이다."
+    }
+  },
+  {
+    "model": "books.author",
+    "pk": 261,
+    "fields": {
+      "name": "이광연 (지은이)",
+      "profile_image": null,
+      "biography": "이광연은 다음 사람을 가리킨다.이광연(1964년~)은 대한민국의 한의사이다.\n이광연(1977년~)은 대한민국의 아나운서이다.\n이광연(1999년~)은 대한민국의 축구 선수이다."
+    }
+  },
+  {
+    "model": "books.author",
+    "pk": 262,
+    "fields": {
+      "name": "최진석 (지은이)",
+      "profile_image": null,
+      "biography": "최진석은 다음 항목을 함의한다.최진석 (철학자)\n최진석 (기업인)\n최진석 (작곡가)\n최진석 "
     }
   }
 ]
