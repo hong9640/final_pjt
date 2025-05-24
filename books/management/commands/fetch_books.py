@@ -14,7 +14,10 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         ttb_key = os.getenv("ALADIN_TTBKEY")
         if not ttb_key:
+            print("❌ ALADIN_TTBKEY 환경변수가 없습니다.")
             return
+        else:
+            print(f"✅ ALADIN_TTBKEY 로드 성공: {ttb_key[:5]}******")
 
         keywords = ['사랑', '우정', '성장', '철학', '감동', '추리', '자기계발', '인문', '에세이', '여행']
         random.shuffle(keywords)
@@ -26,7 +29,7 @@ class Command(BaseCommand):
             if total_saved >= 300:
                 break
 
-            print(f"🔍 키워드 '{keyword}'에서 책 수집 중...")
+            print(f"\n🔍 키워드 '{keyword}'에서 책 수집 중...")
 
             search_url = "https://www.aladin.co.kr/ttb/api/ItemSearch.aspx"
             search_params = {
@@ -43,9 +46,17 @@ class Command(BaseCommand):
 
             try:
                 response = requests.get(search_url, params=search_params)
-                response.raise_for_status()
+                print(f"[응답 상태 코드] {response.status_code}")
+
+                if response.status_code != 200:
+                    print(f"⚠️ API 오류 응답:\n{response.text[:300]}...")
+                    continue
+
                 data = response.json().get('item', [])
-            except requests.RequestException:
+                print(f"📚 '{keyword}' 키워드로 {len(data)}권 수신")
+
+            except requests.RequestException as e:
+                print(f"🔴 요청 예외 발생: {e}")
                 continue
 
             for item in data:
@@ -53,7 +64,11 @@ class Command(BaseCommand):
                     break
 
                 isbn13 = item.get('isbn13')
-                if not isbn13 or isbn13 in collected_isbns:
+                if not isbn13:
+                    print("❌ ISBN13 없음 → 건너뜀")
+                    continue
+                if isbn13 in collected_isbns:
+                    print("🔁 중복 ISBN13 → 건너뜀")
                     continue
 
                 title = item.get('title', '').strip()
@@ -61,11 +76,13 @@ class Command(BaseCommand):
                 category_name = item.get('categoryName', '').strip()
 
                 if not title or not raw_author_name:
+                    print("❌ 제목 또는 저자 없음 → 건너뜀")
                     continue
+
+                print(f"✅ 저장 대상: {title[:30]} / {raw_author_name} / 출판사: {item.get('publisher')}")
 
                 author, _ = Author.objects.get_or_create(name=raw_author_name)
 
-                # 위키 검색용 이름 파싱
                 parsed_author_name = self.extract_primary_author_name(raw_author_name)
                 wiki_data = self.get_wikipedia_data(parsed_author_name)
 
@@ -92,12 +109,9 @@ class Command(BaseCommand):
                 collected_isbns.add(isbn13)
                 total_saved += 1
 
+        print(f"\n📦 총 저장 완료: {total_saved}권")
+
     def extract_primary_author_name(self, raw_author_str):
-        """
-        "홍길동 (지은이), 김철수 (옮긴이)" → "홍길동"
-        "무라카미 하루키 (지은이)" → "무라카미 하루키"
-        "이홍석, 김미진" → "이홍석"
-        """
         parts = [part.strip() for part in raw_author_str.split(',')]
         first = parts[0]
         return re.sub(r'\([^)]*\)', '', first).strip()
@@ -108,6 +122,6 @@ class Command(BaseCommand):
             response = requests.get(url)
             if response.status_code == 200:
                 return response.json()
-        except Exception:
-            pass
+        except Exception as e:
+            print(f"🔻 위키피디아 요청 실패: {author_name} / {e}")
         return None
