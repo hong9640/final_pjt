@@ -9,7 +9,6 @@
         padding: 2.5rem;
         border-radius: 16px;
         box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-        font-family: 'Noto Sans KR', sans-serif;
     }
 
     .update-wrapper h2 {
@@ -80,6 +79,13 @@
         {{ form.email }}
 
         <button type="submit">수정 완료</button>
+
+        <div style="text-align: center; margin-top: 1.5rem;">
+            <a href="{% url 'accounts:password_change' %}" style="color: #6D4C41; font-weight: bold; text-decoration: underline;">
+                비밀번호 변경 →
+            </a>
+        </div>
+
     </form>
 </div>
 {% endblock %}
