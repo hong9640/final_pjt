@@ -124,10 +124,6 @@ def follow_toggle(request, username):
 
 @login_required
 def follow_list_view(request, username):
-    """
-    AJAX 요청으로 특정 유저의 팔로잉 또는 팔로워 목록을 JSON으로 반환
-    GET 파라미터: type=following 또는 type=followers
-    """
     User = get_user_model()
     target_user = get_object_or_404(User, username=username)
     list_type = request.GET.get('type')
@@ -141,9 +137,14 @@ def follow_list_view(request, username):
 
     data = []
     for u in users:
+
+        # 현재 로그인 유저가 u를 팔로우 중인지 정확히 확인
+        is_following = request.user.following.filter(followed_user_id=u.pk).exists()
         data.append({
             'username': u.username,
             'nickname': u.nickname or u.username,
             'profile_image_url': u.profile_image.url if u.profile_image else '',
+            'is_following': is_following
         })
+
     return JsonResponse({'users': data})
