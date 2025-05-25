@@ -11,10 +11,9 @@
     max-width: 1000px;
     margin: 3rem auto;
     padding: 2rem;
-    background-color: #ffffff;
+    background-color: #FAF7F4;
     border-radius: 20px;
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
-    font-family: 'Noto Sans KR', sans-serif;
   }
 
   .library-title {
@@ -29,10 +28,11 @@
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
     gap: 1.6rem;
+    margin-bottom: 2rem;
   }
 
   .book-card {
-    background-color: #faf7f4;
+    background-color: #ffffff;
     border-radius: 14px;
     box-shadow: 0 4px 10px rgba(0,0,0,0.05);
     padding: 1rem;
@@ -42,6 +42,7 @@
     justify-content: space-between;
     transition: transform 0.2s ease;
     height: 100%;
+    margin-bottom: 1rem;
   }
 
   .book-card:hover {
@@ -111,9 +112,9 @@
             </a>
           </div>
         </div>
-          <a href="{% url 'libraries:remove_from_library_to_mylibrary' entry.book.id %}" class="remove-button">
-            서재에서 제거
-          </a>
+        <a href="{% url 'libraries:remove_from_library_to_mylibrary' entry.book.id %}" class="remove-button">
+          서재에서 제거
+        </a>
       </div>
     {% empty %}
       <p class="empty-message">내 서재에 추가된 책이 없습니다.</p>

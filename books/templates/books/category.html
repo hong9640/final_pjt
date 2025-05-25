@@ -15,105 +15,143 @@
         /* background-color: #f8f5f0; */
     }
 
-    /* === 검색창 및 드롭다운을 위한 CSS (이 부분을 확인 및 추가/수정) === */
+    /* 검색창 및 드롭다운 스타일 */
+    
     .search-bar {
-        display: flex;            /* 내부 요소들을 가로로 배치 */
-        justify-content: center;  /* 중앙 정렬 */
-        margin-bottom: 30px;      /* 기존 간격 유지 */
-        align-items: stretch;     /* 드롭다운 버튼, 입력창, 검색버튼의 높이를 동일하게 맞춤 */
+        display: flex;
+        justify-content: center;
+        margin: 20px 0 30px 0;
+        align-items: stretch;
     }
 
     .search-type-dropdown {
-        position: relative;       /* 드롭다운 옵션들의 위치 기준점 */
-        display: inline-block;    /* 다른 요소들과 같은 줄에 배치되도록 */
+        position: relative;
+        display: inline-block;
     }
 
     .search-type-button {
-        background-color: #f8f8f8; /* 버튼 배경색 */
-        color: #333;               /* 버튼 글자색 */
-        padding: 0 12px;          /* 버튼 내부 좌우 패딩 */
-        border: 1px solid #ccc;   /* 테두리 */
-        border-right: none;       /* 오른쪽 테두리는 입력창과 연결되므로 제거 */
-        border-radius: 15px 0 0 15px; /* 왼쪽 모서리만 둥글게 */
-        cursor: pointer;
-        font-size: 14px;
-        height: 40px;             /* 입력창, 검색 버튼과 높이 통일 */
-        box-sizing: border-box;   /* 패딩, 테두리가 높이에 포함되도록 */
-        display: flex;            /* 내부 텍스트와 화살표 아이콘 정렬용 */
-        align-items: center;      /* 내부 요소들 수직 중앙 정렬 */
-        min-width: 100px;         /* 버튼의 최소 너비 */
-        justify-content: space-between; /* 텍스트와 화살표 사이에 공간 분배 */
+    background-color: #f3e7dc;
+    color: #3E3025; /* 짙은 갈색 */
+    padding: 0 12px;
+    border: 1px solid #ccc;
+    border-right: none;
+    border-radius: 25px 0 0 25px;
+    cursor: pointer;
+    font-size: 14px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    min-width: 100px;
+    font-family: 'Gowun Batang', serif;
+    font-weight: bold;
+     gap: 6px; /* 텍스트와 화살표 사이 간격 */
+    justify-content: center; /* 가운데 정렬로 */
     }
 
     .search-type-button .arrow {
-        margin-left: 8px;         /* 텍스트와 화살표 사이 간격 */
-        font-size: 0.7em;         /* 화살표 크기 */
-        transition: transform 0.2s ease-in-out; /* 부드러운 회전 효과 */
-    }
-    .search-type-button.open .arrow { /* JavaScript로 'open' 클래스 추가 시 화살표 회전 */
-        transform: rotate(180deg);
+    font-size: 0.7em;
+    transition: transform 0.2s ease-in-out;
+    color: #3E3025; /* 화살표 색도 동일한 갈색으로 */
     }
 
+
     .search-type-options {
-        display: none;            /* 평소에는 숨겨둠 (JavaScript로 block/none 토글) */
-        position: absolute;       /* 드롭다운 버튼 아래에 절대 위치로 배치 */
+        display: none;
+        position: absolute;
         background-color: white;
-        min-width: 120px;         /* 버튼보다 약간 넓게 */
-        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.1); /* 그림자 효과 */
-        z-index: 1001;            /* 다른 요소들 (예: sticky_category_nav) 보다 위에 오도록 */
+        min-width: 120px;
+        box-shadow: 0px 8px 16px rgba(0,0,0,0.1);
+        z-index: 1001;
         border: 1px solid #ddd;
-        border-top: none;         /* 버튼과 자연스럽게 이어지도록 위쪽 테두리 제거 */
-        border-radius: 0 0 4px 4px; /* 아래쪽 모서리만 살짝 둥글게 */
-        left: 0;                  /* 부모(.search-type-dropdown)의 왼쪽에 맞춤 */
-        top: 100%;                /* 버튼 바로 아래에 표시 */
+        border-top: none;
+        border-radius: 0 0 4px 4px;
+        left: 0;
+        top: 100%;
     }
 
     .search-type-options a {
         color: black;
         padding: 10px 12px;
         text-decoration: none;
-        display: block;           /* 각 옵션이 한 줄 전체를 차지하여 클릭 용이하게 */
+        display: block;
         font-size: 14px;
-        white-space: nowrap;      /* 옵션 텍스트가 길어도 줄바꿈되지 않도록 */
+        white-space: nowrap;
     }
 
     .search-type-options a:hover {
         background-color: #f1f1f1;
     }
 
-    /* 기존 검색 입력창 스타일 수정 */
     .search-bar input[type="text"] {
-        width: 300px;             /* 기존 너비 유지 또는 필요시 조절 */
+        width: 300px;
         padding: 10px;
-        border-radius: 0;         /* 중요: 드롭다운과 이어지므로 왼쪽 둥근 모서리 제거 */
+        border-radius: 0;
         border: 1px solid #ccc;
-        border-left: none;        /* 중요: 드롭다운 버튼과 테두리가 겹치지 않도록 왼쪽 테두리 제거 */
-        border-right: none;       /* 중요: 검색 버튼과 테두리가 겹치지 않도록 오른쪽 테두리 제거 */
-        height: 40px;             /* 드롭다운 버튼, 검색 버튼과 높이 통일 */
+        border-left: none;
+        border-right: none;
+        height: 40px;
         box-sizing: border-box;
         font-size: 14px;
     }
 
-    /* 기존 검색 버튼 스타일 수정 */
-    .search-bar button[type="submit"] { /* 돋보기 버튼 */
-        padding: 10px 15px;
+    .search-bar button[type="submit"] {
+        background-color: #f3e7dc;
+        color: #6a4e3d;
         border: 1px solid #ccc;
-        background-color: #eee;
-        border-radius: 0 15px 15px 0; /* 오른쪽 모서리만 둥글게 */
+        border-left: none;
+        border-radius: 0 25px 25px 0;
+        padding: 0 18px;
+        font-size: 1.1rem;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
         cursor: pointer;
-        height: 40px;             /* 드롭다운 버튼, 입력창과 높이 통일 */
-        box-sizing: border-box;
-        font-size: 16px;          /* 돋보기 아이콘 크기 */
+        transition: background-color 0.2s ease;
     }
-    /* === END 검색창 및 드롭다운 CSS === */
+
+    .search-bar button[type="submit"]:hover {
+        background-color: #c1ad9b;    
+    }
+
+    background-color: #f4ece4;
+    color: #6a4e3d;
+    border: none;
+    padding: 0 18px;
+    cursor: pointer;
+    font-size: 1.1rem;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.2s ease;
+    }
+    .search-bar button[type="submit"]:hover {
+    background-color: #e8e0d6;
+    } /* 검색 실행 버튼 (돋보기) */
+            padding: 10px 15px;
+            border: 1px solid #ccc;
+            background-color: #eee;
+            border-radius: 0 15px 15px 0; /* 오른쪽 모서리만 둥글게 */
+            cursor: pointer;
+            height: 40px;
+            box-sizing: border-box;
+            font-size: 16px;
+        }
 
     /* --- 나머지 기존 스타일 (.search-results-title-container, .book-grid 등)은 그대로 유지 --- */
     .search-results-title-container { 
         text-align: center; margin-bottom: 25px; margin-top: 20px;
     }
     .search-results-title-container h2 {
-        font-size: 1.8em; color: #2C1B13; margin-top: 0; margin-bottom: 0; font-weight: bold;
+        font-size: 1.8em;
+        color: #2C1B13;
+        margin-top: 0;
+        margin-bottom: 0;
+        font-weight: bold;
+        text-align: center; /* ★ 추가 또는 덮어쓰기 */
     }
+
     .search-results-title-container h2 span.search-count {
         font-size: 1.0em; color: #555; margin-left: 8px; font-weight: bold;
     }
@@ -196,7 +234,11 @@
                 {% else %} {# category_total.html의 경우 #}
                     <input type="text" name="q" placeholder="검색어를 입력하세요." value="{{ query|default:'' }}">
                 {% endif %}
-                <button type="submit">🔍</button>
+                <button type="submit">
+<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="#6a4e3d" viewBox="0 0 24 24">
+  <path d="M10 2a8 8 0 105.293 14.293l5.707 5.707 1.414-1.414-5.707-5.707A8 8 0 0010 2zm0 2a6 6 0 110 12A6 6 0 0110 4z"/>
+</svg>
+</button>
             </form>
         </div>
 

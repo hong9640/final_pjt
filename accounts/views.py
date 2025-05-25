@@ -10,6 +10,8 @@ from django.http import JsonResponse
 from recommendations.models import AIRecommendationBook
 from .models import Follow
 from libraries.models import Library
+from .models import BookProfileCard
+from .forms import BookProfileCardForm
 
 
 def signup_view(request):
@@ -59,7 +61,9 @@ def update(request):
 @login_required
 def mypage_view(request):
     user = request.user
+    card = getattr(user, 'reading_card', None)
 
+    # 추천 도서 중 중복 제거
     all_recs = AIRecommendationBook.objects.filter(
         recommendation__user=user
     ).select_related('book').order_by('-id')
@@ -73,6 +77,7 @@ def mypage_view(request):
         if len(unique_recs) == 3:
             break
 
+    # 내 서재 미리보기 + 도서 ID만 따로
     my_library_books = Library.objects.filter(user=user).values_list('book_id', flat=True)
     my_library_preview = Library.objects.filter(user=user).select_related('book')[:3]
 
@@ -83,7 +88,9 @@ def mypage_view(request):
         'my_library_preview': my_library_preview,
         'my_library_books': list(my_library_books),
         'profile_user': user,
+        'card': card,
     }
+
     return render(request, 'accounts/mypage.html', context)
 
 
@@ -175,3 +182,31 @@ def follow_list_view(request, username):
         })
 
     return JsonResponse({'users': data})
+
+
+@login_required
+def book_profile_card_view(request):
+    user = request.user
+    card, _ = BookProfileCard.objects.get_or_create(user=user)
+
+    if request.method == 'POST':
+        form = BookProfileCardForm(request.POST, instance=card)
+        if form.is_valid():
+            form.save()
+            print("⭐ 저장 성공:", form.cleaned_data)  # ✅ 서버 콘솔 확인용
+            if request.headers.get('x-requested-with') == 'XMLHttpRequest':
+                return JsonResponse({'success': True})
+            return redirect('accounts:mypage')
+        else:
+            print("❌ 폼 에러:", form.errors)  # ✅ 디버깅 로그
+            if request.headers.get('x-requested-with') == 'XMLHttpRequest':
+                return JsonResponse({'success': False, 'errors': form.errors}, status=400)
+    else:
+        form = BookProfileCardForm(instance=card)
+
+    # GET 요청일 때 (모달용 AJAX 요청)
+    if request.headers.get('x-requested-with') == 'XMLHttpRequest':
+        return render(request, 'accounts/partials/book_profile_card_form.html', {'form': form})
+
+    # 일반 요청은 리디렉션
+    return redirect('accounts:mypage')

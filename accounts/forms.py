@@ -5,6 +5,7 @@ from django.core.exceptions import ValidationError
 from django.contrib.auth.password_validation import validate_password
 from django.contrib.auth.forms import PasswordChangeForm
 User = get_user_model()
+from accounts.models import BookProfileCard
 
 class CustomUserCreationForm(UserCreationForm):
     email = forms.EmailField(
@@ -111,3 +112,57 @@ class CustomPasswordChangeForm(PasswordChangeForm):
         # 각 필드의 도움말(help_text)을 제거
         for field in self.fields.values():
             field.help_text = None
+
+class BookProfileCardForm(forms.ModelForm):
+    FAVORITE_CHOICES = [
+        ("문학/소설", "문학/소설"),
+        ("어린이/청소년", "어린이/청소년"),
+        ("만화/웹툰", "만화/웹툰"),
+        ("인문/사회", "인문/사회"),
+        ("자기계발/경제", "자기계발/경제"),
+        ("건강/취미", "건강/취미"),
+        ("교육/수험서", "교육/수험서"),
+    ]
+
+    favorite_genres = forms.MultipleChoiceField(
+        choices=FAVORITE_CHOICES,
+        widget=forms.CheckboxSelectMultiple,
+        required=False,
+        label="좋아하는 장르"
+    )
+
+    class Meta:
+        model = BookProfileCard
+        fields = [
+            'title',
+            'favorite_genres',
+            'reading_style',
+            'reading_time',
+            'reading_place',
+            'mood',
+            'introduction',
+            'is_public',
+        ]
+        labels = {
+            'title': '카드 제목',
+            'reading_style': '독서 스타일',
+            'reading_time': '시간대',
+            'reading_place': '장소',
+            'mood': '무드',
+            'introduction': '소개 문구',
+            'is_public': '공개 여부',
+        }
+        widgets = {
+            'reading_style': forms.TextInput(attrs={'placeholder': '예: 몰입해서 정독'}),
+            'reading_time': forms.TextInput(attrs={'placeholder': '예: 새벽'}),
+            'reading_place': forms.TextInput(attrs={'placeholder': '예: 창가, 지하철'}),
+            'mood': forms.TextInput(attrs={'placeholder': '예: 잔잔한, 몽환적인'}),
+            'introduction': forms.Textarea(attrs={'rows': 3, 'placeholder': '나의 독서 취향을 소개해주세요'}),
+        }
+
+    def save(self, commit=True):
+        instance = super().save(commit=False)
+        instance.favorite_genres = self.cleaned_data['favorite_genres']  # ✅ 직접 할당
+        if commit:
+            instance.save()
+        return instance
