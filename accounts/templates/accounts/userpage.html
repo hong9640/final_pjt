@@ -9,12 +9,15 @@
     border-radius: 16px;
     padding: 3rem;
   }
+
   .profile-section {
     display: flex;
     align-items: center;
     gap: 2rem;
     margin-bottom: 2rem;
+    justify-content: space-between;
   }
+
   .profile-photo {
     width: 120px;
     height: 120px;
@@ -24,65 +27,69 @@
     background-repeat: no-repeat;
     background-color: #ddd;
   }
+
   .profile-info {
     flex-grow: 1;
   }
+
   .nickname {
     font-size: 1.4rem;
     font-weight: bold;
     margin-bottom: 0.6rem;
+    color: #3E3025;
   }
+
   .follow-info {
     font-size: 0.9rem;
-    color: #666;
-    margin-bottom: 0.5rem;
+    color: #555;
   }
-  #follow-btn {
-    padding: 0.4rem 1rem;
+
+  .profile-controls {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    align-items: flex-end;
     font-size: 0.9rem;
-    background-color: #d3bfa5;
+  }
+
+  .follow-btn {
+    padding: 0.4rem 0.8rem;
+    background-color: #D7BFAF;
     color: #3E3025;
     border: none;
-    border-radius: 8px;
+    border-radius: 6px;
+    font-size: 0.85rem;
     cursor: pointer;
   }
-  .tab-menu {
+
+  .action-buttons {
     display: flex;
     gap: 1rem;
-    font-size: 1rem;
-    font-weight: bold;
+    margin-top: 1rem;
     justify-content: center;
-    margin-top: 2rem;
+    flex-wrap: wrap;
   }
-  .tab-menu a {
-    cursor: pointer;
-    padding: 0.5rem 1rem;
-    border-radius: 8px;
-    background-color: #e7dcd2;
+
+  .action-buttons a {
+    background-color: #BCAAA4;
     color: #3E3025;
+    padding: 0.6rem 1.2rem;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    font-size: 0.95rem;
+    cursor: pointer;
     text-decoration: none;
   }
-  .tab-menu a:hover {
-    background-color: #d3c4b8;
-  }
-  .shelf-box {
+
+  .recommend-box {
     margin-top: 3rem;
+    background-color: #FAF7F4;
     padding: 2rem;
-    background-color: white;
-    border-radius: 12px;
-    text-align: center;
-    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.05);
+    border-radius: 16px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
   }
-  .shelf-title {
-    font-size: 1.2rem;
-    font-weight: bold;
-    margin-bottom: 1.5rem;
-    color: #3E3025;
-  }
-  .coming-soon {
-    color: #ccc;
-    font-size: 1rem;
-  }
+
   .add-button {
     margin-top: 0.6rem;
     padding: 0.4rem 0.8rem;
@@ -93,9 +100,7 @@
     border-radius: 6px;
     cursor: pointer;
   }
-  .add-button:hover {
-    background-color: #734a2e;
-  }
+
   .modal {
     display: none;
     position: fixed;
@@ -106,6 +111,7 @@
     justify-content: center;
     z-index: 2000;
   }
+
   .modal-content {
     background: #fff;
     padding: 1.5rem;
@@ -114,12 +120,14 @@
     max-height: 80%; overflow-y: auto;
     position: relative;
   }
+
   .close-btn {
     position: absolute;
     top: 0.5rem; right: 0.8rem;
     font-size: 1.2rem;
     cursor: pointer;
   }
+
   .user-item {
     display: flex;
     align-items: center;
@@ -127,18 +135,21 @@
     gap: 0.8rem;
     margin-bottom: 0.5rem;
   }
+
   .user-link {
     display: flex;
     align-items: center;
     gap: 0.5rem;
     cursor: pointer;
   }
+
   .user-item img {
     width: 32px;
     height: 32px;
     border-radius: 50%;
     object-fit: cover;
   }
+
   .follow-toggle-btn {
     background-color: #e0d6cd;
     color: #3E3025;
@@ -154,33 +165,38 @@
   <div class="profile-section">
     <div class="profile-photo" style="background-image: url('{% if profile_user.profile_image %}{{ profile_user.profile_image.url }}{% else %}{% static 'accounts/profile_default.jpg' %}{% endif %}');"></div>
     <div class="profile-info">
-      <div class="nickname" id="user-nickname">{{ profile_user.nickname|default:profile_user.username }}님</div>
-      <div class="follow-info" id="follow-info">
+      <div class="nickname">{{ profile_user.nickname|default:profile_user.username }}님</div>
+      <div class="follow-info">
         <span class="follow-stat" data-type="following" data-username="{{ profile_user.username }}">팔로잉 {{ profile_user.following.count }}</span> |
         <span class="follow-stat" data-type="followers" data-username="{{ profile_user.username }}">팔로워 {{ profile_user.followers.count }}</span>
       </div>
-      {% if request.user != profile_user %}
-      <button id="follow-btn" data-username="{{ profile_user.username }}">
+    </div>
+    {% if request.user != profile_user %}
+    <div class="profile-controls">
+      <button id="follow-btn" class="follow-btn" data-username="{{ profile_user.username }}">
         {% if is_following %}언팔로우{% else %}팔로우{% endif %}
       </button>
-      {% endif %}
-      <div class="tab-menu">
-        <a href="{% url 'reviews:user_written_reviews' profile_user.username %}">{{ profile_user.nickname|default:profile_user.username }}님이 작성한 리뷰</a>
-        <a href="{% url 'reviews:user_liked_reviews' profile_user.username %}">{{ profile_user.nickname|default:profile_user.username }}님이 좋아한 리뷰</a>
-      </div>
     </div>
+    {% endif %}
   </div>
 
-  <div class="shelf-box">
-    <div class="shelf-title">서재</div>
+  <div class="action-buttons">
+    <a href="{% url 'reviews:user_written_reviews' profile_user.username %}">{{ profile_user.nickname|default:profile_user.username }}님이 작성한 리뷰</a>
+    <a href="{% url 'reviews:user_liked_reviews' profile_user.username %}">{{ profile_user.nickname|default:profile_user.username }}님이 좋아한 리뷰</a>
+  </div>
+
+  <div class="recommend-box">
+    <h3 style="font-size: 1.2rem; font-weight: bold; color: #3E3025;">서재</h3>
     {% if library_preview %}
       <div style="display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center;">
         {% for entry in library_preview %}
-          <div style="width: 150px; background: #faf7f4; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); padding: 1rem;">
-            <a href="{% url 'books:book_detail' entry.book.id %}" style="text-decoration: none; color: inherit;">
-              <img src="{{ entry.book.cover_image_url }}" alt="{{ entry.book.title }}" style="width: 100%; height: 200px; object-fit: cover; border-radius: 8px;">
-              <p style="font-size: 0.9rem; font-weight: bold; margin-top: 0.5rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{ entry.book.title }}</p>
+          <div style="width:180px; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); background: white;">
+            <a href="{% url 'books:book_detail' entry.book.id %}">
+              <img src="{{ entry.book.cover_image_url }}" style="width: 100%; height: 220px; object-fit: cover;">
             </a>
+            <div style="padding: 0.5rem;">
+              <p style="font-weight: bold;">{{ entry.book.title }}</p>
+            </div>
             <form onsubmit="event.preventDefault(); addToLibraryAjax({{ entry.book.id }}, this.querySelector('button'));">
               {% csrf_token %}
               <button type="submit" class="add-button">내 서재에 추가</button>
@@ -189,12 +205,11 @@
         {% endfor %}
       </div>
     {% else %}
-      <div class="coming-soon">등록된 책이 없습니다.</div>
+      <p style="color: #777; text-align: center;">등록된 책이 없습니다.</p>
     {% endif %}
   </div>
 </div>
 
-<!-- 팔로잉/팔로워 모달 -->
 <div id="follow-modal" class="modal">
   <div class="modal-content">
     <span class="close-btn">&times;</span>
@@ -237,7 +252,7 @@ if (followBtn) {
     .then(res => res.json())
     .then(data => {
       this.textContent = data.followed ? '언팔로우' : '팔로우';
-      const followInfo = document.getElementById('follow-info');
+      const followInfo = document.querySelector('.follow-info');
       const followingText = followInfo.textContent.split('|')[0].trim();
       followInfo.textContent = `${followingText} | 팔로워 ${data.follower_count}`;
     })
@@ -295,7 +310,6 @@ function attachFollowButtons() {
     btn.addEventListener('click', function (e) {
       e.stopPropagation();
       const username = this.dataset.username;
-      const isFollowing = this.dataset.following === 'true';
       fetch(`/accounts/follow/${username}/`, {
         method: 'POST',
         headers: {
