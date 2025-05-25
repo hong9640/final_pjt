@@ -6,13 +6,13 @@ from django.db.models import Q
 from django.http import JsonResponse
 import json
 from recommendations.models import AIRecommendation, AIRecommendationBook
+from libraries.models import Library  # ✅ 추가
 
 def get_recommendation(request):
     if request.method == 'POST':
         keyword = request.POST.get('query')
         recommended_titles = get_restricted_recommendations(keyword)
 
-        # Book 모델에서 추천된 제목과 일치하는 책만 필터링
         books = Book.objects.filter(title__in=recommended_titles)
 
         return render(request, 'recommendations/recommend_result.html', {
@@ -24,7 +24,6 @@ def show_result(request):
     keyword = request.GET.get('keyword', '')
     recommended_titles = get_restricted_recommendations(keyword)
 
-    # 제목 완전 일치 필터링 (추천 결과에 정확히 해당하는 책만 추출)
     books = Book.objects.filter(title__in=recommended_titles)
 
     return render(request, 'recommendations/recommend_result.html', {
@@ -50,14 +49,22 @@ def get_recommendation_ajax(request):
                     explanation="AI 추천"
                 )
 
-        # 응답
+        # ✅ 사용자의 서재에 있는 책 ID 리스트
+        my_library_book_ids = set()
+        if request.user.is_authenticated:
+            my_library_book_ids = set(
+                Library.objects.filter(user=request.user, book__in=books).values_list('book_id', flat=True)
+            )
+
+        # ✅ 응답
         data = {
             "books": [
                 {
                     "id": book.id,
                     "title": book.title,
                     "cover_image_url": book.cover_image_url,
-                    "author": book.author.name if book.author else ""
+                    "author": book.author.name if book.author else "",
+                    "in_library": book.id in my_library_book_ids
                 } for book in books
             ]
         }
