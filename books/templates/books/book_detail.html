@@ -572,7 +572,7 @@
       <h2>리뷰 ({{ reviews_with_details|length }})</h2>
       {% if reviews_with_details %}
         {% for item in reviews_with_details %}
-        {% with review=item.review_obj like_count=item.like_count user_has_liked=item.user_has_liked comments_list=item.comments_list %}
+        {% with review=item.review_obj like_count=item.like_count user_has_liked=item.user_has_liked comments_list=item.comments_list display_category=item.display_category_group %}
         <div class="review-item-card" id="review-{{ review.id }}">
           <div class="review-user-avatar-placeholder">
             {% if review.user.profile_image %}
@@ -605,11 +605,11 @@
               {{ review.content|linebreaksbr }}
             </div>
             <div class="review-meta-info">
-
-
               <span>작성시간: {{ review.created_at|date:"Y.m.d H:i" }}</span>
-              {% if review.book_category_at_review %}
-                <span>카테고리: {{ review.book_category_at_review }}</span>
+              {% if display_category %} {# 가공된 카테고리 정보 사용 #}
+                  <span>카테고리: {{ display_category }}</span>
+              {% elif review.book_category_at_review %}
+                  <span>카테고리: {{ review.book_category_at_review }}</span>
               {% endif %}
             </div>
 

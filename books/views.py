@@ -131,7 +131,7 @@ def book_detail(request, book_id):
     book = get_object_or_404(Book, id=book_id)
     author = getattr(book, 'author', None)
 
-    # 저자명 정제 로직
+    # ... (기존 저자명 정제, 서재 보유 여부 로직) ...
     if author and isinstance(author.name, str):
         clean_author_name = re.sub(r'\s*\([^)]*\)', '', author.name.split(',')[0].strip())
     elif author:
@@ -139,12 +139,10 @@ def book_detail(request, book_id):
     else:
         clean_author_name = "정보 없음"
 
-    # 로그인 사용자 보유 여부
     is_in_library = False
     if request.user.is_authenticated:
         is_in_library = Library.objects.filter(user=request.user, book=book).exists()
 
-    # 리뷰 목록, 좋아요 여부, 댓글 목록 처리
     book_reviews_qs = book.reviews.select_related('user').prefetch_related(
         'comments__user',
         'likes_received'
@@ -159,11 +157,25 @@ def book_detail(request, book_id):
         )
 
     for review in book_reviews_qs:
+        processed_category_for_review = "기타" # 기본값
+        if review.book_category_at_review: # 리뷰에 저장된 카테고리 정보가 있다면
+            # 예: "국내도서>자기계발>성공학"
+            second_level_for_review = extract_second_level(review.book_category_at_review) 
+            # second_level_for_review는 "자기계발"이 됩니다.
+            
+            # 만약 두 번째 이미지처럼 "문학/소설" 형태의 그룹명을 원한다면 classify_category_group 사용
+            processed_category_for_review = classify_category_group(second_level_for_review)
+            # processed_category_for_review는 "자기계발/경제" 등이 됩니다.
+            
+            # 만약 단순히 두 번째 레벨("자기계발")만 원한다면:
+            # processed_category_for_review = second_level_for_review 
+
         reviews_with_details.append({
             'review_obj': review,
             'like_count': review.likes_received.count(),
             'user_has_liked': review.id in liked_ids,
             'comments_list': review.comments.all().order_by('created_at'),
+            'display_category_group': processed_category_for_review, # 가공된 카테고리 그룹명 추가
         })
 
     context = {
@@ -171,11 +183,11 @@ def book_detail(request, book_id):
         'author': author,
         'clean_author_name': clean_author_name,
         'is_in_library': is_in_library,
-        'reviews_with_details': reviews_with_details,
+        'reviews_with_details': reviews_with_details, # 여기에 display_category_group 포함됨
         'review_form': ReviewForm(),
         'comment_form': CommentForm(),
         'global_categories': get_navigation_categories(),
-        'category_groups': CATEGORY_GROUPS,
+        'category_groups': CATEGORY_GROUPS, # 이 변수는 네비게이션용으로 보임
     }
     return render(request, 'books/book_detail.html', context)
 
