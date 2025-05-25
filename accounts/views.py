@@ -4,15 +4,13 @@ from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.shortcuts import render, redirect, get_object_or_404
-from .forms import CustomUserCreationForm
+from .forms import CustomUserCreationForm, CustomUserChangeForm
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth import logout
-from django.shortcuts import render, redirect
-from .forms import CustomUserChangeForm
+from django.http import JsonResponse
 from recommendations.models import AIRecommendationBook
 from .models import Follow
-from django.http import JsonResponse
 from libraries.models import Library
+
 
 def signup_view(request):
     if request.method == 'POST':
@@ -37,27 +35,14 @@ def login_view(request):
         form = AuthenticationForm()
     return render(request, 'accounts/login.html', {'form': form})
 
-@login_required
-def mypage_view(request):
-    user = request.user
-    recommendations = AIRecommendationBook.objects.filter(recommendation__user=user).select_related('book').order_by('-id')[:6]
-
-    my_library_preview = Library.objects.filter(user=user).select_related('book')[:3]
-
-    context = {
-        'following_count': user.following.count(),
-        'follower_count': user.followers.count(),
-        'recommendations': recommendations,
-        'my_library_preview': my_library_preview,  # 추가
-    }
-    return render(request, 'accounts/mypage.html', context)
 
 @login_required
 def logout_view(request):
     if request.method == 'POST':
         logout(request)
-        return redirect('books:home')  # 로그아웃 후 홈으로 이동
-    return render(request, 'accounts/logout_confirm.html')  # POST 아니면 확인창 띄우기
+        return redirect('books:home')
+    return render(request, 'accounts/logout_confirm.html')
+
 
 @login_required
 def update(request):
@@ -70,27 +55,71 @@ def update(request):
         form = CustomUserChangeForm(instance=request.user)
     return render(request, 'accounts/update.html', {'form': form})
 
+
+@login_required
+def mypage_view(request):
+    user = request.user
+
+    all_recs = AIRecommendationBook.objects.filter(
+        recommendation__user=user
+    ).select_related('book').order_by('-id')
+
+    seen_ids = set()
+    unique_recs = []
+    for rec in all_recs:
+        if rec.book_id not in seen_ids:
+            seen_ids.add(rec.book_id)
+            unique_recs.append(rec)
+        if len(unique_recs) == 3:
+            break
+
+    my_library_books = Library.objects.filter(user=user).values_list('book_id', flat=True)
+    my_library_preview = Library.objects.filter(user=user).select_related('book')[:3]
+
+    context = {
+        'following_count': user.following.count(),
+        'follower_count': user.followers.count(),
+        'recommendations': unique_recs,
+        'my_library_preview': my_library_preview,
+        'my_library_books': list(my_library_books),
+        'profile_user': user,
+    }
+    return render(request, 'accounts/mypage.html', context)
+
+
 @login_required
 def userpage_view(request, username):
     User = get_user_model()
     user = get_object_or_404(User, username=username)
 
-    # 본인 페이지일 경우 리다이렉트
     if user == request.user:
         return redirect('accounts:mypage')
 
-    recommendations = AIRecommendationBook.objects.filter(recommendation__user=user).select_related('book').order_by('-id')[:6]
+    all_recs = AIRecommendationBook.objects.filter(
+        recommendation__user=user
+    ).select_related('book').order_by('-id')
+
+    seen_ids = set()
+    unique_recs = []
+    for rec in all_recs:
+        if rec.book_id not in seen_ids:
+            seen_ids.add(rec.book_id)
+            unique_recs.append(rec)
+        if len(unique_recs) == 3:
+            break
 
     is_following = Follow.objects.filter(following_user=request.user, followed_user=user).exists()
-
-    library_preview = list(Library.objects.filter(user=user).select_related('book')[:3])
+    library_preview = Library.objects.filter(user=user).select_related('book')[:3]
+    my_library_books = Library.objects.filter(user=request.user).values_list('book_id', flat=True)
 
     return render(request, 'accounts/userpage.html', {
         'profile_user': user,
-        'recommendations': recommendations,
+        'recommendations': unique_recs,
         'is_following': is_following,
         'library_preview': library_preview,
+        'my_library_books': list(my_library_books),
     })
+
 
 @login_required
 def follow_toggle(request, username):
@@ -114,13 +143,13 @@ def follow_toggle(request, username):
         )
         followed = True
 
-    # 팔로워 수 새로 계산
     follower_count = Follow.objects.filter(followed_user=target_user).count()
 
     return JsonResponse({
         'followed': followed,
         'follower_count': follower_count,
     })
+
 
 @login_required
 def follow_list_view(request, username):
@@ -131,14 +160,12 @@ def follow_list_view(request, username):
     if list_type == 'followers':
         qs = Follow.objects.filter(followed_user=target_user).select_related('following_user')
         users = [rel.following_user for rel in qs]
-    else:  # following
+    else:
         qs = Follow.objects.filter(following_user=target_user).select_related('followed_user')
         users = [rel.followed_user for rel in qs]
 
     data = []
     for u in users:
-
-        # 현재 로그인 유저가 u를 팔로우 중인지 정확히 확인
         is_following = request.user.following.filter(followed_user_id=u.pk).exists()
         data.append({
             'username': u.username,

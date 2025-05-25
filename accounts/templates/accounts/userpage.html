@@ -10,6 +10,10 @@
     padding: 3rem;
   }
 
+  .follow-stat {
+    cursor: pointer;
+  }
+
   .profile-section {
     display: flex;
     align-items: center;
@@ -90,15 +94,51 @@
     box-shadow: 0 4px 12px rgba(0,0,0,0.05);
   }
 
+  .book-card {
+    width: 180px;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    background: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .book-image {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+  }
+
+  .book-info {
+    padding: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    align-items: center;
+  }
+
+  .book-title {
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+    text-align: center;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+  }
+
   .add-button {
-    margin-top: 0.6rem;
-    padding: 0.4rem 0.8rem;
-    font-size: 0.85rem;
-    background-color: #8B5E3C;
-    color: white;
+    font-family: 'Gowun Batang', serif;
+    background-color: #BCAAA4;
+    color: #3E3025;
+    padding: 0.4rem 0.9rem;
     border: none;
-    border-radius: 6px;
+    border-radius: 8px;
     cursor: pointer;
+    margin-top: auto;
+    align-self: center;
+    margin: 0 auto;
   }
 
   .modal {
@@ -114,11 +154,15 @@
 
   .modal-content {
     background: #fff;
-    padding: 1.5rem;
+    padding: 2.5rem 1.5rem 1.5rem;
     border-radius: 8px;
     max-width: 400px; width: 90%;
     max-height: 80%; overflow-y: auto;
     position: relative;
+  }
+
+  #followListContainer {
+    margin-top: 1.5rem;
   }
 
   .close-btn {
@@ -151,15 +195,26 @@
   }
 
   .follow-toggle-btn {
-    background-color: #e0d6cd;
-    color: #3E3025;
-    border: none;
-    border-radius: 6px;
+    min-width: 80px;
     padding: 0.3rem 0.8rem;
     font-size: 0.8rem;
+    border: none;
+    border-radius: 6px;
     cursor: pointer;
+    font-weight: 500;
+  }
+
+  .follow-toggle-btn.follow {
+    background-color: #d6cfc7;
+    color: #3E3025;
+  }
+
+  .follow-toggle-btn.unfollow {
+    background-color: #a08f84;
+    color: white;
   }
 </style>
+
 
 <div class="userpage-wrapper">
   <div class="profile-section">
@@ -186,21 +241,23 @@
   </div>
 
   <div class="recommend-box">
-    <h3 style="font-size: 1.2rem; font-weight: bold; color: #3E3025;">서재</h3>
+    <h1 style="font-size: 1.2rem; font-weight: bold; color: #3E3025; text-align: center; margin-bottom: 1.5rem;">
+      {{ profile_user.nickname|default:profile_user.username }}님의 서재
+    </h1>
     {% if library_preview %}
       <div style="display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center;">
         {% for entry in library_preview %}
-          <div style="width:180px; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); background: white;">
+          <div class="book-card">
             <a href="{% url 'books:book_detail' entry.book.id %}">
-              <img src="{{ entry.book.cover_image_url }}" style="width: 100%; height: 220px; object-fit: cover;">
+              <img src="{{ entry.book.cover_image_url }}" class="book-image">
             </a>
-            <div style="padding: 0.5rem;">
-              <p style="font-weight: bold;">{{ entry.book.title }}</p>
+            <div class="book-info">
+              <p class="book-title">{{ entry.book.title }}</p>
+              <form onsubmit="event.preventDefault(); addToLibraryAjax({{ entry.book.id }}, this.querySelector('button'));">
+                {% csrf_token %}
+                <button type="submit" class="add-button">내 서재에 추가</button>
+              </form>
             </div>
-            <form onsubmit="event.preventDefault(); addToLibraryAjax({{ entry.book.id }}, this.querySelector('button'));">
-              {% csrf_token %}
-              <button type="submit" class="add-button">내 서재에 추가</button>
-            </form>
           </div>
         {% endfor %}
       </div>
@@ -208,13 +265,12 @@
       <p style="color: #777; text-align: center;">등록된 책이 없습니다.</p>
     {% endif %}
   </div>
-</div>
 
-<div id="follow-modal" class="modal">
-  <div class="modal-content">
-    <span class="close-btn">&times;</span>
-    <h3 id="modal-title"></h3>
-    <div id="modal-body"></div>
+  <div id="followModal" class="modal">
+    <div class="modal-content">
+      <span class="close-btn" onclick="document.getElementById('followModal').style.display='none'">✖</span>
+      <div id="followListContainer">불러오는 중...</div>
+    </div>
   </div>
 </div>
 
@@ -238,78 +294,16 @@ function addToLibraryAjax(bookId, buttonElement) {
   });
 }
 
-const followBtn = document.getElementById('follow-btn');
-if (followBtn) {
-  followBtn.addEventListener('click', function () {
-    const username = this.dataset.username;
-    fetch(`/accounts/follow/${username}/`, {
-      method: 'POST',
-      headers: {
-        'X-CSRFToken': '{{ csrf_token }}',
-        'Content-Type': 'application/json',
-      }
-    })
-    .then(res => res.json())
-    .then(data => {
-      this.textContent = data.followed ? '언팔로우' : '팔로우';
-      const followInfo = document.querySelector('.follow-info');
-      const followingText = followInfo.textContent.split('|')[0].trim();
-      followInfo.textContent = `${followingText} | 팔로워 ${data.follower_count}`;
-    })
-    .catch(() => alert('팔로우 요청 중 오류가 발생했습니다.'));
-  });
-}
+function attachFollowButtonListeners() {
+  document.querySelectorAll('.follow-toggle-btn').forEach(button => {
+    const userLink = button.closest('.user-item')?.querySelector('.user-link');
+    const username = userLink?.getAttribute('data-username');
+    if (!username || username === '{{ request.user.username }}') return;
 
-document.querySelectorAll('.follow-stat').forEach(el => {
-  el.addEventListener('click', () => {
-    const type = el.dataset.type;
-    const username = el.dataset.username;
-    document.getElementById('modal-title').textContent = type === 'followers' ? '팔로워 목록' : '팔로잉 목록';
-    const modal = document.getElementById('follow-modal');
-    const body = document.getElementById('modal-body');
-    body.innerHTML = '<p>로딩 중...</p>';
-    modal.style.display = 'flex';
+    const isUnfollow = button.textContent.trim() === '언팔로우';
+    button.classList.add(isUnfollow ? 'unfollow' : 'follow');
 
-    fetch(`/accounts/ajax/follow_list/${username}/?type=${type}`)
-      .then(res => res.json())
-      .then(data => {
-        if (data.users.length) {
-          const currentUsername = "{{ request.user.username }}";
-          body.innerHTML = data.users.map(u => {
-            const displayName = u.nickname || u.username;
-            const isSelf = u.username === currentUsername;
-            const followBtn = isSelf ? '' :
-              `<button class="follow-toggle-btn" data-username="${u.username}" data-following="${u.is_following}">${u.is_following ? '언팔로우' : '팔로우'}</button>`;
-            return `
-              <div class="user-item">
-                <div class="user-link" onclick="location.href='/accounts/user/${u.username}/'">
-                  <img src="${u.profile_image_url || '/static/accounts/profile_default.jpg'}" alt="${displayName}">
-                  <span>${displayName}님</span>
-                </div>
-                ${followBtn}
-              </div>
-            `;
-          }).join('');
-          attachFollowButtons();
-        } else {
-          body.innerHTML = '<p>목록이 없습니다.</p>';
-        }
-      })
-      .catch(() => {
-        body.innerHTML = '<p>불러오기 실패</p>';
-      });
-  });
-});
-
-document.querySelector('#follow-modal .close-btn').addEventListener('click', () => {
-  document.getElementById('follow-modal').style.display = 'none';
-});
-
-function attachFollowButtons() {
-  document.querySelectorAll('.follow-toggle-btn').forEach(btn => {
-    btn.addEventListener('click', function (e) {
-      e.stopPropagation();
-      const username = this.dataset.username;
+    button.addEventListener('click', () => {
       fetch(`/accounts/follow/${username}/`, {
         method: 'POST',
         headers: {
@@ -318,15 +312,89 @@ function attachFollowButtons() {
       })
       .then(res => res.json())
       .then(data => {
-        this.textContent = data.followed ? '언팔로우' : '팔로우';
-        this.dataset.following = data.followed;
+        button.textContent = data.followed ? '언팔로우' : '팔로우';
+        button.classList.toggle('follow', !data.followed);
+        button.classList.toggle('unfollow', data.followed);
       })
       .catch(err => {
-        alert('팔로우 전환 실패');
-        console.error(err);
+        console.error('팔로우 토글 실패:', err);
       });
     });
   });
 }
+
+window.addEventListener("DOMContentLoaded", function () {
+  const modal = document.getElementById('followModal');
+  const container = document.getElementById('followListContainer');
+  const currentUsername = '{{ request.user.username }}';
+
+  document.querySelectorAll('.follow-stat').forEach(el => {
+    el.addEventListener('click', () => {
+      const username = el.dataset.username;
+      const type = el.dataset.type;
+
+      fetch(`/accounts/ajax/follow_list/${username}/?type=${type}`)
+        .then(res => res.json())
+        .then(data => {
+          container.innerHTML = '';
+          const users = data.users;
+
+          const currentUser = users.find(u => u.username === currentUsername);
+          if (currentUser) {
+            const item = document.createElement('div');
+            item.className = 'user-item';
+            item.innerHTML = `
+              <div class="user-link" onclick="location.href='/accounts/mypage/'">
+                <img src="${currentUser.profile_image_url || '/static/accounts/profile_default.jpg'}">
+                <span>${currentUser.nickname} (나)</span>
+              </div>
+            `;
+            container.appendChild(item);
+          }
+
+          users.filter(u => u.username !== currentUsername).forEach(user => {
+            const item = document.createElement('div');
+            item.className = 'user-item';
+            item.innerHTML = `
+              <div class="user-link" data-username="${user.username}" onclick="location.href='/accounts/user/${user.username}/'">
+                <img src="${user.profile_image_url || '/static/accounts/profile_default.jpg'}">
+                <span>${user.nickname}</span>
+              </div>
+              <button class="follow-toggle-btn">${user.is_following ? '언팔로우' : '팔로우'}</button>
+            `;
+            container.appendChild(item);
+          });
+
+          modal.style.display = 'flex';
+          attachFollowButtonListeners();
+        })
+        .catch(err => {
+          container.innerHTML = '<p style="color:red;">불러오기 실패</p>';
+          modal.style.display = 'flex';
+          console.error(err);
+        });
+    });
+  });
+
+  const topFollowBtn = document.getElementById('follow-btn');
+  if (topFollowBtn) {
+    const username = topFollowBtn.dataset.username;
+    topFollowBtn.addEventListener('click', () => {
+      fetch(`/accounts/follow/${username}/`, {
+        method: 'POST',
+        headers: {
+          'X-CSRFToken': '{{ csrf_token }}',
+        }
+      })
+      .then(res => res.json())
+      .then(data => {
+        topFollowBtn.textContent = data.followed ? '언팔로우' : '팔로우';
+      })
+      .catch(err => {
+        console.error('상단 팔로우 토글 실패:', err);
+      });
+    });
+  }
+});
 </script>
 {% endblock %}
