@@ -1,0 +1,36 @@
+<form method="POST" action="{% url 'accounts:book_profile_card' %}" id="bookProfileCardForm">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <div style="text-align: center; margin-top: 1.5rem;">
+        <button type="submit" class="small-button">저장</button>
+    </div>
+</form>
+
+<script>
+document.getElementById('bookProfileCardForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+    const formData = new FormData(this);
+
+    fetch("{% url 'accounts:book_profile_card' %}", {
+        method: 'POST',
+        headers: {
+            'X-Requested-With': 'XMLHttpRequest',
+            'Accept': 'application/json'
+        },
+        body: formData
+    })
+    .then(res => res.json())
+    .then(data => {
+        if (data.success) {
+            alert('독서카드가 저장되었습니다!');
+            location.reload();
+        } else {
+            alert('오류가 발생했습니다.');
+        }
+    })
+    .catch(err => {
+        alert('저장 중 오류가 발생했습니다.');
+        console.error(err);
+    });
+});
+</script>

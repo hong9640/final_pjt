@@ -251,6 +251,40 @@
     {% endif %}
   </div>
 
+ <div class="recommend-box">
+  <h3 style="font-size: 1.2rem; font-weight: bold; color: #3E3025; text-align: center;">
+    나의 독서카드
+  </h3>
+  {% if card %}
+    <div style="margin-top: 1rem; line-height: 1.7; color: #3E3025;">
+      <p><strong>카드 제목:</strong> {{ card.title }}</p>
+      <p><strong>좋아하는 장르:</strong>
+        {% for genre in card.favorite_genres %}
+          {{ genre }}{% if not forloop.last %}, {% endif %}
+        {% empty %}
+          없음
+        {% endfor %}
+      </p>
+      <p><strong>독서 스타일:</strong> {{ card.reading_style|default:"-" }}</p>
+      <p><strong>시간대:</strong> {{ card.reading_time|default:"-" }}</p>
+      <p><strong>장소:</strong> {{ card.reading_place|default:"-" }}</p>
+      <p><strong>무드:</strong> {{ card.mood|default:"-" }}</p>
+      <p><strong>소개:</strong> {{ card.introduction|default:"-" }}</p>
+      <p><strong>공개여부:</strong> {{ card.is_public|yesno:"공개,비공개" }}</p>
+      <div style="text-align: right; margin-top: 1rem;">
+        <button class="small-button" onclick="openCardModal()">수정하기</button>
+      </div>
+    </div>
+  {% else %}
+    <p style="color: #777; text-align: center;">아직 독서카드를 작성하지 않았습니다.</p>
+    <div style="text-align: center; margin-top: 1rem;">
+      <button class="small-button" onclick="openCardModal()">독서카드 만들기</button>
+    </div>
+  {% endif %}
+</div>
+
+
+
   <div class="recommend-box">
     <h1 style="font-size: 1.2rem; font-weight: bold; color: #3E3025; text-align: center; margin-bottom: 1.5rem;">
       {{ profile_user.nickname|default:profile_user.username }}님의 서재
@@ -281,6 +315,13 @@
       <span class="close-btn" onclick="document.getElementById('followModal').style.display='none'">✖</span>
       <div id="followListContainer">불러오는 중...</div>
     </div>
+  </div>
+</div>
+
+<div id="cardModal" class="modal">
+  <div class="modal-content">
+    <span class="close-btn" onclick="closeCardModal()">✖</span>
+    <div id="cardModalBody">불러오는 중...</div>
   </div>
 </div>
 
@@ -358,7 +399,7 @@ document.addEventListener("DOMContentLoaded", function() {
           });
 
           modal.style.display = 'flex';
-          attachFollowButtonListeners();  // 버튼 이벤트 연결
+          attachFollowButtonListeners();
         })
         .catch(err => {
           container.innerHTML = '<p style="color:red;">불러오기 실패</p>';
@@ -368,6 +409,36 @@ document.addEventListener("DOMContentLoaded", function() {
     });
   });
 });
+
+// ✅ 독서카드 모달용 스크립트
+function openCardModal() {
+  const modal = document.getElementById('cardModal');
+  const body = document.getElementById('cardModalBody');
+  modal.style.display = 'flex';
+
+  fetch("{% url 'accounts:book_profile_card' %}", {
+    headers: {
+      'X-Requested-With': 'XMLHttpRequest'
+    }
+  })
+  .then(res => res.text())
+  .then(html => {
+    body.innerHTML = html;
+  })
+  .catch(err => {
+    body.innerHTML = '<p style="color:red;">폼을 불러오지 못했습니다.</p>';
+    console.error(err);
+  });
+}
+
+function closeCardModal() {
+  document.getElementById('cardModal').style.display = 'none';
+}
+
+function closeCardModal() {
+  document.getElementById('cardModal').style.display = 'none';
+}
 </script>
+
 
 {% endblock %}
