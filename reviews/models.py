@@ -2,6 +2,7 @@
 from django.db import models
 from django.conf import settings
 from books.models import Book, Category # Category 모델도 임포트합니다.
+from django.urls import reverse
 
 class Review(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='reviews_written')
@@ -21,6 +22,10 @@ class Review(models.Model):
 
     def __str__(self):
         return f"리뷰: {self.content[:20]} (작성자: {self.user.username}, 책: {self.book.title})"
+    
+    def get_book_detail_url(self):
+        # books 앱의 book_detail URL name과 book.id를 사용하여 URL을 생성합니다.
+        return reverse('books:book_detail', kwargs={'book_id': self.book.pk})
 
 # Comment 및 Like 모델은 기존과 동일하게 유지 (추후 기능 구현 시 사용)
 class Comment(models.Model):

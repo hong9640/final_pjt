@@ -1,0 +1,181 @@
+{% extends "base.html" %}
+{% load static %} {# 또는 필요한 다른 태그 로드 #}
+
+{% block content %}
+<style>
+    /* book_detail.html의 리뷰 작성 폼 스타일과 유사하게 또는 공통 CSS 사용 */
+    .edit-review-container {
+        max-width: 768px; /* 적절한 너비 설정 */
+        margin: 3rem auto;
+        padding: 2rem;
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+    .edit-review-container h2 {
+        text-align: center;
+        margin-bottom: 1.5rem;
+        color: #333;
+        font-size: 1.8em;
+    }
+    .edit-review-container .form-group {
+        margin-bottom: 1.5rem;
+    }
+    .edit-review-container label {
+        display: block;
+        margin-bottom: 0.5rem;
+        font-weight: 600;
+        color: #454545;
+    }
+    /* ReviewForm에서 hidden으로 설정했으므로, 별도 input[type="number"] 스타일 불필요 */
+    .edit-review-container textarea { /* ReviewForm의 content 위젯에 적용될 스타일 */
+        width: 100%;
+        padding: 0.75rem;
+        border: 1px solid #ced4da;
+        border-radius: 0.25rem;
+        box-sizing: border-box;
+        min-height: 120px;
+        font-size: 1em;
+    }
+    .edit-review-container .star-input-area { /* 별점 UI 스타일 */
+        text-align: center;
+        margin-bottom: 1rem;
+    }
+    .edit-review-container .star-input-area span {
+        font-size: 2.2em; /* book_detail.html과 통일 */
+        color: #E0E0E0;
+        cursor: pointer;
+        margin: 0 0.2rem;
+        transition: color 0.2s ease, transform 0.2s ease;
+    }
+    .edit-review-container .star-input-area span:hover {
+        transform: scale(1.1);
+    }
+    .edit-review-container .star-input-area span.filled {
+        color: #FFC107; /* book_detail.html과 통일 */
+    }
+    .edit-review-container .form-buttons {
+        text-align: center;
+        margin-top: 2rem;
+    }
+    .edit-review-container .form-buttons button,
+    .edit-review-container .form-buttons a.btn {
+        padding: 0.75rem 2rem;
+        border-radius: 25px; /* book_detail.html의 버튼과 유사하게 */
+        text-decoration: none;
+        font-weight: 500;
+        font-size: 1.05em;
+        margin: 0 0.5rem;
+        border: none;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+    .edit-review-container .form-buttons button[type="submit"] {
+        background-image: linear-gradient(45deg, #00796B, #004D40); /* book_detail.html과 유사하게 */
+        color: white;
+    }
+    .edit-review-container .form-buttons button[type="submit"]:hover {
+        background-image: linear-gradient(45deg, #004D40, #00796B);
+        box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+        transform: translateY(-2px);
+    }
+    .edit-review-container .form-buttons a.btn-cancel { /* 취소 버튼용 클래스 */
+        background-color: #6c757d;
+        color: white;
+    }
+    .edit-review-container .form-buttons a.btn-cancel:hover {
+        background-color: #5a6268;
+        box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+        transform: translateY(-2px);
+    }
+    .form-field-errors { 
+        color: #dc3545; /* Bootstrap danger color */
+        font-size: 0.875em; 
+        list-style-type: none; 
+        padding-left: 0; 
+        margin-top: 0.25rem; 
+    }
+</style>
+
+<div class="edit-review-container">
+    <h2>리뷰 수정</h2>
+    <p><strong>도서:</strong> <a href="{{ book.get_absolute_url }}">{{ book.title }}</a></p> {# Book 모델에 get_absolute_url 정의 필요 #}
+
+    <form method="POST" action="{% url 'reviews:edit_review' review_id=review.id %}">
+        {% csrf_token %}
+        
+        <div class="form-group">
+            <label>별점:</label>
+            <div class="star-input-area" id="editStarRating">
+                <span data-value="1">☆</span><span data-value="2">☆</span><span data-value="3">☆</span><span data-value="4">☆</span><span data-value="5">☆</span>
+            </div>
+            {{ form.rating }} {# 숨겨진 rating input, ReviewForm에서 id='id_rating_hidden'으로 설정됨 #}
+            {% if form.rating.errors %}
+                <ul class="form-field-errors">{% for error in form.rating.errors %}<li>{{ error }}</li>{% endfor %}</ul>
+            {% endif %}
+        </div>
+
+        <div class="form-group">
+            {{ form.content.label_tag }}
+            {{ form.content }} {# Textarea 위젯 사용, ReviewForm에서 id='reviewTextarea' 등으로 설정됨 #}
+            {% if form.content.errors %}
+                <ul class="form-field-errors">{% for error in form.content.errors %}<li>{{ error }}</li>{% endfor %}</ul>
+            {% endif %}
+        </div>
+        
+        <div class="form-buttons">
+            <button type="submit">수정 완료</button>
+            <a href="{{ review.get_book_detail_url }}#review-{{ review.id }}" class="btn btn-cancel">취소</a>
+        </div>
+    </form>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const starRatingContainer = document.getElementById('editStarRating');
+    // ReviewForm에서 rating 필드 위젯의 id가 'id_rating_hidden'으로 설정되어 있습니다.
+    const ratingHiddenInput = document.getElementById('id_rating_hidden'); 
+
+    if (starRatingContainer && ratingHiddenInput) {
+        const stars = Array.from(starRatingContainer.querySelectorAll('span'));
+        // 폼이 기존 인스턴스 값으로 초기화되므로, hidden input의 value를 직접 사용합니다.
+        let currentRating = parseInt(ratingHiddenInput.value) || 0; 
+
+        function setStarsDisplay(rating) {
+            stars.forEach((star, index) => {
+                if (index < rating) {
+                    star.innerHTML = '★'; star.classList.add('filled');
+                } else {
+                    star.innerHTML = '☆'; star.classList.remove('filled');
+                }
+            });
+        }
+
+        setStarsDisplay(currentRating); // 페이지 로드 시 현재 저장된 별점으로 초기화
+
+        stars.forEach(star => {
+            const starValue = parseInt(star.getAttribute('data-value'));
+            star.addEventListener('click', () => {
+                currentRating = starValue;
+                ratingHiddenInput.value = currentRating; // 숨겨진 필드 값 업데이트
+                setStarsDisplay(currentRating);
+            });
+            star.addEventListener('mouseover', () => {
+                const hoverRating = parseInt(star.getAttribute('data-value'));
+                stars.forEach((s, index) => { 
+                    if (index < hoverRating) {
+                        s.innerHTML = '★'; s.classList.add('filled');
+                    } else {
+                        s.innerHTML = '☆'; s.classList.remove('filled');
+                    }
+                });
+            });
+            star.addEventListener('mouseout', () => {
+                setStarsDisplay(currentRating); // 마우스 아웃 시 실제 선택된 별점으로 복원
+            });
+        });
+    }
+});
+</script>
+{% endblock %}

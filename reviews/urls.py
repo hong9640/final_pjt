@@ -17,4 +17,6 @@ urlpatterns = [
     path('comment/<int:comment_id>/delete/', views.delete_comment, name='delete_comment'),
     path('user/<str:username>/written/', views.user_written_reviews, name='user_written_reviews'),
     path('user/<str:username>/liked/', views.user_liked_reviews, name='user_liked_reviews'),
+    path('<int:review_id>/edit/', views.edit_review, name='edit_review'), 
+    path('comment/<int:comment_id>/edit/', views.edit_comment, name='edit_comment'),
 ]
