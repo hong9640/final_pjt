@@ -1,0 +1,133 @@
+{% extends "base.html" %}
+{% load static %} {# 또는 필요한 다른 태그 로드 #}
+
+{% block content %}
+<style>
+    /* === 전체 페이지 및 기본 설정 (book_detail.html 참고) === */
+    body {
+        background-color: #F8F9FA; 
+        color: #343A40; 
+    }
+
+    .edit-comment-container { /* 기존 edit-comment-container 유지 */
+        max-width: 700px; /* 기존 너비 유지 */
+        margin: 3rem auto; /* book_detail.html과 유사한 상하 여백 */
+        padding: 2rem;     /* 내부 여백 */
+        background-color: #fff;
+        border-radius: 12px; /* book_detail.html과 유사한 모서리 둥글기 */
+        box-shadow: 0 6px 20px rgba(0,0,0,0.08); /* book_detail.html과 유사한 그림자 */
+    }
+    .edit-comment-container h2 {
+        text-align: center;
+        margin-bottom: 1.5rem;
+        color: #2C3E50; /* book_detail.html 제목 색상과 유사하게 */
+        font-size: 1.8em;  /* book_detail.html 제목 크기와 유사하게 */
+    }
+    .edit-comment-container p {
+        font-size: 0.95em;
+        color: #495057;
+        margin-bottom: 0.75rem;
+    }
+    .edit-comment-container p strong {
+        color: #343A40;
+    }
+    .edit-comment-container hr {
+        margin-top: 1rem;
+        margin-bottom: 1.5rem;
+        border-color: #DEE2E6;
+    }
+
+    /* === 폼 요소 스타일 (book_detail.html의 .review-form-box 내부 요소들과 유사하게) === */
+    .edit-comment-container .form-group {
+        margin-bottom: 1.5rem;
+    }
+    .edit-comment-container label { /* CommentForm에 label이 명시적으로 있다면 */
+        display: block;
+        margin-bottom: 0.5rem;
+        font-weight: 600;
+        color: #495057;
+    }
+    .edit-comment-container textarea { /* CommentForm의 content 위젯 대상 */
+        width: 100%;
+        box-sizing: border-box;
+        min-height: 100px; /* book_detail.html의 리뷰 내용 입력창과 유사하게 */
+        padding: 1rem;
+        border: 1px solid #CED4DA;
+        border-radius: 8px;
+        font-family: inherit;
+        font-size: 1em;
+        transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+    .edit-comment-container textarea:focus {
+        border-color: #00796B; /* book_detail.html의 포커스 색상과 유사하게 */
+        box-shadow: 0 0 0 0.2rem rgba(0, 121, 107, 0.25);
+        outline: none;
+    }
+
+    /* === 버튼 스타일 (book_detail.html의 .review-buttons button과 유사하게) === */
+    .form-buttons { /* 기존 클래스 유지 */
+        text-align: center; 
+        margin-top: 2rem; /* 여백 증가 */
+    }
+    .form-buttons .btn { /* 공통 버튼 스타일 클래스 (예시) */
+        color: white; 
+        border: none; 
+        padding: 0.8rem 2rem; /* book_detail.html 서재 추가/제거 버튼과 유사한 패딩 */
+        border-radius: 25px;  /* 둥근 버튼 */
+        cursor: pointer; 
+        font-weight: 500; 
+        font-size: 1.05em;   /* book_detail.html 서재 추가/제거 버튼과 유사한 폰트 크기 */
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        text-decoration: none; /* a 태그일 경우 대비 */
+        margin: 0 0.5rem;      /* 버튼 간 간격 */
+        display: inline-block; /* a 태그를 버튼처럼 보이게 */
+    }
+    .form-buttons .btn-primary-custom { /* 수정 완료 버튼 - book_detail.html의 '리뷰 등록' 버튼과 유사한 색상 */
+        background-image: linear-gradient(45deg, #00796B, #004D40); /* 딥 그린 그라데이션 */
+    }
+    .form-buttons .btn-primary-custom:hover {
+        background-image: linear-gradient(45deg, #004D40, #00796B);
+        box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+        transform: translateY(-2px);
+    }
+    .form-buttons .btn-secondary-custom { /* 취소 버튼 - book_detail.html의 '구매 링크' 버튼과 유사한 색상 */
+        background-image: linear-gradient(45deg, #6c757d, #5a6268); /* 회색 계열 그라데이션 */
+    }
+    .form-buttons .btn-secondary-custom:hover {
+        background-image: linear-gradient(45deg, #5a6268, #6c757d);
+        box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+        transform: translateY(-2px);
+    }
+
+    .form-field-errors { 
+        color: #dc3545; 
+        font-size: 0.875em; 
+        list-style-type: none; 
+        padding-left: 0; 
+        margin-top: 0.25rem; 
+    }
+</style>
+
+<div class="edit-comment-container">
+    <h2>댓글 수정</h2>
+    <p><strong>도서:</strong> <a href="{{ book.get_absolute_url }}">{{ book.title }}</a></p>
+    <p><strong>원래 리뷰 내용:</strong> "{{ review.content|truncatewords:20 }}"</p> {# 리뷰 내용 일부 표시 시 따옴표 추가 및 글자 수 조절 #}
+    <hr>
+    <form method="POST" action="{% url 'reviews:edit_comment' comment_id=comment.id %}">
+        {% csrf_token %}
+        <div class="form-group">
+            {# CommentForm에 label이 빈 문자열로 설정되어 있다면, 여기서 직접 추가 가능 #}
+            {# <label for="{{ form.content.id_for_label }}">댓글 내용:</label> #}
+            {{ form.content }} {# CommentForm에서 정의된 위젯(placeholder, class 등) 사용 #}
+            {% if form.content.errors %}
+                <ul class="form-field-errors">{% for error in form.content.errors %}<li>{{ error }}</li>{% endfor %}</ul>
+            {% endif %}
+        </div>
+        <div class="form-buttons">
+            <button type="submit" class="btn btn-primary-custom">수정 완료</button>
+            <a href="{{ review.get_book_detail_url }}#comment-{{ comment.id }}" class="btn btn-secondary-custom">취소</a>
+        </div>
+    </form>
+</div>
+{% endblock %}
