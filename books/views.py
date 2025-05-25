@@ -208,7 +208,7 @@ def all_books_list(request):
 
     book_list_qs = book_list_qs.order_by('-pub_date')
 
-    paginator = Paginator(book_list_qs, 9)
+    paginator = Paginator(book_list_qs, 12)
     page_number_str = request.GET.get('page')
     page_obj = paginator.get_page(page_number_str)
     pagination_context = _get_custom_pagination_context(page_obj, paginator)
@@ -260,7 +260,7 @@ def books_by_category_view(request, category_id):
             
     book_list_qs = book_list_qs.order_by('-pub_date')
 
-    paginator = Paginator(book_list_qs, 9)
+    paginator = Paginator(book_list_qs, 12)
     page_number_str = request.GET.get('page')
     page_obj = paginator.get_page(page_number_str)
     pagination_context = _get_custom_pagination_context(page_obj, paginator)
@@ -354,7 +354,7 @@ def books_by_group_view(request, group_name):
 
     book_list_qs = book_list_qs.order_by('-pub_date')
     
-    paginator = Paginator(book_list_qs, 9)
+    paginator = Paginator(book_list_qs, 12)
     page_number_str = request.GET.get('page')
     page_obj = paginator.get_page(page_number_str)
     pagination_context = _get_custom_pagination_context(page_obj, paginator)
