@@ -599,7 +599,7 @@
               {% endif %}
 
             </div>
-            <p style="font-weight: bold; margin-bottom: 0.25rem;">{% if user != review.user %}<a href="{% url 'accounts:userpage' review.user.username %}" style="text-decoration: none; color: inherit;">{{ review.user.username|default:"익명" }}</a>{% else %}{{ review.user.username|default:"익명" }}{% endif %}</p>
+            <p style="font-weight: bold; margin-bottom: 0.25rem;"><a href="{% if user == review.user %}{% url 'accounts:mypage' %}{% else %}{% url 'accounts:userpage' review.user.username %}{% endif %}" title="{% if user == review.user %}내 마이페이지{% else %}{{ review.user.username }}님의 페이지{% endif %}" style="text-decoration: none; color: inherit; cursor: pointer;">{{ review.user.username|default:"익명" }}</a></p>
             
             <div class="review-text-block">
               {{ review.content|linebreaksbr }}
