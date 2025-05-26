@@ -530,9 +530,17 @@
       <div class="book-info-block">
 
         <p><strong>저자:</strong> {{ book.author.name|default:"정보 없음" }}</p>
-
         <p><strong>출판사:</strong> {{ book.publisher|default:"정보 없음" }}</p>
         <p><strong>출간일:</strong> {{ book.pub_date|default:"정보 없음" }}</p>
+        {% if reviews_count > 0 and average_rating is not None %}
+                    <p class="book-average-rating">
+                        <strong>평균 별점:</strong> 
+                        5.0 / {{ average_rating|floatformat:1 }}
+                        (리뷰 {{ reviews_count }}개)
+                    </p>
+                {% else %}
+                    <p class="book-average-rating"><strong>평균 별점:</strong> 아직 등록된 리뷰가 없습니다.</p>
+                {% endif %}
       </div>
       <div class="book-description-block">
         {{ book.description|linebreaksbr|default:"책 설명이 여기에 표시됩니다." }}
