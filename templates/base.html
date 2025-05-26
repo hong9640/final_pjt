@@ -86,7 +86,32 @@
     #overlay.active {
       display: block;
     }
-    
+    footer {
+            background-color: #D9C2B0; /* 헤더와 동일한 배경색 또는 다른 어울리는 색 */
+            color: #3E3025;
+            padding: 25px 20px; /* 상하, 좌우 내부 여백 */
+            text-align: center;
+            flex-shrink: 0; /* 👈 내용이 많아도 푸터가 줄어들지 않도록 */
+            border-top: 1px solid #c5b09e; /* (선택) 푸터 상단 구분선 */
+            margin-top: 30px; /* (선택) 메인 콘텐츠와 푸터 사이 기본 간격, main-content-area가 flex:1 이면 자동 조절됨 */
+        }
+
+        .footer-content p {
+            margin: 8px 0;
+            font-size: 0.85em;
+            line-height: 1.5;
+        }
+
+        .footer-content a {
+            color: #3E3025;
+            text-decoration: none;
+            margin: 0 8px;
+        }
+
+        .footer-content a:hover {
+            color: #A67C52;
+            text-decoration: underline;
+        }
   </style>
 </head>
 <body>
@@ -123,7 +148,15 @@
     {% block content %}
     {% endblock %}
   </div>
-  
+  <footer>
+        <div class="footer-content">
+            <p>&copy; {% now "Y" %} 도서 추천 서비스. All Rights Reserved.</p>
+            <p>싸피 관통 프로젝트</p>
+            <p>
+                개발: 홍창근, 윤승주
+            </p>
+            </div>
+    </footer>
   {% include "recommendations/modal_input.html" %}
   <script>
     function openModal() {
