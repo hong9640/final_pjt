@@ -21,7 +21,7 @@
     header {
       height: 38px;
       background-color: #D9C2B0;
-      padding: 0.8rem 2rem; /* 헤더 높이 축소 */
+      padding: 0.8rem 2rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -33,7 +33,7 @@
     #menuToggleBtn {
       background: none;
       border: none;
-      font-size: 1.6rem; /* 살짝 줄임 */
+      font-size: 1.6rem;
       cursor: pointer;
       color: #3E3025;
     }
@@ -48,7 +48,7 @@
     }
 
     .logo-img {
-      height: 70px; /* 줄인 로고 크기 */
+      height: 70px;
       width: auto;
       margin-top: 2px;
     }
@@ -86,32 +86,48 @@
     #overlay.active {
       display: block;
     }
+
     footer {
-            background-color: #D9C2B0; /* 헤더와 동일한 배경색 또는 다른 어울리는 색 */
-            color: #3E3025;
-            padding: 25px 20px; /* 상하, 좌우 내부 여백 */
-            text-align: center;
-            flex-shrink: 0; /* 👈 내용이 많아도 푸터가 줄어들지 않도록 */
-            border-top: 1px solid #c5b09e; /* (선택) 푸터 상단 구분선 */
-            margin-top: 30px; /* (선택) 메인 콘텐츠와 푸터 사이 기본 간격, main-content-area가 flex:1 이면 자동 조절됨 */
-        }
+      background-color: #D9C2B0;
+      color: #3E3025;
+      padding: 25px 20px;
+      text-align: center;
+      flex-shrink: 0;
+      border-top: 1px solid #c5b09e;
+      margin-top: 30px;
+    }
 
-        .footer-content p {
-            margin: 8px 0;
-            font-size: 0.85em;
-            line-height: 1.5;
-        }
+    .footer-content p {
+      margin: 8px 0;
+      font-size: 0.85em;
+      line-height: 1.5;
+    }
 
-        .footer-content a {
-            color: #3E3025;
-            text-decoration: none;
-            margin: 0 8px;
-        }
+    .footer-content a {
+      color: #3E3025;
+      text-decoration: none;
+      margin: 0 8px;
+    }
 
-        .footer-content a:hover {
-            color: #A67C52;
-            text-decoration: underline;
-        }
+    .footer-content a:hover {
+      color: #A67C52;
+      text-decoration: underline;
+    }
+
+    .add-button {
+      font-family: 'Gowun Batang', serif;
+      background-color: #BCAAA4;
+      color: #3E3025;
+      padding: 0.4rem 0.9rem;
+      border: none;
+      border-radius: 8px;
+      font-weight: bold;
+      font-size: 0.85rem;
+      cursor: pointer;
+      margin-top: auto;
+      align-self: center;
+    }
+
   </style>
 </head>
 <body>
@@ -131,7 +147,7 @@
     <nav>
       {% if user.is_authenticated %}
         <a href="{% url 'books:home' %}">홈</a>
-        <a href="#" onclick="openModal()">맞춤형 추천✨</a>
+        <a href="javascript:void(0);" onclick="openChoiceModal()">맞춤형 추천✨</a>
         <a href="{% url 'accounts:mypage' %}">마이페이지</a>
       {% else %}
         <a href="{% url 'books:home' %}">홈</a>
@@ -139,50 +155,213 @@
         <a href="{% url 'accounts:login' %}">로그인</a>
       {% endif %}
     </nav>
-
   </header>
   
   {% include "books/includes/sticky_category_nav.html" %}
   
   <div class="container">
-    {% block content %}
-    {% endblock %}
+    {% block content %}{% endblock %}
   </div>
+
   <footer>
-        <div class="footer-content">
-            <p>&copy; {% now "Y" %} 도서 추천 서비스. All Rights Reserved.</p>
-            <p>싸피 관통 프로젝트</p>
-            <p>
-                개발: 홍창근, 윤승주
-            </p>
-            </div>
-    </footer>
-  {% include "recommendations/modal_input.html" %}
-  <script>
-    function openModal() {
-      document.getElementById('ai-recommend-modal').style.display = 'flex';
+    <div class="footer-content">
+      <p>&copy; {% now "Y" %} 도서 추천 서비스. All Rights Reserved.</p>
+      <p>싸피 관통 프로젝트</p>
+      <p>개발: 홍창근, 윤승주</p>
+    </div>
+  </footer>
+
+  {% include "recommendations/modal_choice.html" %}
+  {% include "recommendations/modal_unified.html" %}
+
+
+
+<script>
+let dotInterval = null;
+
+function openModal(type) {
+  const modal = document.getElementById('ai-recommend-modal');
+  const title = document.getElementById('recommend-title');
+  const message = document.getElementById('loading-message');
+  const dots = document.getElementById('dots');
+  const loadingScreen = document.getElementById('loading-screen');
+  const resultBox = document.getElementById('recommend-results');
+  const retryBox = document.getElementById('retry-button-wrapper');
+
+  modal.style.display = 'flex';
+  loadingScreen.style.display = 'block';
+  resultBox.innerHTML = '';
+  retryBox.style.display = 'none';
+
+  let fetchUrl = '';
+  let postData = {};
+  window.__lastType = type;
+
+  if (type === 'text') {
+    const query = prompt("추천 키워드를 입력해 주세요 (예: 우정, 힐링, 추리 등)");
+    if (!query) {
+      closeModal();
+      return;
     }
-    
-    function closeModal() {
-      document.getElementById('ai-recommend-modal').style.display = 'none';
+    window.__lastQuery = query;
+    title.innerText = "키워드를 분속 중입니다";
+    message.innerHTML = `'${query}' 관련 책을 찾는 중<span id="dots">.</span>`;
+    fetchUrl = "{% url 'recommendations:get_recommendation_ajax' %}";
+    postData = { query };
+  } else if (type === 'card') {
+    title.innerText = "나의 독서카드를 분석 중입니다";
+    message.innerHTML = `당신의 생각을 바탕으로 책을 찾는 중<span id="dots">.</span>`;
+    fetchUrl = "{% url 'recommendations:card_based_recommend' %}";
+  } else if (type === 'library') {
+    title.innerText = "서재 분석 중입니다";
+    message.innerHTML = `당신의 서재를 넘기는 중<span id="dots">.</span>`;
+    fetchUrl = "{% url 'recommendations:library_based_recommend' %}";
+  }
+
+  setTimeout(() => {
+    const dots = document.getElementById('dots');
+    if (dots) {
+      dotInterval = setInterval(() => {
+        const current = dots.textContent.length;
+        dots.textContent = '.'.repeat((current % 3) + 1);
+      }, 500);
     }
-    
-    document.addEventListener('DOMContentLoaded', () => {
-      const toggleBtn = document.getElementById("menuToggleBtn");
-      const sideMenu = document.getElementById("sideCategoryMenu");
-      const overlay = document.getElementById("overlay");
-      
-      toggleBtn.addEventListener("click", () => {
-        sideMenu?.classList.add("active");
-        overlay.classList.add("active");
-      });
-      
-      overlay.addEventListener("click", () => {
-        sideMenu?.classList.remove("active");
-        overlay.classList.remove("active");
-      });
-    });
-  </script>
+  }, 10);
+
+  fetch(fetchUrl, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'X-CSRFToken': '{{ csrf_token }}',
+      'X-Requested-With': 'XMLHttpRequest'
+    },
+    body: JSON.stringify(postData)
+  })
+  .then(res => res.json())
+  .then(data => {
+    clearInterval(dotInterval);
+    loadingScreen.style.display = 'none';
+
+    if (type === 'text') {
+      title.innerText = `'${window.__lastQuery}'에 대한 추천 결과`;
+    } else if (type === 'card') {
+      title.innerText = `당신의 독서카드로 추천한 책`;
+    } else if (type === 'library') {
+      title.innerText = `서재 기반 추천 도서`;
+    }
+
+    if (data.books?.length) {
+      const html = data.books.map(book => {
+        const buttonHtml = book.in_library
+          ? `<div style="height: 40px;"></div>`
+          : `<form onsubmit="event.preventDefault(); addToLibraryAjax(${book.id}, this.querySelector('button'))" style="display: flex; justify-content: center;">
+               <button type="submit" class="add-button">내 서재에 추가</button>
+             </form>`;
+        return `
+          <div style="width: 180px; height: 330px; border-radius: 12px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); 
+                      overflow: hidden; background: white; display: flex; flex-direction: column; padding-bottom: 0.5rem;">
+            <a href="/books/book/${book.id}/" style="text-decoration: none; color: inherit;">
+              <img src="${book.cover_image_url}" alt="${book.title}" style="width: 100%; height: 220px; object-fit: cover;">
+              <div style="padding: 0.6rem; flex-grow: 1;">
+                <h4 style="margin: 0; font-size: 0.95rem; line-height: 1.3em; height: 2.6em;
+                           overflow: hidden; text-overflow: ellipsis; display: -webkit-box;
+                           -webkit-line-clamp: 2; -webkit-box-orient: vertical;">${book.title}</h4>
+              </div>
+            </a>
+            ${buttonHtml}
+          </div>
+        `;
+      }).join('');
+      resultBox.innerHTML = html;
+      retryBox.style.display = 'block';
+    } else {
+      resultBox.innerHTML = '<p>추천 결과가 없습니다.</p>';
+      retryBox.style.display = 'block';
+    }
+  })
+  .catch(err => {
+    clearInterval(dotInterval);
+    resultBox.innerHTML = '<p style="color:red;">추천 요청 중 오류 발생</p>';
+    console.error(err);
+  });
+}
+
+function closeModal() {
+  const modal = document.getElementById('ai-recommend-modal');
+  const choiceModal = document.getElementById('recommend-choice-modal');
+  const loading = document.getElementById('loading-screen');
+  const result = document.getElementById('recommend-results');
+  const retry = document.getElementById('retry-button-wrapper');
+  const title = document.getElementById('recommend-title');
+
+  // 모든 모달 닫기
+  if (modal) modal.style.display = 'none';
+  if (choiceModal) choiceModal.style.display = 'none';
+
+  // 초기화
+  loading.style.display = 'none';
+  result.innerHTML = '';
+  retry.style.display = 'none';
+  title.innerText = '추천을 준비 중입니다';
+  clearInterval(dotInterval);
+}
+
+
+function retryRecommend() {
+  if (window.__lastType) {
+    openModal(window.__lastType);
+  }
+}
+
+function addToLibraryAjax(bookId, buttonElement) {
+  fetch(`/libraries/add/ajax/${bookId}/`, {
+    method: 'POST',
+    headers: {
+      'X-CSRFToken': '{{ csrf_token }}',
+    }
+  })
+  .then(res => res.json())
+  .then(data => {
+    if (data.success) {
+      buttonElement.remove();
+    }
+  })
+  .catch(err => {
+    alert('서재 추가 중 오류가 발생했습니다.');
+    console.error(err);
+  });
+}
+
+function openChoiceModal() {
+  const modal = document.getElementById('recommend-choice-modal');
+  if (modal) modal.style.display = 'flex';
+}
+
+function closeChoiceModal() {
+  const modal = document.getElementById('recommend-choice-modal');
+  if (modal) modal.style.display = 'none';
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  const toggleBtn = document.getElementById("menuToggleBtn");
+  const sideMenu = document.getElementById("sideCategoryMenu");
+  const overlay = document.getElementById("overlay");
+
+  toggleBtn?.addEventListener("click", () => {
+    sideMenu?.classList.add("active");
+    overlay.classList.add("active");
+  });
+
+  overlay?.addEventListener("click", () => {
+    sideMenu?.classList.remove("active");
+    overlay.classList.remove("active");
+  });
+
+  window.userHasCard = "{{ card|yesno:'true,false' }}" === "true";
+  window.userLibraryCount = {{ my_library_books|length|default:"0" }};
+});
+</script>
+
 
 </body>
 </html>
