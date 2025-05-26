@@ -1,6 +1,8 @@
 import openai
 import os
 from openai import OpenAI
+import re
+
 client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
 def get_recommendation_ids_based_on_library(library_books):
@@ -22,18 +24,23 @@ def get_recommendation_ids_based_on_library(library_books):
         all_books_text += f"{book.id}: {book.title.strip()} - {desc[:80]}...\n"
 
     prompt = f"""
-사용자의 서재에는 다음과 같은 책들이 담겨 있어.
+사용자의 서재에는 다음과 같은 책들이 담겨 있어:
 {user_books_text}
 
 이 사용자가 좋아할 만한 책 3권을 추천해줘.
-단, 추천은 아래의 목록 안에서만 골라줘. 반드시 아래 ID 중에서 골라줘.
+**반드시 아래 목록 안에 있는 ID를 사용해서 추천해줘. ID가 없는 책은 절대 추천하지 마.**
+
+**출력은 오직 숫자만 줄 단위로 출력하고, 다른 설명은 절대 하지 마.**
 
 추천 가능한 책 목록:
 {all_books_text}
 
-출력 형식: 숫자만 줄 단위로 출력해 줘.
-(예: 12\\n101\\n301)
+출력 예시:
+12  
+101  
+301
 """
+
 
     try:
         response = client.chat.completions.create(
@@ -47,7 +54,7 @@ def get_recommendation_ids_based_on_library(library_books):
         )
         raw = response.choices[0].message.content
         print("GPT 응답 원문:\n", raw)
-        ids = [int(line.strip()) for line in raw.strip().split("\n") if line.strip().isdigit()]
+        ids = [int(num) for num in re.findall(r"\b\d+\b", raw)]
         return ids
 
     except Exception as e:
