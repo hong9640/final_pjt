@@ -223,10 +223,15 @@
   <div class="action-buttons">
     <a href="{% url 'reviews:user_written_reviews' profile_user.username %}">내가 작성한 리뷰</a>
     <a href="{% url 'reviews:user_liked_reviews' profile_user.username %}">내가 좋아한 리뷰</a>
+    {% if card %}
+      <a href="javascript:void(0);" onclick="openViewCardModal()">내 독서카드 보기</a>
+    {% else %}
+      <a href="javascript:void(0);" onclick="openCardModal()">독서카드 만들기</a>
+    {% endif %}
   </div>
 
   <div class="recommend-box">
-    <h3 style="font-size: 1.2rem; font-weight: bold; color: #3E3025;">최근 추천 받은 책</h3>
+    <h3 style="font-size: 1.2rem; font-weight: bold; color: #3E3025; text-align: center;">최근 추천 받은 책</h3>
     {% if recommendations %}
       <div style="display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center;">
         {% for rec in recommendations %}
@@ -250,40 +255,6 @@
       <p style="color: #777; text-align: center;">아직 추천 받은 책이 없습니다.</p>
     {% endif %}
   </div>
-
- <div class="recommend-box">
-  <h3 style="font-size: 1.2rem; font-weight: bold; color: #3E3025; text-align: center;">
-    나의 독서카드
-  </h3>
-  {% if card %}
-    <div style="margin-top: 1rem; line-height: 1.7; color: #3E3025;">
-      <p><strong>카드 제목:</strong> {{ card.title }}</p>
-      <p><strong>좋아하는 장르:</strong>
-        {% for genre in card.favorite_genres %}
-          {{ genre }}{% if not forloop.last %}, {% endif %}
-        {% empty %}
-          없음
-        {% endfor %}
-      </p>
-      <p><strong>독서 스타일:</strong> {{ card.reading_style|default:"-" }}</p>
-      <p><strong>시간대:</strong> {{ card.reading_time|default:"-" }}</p>
-      <p><strong>장소:</strong> {{ card.reading_place|default:"-" }}</p>
-      <p><strong>무드:</strong> {{ card.mood|default:"-" }}</p>
-      <p><strong>소개:</strong> {{ card.introduction|default:"-" }}</p>
-      <p><strong>공개여부:</strong> {{ card.is_public|yesno:"공개,비공개" }}</p>
-      <div style="text-align: right; margin-top: 1rem;">
-        <button class="small-button" onclick="openCardModal()">수정하기</button>
-      </div>
-    </div>
-  {% else %}
-    <p style="color: #777; text-align: center;">아직 독서카드를 작성하지 않았습니다.</p>
-    <div style="text-align: center; margin-top: 1rem;">
-      <button class="small-button" onclick="openCardModal()">독서카드 만들기</button>
-    </div>
-  {% endif %}
-</div>
-
-
 
   <div class="recommend-box">
     <h1 style="font-size: 1.2rem; font-weight: bold; color: #3E3025; text-align: center; margin-bottom: 1.5rem;">
@@ -316,7 +287,14 @@
       <div id="followListContainer">불러오는 중...</div>
     </div>
   </div>
+
+<div id="viewCardModal" class="modal">
+  <div class="modal-content">
+    <span class="close-btn" onclick="closeViewCardModal()">✖</span>
+    <div id="viewCardModalBody">불러오는 중...</div>
+  </div>
 </div>
+
 
 <div id="cardModal" class="modal">
   <div class="modal-content">
@@ -431,6 +409,32 @@ function openCardModal() {
   });
 }
 
+
+function openViewCardModal() {
+  const modal = document.getElementById('viewCardModal');
+  const body = document.getElementById('viewCardModalBody');
+  modal.style.display = 'flex';
+
+  fetch("{% url 'accounts:book_profile_card' %}?mode=view", {
+    headers: {
+      'X-Requested-With': 'XMLHttpRequest'
+    }
+  })
+  .then(res => res.text())
+  .then(html => {
+    body.innerHTML = html;
+  })
+  .catch(err => {
+    body.innerHTML = '<p style="color:red;">불러오기 실패</p>';
+    console.error(err);
+  });
+}
+
+function closeViewCardModal() {
+  document.getElementById('viewCardModal').style.display = 'none';
+}
+
+
 function closeCardModal() {
   document.getElementById('cardModal').style.display = 'none';
 }
@@ -438,6 +442,36 @@ function closeCardModal() {
 function closeCardModal() {
   document.getElementById('cardModal').style.display = 'none';
 }
+
+window.getCardBasedRecommendation = function() {
+  fetch("{% url 'recommendations:card_based_recommend' %}", {
+    method: "POST",
+    headers: {
+      "X-CSRFToken": "{{ csrf_token }}",
+      "X-Requested-With": "XMLHttpRequest"
+    }
+  })
+  .then(res => res.json())
+  .then(data => {
+    const body = document.getElementById('viewCardModalBody');
+    if (data.books?.length) {
+      const bookHtml = data.books.map(book => `
+        <div style="margin-bottom: 1rem;">
+          <strong>${book.title}</strong><br>
+          <img src="${book.cover_image_url}" style="width: 80px;">
+        </div>
+      `).join('');
+      body.innerHTML = `<h3>추천된 책 목록</h3>${bookHtml}`;
+    } else {
+      body.innerHTML = '<p>추천 결과가 없습니다.</p>';
+    }
+  })
+  .catch(err => {
+    console.error(err);
+    alert("추천 요청에 실패했습니다.");
+  });
+}
+
 </script>
 
 

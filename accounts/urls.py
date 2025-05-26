@@ -22,4 +22,5 @@ urlpatterns = [
         form_class=CustomPasswordChangeForm,
     ), name='password_change'),
     path('book-card/', views.book_profile_card_view, name='book_profile_card'),
+    path('card/<str:username>/', views.user_card_view, name='user_card_view'),
 ]

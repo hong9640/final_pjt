@@ -238,7 +238,11 @@
   <div class="action-buttons">
     <a href="{% url 'reviews:user_written_reviews' profile_user.username %}">{{ profile_user.nickname|default:profile_user.username }}님이 작성한 리뷰</a>
     <a href="{% url 'reviews:user_liked_reviews' profile_user.username %}">{{ profile_user.nickname|default:profile_user.username }}님이 좋아한 리뷰</a>
-  </div>
+  
+    {% if profile_user.reading_card and profile_user.reading_card.is_public %}
+      <a href="javascript:void(0);" onclick="openUserCardModal()">독서카드 보기</a>
+    {% endif %}
+    </div>
 
   <div class="recommend-box">
     <h1 style="font-size: 1.2rem; font-weight: bold; color: #3E3025; text-align: center; margin-bottom: 1.5rem;">
@@ -266,7 +270,14 @@
     {% endif %}
   </div>
 
-  <div id="followModal" class="modal">
+  <div id="userCardModal" class="modal">
+  <div class="modal-content">
+    <span class="close-btn" onclick="closeUserCardModal()">✖</span>
+    <div id="userCardModalBody">불러오는 중...</div>
+  </div>
+</div>
+
+<div id="followModal" class="modal">
     <div class="modal-content">
       <span class="close-btn" onclick="document.getElementById('followModal').style.display='none'">✖</span>
       <div id="followListContainer">불러오는 중...</div>
@@ -323,7 +334,31 @@ function attachFollowButtonListeners() {
   });
 }
 
+
+function openUserCardModal() {
+  const modal = document.getElementById('userCardModal');
+  const body = document.getElementById('userCardModalBody');
+  modal.style.display = 'flex';
+
+  fetch(`/accounts/card/{{ profile_user.username }}/`, {
+    headers: { 'X-Requested-With': 'XMLHttpRequest' }
+  })
+  .then(res => res.text())
+  .then(html => {
+    body.innerHTML = html;
+  })
+  .catch(err => {
+    body.innerHTML = '<p style="color:red;">불러오기 실패</p>';
+    console.error(err);
+  });
+}
+
+function closeUserCardModal() {
+  document.getElementById('userCardModal').style.display = 'none';
+}
+
 window.addEventListener("DOMContentLoaded", function () {
+
   const modal = document.getElementById('followModal');
   const container = document.getElementById('followListContainer');
   const currentUsername = '{{ request.user.username }}';
