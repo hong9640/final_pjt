@@ -187,12 +187,14 @@ def follow_list_view(request, username):
 @login_required
 def book_profile_card_view(request):
     user = request.user
-    card, _ = BookProfileCard.objects.get_or_create(user=user)
+    card = getattr(user, 'reading_card', None)
 
     if request.method == 'POST':
         form = BookProfileCardForm(request.POST, instance=card)
         if form.is_valid():
-            form.save()
+            new_card = form.save(commit=False)
+            new_card.user = user
+            new_card.save()
             if request.headers.get('x-requested-with') == 'XMLHttpRequest':
                 return JsonResponse({'success': True})
             return redirect('accounts:mypage')
@@ -202,13 +204,19 @@ def book_profile_card_view(request):
 
     elif request.headers.get('x-requested-with') == 'XMLHttpRequest':
         mode = request.GET.get('mode')
-        if mode == 'view':
+        if mode == 'view' and card:
             return render(request, 'accounts/partials/book_profile_card_view.html', {'card': card})
         else:
+            # ✅ 카드 없으면 폼 보여줄 때 새 인스턴스 생성해서 연결
+            if not card:
+                card = BookProfileCard(user=user)
             form = BookProfileCardForm(instance=card)
             return render(request, 'accounts/partials/book_profile_card_form.html', {'form': form})
 
     return redirect('accounts:mypage')
+
+
+
 
 @login_required
 def user_card_view(request, username):

@@ -31,13 +31,16 @@
     }
 
     #menuToggleBtn {
+      font-size: 1.6rem;
       background: none;
       border: none;
-      font-size: 1.6rem;
-      cursor: pointer;
       color: #3E3025;
+      cursor: pointer;
+      padding: 0;
+      line-height: 1;
+      display: flex;
+      align-items: center;
     }
-
     .logo-container {
       padding-left: 0.3rem;
     }
@@ -51,6 +54,7 @@
       height: 70px;
       width: auto;
       margin-top: 2px;
+      display: block;
     }
 
     nav a {
@@ -173,11 +177,14 @@
 
   {% include "recommendations/modal_choice.html" %}
   {% include "recommendations/modal_unified.html" %}
+  {% include "recommendations/modal_result.html" %}
+
 
 
 
 <script>
 let dotInterval = null;
+
 
 function openModal(type) {
   const modal = document.getElementById('ai-recommend-modal');
@@ -188,6 +195,7 @@ function openModal(type) {
   const resultBox = document.getElementById('recommend-results');
   const retryBox = document.getElementById('retry-button-wrapper');
 
+  // 초기화
   modal.style.display = 'flex';
   loadingScreen.style.display = 'block';
   resultBox.innerHTML = '';
@@ -197,6 +205,21 @@ function openModal(type) {
   let postData = {};
   window.__lastType = type;
 
+  // ✅ 조건: 독서카드 없음
+  if (type === 'card' && !window.userHasCard) {
+    title.innerText = "추천 불가";
+    loadingScreen.style.display = 'none';
+    resultBox.innerHTML = `
+      <div style="text-align: center; padding: 2rem;">
+        <p style="font-size: 1.1rem; color: #5A3E36;">아직 독서카드가 없습니다.<br>나만의 독서카드를 만들어보세요!</p>
+        <button onclick="openBookCardForm()" style="margin-top: 1rem; padding: 0.6rem 1.2rem; background: #A67C52; color: white;
+          border: none; border-radius: 6px; font-size: 0.95rem; cursor: pointer;">
+          지금 만들기
+        </button>
+      </div>
+    `;
+    return;
+  }
   if (type === 'text') {
     const query = prompt("추천 키워드를 입력해 주세요 (예: 우정, 힐링, 추리 등)");
     if (!query) {
@@ -204,7 +227,7 @@ function openModal(type) {
       return;
     }
     window.__lastQuery = query;
-    title.innerText = "키워드를 분속 중입니다";
+    title.innerText = "키워드를 분석 중입니다";
     message.innerHTML = `'${query}' 관련 책을 찾는 중<span id="dots">.</span>`;
     fetchUrl = "{% url 'recommendations:get_recommendation_ajax' %}";
     postData = { query };
@@ -241,6 +264,19 @@ function openModal(type) {
   .then(data => {
     clearInterval(dotInterval);
     loadingScreen.style.display = 'none';
+
+    // ✅ 조건: 서재가 비어있습니다
+    if (type === 'library' && data.error === '서재가 비어있습니다.') {
+      title.innerText = "추천 불가";
+      resultBox.innerHTML = `
+        <div style="width: 100%; text-align: center; padding: 2rem;">
+          <p style="font-size: 1.1rem; color: #5A3E36;">
+            서재에 책이 없습니다!<br>책을 먼저 서재에 담아보세요.
+          </p>
+        </div>
+      `;
+      return;
+    }
 
     if (type === 'text') {
       title.innerText = `'${window.__lastQuery}'에 대한 추천 결과`;
@@ -360,6 +396,40 @@ document.addEventListener('DOMContentLoaded', () => {
   window.userHasCard = "{{ card|yesno:'true,false' }}" === "true";
   window.userLibraryCount = {{ my_library_books|length|default:"0" }};
 });
+
+  function openBookCardForm() {
+    // 닫기: 기존 추천 모달 등
+    closeModal();
+
+    // 모달 관련 요소
+    const modal = document.getElementById('viewCardModal');
+    const body = document.getElementById('viewCardModalBody');
+
+    // 초기화
+    body.innerHTML = `<p style="text-align: center; font-size: 1rem; color: #7C685A;">불러오는 중입니다...</p>`;
+
+    // AJAX 요청
+    fetch("{% url 'accounts:book_profile_card' %}", {
+      headers: { 'X-Requested-With': 'XMLHttpRequest' }
+    })
+    .then(res => {
+      if (!res.ok) {
+        throw new Error("서버 응답 오류");
+      }
+      return res.text();
+    })
+    .then(html => {
+      // form 삽입
+      body.innerHTML = html;
+
+      // 모달 열기
+      modal.style.display = 'flex';
+    })
+    .catch(err => {
+      body.innerHTML = `<p style="text-align: center; color: red;">폼을 불러오는 데 실패했습니다.</p>`;
+      console.error(err);
+    });
+  }
 </script>
 
 
