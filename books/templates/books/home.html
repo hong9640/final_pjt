@@ -187,7 +187,7 @@
         transition: background-color 0.2s, color 0.2s;
     }
     .category-tab.active { background-color: #D2B9AD; color: white; }
-    .sections { display: flex; flex-direction: column; gap: 30px; margin: 30px 0; }
+    .sections { display: flex; flex-direction: column; gap: 30px; margin: 10px 0; }
     @media (min-width: 768px) {
         .sections { flex-direction: row; justify-content: space-between; align-items: stretch; }
         .section.new-books { padding-right: 60px }
@@ -195,6 +195,7 @@
     .section {
         flex: 1; background-color: #f8f5f0; padding: 20px; border-radius: 8px;
         display: flex; flex-direction: column;
+        margin-bottom: 20px;
     }
     .section h2 { margin-top: 0; margin-bottom: 15px; font-size: 1.5em; color: #2C1B13; }
     .search-results-container { margin-top: 30px; margin-bottom: 30px }
@@ -280,6 +281,30 @@
     .section.reviews h2 {
     text-align: center;
 }
+.welcome-message {
+    text-align: center;
+    padding: 20px 15px; 
+    display: flex;
+    flex-direction: column; 
+    justify-content: center; 
+}
+
+.welcome-message h3 {
+    font-size: 1.6em;
+    color: #3E3025;
+    margin-top: 0;       
+    margin-bottom: 12px;
+    font-weight: bold;
+    line-height: 1.4;
+}
+
+.welcome-message p {
+    font-size: 1.0em;
+    color: #5D4037;
+    margin-top: 0;     
+    margin-bottom: 0;  
+    line-height: 1.6;
+}
 </style>
 
 <div class="content-wrapper">
@@ -314,8 +339,14 @@
 </button>
             </form>
         </div>
-
         {% if not query %} {# 검색어가 없을 때 기존 홈 콘텐츠 표시 #}
+        <div class="section">
+            <div class="welcome-message">
+                <h3>당신의 다음 이야기는 무엇인가요?</h3>
+                <p>책 속에서 새로운 세계를 발견하세요.</p>
+            </div>
+        </div>
+        <div class="section">
             <section class="bestseller-section">
                 <h2>베스트셀러</h2>
                 <div id="bestseller-list">
@@ -358,6 +389,7 @@
                 </div>
                 {% endif %}
             </section>
+        </div>
 
             <div class="sections">
                 <section class="section new-books">

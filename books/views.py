@@ -7,7 +7,7 @@ from libraries.models import Library
 from reviews.models import Review, Like
 from reviews.forms import ReviewForm, CommentForm
 import re
-from collections import defaultdict
+from collections import defaultdict, OrderedDict
 from django.db.models import Q
 
 CATEGORY_GROUPS = [
@@ -43,7 +43,7 @@ def home(request):
         'query': query,
         'search_type': search_type,
         'global_categories': get_navigation_categories(),
-        'category_groups': CATEGORY_GROUPS,
+        'category_groups': CATEGORY_GROUPS, # 이 변수는 왼쪽 사이드바 네비게이션용으로 사용
     }
 
     if query:
@@ -65,54 +65,67 @@ def home(request):
                 Q(publisher__icontains=query)
             ).distinct()
             context['page_title'] = f"'{query}' (통합) 검색 결과"
-        
-        searched_books_list = books_qs.order_by('-pub_date')
 
-        # --- 검색 결과에 대한 페이지네이션 추가 ---
-        paginator = Paginator(searched_books_list, 12) # 한 페이지에 9개씩 (다른 페이지와 동일하게)
-        page_number_str = request.GET.get('page') # 검색 결과 페이지 번호
+        searched_books_list = books_qs.order_by('-pub_date')
+        paginator = Paginator(searched_books_list, 12)
+        page_number_str = request.GET.get('page')
         page_obj = paginator.get_page(page_number_str)
-        
         pagination_context_for_search = _get_custom_pagination_context(page_obj, paginator)
 
-        context['page_obj'] = page_obj # searched_books 대신 page_obj 전달
+        context['page_obj'] = page_obj
         context['is_paginated'] = page_obj.has_other_pages()
-        context.update(pagination_context_for_search) # 페이지네이션 변수들 context에 추가
-        # context['searched_books'] = searched_books -> 이제 page_obj로 대체됨
-        # --- 페이지네이션 추가 끝 ---
+        context.update(pagination_context_for_search)
 
     else:
-        # 기존 홈 화면 로직 (검색어가 없을 때)
+        # --- 베스트셀러 순서 정렬을 위한 로직 수정 시작 ---
         bestseller_books_qs = Book.objects.filter(is_bestseller=True).select_related('category')
-        # ... (이하 기존 베스트셀러, 신간, 리뷰 로직 동일) ...
-        grouped_bestsellers = defaultdict(list)
+        
+        # 1. 임시로 모든 베스트셀러를 그룹별로 분류 (기존 방식과 유사)
+        temp_grouped_bestsellers = defaultdict(list)
         for book in bestseller_books_qs:
             if book.category:
                 second_level = extract_second_level(book.category.name)
                 group = classify_category_group(second_level)
             else:
                 group = "기타"
-            grouped_bestsellers[group].append(book)
+            temp_grouped_bestsellers[group].append(book)
+
+        # 2. CATEGORY_GROUPS (원하는 순서)를 기준으로 최종 데이터 생성
+        ordered_grouped_bestsellers_for_template = OrderedDict()
+        ordered_bestseller_groups_for_tabs = []
+
+        for desired_group_name in CATEGORY_GROUPS: # 정의된 순서대로 반복
+            if desired_group_name in temp_grouped_bestsellers and temp_grouped_bestsellers[desired_group_name]:
+                # 해당 그룹에 책이 있는 경우에만 추가
+                ordered_grouped_bestsellers_for_template[desired_group_name] = temp_grouped_bestsellers[desired_group_name]
+                # 탭용 리스트에도 그룹 이름 추가 (중복 없이)
+                if desired_group_name not in ordered_bestseller_groups_for_tabs:
+                     ordered_bestseller_groups_for_tabs.append(desired_group_name)
+        
+        # (선택 사항) CATEGORY_GROUPS에 없지만 temp_grouped_bestsellers에는 있는 그룹 처리
+        # 예를 들어, 분류 결과 새로운 그룹이 생겼고, 이를 맨 뒤에 추가하고 싶다면 아래 주석 해제 후 로직 추가
+        # for group_name, books in temp_grouped_bestsellers.items():
+        #     if group_name not in ordered_grouped_bestsellers_for_template and books: # 아직 추가 안됐고 책이 있다면
+        #         ordered_grouped_bestsellers_for_template[group_name] = books
+        #         if group_name not in ordered_bestseller_groups_for_tabs:
+        #             ordered_bestseller_groups_for_tabs.append(group_name)
+
+        # --- 베스트셀러 순서 정렬 로직 수정 끝 ---
 
         new_books_qs = Book.objects.order_by('-pub_date')[:8]
         all_latest_reviews_list = Review.objects.select_related('book', 'user').order_by('-created_at')
         review_paginator = Paginator(all_latest_reviews_list, 5)
-        review_page_number = request.GET.get('review_page') # 리뷰 전용 페이지 파라미터
-        try:
-            latest_reviews_page_obj = review_paginator.page(review_page_number)
-        except PageNotAnInteger:
-            latest_reviews_page_obj = review_paginator.page(1)
-        except EmptyPage:
-            latest_reviews_page_obj = review_paginator.page(review_paginator.num_pages)
+        review_page_number = request.GET.get('review_page')
+        latest_reviews_page_obj = review_paginator.get_page(review_page_number) # get_page 사용
 
         context.update({
-            'grouped_bestsellers': dict(grouped_bestsellers),
-            'bestseller_groups': list(grouped_bestsellers.keys()),
+            'grouped_bestsellers': ordered_grouped_bestsellers_for_template, # 정렬된 OrderedDict 전달
+            'bestseller_groups': ordered_bestseller_groups_for_tabs,     # 정렬된 리스트 전달
             'new_books': new_books_qs,
             'latest_reviews_page': latest_reviews_page_obj,
             'page_title': "홈",
         })
-        
+
     return render(request, 'books/home.html', context)
 
 
