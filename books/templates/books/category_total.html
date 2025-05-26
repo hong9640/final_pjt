@@ -201,10 +201,20 @@
         color: #ccc; pointer-events: none; cursor: default; 
         padding: 8px 12px; margin: 0 2px; border: 1px solid #ddd; border-radius: 4px;
     }
+    .section {
+        flex: 1; background-color: #f8f5f0; padding: 20px; border-radius: 8px;
+        display: flex; flex-direction: column;
+    }
+    .section h2 { margin-top: 0; margin-bottom: 15px; font-size: 1.5em; color: #2C1B13; }
+
+    .search-results-container { margin-top: 30px; margin-bottom: 30px }
+    .search-results-container h2 {
+        text-align: center; margin-bottom: 25px; font-size: 1.8em; color: #2C1B13;
+    }
 </style>
 
 <div class="category-total-page-content-wrapper">
-    <div class="category-total-sections-wrapper section"> {# 배경색 등을 위해 .section 클래스 추가 가능 #}
+    <div class="category-total-sections-wrapper"> {# 배경색 등을 위해 .section 클래스 추가 가능 #}
     
         <div class="search-results-title-container"> {# 변경된 제목 컨테이너 #}
             <h2>
@@ -240,62 +250,63 @@
                 <button type="submit">🔍</button>
             </form>
         </div>
-
-        {% if page_obj and page_obj.object_list %}
-            <div class="book-grid"> {# 변경된 그리드 클래스 #}
-                {% for book in page_obj %}
-                <div class="book-card"> {# 변경된 카드 클래스 #}
-                    <a href="{% url 'books:book_detail' book_id=book.id %}">
-                        <img src="{{ book.cover_image_url|default:'https://placehold.co/150x180/e2e8f0/a0aec0?text=No+Image' }}" alt="{{ book.title }}">
-                    </a>
-                    <p>{{ book.title }}</p>
-                    <a href="{% url 'books:book_detail' book_id=book.id %}" class="detail-link">자세히 보기</a>
+        <div class='section'>
+            {% if page_obj and page_obj.object_list %}
+                <div class="book-grid"> {# 변경된 그리드 클래스 #}
+                    {% for book in page_obj %}
+                    <div class="book-card"> {# 변경된 카드 클래스 #}
+                        <a href="{% url 'books:book_detail' book_id=book.id %}">
+                            <img src="{{ book.cover_image_url|default:'https://placehold.co/150x180/e2e8f0/a0aec0?text=No+Image' }}" alt="{{ book.title }}">
+                        </a>
+                        <p>{{ book.title }}</p>
+                        <a href="{% url 'books:book_detail' book_id=book.id %}" class="detail-link">자세히 보기</a>
+                    </div>
+                    {% endfor %}
                 </div>
-                {% endfor %}
-            </div>
-
-            {% if is_paginated and page_obj.paginator.num_pages > 1 %}
-            <div class="custom-pagination">
-                {% if first_page_jump_target %}
-                <a href="?page={{ first_page_jump_target }}{% if query %}&q={{ query }}&search_type={{ search_type }}{% endif %}" aria-label="First Page">&laquo;&laquo;</a>
-                {% else %}
-                <span class="disabled" aria-hidden="true">&laquo;&laquo;</span>
+    
+                {% if is_paginated and page_obj.paginator.num_pages > 1 %}
+                <div class="custom-pagination">
+                    {% if first_page_jump_target %}
+                    <a href="?page={{ first_page_jump_target }}{% if query %}&q={{ query }}&search_type={{ search_type }}{% endif %}" aria-label="First Page">&laquo;&laquo;</a>
+                    {% else %}
+                    <span class="disabled" aria-hidden="true">&laquo;&laquo;</span>
+                    {% endif %}
+                    {% if prev_single_page_target %}
+                    <a href="?page={{ prev_single_page_target }}{% if query %}&q={{ query }}&search_type={{ search_type }}{% endif %}" aria-label="Previous Page">&laquo;</a>
+                    {% else %}
+                    <span class="disabled" aria-hidden="true">&laquo;</span>
+                    {% endif %}
+                    {% for page_num in visible_page_numbers %}
+                    {% if page_obj.number == page_num %}
+                    <span class="current">{{ page_num }}</span>
+                    {% else %}
+                    <a href="?page={{ page_num }}{% if query %}&q={{ query }}&search_type={{ search_type }}{% endif %}">{{ page_num }}</a>
+                    {% endif %}
+                    {% endfor %}
+                    {% if next_single_page_target %}
+                    <a href="?page={{ next_single_page_target }}{% if query %}&q={{ query }}&search_type={{ search_type }}{% endif %}" aria-label="Next Page">&raquo;</a>
+                    {% else %}
+                    <span class="disabled" aria-hidden="true">&raquo;</span>
+                    {% endif %}
+                    {% if last_page_jump_target %}
+                    <a href="?page={{ last_page_jump_target }}{% if query %}&q={{ query }}&search_type={{ search_type }}{% endif %}" aria-label="Last Page">&raquo;&raquo;</a>
+                    {% else %}
+                    <span class="disabled" aria-hidden="true">&raquo;&raquo;</span>
+                    {% endif %}
+                </div>
                 {% endif %}
-                {% if prev_single_page_target %}
-                <a href="?page={{ prev_single_page_target }}{% if query %}&q={{ query }}&search_type={{ search_type }}{% endif %}" aria-label="Previous Page">&laquo;</a>
-                {% else %}
-                <span class="disabled" aria-hidden="true">&laquo;</span>
-                {% endif %}
-                {% for page_num in visible_page_numbers %}
-                {% if page_obj.number == page_num %}
-                <span class="current">{{ page_num }}</span>
-                {% else %}
-                <a href="?page={{ page_num }}{% if query %}&q={{ query }}&search_type={{ search_type }}{% endif %}">{{ page_num }}</a>
-                {% endif %}
-                {% endfor %}
-                {% if next_single_page_target %}
-                <a href="?page={{ next_single_page_target }}{% if query %}&q={{ query }}&search_type={{ search_type }}{% endif %}" aria-label="Next Page">&raquo;</a>
-                {% else %}
-                <span class="disabled" aria-hidden="true">&raquo;</span>
-                {% endif %}
-                {% if last_page_jump_target %}
-                <a href="?page={{ last_page_jump_target }}{% if query %}&q={{ query }}&search_type={{ search_type }}{% endif %}" aria-label="Last Page">&raquo;&raquo;</a>
-                {% else %}
-                <span class="disabled" aria-hidden="true">&raquo;&raquo;</span>
-                {% endif %}
-            </div>
+            {% else %}
+                <p class="no-results"> 
+                    {% if query %}
+                    '{{ query }}'에 대한 검색 결과가 없습니다.
+                    {% else %}
+                    등록된 책이 없습니다.
+                    {% endif %}
+                </p>
             {% endif %}
-        {% else %}
-            <p class="no-results"> 
-                {% if query %}
-                '{{ query }}'에 대한 검색 결과가 없습니다.
-                {% else %}
-                등록된 책이 없습니다.
-                {% endif %}
-            </p>
-        {% endif %}
+        </div>
     </div>
-</div>
+        </div>
 
 <script>
 document.addEventListener("DOMContentLoaded", () => {
