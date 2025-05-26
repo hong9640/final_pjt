@@ -287,8 +287,8 @@
     display: flex;
     flex-direction: column; 
     justify-content: center; 
+    align-items: center;
 }
-
 .welcome-message h3 {
     font-size: 1.6em;
     color: #3E3025;
@@ -304,6 +304,12 @@
     margin-top: 0;     
     margin-bottom: 0;  
     line-height: 1.6;
+}
+.welcome-image { /* img 태그에 이 클래스를 적용했다고 가정 */
+    max-width: 100%;
+    height: auto;
+    margin-top: 15px;
+    display: inline-block;
 }
 </style>
 
@@ -344,6 +350,7 @@
             <div class="welcome-message">
                 <h3>당신의 다음 이야기는 무엇인가요?</h3>
                 <p>책 속에서 새로운 세계를 발견하세요.</p>
+                <img src="{% static 'images/sample2.png' %}" alt="환영 이미지" class="welcome-image">
             </div>
         </div>
         <div class="section">
