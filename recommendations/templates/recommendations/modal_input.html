@@ -102,7 +102,7 @@ document.getElementById('ai-recommend-form').addEventListener('submit', async fu
   resultsContainer.innerHTML = "";
   retryButton.style.display = 'none';
   loadingScreen.style.display = 'block';
-  title.innerText = "AI 추천 대기 중...";
+  title.innerText = "잠시만 기다려 주세요";
   startDotAnimation();
 
   const res = await fetch("{% url 'recommendations:get_recommendation_ajax' %}", {
