@@ -157,7 +157,7 @@ class BookProfileCardForm(forms.ModelForm):
             'reading_time': forms.TextInput(attrs={'placeholder': '예: 새벽'}),
             'reading_place': forms.TextInput(attrs={'placeholder': '예: 창가, 지하철'}),
             'mood': forms.TextInput(attrs={'placeholder': '예: 잔잔한, 몽환적인'}),
-            'introduction': forms.Textarea(attrs={'rows': 3, 'placeholder': '나의 독서 취향을 소개해주세요'}),
+            'introduction': forms.Textarea(attrs={'rows': 3, 'placeholder': '예: 다양한 장르를 즐기지만 특히 추리소설을 좋아해요'}),
         }
 
     def save(self, commit=True):

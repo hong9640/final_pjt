@@ -193,20 +193,33 @@ def book_profile_card_view(request):
         form = BookProfileCardForm(request.POST, instance=card)
         if form.is_valid():
             form.save()
-            print("⭐ 저장 성공:", form.cleaned_data)  # ✅ 서버 콘솔 확인용
             if request.headers.get('x-requested-with') == 'XMLHttpRequest':
                 return JsonResponse({'success': True})
             return redirect('accounts:mypage')
         else:
-            print("❌ 폼 에러:", form.errors)  # ✅ 디버깅 로그
             if request.headers.get('x-requested-with') == 'XMLHttpRequest':
                 return JsonResponse({'success': False, 'errors': form.errors}, status=400)
-    else:
-        form = BookProfileCardForm(instance=card)
 
-    # GET 요청일 때 (모달용 AJAX 요청)
-    if request.headers.get('x-requested-with') == 'XMLHttpRequest':
-        return render(request, 'accounts/partials/book_profile_card_form.html', {'form': form})
+    elif request.headers.get('x-requested-with') == 'XMLHttpRequest':
+        mode = request.GET.get('mode')
+        if mode == 'view':
+            return render(request, 'accounts/partials/book_profile_card_view.html', {'card': card})
+        else:
+            form = BookProfileCardForm(instance=card)
+            return render(request, 'accounts/partials/book_profile_card_form.html', {'form': form})
 
-    # 일반 요청은 리디렉션
     return redirect('accounts:mypage')
+
+@login_required
+def user_card_view(request, username):
+    user = get_object_or_404(get_user_model(), username=username)
+    card = getattr(user, 'reading_card', None)
+
+    if not card:
+        return JsonResponse({'error': '독서카드가 없습니다.'}, status=404)
+
+    # ✅ 공개 설정이 꺼져 있고 요청한 유저가 작성자가 아닌 경우
+    if not card.is_public and request.user != user:
+        return JsonResponse({'error': '비공개 카드입니다.'}, status=403)
+
+    return render(request, 'accounts/partials/book_profile_card_view.html', {'card': card})

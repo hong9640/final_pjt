@@ -7,6 +7,10 @@ from django.http import JsonResponse
 import json
 from recommendations.models import AIRecommendation, AIRecommendationBook
 from libraries.models import Library  # ✅ 추가
+from .utils import get_restricted_recommendations
+from django.contrib.auth.decorators import login_required
+
+
 
 def get_recommendation(request):
     if request.method == 'POST':
@@ -69,3 +73,39 @@ def get_recommendation_ajax(request):
             ]
         }
         return JsonResponse(data)
+    
+@login_required
+def card_based_recommendation(request):
+    card = getattr(request.user, 'reading_card', None)
+    if not card:
+        return JsonResponse({'error': '독서카드 없음'}, status=404)
+
+    keyword_parts = []
+    if card.favorite_genres:
+        keyword_parts.extend(card.favorite_genres)
+    if card.mood:
+        keyword_parts.append(card.mood)
+    if card.introduction:
+        keyword_parts.append(card.introduction)
+
+    keyword = ", ".join(keyword_parts)
+    titles = get_restricted_recommendations(keyword)
+    books = Book.objects.filter(title__in=titles)
+
+    recommendation = AIRecommendation.objects.create(user=request.user, input_text=keyword)
+    for book in books:
+        AIRecommendationBook.objects.create(
+            recommendation=recommendation,
+            book=book,
+            explanation="독서카드 기반 추천"
+        )
+
+    return JsonResponse({
+        'books': [
+            {
+                'id': book.id,
+                'title': book.title,
+                'cover_image_url': book.cover_image_url,
+            } for book in books
+        ]
+    })
