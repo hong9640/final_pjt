@@ -120,37 +120,12 @@
         background-color: #c1ad9b;    
     }
 
-    background-color: #f4ece4;
-    color: #6a4e3d;
-    border: none;
-    padding: 0 18px;
-    cursor: pointer;
-    font-size: 1.1rem;
-    height: 44px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: background-color 0.2s ease;
-    }
-    .search-bar button[type="submit"]:hover {
-    background-color: #e8e0d6;
-    } /* 검색 실행 버튼 (돋보기) */
-            padding: 10px 15px;
-            border: 1px solid #ccc;
-            background-color: #eee;
-            border-radius: 0 15px 15px 0; /* 오른쪽 모서리만 둥글게 */
-            cursor: pointer;
-            height: 40px;
-            box-sizing: border-box;
-            font-size: 16px;
-        }
-
     /* ... (기존 bestseller, book-card, sections, reviews, pagination 등 스타일 유지) ... */
-    .bestseller-section {
+   {% comment %} .bestseller-section {
         background-color: #f8f5f0; padding: 2rem; border-radius: 16px;
         box-shadow: 0 4px 12px rgba(0,0,0,0.05); margin-bottom: 3rem;
         position: relative; z-index: 0; 
-    }
+    } {% endcomment %}
     .bestseller-section h2 {
         margin-top: 0; margin-bottom: 1rem; font-size: 1.8em;
         color: #2C1B13; text-align: center;
@@ -283,11 +258,25 @@
 }
 .welcome-message {
     text-align: center;
-    padding: 20px 15px; 
+    padding-top: 20px;    /* 위쪽 패딩 (기존 값 또는 필요에 따라 조정) */
+    padding-bottom: 20px; /* 아래쪽 패딩 (기존 값 또는 필요에 따라 조정) */
+    padding-left: 0;      /* 왼쪽 패딩 제거! */
+    padding-right: 0;     /* 오른쪽 패딩 제거! */
     display: flex;
-    flex-direction: column; 
-    justify-content: center; 
+    flex-direction: column;
+    justify-content: center;
     align-items: center;
+    width: 100%; /* 부모 요소(.search-bar + .section)의 전체 너비를 사용 */
+    box-sizing: border-box;
+}
+
+/* 3. welcome-image가 확장된 공간을 채우도록 설정합니다. */
+.welcome-image {
+    max-width: 100%; /* 부모 요소 너비를 초과하지 않음 */
+    width: 100%;     /* 확장된 부모 요소의 너비를 100% 사용 */
+    height: auto;    /* 이미지 비율 유지 */
+    margin-top: 15px;
+    display: block;  /* 이미지를 블록 요소로 만들어 너비 설정을 확실하게 적용 */
 }
 .welcome-message h3 {
     font-size: 1.6em;
@@ -305,11 +294,128 @@
     margin-bottom: 0;  
     line-height: 1.6;
 }
-.welcome-image { /* img 태그에 이 클래스를 적용했다고 가정 */
-    max-width: 100%;
-    height: auto;
+.welcome-swiper {
+    width: 100%;
+    height: auto; /* 이미지 비율에 맞춰 자동 높이 설정 */
     margin-top: 15px;
+    border-radius: 8px; /* 필요하다면 */
+    overflow: hidden; /* 필요하다면 */
+}
+
+.welcome-swiper .swiper-slide {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.welcome-swiper .swiper-slide img {
+    display: block;
+    width: 100%;
+    height: auto;
+    object-fit: contain; /* 이미지가 컨테이너에 맞춰 비율 유지 */
+}
+
+.swiper-pagination {
+    position: relative !important; /* 기존 Swiper의 absolute 위치를 상대적으로 변경 */
+    bottom: 10px !important;
+    text-align: center;
+    z-index: 1;
+}
+
+.swiper-pagination-bullet {
+    width: 10px;
+    height: 10px;
     display: inline-block;
+    border-radius: 50%;
+    background: #d2b9ad;
+    opacity: 0.8;
+    margin: 0 5px;
+    cursor: pointer;
+}
+
+.swiper-pagination-bullet-active {
+    background: #a67c52;
+    opacity: 1;
+}
+
+.welcome-swiper-prev,
+.welcome-swiper-next {
+    color: #a67c52 !important;
+    position: absolute;
+    top: 50%;
+    width: 30px;
+    height: 30px;
+    margin-top: -15px;
+    z-index: 10;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.welcome-swiper-prev:hover,
+.welcome-swiper-next:hover {
+    color: #3e3025 !important;
+    transform: scale(1.2);
+}
+
+.welcome-swiper-prev::after,
+.welcome-swiper-next::after {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #a67c52;
+}
+
+.welcome-swiper-prev::after {
+    content: '←';
+}
+
+.welcome-swiper-next::after {
+    content: '→';
+}
+
+.welcome-swiper-prev {
+    left: 10px;
+}
+
+.welcome-swiper-next {
+    right: 10px;
+}
+.welcome-swiper .swiper-slide {
+    position: relative; /* 자식 요소(.image-credit)의 absolute 포지셔닝 기준점 (선택적) */
+    display: flex;
+    flex-direction: column; /* 이미지와 캡션을 수직으로 정렬 */
+    justify-content: center; /* 주 축(수직) 가운데 정렬 */
+    align-items: center;    /* 교차 축(수평) 가운데 정렬 */
+}
+
+/* 이미지 크기가 너무 커서 캡션이 밀려나지 않도록 이미지 높이 조정 (필요시) */
+.welcome-swiper .swiper-slide img.welcome-image {
+    max-height: calc(100% - 25px); /* 캡션 공간 대략 25px 확보 */
+    object-fit: contain; /* 비율 유지 */
+}
+
+
+.image-credit {
+    display: block; /* 한 줄 전체를 차지하도록 */
+    font-size: 0.6em;  /* 글자 크기를 매우 작게 */
+    color: #888;       /* 너무 튀지 않는 회색 계열 */
+    margin-top: 5px;   /* 이미지와의 간격 */
+    padding: 2px 5px;
+    text-align: center; /* 가운데 정렬 */
+    line-height: 1.3;   /* 줄 간격 */
+    width: 90%;         /* 슬라이드 너비의 90% 정도 사용 */
+    box-sizing: border-box;
+}
+
+.image-credit a {
+    color: #666;       /* 링크 색상도 부드럽게 */
+    text-decoration: none;
+}
+
+.image-credit a:hover {
+    text-decoration: underline;
 }
 </style>
 
@@ -350,7 +456,38 @@
             <div class="welcome-message">
                 <h3>당신의 다음 이야기는 무엇인가요?</h3>
                 <p>책 속에서 새로운 세계를 발견하세요.</p>
-                <img src="{% static 'images/sample2.png' %}" alt="환영 이미지" class="welcome-image">
+                <div class="swiper welcome-swiper">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide">
+                            <img src="{% static 'images/sample2.png' %}" alt="환영 이미지 1" class="welcome-image">
+                        </div>
+                        <div class="swiper-slide">
+                            <img src="{% static 'images/sample1.jpg' %}" alt="환영 이미지 1" class="welcome-image">
+                            <span class="image-credit">
+                                Photo by <a href="https://unsplash.com/ko/@letsclickpics?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash" target="_blank" rel="noopener noreferrer">Hasnain S. H.</a> on <a href="https://unsplash.com/ko/%EC%82%AC%EC%A7%84/%EC%B1%85%EC%97%90-%ED%8E%9C-nVBPy9S2USQ?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash" target="_blank" rel="noopener noreferrer">Unsplash</a>
+                            </span>
+                        </div>
+                        <div class="swiper-slide">
+                            <img src="{% static 'images/sample3.jpg' %}" alt="환영 이미지 3" class="welcome-image">
+                            <span class="image-credit">
+                            Photo by <span><a href="https://unsplash.com/@elin_mel" target="_blank">Elin Melberg</a></span> on 
+                            <span><a href="https://unsplash.com" target="_blank">Unsplash</a></span>
+                            </span>
+                        </div>
+                        <div class="swiper-slide">
+                            <img src="{% static 'images/sample4.jpg' %}" alt="환영 이미지 4" class="welcome-image">
+                            <span class="image-credit">
+                            Photo by <span><a href="https://unsplash.com/@elin_mel" target="_blank">Elin Melberg</a></span> on 
+                            <span><a href="https://unsplash.com" target="_blank">Unsplash</a></span>
+                            </span>
+                        </div>
+                        {# 필요하다면 더 많은 이미지를 추가할 수 있습니다. #}
+                    </div>
+                    <div class="swiper-pagination"></div>
+
+                    <div class="swiper-button-prev welcome-swiper-prev"></div>
+                    <div class="swiper-button-next welcome-swiper-next"></div>
+                </div>
             </div>
         </div>
         <div class="section">
@@ -543,6 +680,24 @@
                 });
             }
         });
+        const welcomeSwiperElement = document.querySelector('.welcome-swiper');
+        if (welcomeSwiperElement) {
+            const welcomeSwiper = new Swiper(welcomeSwiperElement, { // 직접 DOM 요소를 전달하거나, 고유한 선택자 사용
+                loop: true,
+                autoplay: {
+                    delay: 3000, // 각 슬라이드 간 3초 간격
+                    disableOnInteraction: false, // 사용자가 터치해도 자동 슬라이드 유지
+                },
+                pagination: {
+                    el: '.welcome-swiper .swiper-pagination', // welcome-swiper 내부의 pagination 요소 지정
+                    clickable: true,
+                },
+                navigation: {
+                    nextEl: '.welcome-swiper .welcome-swiper-next', // welcome-swiper 내부의 next 버튼 지정
+                    prevEl: '.welcome-swiper .welcome-swiper-prev', // welcome-swiper 내부의 prev 버튼 지정
+                },
+            });
+        }
 
         document.querySelectorAll(".category-tab").forEach((btn) => {
             btn.addEventListener("click", () => {
