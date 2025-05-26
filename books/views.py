@@ -69,7 +69,7 @@ def home(request):
         searched_books_list = books_qs.order_by('-pub_date')
 
         # --- 검색 결과에 대한 페이지네이션 추가 ---
-        paginator = Paginator(searched_books_list, 9) # 한 페이지에 9개씩 (다른 페이지와 동일하게)
+        paginator = Paginator(searched_books_list, 12) # 한 페이지에 9개씩 (다른 페이지와 동일하게)
         page_number_str = request.GET.get('page') # 검색 결과 페이지 번호
         page_obj = paginator.get_page(page_number_str)
         
@@ -94,7 +94,7 @@ def home(request):
                 group = "기타"
             grouped_bestsellers[group].append(book)
 
-        new_books_qs = Book.objects.order_by('-pub_date')[:6]
+        new_books_qs = Book.objects.order_by('-pub_date')[:8]
         all_latest_reviews_list = Review.objects.select_related('book', 'user').order_by('-created_at')
         review_paginator = Paginator(all_latest_reviews_list, 5)
         review_page_number = request.GET.get('review_page') # 리뷰 전용 페이지 파라미터

@@ -15,8 +15,7 @@
     }
 
     .content-sections-wrapper {
-        /* max-width: 1100px; 사용자가 100%로 변경 요청했던 부분 반영 */
-        max-width: 100%; 
+        max-width: 1200px;
         margin: 0 auto;
         padding: 0 20px; /* 좌우 여백은 유지 */
         box-sizing: border-box; /* 패딩이 너비에 포함되도록 */
@@ -162,12 +161,12 @@
     .book-card {
         background-color: #fff; padding: 20px; border-radius: 12px; text-align: center;
         box-shadow: 0 5px 15px rgba(0,0,0,0.07); display: flex; flex-direction: column;
-        justify-content: space-between; width: 100%; min-height: 290px;
+        justify-content: space-between; width: 100%; min-height: 350px;
         border: 1px solid #F0EBE3; transition: transform 0.3s ease, box-shadow 0.3s ease;
         box-sizing: border-box;
     }
     .book-card img {
-        width: 100%; max-height: 160px; object-fit: contain;
+        width: 100%; max-height: 220px; object-fit: contain;
         border-radius: 6px; margin-bottom: 15px;
     }
     .book-card p {
@@ -202,7 +201,11 @@
     .search-results-container h2 {
         text-align: center; margin-bottom: 25px; font-size: 1.8em; color: #2C1B13;
     }
-    .book-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 45px; }
+    .book-grid { 
+        display: grid; 
+        grid-template-columns: repeat(4, minmax(230px, 1fr));
+        gap: 20px; 
+    }
     .no-results {
         width: 100%; text-align: center; margin-top: 20px; font-size: 1.1em; color: #555;
     }
@@ -271,6 +274,12 @@
     .custom-pagination .disabled {
         color: #ccc; pointer-events: none; cursor: default;
     }
+    .section.new-books h2 {
+    text-align: center;
+}
+    .section.reviews h2 {
+    text-align: center;
+}
 </style>
 
 <div class="content-wrapper">
@@ -368,55 +377,55 @@
                     </div>
                 </section>
 
-                <section class="section reviews">
-                    <h2>실시간 리뷰</h2>
-                    <div class="review-placeholder">
-                        <div class="review-items-list">
-                            {% if latest_reviews_page and latest_reviews_page.object_list %}
-                                {% for review in latest_reviews_page %}
-                                <a href="{% url 'books:book_detail' book_id=review.book.id %}#review-{{ review.id }}" class="home-review-item">
-                                    {% if review.book %}
-                                    <div class="review-book-title">{{ review.book.title }}</div>
-                                    {% endif %}
-                                    <div class="review-content-preview">{{ review.content|truncatewords_html:12 }}</div>
-                                    <div class="review-meta">
-                                        {% if review.user %}<span>{{ review.user.username }}</span> | {% endif %}
-                                        <span>{{ review.created_at|date:"y.m.d H:i" }}</span>
-                                    </div>
-                                </a>
-                                {% endfor %}
-                            {% else %}
-                                <p class="no-reviews-home">최근 등록된 리뷰가 없습니다.</p>
-                            {% endif %}
-                        </div>
-                        {% if latest_reviews_page.has_other_pages %}
-                        <div class="pagination">
-                            {% if latest_reviews_page.has_previous %}
-                            <a href="?review_page={{ latest_reviews_page.previous_page_number }}{% if query %}&q={{ query }}&search_type={{ search_type }}{% endif %}" title="이전 페이지">&laquo;</a>
-                            {% endif %}
-                            {% for i in latest_reviews_page.paginator.page_range %}
-                                {% if latest_reviews_page.number == i %}
-                                <span class="current-page">{{ i }}</span>
-                                {% elif i > latest_reviews_page.number|add:'-3' and i < latest_reviews_page.number|add:'3' %} 
-                                <a href="?review_page={{ i }}{% if query %}&q={{ query }}&search_type={{ search_type }}{% endif %}">{{ i }}</a>
-                                {% elif i == 1 or i == latest_reviews_page.paginator.num_pages %}
-                                    {% if i == 1 and latest_reviews_page.number > 3 %}
-                                    <a href="?review_page={{ i }}{% if query %}&q={{ query }}&search_type={{ search_type }}{% endif %}">{{ i }}</a>
-                                    {% if latest_reviews_page.number > 4 %}<span>...</span>{% endif %}
-                                    {% elif i == latest_reviews_page.paginator.num_pages and latest_reviews_page.number < latest_reviews_page.paginator.num_pages|add:'-3' %}
-                                    {% if latest_reviews_page.number < latest_reviews_page.paginator.num_pages|add:'-4' %}<span>...</span>{% endif %}
-                                    <a href="?review_page={{ i }}{% if query %}&q={{ query }}&search_type={{ search_type }}{% endif %}">{{ i }}</a>
-                                    {% endif %}
+            </div>
+            <section class="section reviews">
+                <h2>실시간 리뷰</h2>
+                <div class="review-placeholder">
+                    <div class="review-items-list">
+                        {% if latest_reviews_page and latest_reviews_page.object_list %}
+                            {% for review in latest_reviews_page %}
+                            <a href="{% url 'books:book_detail' book_id=review.book.id %}#review-{{ review.id }}" class="home-review-item">
+                                {% if review.book %}
+                                <div class="review-book-title">{{ review.book.title }}</div>
                                 {% endif %}
+                                <div class="review-content-preview">{{ review.content|truncatewords_html:12 }}</div>
+                                <div class="review-meta">
+                                    {% if review.user %}<span>{{ review.user.username }}</span> | {% endif %}
+                                    <span>{{ review.created_at|date:"y.m.d H:i" }}</span>
+                                </div>
+                            </a>
                             {% endfor %}
-                            {% if latest_reviews_page.has_next %}
-                            <a href="?review_page={{ latest_reviews_page.next_page_number }}{% if query %}&q={{ query }}&search_type={{ search_type }}{% endif %}" title="다음 페이지">&raquo;</a>
-                            {% endif %}
-                        </div>
+                        {% else %}
+                            <p class="no-reviews-home">최근 등록된 리뷰가 없습니다.</p>
                         {% endif %}
                     </div>
-                </section>
-            </div>
+                    {% if latest_reviews_page.has_other_pages %}
+                    <div class="pagination">
+                        {% if latest_reviews_page.has_previous %}
+                        <a href="?review_page={{ latest_reviews_page.previous_page_number }}{% if query %}&q={{ query }}&search_type={{ search_type }}{% endif %}" title="이전 페이지">&laquo;</a>
+                        {% endif %}
+                        {% for i in latest_reviews_page.paginator.page_range %}
+                            {% if latest_reviews_page.number == i %}
+                            <span class="current-page">{{ i }}</span>
+                            {% elif i > latest_reviews_page.number|add:'-3' and i < latest_reviews_page.number|add:'3' %} 
+                            <a href="?review_page={{ i }}{% if query %}&q={{ query }}&search_type={{ search_type }}{% endif %}">{{ i }}</a>
+                            {% elif i == 1 or i == latest_reviews_page.paginator.num_pages %}
+                                {% if i == 1 and latest_reviews_page.number > 3 %}
+                                <a href="?review_page={{ i }}{% if query %}&q={{ query }}&search_type={{ search_type }}{% endif %}">{{ i }}</a>
+                                {% if latest_reviews_page.number > 4 %}<span>...</span>{% endif %}
+                                {% elif i == latest_reviews_page.paginator.num_pages and latest_reviews_page.number < latest_reviews_page.paginator.num_pages|add:'-3' %}
+                                {% if latest_reviews_page.number < latest_reviews_page.paginator.num_pages|add:'-4' %}<span>...</span>{% endif %}
+                                <a href="?review_page={{ i }}{% if query %}&q={{ query }}&search_type={{ search_type }}{% endif %}">{{ i }}</a>
+                                {% endif %}
+                            {% endif %}
+                        {% endfor %}
+                        {% if latest_reviews_page.has_next %}
+                        <a href="?review_page={{ latest_reviews_page.next_page_number }}{% if query %}&q={{ query }}&search_type={{ search_type }}{% endif %}" title="다음 페이지">&raquo;</a>
+                        {% endif %}
+                    </div>
+                    {% endif %}
+                </div>
+            </section>
         {% else %} {# 검색어가 있을 때 (query가 존재할 때) 표시될 내용 시작 #}
             <div class="search-results-container section">
                 <h2>
