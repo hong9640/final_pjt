@@ -106,7 +106,7 @@
     <nav>
       {% if user.is_authenticated %}
         <a href="{% url 'books:home' %}">홈</a>
-        <a href="#" onclick="openModal()">나를 위한 추천✨</a>
+        <a href="#" onclick="openModal()">맞춤형 추천✨</a>
         <a href="{% url 'accounts:mypage' %}">마이페이지</a>
       {% else %}
         <a href="{% url 'books:home' %}">홈</a>

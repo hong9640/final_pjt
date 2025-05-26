@@ -100,12 +100,18 @@ def card_based_recommendation(request):
             explanation="독서카드 기반 추천"
         )
 
+    # ✅ 내 서재에 담긴 책 ID
+    my_library_ids = set(
+        Library.objects.filter(user=request.user, book__in=books).values_list('book_id', flat=True)
+    )
+
     return JsonResponse({
         'books': [
             {
                 'id': book.id,
                 'title': book.title,
                 'cover_image_url': book.cover_image_url,
+                'in_library': book.id in my_library_ids  # ✅ 이 줄 추가
             } for book in books
         ]
     })
