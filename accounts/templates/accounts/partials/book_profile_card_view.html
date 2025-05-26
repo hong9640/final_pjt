@@ -1,7 +1,5 @@
 
 {% load static %}
-
-
 <div style="line-height: 1.7; color: #3E3025;">
   <h2 style="text-align: center; font-size: 1.3rem; margin-bottom: 1.5rem;">
     {{ card.title|default:"제목 없는 카드" }}
@@ -22,16 +20,38 @@
   {% if request.user == card.user %}
     <p><strong>공개여부:</strong> {{ card.is_public|yesno:"공개,비공개" }}</p>
     <div style="display: flex; justify-content: space-between; margin-top: 1.5rem;">
-      <button class="small-button" onclick="getCardBasedRecommendation()">추천받기</button>
+      <button class="small-button" onclick="openCardBasedRecommendModal()">내 독서카드 기반 추천받기</button>
       <button class="small-button" onclick="openCardModal(); closeViewCardModal();">수정하기</button>
     </div>
   {% endif %}
 </div>
 
 <script>
-window.getCardBasedRecommendation = function() {
-  const modalBody = document.getElementById('viewCardModalBody');
-  modalBody.innerHTML = `
+function addToLibraryAjax(bookId, buttonElement) {
+  fetch(`/libraries/add/ajax/${bookId}/`, {
+    method: 'POST',
+    headers: {
+      'X-CSRFToken': '{{ csrf_token }}',
+    }
+  })
+  .then(res => res.json())
+  .then(data => {
+    if (data.success) {
+      buttonElement.remove();
+    }
+  })
+  .catch(err => {
+    alert('서재 추가 중 오류가 발생했습니다.');
+    console.error(err);
+  });
+}
+
+function openCardBasedRecommendModal() {
+  const modal = document.getElementById('viewCardModal');
+  const body = document.getElementById('viewCardModalBody');
+  modal.style.display = 'flex';
+
+  body.innerHTML = `
     <div style="text-align: center; padding: 2rem;">
       <p style="font-size: 1.1rem; margin-bottom: 1rem;">
         나에게 맞는 책을 찾는 중<span id="dots">.</span>
@@ -57,10 +77,12 @@ window.getCardBasedRecommendation = function() {
   .then(res => res.json())
   .then(data => {
     clearInterval(dotInterval);
+    console.log("추천 도서 데이터:", data.books);
+
     if (data.books?.length) {
       const bookHtml = data.books.map(book => `
-        <div style="width: 180px; height: 330px; border-radius: 12px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-                    overflow: hidden; background: white; display: flex; flex-direction: column; padding-bottom: 0.5rem;">
+        <div style="width: 180px; height: 360px; border-radius: 12px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+                    overflow: hidden; background: white; display: flex; flex-direction: column;">
           <a href="/books/book/${book.id}/" style="text-decoration: none; color: inherit;">
             <img src="${book.cover_image_url}" alt="${book.title}" style="width: 100%; height: 220px; object-fit: cover;">
             <div style="padding: 0.6rem; flex-grow: 1;">
@@ -69,23 +91,29 @@ window.getCardBasedRecommendation = function() {
                          -webkit-line-clamp: 2; -webkit-box-orient: vertical;">${book.title}</h4>
             </div>
           </a>
+          <form onsubmit="event.preventDefault(); addToLibraryAjax(${book.id}, this.querySelector('button'))"
+                style="text-align: center; margin: 0.5rem auto;">
+            <button type="submit" class="add-button">내 서재에 추가</button>
+          </form>
         </div>
       `).join('');
 
-      modalBody.innerHTML = `
+      console.log("렌더링된 카드 HTML:", bookHtml);
+
+      body.innerHTML = `
         <h3 style="text-align: center; font-size: 1.2rem; margin-bottom: 1.2rem;">추천된 책 목록</h3>
         <div style="display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center;">
           ${bookHtml}
         </div>
       `;
     } else {
-      modalBody.innerHTML = '<p style="text-align: center;">추천 결과가 없습니다.</p>';
+      body.innerHTML = '<p style="text-align: center;">추천 결과가 없습니다.</p>';
     }
   })
   .catch(err => {
     clearInterval(dotInterval);
     console.error(err);
-    modalBody.innerHTML = '<p style="text-align: center; color: red;">추천 요청에 실패했습니다.</p>';
+    body.innerHTML = '<p style="text-align: center; color: red;">추천 요청에 실패했습니다.</p>';
   });
 }
 </script>
