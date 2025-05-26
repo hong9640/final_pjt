@@ -9,6 +9,7 @@ from recommendations.models import AIRecommendation, AIRecommendationBook
 from libraries.models import Library  # ✅ 추가
 from .utils import get_restricted_recommendations
 from django.contrib.auth.decorators import login_required
+from recommendations.library_recommend_utils import get_recommendation_ids_based_on_library
 
 
 
@@ -112,6 +113,44 @@ def card_based_recommendation(request):
                 'title': book.title,
                 'cover_image_url': book.cover_image_url,
                 'in_library': book.id in my_library_ids  # ✅ 이 줄 추가
+            } for book in books
+        ]
+    })
+
+@login_required
+def library_based_recommendation(request):
+    books_in_library = Library.objects.filter(user=request.user).select_related('book')
+    if not books_in_library.exists():
+        return JsonResponse({'error': '서재가 비어있습니다.'}, status=404)
+
+    # 서재에 담긴 책 객체들
+    library_books = [entry.book for entry in books_in_library]
+
+    # GPT 추천 호출 → Book.id 리스트
+    recommended_ids = get_recommendation_ids_based_on_library(library_books)
+    print("GPT 추천된 Book.id 목록:", recommended_ids)
+
+    books = Book.objects.filter(id__in=recommended_ids)
+
+    # AIRecommendation 저장
+    recommendation = AIRecommendation.objects.create(user=request.user, input_text="[서재 기반 추천]")
+    for book in books:
+        AIRecommendationBook.objects.create(
+            recommendation=recommendation,
+            book=book,
+            explanation="서재 기반 추천"
+        )
+
+    # 이미 서재에 있는 책인지 확인
+    my_library_ids = set(b.id for b in library_books)
+
+    return JsonResponse({
+        'books': [
+            {
+                'id': book.id,
+                'title': book.title,
+                'cover_image_url': book.cover_image_url,
+                'in_library': book.id in my_library_ids
             } for book in books
         ]
     })

@@ -20,7 +20,7 @@
     text-align: center;
     font-size: 1.8rem;
     color: #3E3025;
-    margin-bottom: 2.5rem;
+    margin-bottom: 1.1rem;
     font-family: 'Noto Serif KR', serif;
   }
 
@@ -131,10 +131,41 @@
     border: 1px solid #ddd;
     border-radius: 4px;
   }
+
+  .add-button {
+    background-color: #BCAAA4;
+    color: #3E3025;
+    padding: 0.5rem 1.2rem;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    font-size: 0.9rem;
+    cursor: pointer;
+    font-family: 'Gowun Batang', serif;
+  }
+
+  .add-button:hover {
+    background-color: #A28D7B;
+  }
 </style>
 
 <div class="library-wrapper">
-  <h2 class="library-title">📚 내 서재</h2>
+  <h2 class="library-title">
+    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24"
+        fill="none" stroke="#3E3025" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+        class="lucide lucide-book-open-check-icon lucide-book-open-check"
+        style="position: relative; top: 0.25rem; margin-right: 0.1rem;">
+      <path d="M12 21V7"/>
+      <path d="m16 12 2 2 4-4"/>
+      <path d="M22 6V4a1 1 0 0 0-1-1h-5a4 4 0 0 0-4 4 4 4 0 0 0-4-4H3a1 1 0 0 0-1 1v13a1 1 0 0 0 1 1h6a3 3 0 0 1 3 3 3 3 0 0 1 3-3h6a1 1 0 0 0 1-1v-1.3"/>
+    </svg>
+    내 서재
+  </h2>
+
+  <!-- 서재 기반 추천 버튼 -->
+  <div style="text-align: center; margin-bottom: 2rem;">
+    <button onclick="openLibraryBasedRecommendModal()" class="add-button">내 서재 기반 추천 받기</button>
+  </div>
 
   {% if page_obj %}
   <div class="book-grid">
@@ -186,4 +217,79 @@
   </div>
   {% endif %}
 </div>
+
+<!-- 추천 모달 포함 -->
+{% include 'recommendations/modal_input.html' %}
+
+<script>
+function openLibraryBasedRecommendModal() {
+  const modal = document.getElementById('ai-recommend-modal');
+  const title = document.getElementById('recommend-title');
+  const formArea = document.getElementById('form-area');
+  const loading = document.getElementById('loading-screen');
+  const results = document.getElementById('recommend-results');
+  const retry = document.getElementById('retry-button-wrapper');
+
+  modal.style.display = 'flex';
+  title.innerText = "내 서재에 기반해 책 추천 중입니다...";
+  formArea.style.display = 'none';
+  results.innerHTML = '';
+  retry.style.display = 'none';
+  loading.style.display = 'block';
+  startDotAnimation();
+
+  fetch("{% url 'recommendations:library_based_recommend' %}", {
+    method: 'POST',
+    headers: {
+      'X-CSRFToken': '{{ csrf_token }}',
+      'X-Requested-With': 'XMLHttpRequest'
+    }
+  })
+  .then(res => res.json())
+  .then(data => {
+    stopDotAnimation();
+    loading.style.display = 'none';
+    title.innerText = "서재 기반 추천 결과";
+
+    if (data.books?.length) {
+      const resultsContainer = document.getElementById('recommend-results');
+      resultsContainer.innerHTML = "";
+      for (let book of data.books) {
+        const buttonHtml = book.in_library
+          ? `<div style="height: 40px;"></div>`
+          : `
+            <form onsubmit="event.preventDefault(); addToLibraryAjax(${book.id}, this.querySelector('button'))"
+                  style="display: flex; justify-content: center;">
+              <button type="submit" class="add-button">내 서재에 추가</button>
+            </form>`;
+
+        const card = `
+          <div style="width: 180px; height: 330px; border-radius: 12px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); 
+                      overflow: hidden; background: white; display: flex; flex-direction: column; padding-bottom: 0.5rem;">
+            <a href="/books/book/${book.id}/" style="text-decoration: none; color: inherit;">
+              <img src="${book.cover_image_url}" alt="${book.title}" style="width: 100%; height: 220px; object-fit: cover;">
+              <div style="padding: 0.6rem; flex-grow: 1;">
+                <h4 style="margin: 0; font-size: 0.95rem; line-height: 1.3em; height: 2.6em;
+                           overflow: hidden; text-overflow: ellipsis; display: -webkit-box;
+                           -webkit-line-clamp: 2; -webkit-box-orient: vertical;">${book.title}</h4>
+              </div>
+            </a>
+            ${buttonHtml}
+          </div>
+        `;
+        resultsContainer.innerHTML += card;
+      }
+      retry.style.display = 'block';
+    } else {
+      results.innerHTML = "<p>추천 결과를 찾지 못했어요.</p>";
+    }
+  })
+  .catch(err => {
+    stopDotAnimation();
+    loading.style.display = 'none';
+    results.innerHTML = "<p style='color:red;'>추천 요청에 실패했습니다.</p>";
+    console.error(err);
+  });
+}
+</script>
 {% endblock %}
