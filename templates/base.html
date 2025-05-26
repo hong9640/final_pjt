@@ -115,35 +115,35 @@
       {% endif %}
     </nav>
 
-    {% include "recommendations/modal_input.html" %}
   </header>
-
+  
   {% include "books/includes/sticky_category_nav.html" %}
-
+  
   <div class="container">
     {% block content %}
     {% endblock %}
   </div>
-
+  
+  {% include "recommendations/modal_input.html" %}
   <script>
     function openModal() {
       document.getElementById('ai-recommend-modal').style.display = 'flex';
     }
-
+    
     function closeModal() {
       document.getElementById('ai-recommend-modal').style.display = 'none';
     }
-
+    
     document.addEventListener('DOMContentLoaded', () => {
       const toggleBtn = document.getElementById("menuToggleBtn");
       const sideMenu = document.getElementById("sideCategoryMenu");
       const overlay = document.getElementById("overlay");
-
+      
       toggleBtn.addEventListener("click", () => {
         sideMenu?.classList.add("active");
         overlay.classList.add("active");
       });
-
+      
       overlay.addEventListener("click", () => {
         sideMenu?.classList.remove("active");
         overlay.classList.remove("active");
