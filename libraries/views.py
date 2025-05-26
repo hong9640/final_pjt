@@ -44,14 +44,16 @@ def remove_from_library_to_mylibrary(request, book_id):
 def my_library(request):
     user = request.user
     library_qs = Library.objects.filter(user=user).select_related('book')
-    
+
     paginator = Paginator(library_qs, 12)  # 페이지당 12권씩 표시
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
 
     return render(request, 'libraries/my_library.html', {
-        'page_obj': page_obj
+        'page_obj': page_obj,
+        'my_library_books': library_qs,  # base.html의 window.userLibraryCount용
     })
+
 
 
 @login_required
