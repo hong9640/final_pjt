@@ -11,22 +11,25 @@
   align-items: center;
   z-index: 2000;
 ">
-  <div id="viewCardModalBody" style="
+  <div id="viewCardModalWrapper" style="
     background: white;
-    border-radius: 8px;
-    padding: 2.5rem 1.5rem 1.5rem;
-    max-width: 400px;
+    border-radius: 12px;
+    padding: 2rem;
+    max-width: 650px;
     width: 90%;
     max-height: 80%;
     overflow-y: auto;
     position: relative;
+    font-family: 'Gowun Batang', serif;
+    color: #3E3025;
     box-shadow: 0 4px 16px rgba(0,0,0,0.2);
   ">
+    <!-- ✅ 여기 버튼이 항상 살아있게 위치 -->
     <button onclick="closeViewCardModal()" style="
       position: absolute;
-      top: 0.5rem;
+      top: 0.6rem;
       right: 0.8rem;
-      font-size: 1.2rem;
+      font-size: 1.3rem;
       background: none;
       border: none;
       cursor: pointer;
@@ -34,12 +37,21 @@
       z-index: 10;
     ">✖</button>
 
-    불러오는 중...
+    <!-- ✅ 여기는 내용만 덮어쓰기 됨 -->
+    <div id="viewCardModalBody" style="margin-top: 1.5rem;">
+      <p style="text-align: center;">불러오는 중입니다...</p>
+    </div>
   </div>
 </div>
 
 <script>
-  function closeViewCardModal() {
-    document.getElementById('viewCardModal').style.display = 'none';
+function closeViewCardModal() {
+  const modal = document.getElementById('viewCardModal');
+  if (modal) {
+    modal.style.display = 'none';
+    document.getElementById('viewCardModalBody').innerHTML = `
+      <p style="text-align: center;">불러오는 중입니다...</p>
+    `;
   }
+}
 </script>

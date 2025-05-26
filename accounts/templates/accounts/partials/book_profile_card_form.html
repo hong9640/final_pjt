@@ -1,50 +1,54 @@
-<form method="POST" action="{% url 'accounts:book_profile_card' %}" id="bookProfileCardForm" style="font-family: 'Gowun Batang', serif; color: #3E3025;">
+<form method="POST" id="bookProfileCardForm" style="font-family: 'Gowun Batang', serif; color: #3E3025;">
   {% csrf_token %}
 
-  <div style="display: flex; flex-direction: column; gap: 1rem; font-size: 0.95rem;">
+  <div style="display: flex; flex-direction: column; gap: 1rem;">
     <div>
-      <div style="margin-bottom: 0.3rem;"><strong>{{ form.title.label }}</strong></div>
+      <label><strong>{{ form.title.label }}</strong></label>
       {{ form.title }}
     </div>
 
     <div>
-      <div style="margin-bottom: 0.3rem;"><strong>{{ form.favorite_genres.label }}</strong></div>
+      <label><strong>{{ form.favorite_genres.label }}</strong></label>
       {{ form.favorite_genres }}
     </div>
 
     <div>
-      <div style="margin-bottom: 0.3rem;"><strong>{{ form.reading_style.label }}</strong></div>
+      <label><strong>{{ form.reading_style.label }}</strong></label>
       {{ form.reading_style }}
     </div>
 
     <div>
-      <div style="margin-bottom: 0.3rem;"><strong>{{ form.reading_time.label }}</strong></div>
+      <label><strong>{{ form.reading_time.label }}</strong></label>
       {{ form.reading_time }}
     </div>
 
     <div>
-      <div style="margin-bottom: 0.3rem;"><strong>{{ form.reading_place.label }}</strong></div>
+      <label><strong>{{ form.reading_place.label }}</strong></label>
       {{ form.reading_place }}
     </div>
 
     <div>
-      <div style="margin-bottom: 0.3rem;"><strong>{{ form.mood.label }}</strong></div>
+      <label><strong>{{ form.mood.label }}</strong></label>
       {{ form.mood }}
     </div>
 
     <div>
-      <div style="margin-bottom: 0.3rem;"><strong>{{ form.introduction.label }}</strong></div>
+      <label><strong>{{ form.introduction.label }}</strong></label>
       {{ form.introduction }}
     </div>
 
-    <div style="display: flex; align-items: center; gap: 0.5rem; line-height: 1;">
-        <input type="checkbox" id="{{ form.is_public.id_for_label }}" name="{{ form.is_public.html_name }}" {% if form.is_public.value %}checked{% endif %} style="transform: translateY(1px);" />
-        <label for="{{ form.is_public.id_for_label }}" style="margin: 0;"><strong>공개여부</strong></label>
+    <div style="display: flex; align-items: center; gap: 0.5rem;">
+      <input type="checkbox" id="{{ form.is_public.id_for_label }}" name="{{ form.is_public.html_name }}"
+             {% if form.is_public.value %}checked{% endif %} />
+      <label for="{{ form.is_public.id_for_label }}"><strong>공개 여부</strong></label>
     </div>
+  </div>
 
-
-  <div style="text-align: center; margin-top: 1.8rem;">
-    <button type="submit" class="small-button">저장</button>
+  <div style="text-align: center; margin-top: 1.5rem;">
+    <button type="submit" style="padding: 0.6rem 1.2rem; background: #A67C52; color: white;
+      border: none; border-radius: 6px; font-size: 0.95rem; cursor: pointer;">
+      저장
+    </button>
   </div>
 </form>
 
@@ -59,35 +63,35 @@
     const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
 
     fetch("{% url 'accounts:book_profile_card' %}", {
-        method: 'POST',
-        headers: {
-            'X-Requested-With': 'XMLHttpRequest',
-            'Accept': 'application/json',
-            'X-CSRFToken': csrftoken
-        },
-        body: formData
+      method: 'POST',
+      headers: {
+        'X-Requested-With': 'XMLHttpRequest',
+        'Accept': 'application/json',
+        'X-CSRFToken': csrftoken
+      },
+      body: formData
     })
     .then(res => res.json())
     .then(data => {
-        if (data.success) {
-            closeCardModal();
-            setTimeout(() => {
-                fetch("{% url 'accounts:book_profile_card' %}?mode=view", {
-                    headers: { 'X-Requested-With': 'XMLHttpRequest' }
-                })
-                .then(res => res.text())
-                .then(html => {
-                    document.getElementById('viewCardModalBody').innerHTML = html;
-                    document.getElementById('viewCardModal').style.display = 'flex';
-                });
-            }, 250);
-        } else {
-            alert('오류가 발생했습니다.');
-        }
+      if (data.success) {
+        closeViewCardModal();
+        setTimeout(() => {
+          fetch("{% url 'accounts:book_profile_card' %}?mode=view", {
+            headers: { 'X-Requested-With': 'XMLHttpRequest' }
+          })
+          .then(res => res.text())
+          .then(html => {
+            document.getElementById('viewCardModalBody').innerHTML = html;
+            document.getElementById('viewCardModal').style.display = 'flex';
+          });
+        }, 250);
+      } else {
+        alert('오류가 발생했습니다.');
+      }
     })
     .catch(err => {
-        alert('저장 중 오류가 발생했습니다.');
-        console.error(err);
+      alert('저장 중 오류가 발생했습니다.');
+      console.error(err);
     });
   });
 })();
