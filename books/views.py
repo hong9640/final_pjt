@@ -8,7 +8,7 @@ from reviews.models import Review, Like
 from reviews.forms import ReviewForm, CommentForm
 import re
 from collections import defaultdict, OrderedDict
-from django.db.models import Q
+from django.db.models import Q, Avg
 
 CATEGORY_GROUPS = [
     "문학/소설", "어린이/청소년", "만화/웹툰",
@@ -144,7 +144,6 @@ def book_detail(request, book_id):
     book = get_object_or_404(Book, id=book_id)
     author = getattr(book, 'author', None)
 
-    # ... (기존 저자명 정제, 서재 보유 여부 로직) ...
     if author and isinstance(author.name, str):
         clean_author_name = re.sub(r'\s*\([^)]*\)', '', author.name.split(',')[0].strip())
     elif author:
@@ -156,10 +155,23 @@ def book_detail(request, book_id):
     if request.user.is_authenticated:
         is_in_library = Library.objects.filter(user=request.user, book=book).exists()
 
+    # 해당 책의 모든 리뷰를 가져옵니다. (기존 코드 활용)
     book_reviews_qs = book.reviews.select_related('user').prefetch_related(
         'comments__user',
         'likes_received'
     ).order_by('-created_at')
+
+    # --- 평균 별점 계산 로직 추가 ---
+    average_rating_data = book_reviews_qs.aggregate(avg_rating=Avg('rating')) # book_reviews_qs를 사용하거나 book.reviews.all() 사용
+    average_rating = average_rating_data.get('avg_rating')
+    reviews_count = book_reviews_qs.count() # 전체 리뷰 개수
+
+    if average_rating is not None:
+        average_rating = round(average_rating, 1) # 소수점 첫째 자리까지 반올림
+    # else: # average_rating이 None일 경우 템플릿에서 처리하거나 여기서 기본값 설정 가능
+        # average_rating = 0 # 예시: 리뷰가 없을 때 0으로 표시하고 싶다면
+
+    # --- 평균 별점 계산 로직 끝 ---
 
     reviews_with_details = []
     liked_ids = set()
@@ -170,25 +182,17 @@ def book_detail(request, book_id):
         )
 
     for review in book_reviews_qs:
-        processed_category_for_review = "기타" # 기본값
-        if review.book_category_at_review: # 리뷰에 저장된 카테고리 정보가 있다면
-            # 예: "국내도서>자기계발>성공학"
-            second_level_for_review = extract_second_level(review.book_category_at_review) 
-            # second_level_for_review는 "자기계발"이 됩니다.
-            
-            # 만약 두 번째 이미지처럼 "문학/소설" 형태의 그룹명을 원한다면 classify_category_group 사용
+        processed_category_for_review = "기타"
+        if review.book_category_at_review:
+            second_level_for_review = extract_second_level(review.book_category_at_review)
             processed_category_for_review = classify_category_group(second_level_for_review)
-            # processed_category_for_review는 "자기계발/경제" 등이 됩니다.
-            
-            # 만약 단순히 두 번째 레벨("자기계발")만 원한다면:
-            # processed_category_for_review = second_level_for_review 
-
+        
         reviews_with_details.append({
             'review_obj': review,
             'like_count': review.likes_received.count(),
             'user_has_liked': review.id in liked_ids,
             'comments_list': review.comments.all().order_by('created_at'),
-            'display_category_group': processed_category_for_review, # 가공된 카테고리 그룹명 추가
+            'display_category_group': processed_category_for_review,
         })
 
     context = {
@@ -196,11 +200,14 @@ def book_detail(request, book_id):
         'author': author,
         'clean_author_name': clean_author_name,
         'is_in_library': is_in_library,
-        'reviews_with_details': reviews_with_details, # 여기에 display_category_group 포함됨
+        'reviews_with_details': reviews_with_details,
         'review_form': ReviewForm(),
         'comment_form': CommentForm(),
         'global_categories': get_navigation_categories(),
-        'category_groups': CATEGORY_GROUPS, # 이 변수는 네비게이션용으로 보임
+        'category_groups': CATEGORY_GROUPS,
+        # --- 평균 별점 및 리뷰 개수를 context에 추가 ---
+        'average_rating': average_rating,
+        'reviews_count': reviews_count,
     }
     return render(request, 'books/book_detail.html', context)
 
