@@ -162,7 +162,8 @@ class BookProfileCardForm(forms.ModelForm):
 
     def save(self, commit=True):
         instance = super().save(commit=False)
-        instance.favorite_genres = self.cleaned_data['favorite_genres']  # ✅ 직접 할당
+        # 안전하게 처리
+        instance.favorite_genres = self.cleaned_data.get('favorite_genres') or []
         if commit:
             instance.save()
         return instance

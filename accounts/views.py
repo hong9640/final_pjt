@@ -26,16 +26,28 @@ def signup_view(request):
     return render(request, 'accounts/signup.html', {'form': form})
 
 
+# accounts/views.py
+
 def login_view(request):
+    error_message = None  # 추가
+
     if request.method == 'POST':
         form = AuthenticationForm(request, data=request.POST)
         if form.is_valid():
             user = form.get_user()
             login(request, user)
             return redirect('books:home')
+        else:
+            error_message = '아이디 또는 비밀번호가 올바르지 않습니다.'  # 로그인 실패 시 메시지
+
     else:
         form = AuthenticationForm()
-    return render(request, 'accounts/login.html', {'form': form})
+
+    return render(request, 'accounts/login.html', {
+        'form': form,
+        'error_message': error_message  # 에러 메시지 전달
+    })
+
 
 
 @login_required
@@ -199,6 +211,7 @@ def book_profile_card_view(request):
                 return JsonResponse({'success': True})
             return redirect('accounts:mypage')
         else:
+            print("form errors:", form.errors)
             if request.headers.get('x-requested-with') == 'XMLHttpRequest':
                 return JsonResponse({'success': False, 'errors': form.errors}, status=400)
 

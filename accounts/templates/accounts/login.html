@@ -21,6 +21,13 @@
     color: #3E3025;
   }
 
+  .error-message {
+    color: red;
+    text-align: center;
+    margin-bottom: 1rem;
+    font-size: 0.95rem;
+  }
+
   label {
     display: block;
     margin-top: 1rem;
@@ -59,6 +66,11 @@
 
 <div class="form-wrapper">
   <h2>로그인</h2>
+
+  {% if error_message %}
+    <div class="error-message">{{ error_message }}</div>
+  {% endif %}
+
   <form method="POST">
     {% csrf_token %}
 
