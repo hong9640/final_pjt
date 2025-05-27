@@ -129,7 +129,8 @@ def userpage_view(request, username):
 
     is_following = Follow.objects.filter(following_user=request.user, followed_user=user).exists()
     library_preview = Library.objects.filter(user=user).select_related('book')[:3]
-    my_library_books = Library.objects.filter(user=request.user).values_list('book_id', flat=True)
+    my_library_books = my_library_books = set(Library.objects.filter(user=request.user).values_list('book_id', flat=True))
+
 
     return render(request, 'accounts/userpage.html', {
         'profile_user': user,

@@ -628,7 +628,7 @@
                   {% if review.user.profile_image %}
                       <img src="{{ review.user.profile_image.url }}" alt="{{ review.user.username }}">
                   {% else %}
-                      {{ review.user.username|slice:":1"|upper }}
+                      <img src="{% static 'accounts/profile_default.png' %}" alt="기본 프로필">
                   {% endif %}
               </div>
               <div class="review-details-content">

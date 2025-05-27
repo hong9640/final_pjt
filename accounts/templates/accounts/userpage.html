@@ -218,7 +218,7 @@
 
 <div class="userpage-wrapper">
   <div class="profile-section">
-    <div class="profile-photo" style="background-image: url('{% if profile_user.profile_image %}{{ profile_user.profile_image.url }}{% else %}{% static 'accounts/profile_default.jpg' %}{% endif %}');"></div>
+    <div class="profile-photo" style="background-image: url('{% if profile_user.profile_image %}{{ profile_user.profile_image.url }}{% else %}{% static 'accounts/profile_default.png' %}{% endif %}');"></div>
     <div class="profile-info">
       <div class="nickname">{{ profile_user.nickname|default:profile_user.username }}님</div>
       <div class="follow-info">
@@ -259,7 +259,9 @@
               <p class="book-title">{{ entry.book.title }}</p>
               <form onsubmit="event.preventDefault(); addToLibraryAjax({{ entry.book.id }}, this.querySelector('button'));">
                 {% csrf_token %}
-                <button type="submit" class="add-button">내 서재에 추가</button>
+                {% if entry.book.id not in my_library_books %}
+                  <button type="submit" class="add-button">내 서재에 추가</button>
+                {% endif %}
               </form>
             </div>
           </div>
@@ -380,7 +382,7 @@ window.addEventListener("DOMContentLoaded", function () {
             item.className = 'user-item';
             item.innerHTML = `
               <div class="user-link" onclick="location.href='/accounts/mypage/'">
-                <img src="${currentUser.profile_image_url || '/static/accounts/profile_default.jpg'}">
+                <img src="${currentUser.profile_image_url || '/static/accounts/profile_default.png'}">
                 <span>${currentUser.nickname} (나)</span>
               </div>
             `;
@@ -392,7 +394,7 @@ window.addEventListener("DOMContentLoaded", function () {
             item.className = 'user-item';
             item.innerHTML = `
               <div class="user-link" data-username="${user.username}" onclick="location.href='/accounts/user/${user.username}/'">
-                <img src="${user.profile_image_url || '/static/accounts/profile_default.jpg'}">
+                <img src="${user.profile_image_url || '/static/accounts/profile_default.png'}">
                 <span>${user.nickname}</span>
               </div>
               <button class="follow-toggle-btn">${user.is_following ? '언팔로우' : '팔로우'}</button>
