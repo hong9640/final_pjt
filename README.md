@@ -55,10 +55,10 @@
 ![ERD](./readme_image/recommendation.png)
 - 상단의 '맞춤형 추천'을 누르면 문장 기반, 독서카드 기반, 내 서재 기반에 나눠 책을 추천 받을 수 있게 구현하였습니다.
 
-- ![ERD](./readme_image/recommendation3.png)
+![ERD](./readme_image/recommendation3.png)
 - 추천이 완료되면 사진과 같이 추천된 책이 뜨게 구현하였습니다.
 
-- ![ERD](./readme_image/mypage.png)
+![ERD](./readme_image/mypage.png)
 - 마이페이지는 내가 작성한 리뷰, 좋아요한 리뷰를 볼 수 있게 하고 독서카드도 작성이 가능하게 하였습니다. 또한 맞춤형 추천을으로 추천받은 책들을 보이게 하며 해당 책들은 내 서재에 추가할 수 있게 하였습니다. 또한 팔로잉, 팔로워가 가능하게 지정했습니다.
 
 ## 3. 데이터베이스 모델링 (ERD)
