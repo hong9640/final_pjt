@@ -26,7 +26,7 @@
     width: 120px;
     height: 120px;
     border-radius: 50%;
-    background-size: cover;
+    background-size: 105%;
     background-position: center;
     background-repeat: no-repeat;
     background-color: #ddd;
@@ -203,7 +203,7 @@
 
 <div class="mypage-wrapper">
   <div class="profile-section">
-    <div class="profile-photo" style="background-image: url('{% if profile_user.profile_image %}{{ profile_user.profile_image.url }}{% else %}{% static 'accounts/profile_default.jpg' %}{% endif %}');"></div>
+    <div class="profile-photo" style="background-image: url('{% if profile_user.profile_image %}{{ profile_user.profile_image.url }}{% else %}{% static 'accounts/profile_default.png' %}{% endif %}');"></div>
     <div class="profile-info">
       <div class="nickname">{{ profile_user.nickname|default:profile_user.username }}님</div>
       <div style="font-size: 0.9rem; color: #555;">
@@ -367,7 +367,7 @@ document.addEventListener("DOMContentLoaded", function() {
             item.className = 'user-item';
             item.innerHTML = `
               <div class="user-link" onclick="location.href='/accounts/mypage/'">
-                <img src="${currentUser.profile_image_url || '/static/accounts/profile_default.jpg'}">
+                <img src="${currentUser.profile_image_url || '/static/accounts/profile_default.png'}">
                 <span>${currentUser.nickname}</span>
               </div>
               <button class="follow-toggle-btn">나</button>
@@ -380,7 +380,7 @@ document.addEventListener("DOMContentLoaded", function() {
             item.className = 'user-item';
             item.innerHTML = `
               <div class="user-link" data-username="${user.username}" onclick="location.href='/accounts/user/${user.username}/'">
-                <img src="${user.profile_image_url || '/static/accounts/profile_default.jpg'}">
+                <img src="${user.profile_image_url || '/static/accounts/profile_default.png'}">
                 <span>${user.nickname}</span>
               </div>
               <button class="follow-toggle-btn">${user.is_following ? '언팔로우' : '팔로우'}</button>
