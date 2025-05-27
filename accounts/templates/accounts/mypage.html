@@ -352,6 +352,15 @@ document.addEventListener("DOMContentLoaded", function() {
           container.innerHTML = '';
           const users = data.users;
 
+          if (users.length === 0) {
+            const type = el.dataset.type;
+            const message = type === 'followers' ? '팔로워가 없습니다.' : '팔로잉이 없습니다.';
+            container.innerHTML = `<p style="text-align: center; color: #777;">${message}</p>`;
+            modal.style.display = 'flex';
+            return;
+          }
+
+
           const currentUser = users.find(u => u.username === currentUsername);
           if (currentUser) {
             const item = document.createElement('div');
