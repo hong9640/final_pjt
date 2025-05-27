@@ -63,6 +63,7 @@
 
 ## 3. 데이터베이스 모델링 (ERD)
 ![ERD](./readme_image/ERD.png)
+
 ## 4. 도서 데이터 수집 방식
 
 - 본 프로젝트에서는 **국내 도서 정보를 확보하기 위해 [알라딘 TTB(Open API)](https://www.aladin.co.kr/ttb/apiintro.aspx)**를 활용하였습니다.
