@@ -417,6 +417,41 @@
 .image-credit a:hover {
     text-decoration: underline;
 }
+
+.simple-welcome-section {
+  background-color: #f8f5f0; /* 아래 박스들과 통일 */
+  border-radius: 16px;
+  padding: 2rem;
+  margin-bottom: 1.5rem;
+}
+
+.simple-welcome {
+  text-align: center;
+}
+
+.welcome-illustration {
+  width: 240px;
+  max-width: 90%;
+  height: auto;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  opacity: 0.9;
+}
+
+.simple-welcome h2 {
+  font-size: 1.6rem;
+  color: #3E3025;
+  font-family: 'Gowun Batang', serif;
+  margin-bottom: 8px;
+}
+
+.simple-welcome p {
+  font-size: 1.3rem;
+  color: #5D4037;
+  font-family: 'Gowun Batang', serif;
+}
+
+
 </style>
 
 <div class="content-wrapper">
@@ -452,44 +487,16 @@
             </form>
         </div>
         {% if not query %} {# 검색어가 없을 때 기존 홈 콘텐츠 표시 #}
-        <div class="section">
-            <div class="welcome-message">
-                <h3>당신의 다음 이야기는 무엇인가요?</h3>
-                <p>책 속에서 새로운 세계를 발견하세요.</p>
-                <div class="swiper welcome-swiper">
-                    <div class="swiper-wrapper">
-                        <div class="swiper-slide">
-                            <img src="{% static 'images/sample2.png' %}" alt="환영 이미지 1" class="welcome-image">
-                        </div>
-                        <div class="swiper-slide">
-                            <img src="{% static 'images/sample1.jpg' %}" alt="환영 이미지 1" class="welcome-image">
-                            <span class="image-credit">
-                                Photo by <a href="https://unsplash.com/ko/@letsclickpics?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash" target="_blank" rel="noopener noreferrer">Hasnain S. H.</a> on <a href="https://unsplash.com/ko/%EC%82%AC%EC%A7%84/%EC%B1%85%EC%97%90-%ED%8E%9C-nVBPy9S2USQ?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash" target="_blank" rel="noopener noreferrer">Unsplash</a>
-                            </span>
-                        </div>
-                        <div class="swiper-slide">
-                            <img src="{% static 'images/sample3.jpg' %}" alt="환영 이미지 3" class="welcome-image">
-                            <span class="image-credit">
-                            Photo by <span><a href="https://unsplash.com/@elin_mel" target="_blank">Elin Melberg</a></span> on 
-                            <span><a href="https://unsplash.com" target="_blank">Unsplash</a></span>
-                            </span>
-                        </div>
-                        <div class="swiper-slide">
-                            <img src="{% static 'images/sample4.jpg' %}" alt="환영 이미지 4" class="welcome-image">
-                            <span class="image-credit">
-                            Photo by <span><a href="https://unsplash.com/@elin_mel" target="_blank">Elin Melberg</a></span> on 
-                            <span><a href="https://unsplash.com" target="_blank">Unsplash</a></span>
-                            </span>
-                        </div>
-                        {# 필요하다면 더 많은 이미지를 추가할 수 있습니다. #}
-                    </div>
-                    <div class="swiper-pagination"></div>
-
-                    <div class="swiper-button-prev welcome-swiper-prev"></div>
-                    <div class="swiper-button-next welcome-swiper-next"></div>
-                </div>
-            </div>
+        <div class="section simple-welcome-section">
+        <div class="simple-welcome">
+            <img src="{% static 'images/004.png' %}" alt="열린 책 일러스트" class="welcome-illustration">
+            <h2>당신의 다음 이야기가 시작되는 곳</h2>
+            <p>책가을</p>
         </div>
+        </div>
+
+
+
         <div class="section">
             <section class="bestseller-section">
                 <h2>베스트셀러</h2>
